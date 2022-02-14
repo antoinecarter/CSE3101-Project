@@ -1,0 +1,46 @@
+CSE3101 Project
+
+Outline:
+    Model-View-Controller Architecture of a HRMIS
+
+Features:
+    Manage organizational structures: departments → units → employees
+    Employee Leave
+    Employee Attendance
+    Dashboard showing frequency of lateness and absent days
+
+Technology:
+    PHP
+    MySQL
+    HTML
+    CSS
+    (optional)Front-end Frameworks
+        Vue.js, jQuery, Semantic-UI, Backbone.js, Svelte
+
+Roles:
+    Administrator
+    User
+
+Views:
+    Keyword: [L] - Limited Access; A-Admin; U-User
+        User Account (A/U[L])
+        Username
+        Password
+        Link to Employee (A)
+        Role (A)
+        Lookup Table (A)
+        Organization: (A)
+        Organization
+        Departments
+        Units
+        Positions
+        Employee Management (A/U[L])
+        Individual
+        Employees
+        Attendance Management (A/U[L])
+        Dashboard on Attendance & Absent Days
+        Timesheet
+        Leave Management (A/U[L])
+        Dashboard on Leave
+        Leave Request
+        Leave Taken
