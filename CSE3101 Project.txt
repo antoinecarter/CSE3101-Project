@@ -44,3 +44,129 @@ Views:
         Dashboard on Leave
         Leave Request
         Leave Taken
+
+Model: 
+    Connection Details:
+        host: localhost
+        dbname: hrmis
+        user: root
+        password: 
+    
+    Database Tables:
+        Users
+            Username
+            Password
+            Link to Employee
+            Responsibilities
+            Can Create
+            Can View
+            Can Update
+            Can Delete
+            Can Verify
+            Can Approve
+        Individuals
+            First Name
+            Last Name
+            Middle Name
+            Maiden Name
+            D.O.B.
+            Place of Birth
+            D.O.M.
+            Place of Marriage
+            Address
+            Email Address
+            Nationality
+            Ethnicity
+            Status
+            National Identifiers
+                NIS
+                ID
+                TIN
+        Employees
+            Employee Number
+            Individual
+            Position
+            Payment frequency
+            Employment Type
+            Employment Status
+            Employment Date
+            Annual Leave Date
+            Rate of Pay
+            Separtation Type
+            Separation Status
+            Shift
+            Status
+            
+            Salary
+            Attendance Details
+            Leave
+                Leave Entitlement
+                Leave Track
+                Leave Request
+        
+        Organization
+            Name
+            Address
+            Telephone
+            Fax Number
+            Email Address
+            Country
+            Tax Registration No.
+            NIS Registration No.
+            Status
+            Work Locations
+                Location Code
+                Location Description
+                Address    
+                Tel No.
+            Company Year
+                Year
+                Start Year
+                End Year
+    
+        Pay Period
+            Company Year
+            Start Date
+            End Date
+            Rate of Pay 
+        Departments
+            Department Code
+            Description
+            Parent Department
+            Org Level
+            Status
+
+        Units
+            Unit Code
+            Unit Description
+            Parent Department
+            Org Level
+            Status
+
+        Positions
+            Position Code
+            Description
+            Parent Unit
+            Work Location
+            Status
+
+        Shifts
+            Shift Type
+            Shift Code
+            Start Time
+            End Time
+            Shift Hours
+            Lunch Time Start
+            Lunch Time End
+            Lunch Hours
+            Status
+
+        Timeclock Clock In/Clock Out
+            Employee
+            Shift
+            Shift Hours
+            Day
+            Work Date
+            PayPeriod
+            Min TimeIn 
+            Max TimeOut
