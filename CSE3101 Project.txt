@@ -54,6 +54,10 @@ Model:
     
     Database Tables:
         Users
+            ID
+            First Name
+            Last Name
+            Email
             Username
             Password
             Link to Employee
