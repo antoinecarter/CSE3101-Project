@@ -7,5 +7,6 @@
         public function verify();
         public function approve();
         public function find($id);
+        public function remove_errors($d);
     }
 ?>

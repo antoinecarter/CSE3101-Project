@@ -9,10 +9,25 @@
         private $username;
         private $passcode;
         private $role;
+        private $emp_no;
+        private $can_create; 
+        private $can_view;
+        private $can_update; 
+        private $can_delete; 
+        private $can_verify;
+        private $can_approve;
 
         public function __construct()
         {
             $this->connect();
+        }
+
+        public function remove_errors($d)
+        {
+            $d = trim($d);
+            $d = stripslashes($d);
+            $d = htmlspecialchars($d);
+            return $d;
         }
 
         public function create()
@@ -48,7 +63,7 @@
 
         public function update()
         {
-            
+            $sql = "UPDATE users SET ";
         }
 
         public function delete()
