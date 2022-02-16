@@ -19,5 +19,3 @@ echo $reslt;
 </p>
 </form>
 </body>
-</html>
-
