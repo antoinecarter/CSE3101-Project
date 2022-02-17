@@ -1,12 +1,12 @@
 <?php
     interface crud {
         public function create();
-        public function view();
-        public function update();
-        public function delete();
-        public function verify();
-        public function approve();
-        public function find($id);
+ //       public function view_all();
+        public function update($id);
+        public function delete($id);
+        public function verify($role);
+        public function approve($role);
+        public function view($role, $id);
         public function remove_errors($d);
     }
 ?>

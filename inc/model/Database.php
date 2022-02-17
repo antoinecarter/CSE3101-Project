@@ -10,7 +10,7 @@
                 email VARCHAR(100) NOT NULL,
                 username VARCHAR(30) NOT NULL,
                 passcode VARCHAR(50) NOT NULL, 
-                employee_no INT,
+                employee_no INT DEFAULT NULL,
                 role VARCHAR(20) NOT NULL DEFAULT 'USER',
                 can_create INT DEFAULT 0 COMMENT '1=Yes, 0=No', 
                 can_view INT DEFAULT 0 COMMENT '1=Yes, 0=No',
@@ -18,6 +18,10 @@
                 can_delete INT DEFAULT 0 COMMENT '1=Yes, 0=No', 
                 can_verify INT DEFAULT 0 COMMENT '1=Yes, 0=No',
                 can_approve INT DEFAULT 0 COMMENT '1=Yes, 0=No',
+                start_date DATE NOT NULL DEFAULT SYSDATE,
+                end_date DATE DEFAULT NULL,
+                status VARCHAR(20) NOT NULL, 
+                
                 PRIMARY KEY (id)
             );",
 
