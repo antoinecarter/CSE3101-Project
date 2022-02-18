@@ -44,7 +44,9 @@
                 "email" => $this->remove_errors($this->email) ,
                 "username" => $this->remove_errors($this->username) ,
                 "passcode" => $this->remove_errors($this->passcode) ,
-                "role" => $this->remove_errors($this->role) 
+                "role" => $this->remove_errors($this->role), 
+                "start_date" => $this->remove_errors($this->start_date),
+                "status" => $this->remove_errors($this->status) 
             ];
 
             try{
@@ -89,7 +91,10 @@
                         can_update = :c_update,
                         can_delete = :c_delete,
                         can_verify = :c_verify,
-                        can_approve = :c_approve
+                        can_approve = :c_approve,
+                        start_date = :start_date,
+                        end_date = :end_date,
+                        status = :status
                     WHERE
                         id = :id";
             
@@ -107,7 +112,10 @@
                 "c_update" => $this->remove_errors($this->can_update),
                 "c_delete" => $this->remove_errors($this->can_delete),
                 "c_verify" => $this->remove_errors($this->can_verify),
-                "c_approve" => $this->remove_errors($this->can_approve)
+                "c_approve" => $this->remove_errors($this->can_approve),
+                "start_date" => $this->remove_errors($this->start_date),
+                "status" => $this->remove_errors($this->status),
+                "end_date" => $this->remove_errors($this->end_date)
             ];
 
             try{
@@ -147,6 +155,46 @@
             }
             
             
+        }
+
+        public function login($data)
+        {
+            $username = $this->remove_errors($data['username']);
+            $passcode = $this->remove_errors(md5($data['passcode']));
+
+            try{
+                $sql = "SELECT username, passcode FROM users WHERE username = :username AND passcode = :passcode LIMIT 1";
+                $userlogin = [
+                    "username" => $username,
+                    "passcode" => $passcode
+                ];
+
+                $statement = $this->connection->prepare($sql);
+                $statement->execute($userlogin);
+                $row = $statement->fetch(PDO::FETCH_ASSOC);
+                if($statement->rowCount() > 0){
+                    session_start();
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['pass'] = $row['passcode'];
+                    $_SESSION['role'] = $row['role'];
+
+                    header('Location: /CSE3101-Project/home');
+                }else{
+                    $message = "Invalid UserLogin Attempt";
+                    header('Location: /CSE3101-Project/login');
+                    return $message;
+                }
+
+            }catch(PDOException $message){
+                echo $message->getMessage();
+                
+            }
+        }
+
+        public function logout(){
+            session_unset();
+            header('Location: /CSE3101-Project/login');
         }
 
         public function verify($role)
