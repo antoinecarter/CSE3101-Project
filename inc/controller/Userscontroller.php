@@ -3,9 +3,11 @@
 
     class UsersController {
         private $user_obj;
+        private $controller;
 
         
 
 
     }
+   
 ?>
