@@ -178,23 +178,33 @@
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['pass'] = $row['passcode'];
                     $_SESSION['role'] = $row['role'];
-
-                    header('Location: /CSE3101-Project/inc/view/Afterlogin.php');
+                    return true;
                 }else{
                     $message = "Invalid UserLogin Attempt";
-                    header('Location: /CSE3101-Project/inc/view/login.php');
-                    return $message;
+                    require_once __DIR__."/../../view/login.php";
                 }
 
             }catch(PDOException $message){
                 echo $message->getMessage();
                 
             }
+            return $message;
         }
 
         public function logout(){
             session_unset();
             header('Location: /CSE3101-Project/login');
+        }
+
+        public function findcreds($d){
+            $username = $this->remove_errors($d['username']);
+            $passcode = $this->remove_errors(md5($d['passcode']));
+
+            $sql = "SELECT username, passcode FROM users WHERE username = :username AND passcode = :passcode LIMIT 1";
+            $userlogin = [
+                "username" => $username,
+                "passcode" => $passcode
+            ];
         }
 
         public function verify($role)

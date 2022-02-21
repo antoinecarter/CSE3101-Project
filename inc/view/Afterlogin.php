@@ -1,10 +1,9 @@
 <html>
+
 <head></head>
+
 <body>
-<?php
-echo $reslt;
-?>
+    Hello world
 </body>
+
 </html>
-
-

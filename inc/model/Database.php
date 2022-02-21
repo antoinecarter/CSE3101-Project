@@ -4,13 +4,13 @@
 
         private $tables = [
             "CREATE TABLE IF NOT EXISTS users(
-                id NUMBER AUTO_INCREMENT NOT NULL,
+                id INT NOT NULL AUTO_INCREMENT,
                 first_name VARCHAR(30) NOT NULL, 
                 last_name VARCHAR(30) NOT NULL,
                 email VARCHAR(100) NOT NULL,
                 username VARCHAR(30) NOT NULL,
-                passcode VARCHAR(50) NOT NULL, 
-                employee_no INT DEFAULT NULL,
+                passcode VARCHAR(100) NOT NULL, 
+                employee_no INT,
                 role VARCHAR(20) NOT NULL DEFAULT 'USER',
                 can_create INT DEFAULT 0 COMMENT '1=Yes, 0=No', 
                 can_view INT DEFAULT 0 COMMENT '1=Yes, 0=No',
@@ -18,15 +18,19 @@
                 can_delete INT DEFAULT 0 COMMENT '1=Yes, 0=No', 
                 can_verify INT DEFAULT 0 COMMENT '1=Yes, 0=No',
                 can_approve INT DEFAULT 0 COMMENT '1=Yes, 0=No',
-                start_date DATE NOT NULL DEFAULT SYSDATE,
-                end_date DATE DEFAULT NULL,
+                start_date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                end_date DATE,
                 status VARCHAR(20) NOT NULL, 
                 
                 PRIMARY KEY (id)
             );",
 
             "ALTER TABLE users AUTO_INCREMENT=1500;"
+            /*,
 
+            "INSERT INTO users (id, first_name, last_name, email, username, passcode, employee_no, role, can_create, can_view, can_update, can_delete, can_verify, can_approve, start_date, end_date, status)
+                        VALUES (1500, 'John', 'Doe', 'johndoe@gmail.com', 'johndoe', '27d4370b6492cf2a5f9aa301f042f0c2', 1, 'ADMIN', 'Y','Y','Y','Y','Y','Y','2022-01-01','', 'VERIFY');"
+*/
         ];
 
         public function connect()
