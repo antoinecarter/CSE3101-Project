@@ -179,10 +179,10 @@
                     $_SESSION['pass'] = $row['passcode'];
                     $_SESSION['role'] = $row['role'];
 
-                    header('Location: /CSE3101-Project/home');
+                    header('Location: /CSE3101-Project/inc/view/Afterlogin.php');
                 }else{
                     $message = "Invalid UserLogin Attempt";
-                    header('Location: /CSE3101-Project/login');
+                    header('Location: /CSE3101-Project/inc/view/login.php');
                     return $message;
                 }
 

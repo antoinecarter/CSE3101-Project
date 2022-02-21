@@ -1,5 +1,5 @@
 <?php
-include_once("inc/controller/Logincontroller.php");
-$controller = new Controller();
+include_once("inc/controller/Userscontroller.php");
+$controller = new UsersController();
 $controller->invoke();
 ?>
