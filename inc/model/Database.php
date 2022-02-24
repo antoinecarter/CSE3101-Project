@@ -2,6 +2,9 @@
     class Database {
         protected $connection;
 
+        private $statement;
+
+
         private $tables = [
             "CREATE TABLE IF NOT EXISTS users(
                 id INT NOT NULL AUTO_INCREMENT,
@@ -33,7 +36,7 @@
 */
         ];
 
-        public function connect()
+        public function __construct()
         {
             $host_name = "localhost";
             $db_name = "hrmis";
@@ -50,7 +53,6 @@
         }
 
         public function init(){
-            $this->connect();
             try {
                 if($this->connection){
                     foreach($this->tables as $table){
@@ -62,9 +64,52 @@
             }
         }
 
+        public function bind($param, $value, $type = null){
+            if(is_null($type)){
+                switch(true){
+                    case is_int($value):
+                        $type = PDO::PARAM_INT;
+                        break;
+                    case is_bool($value):
+                        $type = PDO::PARAM_BOOL;
+                        break;
+                    case is_null($value):
+                        $type = PDO::PARAM_NULL;
+                        break;
+                    default:
+                        $type = PDO::PARAM_STR;
+                }
+            }
+            $this->statement->bindValue($param, $value, $type);
+        }
+
         public function get_connection(){
             return $this->connection;
         }
+
+        public function query($sql){
+            $this->statement = $this->connection->prepare($sql);
+        }
+
+        public function execute(){
+            return $this->statement->execute();
+        }
+
+        public function dataset(){
+            $this->execute();
+            return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function record(){
+            $this->execute();
+            return $this->statement->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function rowCount(){
+            return $this->statement->rowCount();
+        }
+
+        
     }
 
 ?>

@@ -2,7 +2,7 @@
     include_once __DIR__."/../Database.php";
     include_once __DIR__."/interface.php";
 
-    class User extends Database implements crud {
+    class User implements crud {
         private $first_name;
         private $last_name;
         private $email;
@@ -20,9 +20,11 @@
         private $end_date;
         private $status;
 
+        protected $connection;
+
         public function __construct()
         {
-            $this->connect();
+            $this->connection = new Database;
         }
 
         public function remove_errors($d)
@@ -33,10 +35,43 @@
             return $d;
         }
 
-        public function create()
+        public function findUsernameORPassword($username, $passcode){
+            $username = $this->remove_errors($username);
+            $passcode = $this->remove_errors(md5($passcode));
+
+            $this->connection->query("SELECT * FROM users WHERE username = :username AND passcode = :passcode LIMIT 1");
+            $this->connection->bind(':username', $username);
+            $this->connection->bind(':passcode', $passcode);
+
+            $row = $this->connection->record();
+
+            if($this->connection->rowCount()>0){
+                return $row;
+            }else{
+                return false;
+            }
+            
+        }
+
+        public function login($username, $passcode)
         {
-            $sql = "INSERT INTO users(first_name, last_name, email, username, passcode, role, status, start_date) 
-                                VALUES (:first_name, :last_name, :email, :username, :passcode, :role, :status, :start_date)";
+            $row = $this->findUsernameORPassword($username, $passcode);
+
+            if($row == false){
+                return false;
+            }
+            return $row;
+        }
+
+        public function logout(){
+            session_unset();
+            header('Location: /CSE3101-Project/login');
+        }
+        
+        public function create($d)
+        {
+            $this->connection->query("INSERT INTO users(first_name, last_name, email, username, passcode, role, status, start_date) 
+                                VALUES (:first_name, :last_name, :email, :username, :passcode, :role, :status, :start_date)");
             
             $new_user = [
                 "first_name" => $this->remove_errors($this->first_name) ,
@@ -50,9 +85,9 @@
             ];
 
             try{
-                $statement = $this->connection->prepare($sql);
-                $statement->exec($new_user);
-                $this->id = $this->connection->lastInsertId();
+                //$statement = $this->connection->prepare($sql);
+                //$statement->exec($new_user);
+                //$this->id = $this->connection->lastInsertId();
                 $message = 'Account Created';
                 return $message;
                 header("location: /CSE3101-Project/");
@@ -74,7 +109,7 @@
         }
         */
 
-        public function update($id)
+        public function update($id, $d)
         {
             $sql = "UPDATE 
                         users 
@@ -119,8 +154,8 @@
             ];
 
             try{
-                $statement = $this->connection->prepare($sql);
-                $statement->exec($update_user);
+                //$statement = $this->connection->prepare($sql);
+                //$statement->exec($update_user);
                 $message = "User Account Updated";
                 return $message;
             }catch(PDOException $message){
@@ -132,8 +167,8 @@
         {
             $sql = "DELETE FROM users WHERE id= :id";
             try{
-                $statement = $this->connection->prepare($sql);
-                $statement->execute(['id'=> $id]);
+                //$statement = $this->connection->prepare($sql);
+                //$statement->execute(['id'=> $id]);
                 header('Location: ');
             }catch(PDOException $message){
                 echo $message->getMessage();
@@ -144,69 +179,17 @@
         {
             if($this->role == $role){
                 $sql = "SELECT * FROM users";
-                $statement = $this->connection->prepare($sql);
-                $statement->execute();
-                return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
+                //$statement = $this->connection->prepare($sql);
+                //$statement->execute();
+                //return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
             }else{
                 $sql = "SELECT * FROM users WHERE id= :id";
-                $statement = $this->connection->prepare($sql);
-                $statement->execute(['id' => $id]);
-                return $statement->fetchObject();
-            }
-            
-            
+                //$statement = $this->connection->prepare($sql);
+                //$statement->execute(['id' => $id]);
+                //return $statement->fetchObject();
+            }    
         }
-
-        public function login($data)
-        {
-            $username = $this->remove_errors($data['username']);
-            $passcode = $this->remove_errors(md5($data['passcode']));
-
-            try{
-                $sql = "SELECT username, passcode FROM users WHERE username = :username AND passcode = :passcode LIMIT 1";
-                $userlogin = [
-                    "username" => $username,
-                    "passcode" => $passcode
-                ];
-
-                $statement = $this->connection->prepare($sql);
-                $statement->execute($userlogin);
-                $row = $statement->fetch(PDO::FETCH_ASSOC);
-                if($statement->rowCount() > 0){
-                    session_start();
-                    $_SESSION['id'] = $row['id'];
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['pass'] = $row['passcode'];
-                    $_SESSION['role'] = $row['role'];
-                    return true;
-                }else{
-                    $message = "Invalid UserLogin Attempt";
-                    require_once __DIR__."/../../view/login.php";
-                }
-
-            }catch(PDOException $message){
-                echo $message->getMessage();
-                
-            }
-            return $message;
-        }
-
-        public function logout(){
-            session_unset();
-            header('Location: /CSE3101-Project/login');
-        }
-
-        public function findcreds($d){
-            $username = $this->remove_errors($d['username']);
-            $passcode = $this->remove_errors(md5($d['passcode']));
-
-            $sql = "SELECT username, passcode FROM users WHERE username = :username AND passcode = :passcode LIMIT 1";
-            $userlogin = [
-                "username" => $username,
-                "passcode" => $passcode
-            ];
-        }
-
+        
         public function verify($role)
         {
             if($this->role == $role){

@@ -1,8 +1,17 @@
 <?php
+
     include_once __DIR__."/../model/tables/users.php";
+    include_once __DIR__."/../alert.php";
 
     class UsersController extends User
     {
+        private $userModel;
+        public $message;
+
+        public function __construct()
+        {
+            $this->userModel = new User;
+        }
         /*
         public function __construct()
         {
@@ -40,22 +49,52 @@
                 }
             }
         }*/
-
+        public function home(){
+            include_once __DIR__."/../view/home.php";
+        }
+        
         public function userlogin(){
             $method = $_SERVER["REQUEST_METHOD"];
             
-            
             if($method == "GET"){
                 include_once __DIR__."/../view/login.php";
-            }else{
+            }else{         
                 $d = [
-                    'username' => $_POST['username'],
-                    'passcode' => $_POST['passcode']
+                    'username' => $this->remove_errors($_POST['username']),
+                    'passcode' => $this->remove_errors($_POST['passcode']) 
                 ];
 
-                $valid = $this->login($d);
-                if($valid){
-                    header("Location: /CSE3101-Project/inc/view/Afterlogin.php");
+                if(empty($d['username']) || empty($d['passcode'])){
+                    //alert('login',"Please fill out all inputs");
+                    $this->message = "Please fill out all inputs";
+                    header("Location: /CSE3101-Project/");
+                    exit();
+                }
+
+                if($this->userModel->findUsernameORPassword($d['username'], $d['passcode'])){
+                    $valid = $this->userModel->login($d['username'], $d['passcode']);
+                    if($valid){
+                        session_start();
+                        $_SESSION['id'] = $valid['id'];
+                        $_SESSION['username'] = $valid['username'];
+                        $_SESSION['pass'] = $valid['passcode'];
+                        $_SESSION['role'] = $valid['role'];
+                        header('Location: /CSE3101-Project/home');
+                        exit();
+                    }else{
+                        $this->message = "Username/Password Incorrect";
+                        //alert('login',"Username/Password Incorrect");
+                        header("Location: /CSE3101-Project/");
+                        
+                        exit();
+                        
+                    }
+
+                }else{
+                    //alert('login',"User not found");
+                    $this->message = "User not found";
+                    header("Location: /CSE3101-Project/");
+                    exit();
                 }
             }
             
@@ -86,4 +125,18 @@
         }
 
     }
+
+    $init = new UsersController;
+
+    if($_SERVER['REQUEST_METHOD'] == 'post'){
+        switch($_POST['type']){
+            case 'login':
+                $init->userlogin();
+                break;
+            default:
+                header('Location: Location: /CSE3101-Project/inc/view/login.php');
+        }
+    }
+
+?>
 
