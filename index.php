@@ -32,10 +32,3 @@
         </main>
     </body>
 </html>
-
-<?php 
-  /*
-include_once __DIR__."/../Userscontroller.php";
-$controller = new UsersController();
-$controller->login($data);*/
-?> 
