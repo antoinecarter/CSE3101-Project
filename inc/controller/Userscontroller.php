@@ -121,7 +121,7 @@
                 }
         }
 
-        public function updateuser(){
+        public function updateuser($id){
                 $d = array(
                             'id'		=> $_REQUEST['id'],
                             'name' 		=> $_REQUEST['name'],
@@ -133,9 +133,16 @@
             
         
     
-        public function viewuser(){
-
-        }
+        public function viewuser($id){
+                $user = $this->userModel->getUserById($id);
+        
+                $d = [
+                    'user' => $user
+                ];
+        
+                header('posts/show', $d);
+            }
+        
 
         //delete post
         public function delete($id){

@@ -180,6 +180,24 @@
                 echo $message->getMessage();
             }         
         }
+        
+        public function deleteuser($id)
+        {
+            $this->connection->query( "DELETE FROM users WHERE id= :id");
+            $this->connection->bind(':id', $id);
+                if($this->connection->execute()){
+                    return true;
+                }else{
+                    return false;
+                }
+            try{
+                //$statement = $this->connection->prepare($sql);
+                //$statement->execute(['id'=> $id]);
+                header('Location: ');
+            }catch(PDOException $message){
+                echo $message->getMessage();
+            }         
+        }
 
         public function view($role, $id)
         {
