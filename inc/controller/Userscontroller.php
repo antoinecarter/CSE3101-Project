@@ -123,10 +123,25 @@
 
         public function updateuser($id){
                 $d = array(
-                            'id'		=> $_REQUEST['id'],
-                            'name' 		=> $_REQUEST['name'],
-                            'last_name' => $_REQUEST['last_name'],
-                            'email'		=> $_REQUEST['email']
+                            'id'		    => $_REQUEST['id'],
+                            'first_name' 	=> $_REQUEST['first_name'],
+                            'last_name'     => $_REQUEST['last_name'],
+                            'email'		    => $_REQUEST['email'],
+                            'username'		=> $_REQUEST['username'],
+                            'passcode'		=> $_REQUEST['passcode'],
+                            'role'		    => $_REQUEST['role'],
+                            'emp_no'		=> $_REQUEST['emp_no'],
+                            'c_create'		=> $_REQUEST['can_create'],
+                            'c_view'		=> $_REQUEST['can_view'],
+                            'c_update'		=> $_REQUEST['can_update'],
+                            'c_delete'		=> $_REQUEST['can_delete'],
+                            'c_verify'		=> $_REQUEST['can_verify'],
+                            'c_approve'		=> $_REQUEST['can_approve'],
+                            'start_date'	=> $_REQUEST['start_date'],
+                            'status'		=> $_REQUEST['status'],
+                            'end_date'		=> $_REQUEST['end_date']
+
+
                             );		
                     parent::update($id, $d);		
             }    
