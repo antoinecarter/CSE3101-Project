@@ -111,7 +111,7 @@
 
         public function update($id, $d)
         {
-            $sql = "UPDATE 
+            $this->connection->query("UPDATE 
                         users 
                     SET 
                         first_name = :first_name, 
@@ -131,7 +131,7 @@
                         end_date = :end_date,
                         status = :status
                     WHERE
-                        id = :id";
+                        id = :id");
             
             $updateuser = [
                 "id" => $id,
@@ -165,7 +165,7 @@
 
         public function delete($id)
         {
-            $sql = "DELETE FROM users WHERE id= :id";
+            $this->connection->query( "DELETE FROM users WHERE id= :id");
             try{
                 //$statement = $this->connection->prepare($sql);
                 //$statement->execute(['id'=> $id]);
@@ -178,7 +178,7 @@
         public function view($role, $id)
         {
             if($this->role == $role){
-                $sql = "SELECT * FROM users";
+                $this->connection->query("SELECT * FROM users");
                 //$statement = $this->connection->prepare($sql);
                 //$statement->execute();
                 //return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
