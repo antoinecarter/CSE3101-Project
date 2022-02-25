@@ -85,7 +85,7 @@
             ];
 
             try{
-                //$statement = $this->connection->prepare($sql);
+                //$statement = $this->connection->query($sql);
                 //$statement->exec($new_user);
                 //$this->id = $this->connection->lastInsertId();
                 $message = 'Account Created';
