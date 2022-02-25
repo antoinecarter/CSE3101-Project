@@ -12,43 +12,7 @@
         {
             $this->userModel = new User;
         }
-        /*
-        public function __construct()
-        {
-            $this->userobj = new User;
-        }
-        
-        public function login($data){
-            
-            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                // process form
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
-                $data = [
-                    'username' => trim($_POST['username']),
-                    'passcode' => trim($_POST['passcode']),
-                    'username_err' => '',
-                    'passcode_err' => ''
-                ];
-    
-                //validate username
-                if(empty($data['username'])){
-                    $data['username_err'] = 'Please enter username';
-                }else{
-                    if($this->userModel->findUserByEmail($data['username'])){
-                        //user found
-                    }else{
-                        $data['username_err'] = 'User not found';
-                    }
-                }
-    
-                //validate passcode 
-                if(empty($data['passcode'])){
-                    $data['passcode_err'] = 'Please enter your passcode';
-                }elseif(strlen($data['password']) < 6){
-                    $data['passcode_err'] = 'passcode must be atleast six characters';
-                }
-            }
-        }*/
+
         public function home(){
             include_once __DIR__."/../view/home.php";
         }
@@ -66,10 +30,11 @@
 
                 if(empty($d['username']) || empty($d['passcode'])){
                     //alert('login',"Please fill out all inputs");
-                    $this->message = "Please fill out all inputs";
-                    header("Location: /CSE3101-Project/");
+                    $d['last_name'] || $d['passcode'] = 'Please fill out all inputs';
+                    header("location: ../index.php");
                     exit();
                 }
+                
 
                 if($this->userModel->findUsernameORPassword($d['username'], $d['passcode'])){
                     $valid = $this->userModel->login($d['username'], $d['passcode']);
@@ -101,7 +66,55 @@
         }
 
         public function createuser(){
+                $method = $_SERVER['REQUEST_METHOD'];
+ 
+                    if ($method == "GET"){
+                        include_once __DIR__."/../view/newuser.php";
+                    }else{
+                    $d = [
+                        'first_name' => $this->remove_errors($_POST['first_name']),
+                        'last_name' => $this->remove_errors($_POST['last_name']),
+                        'username' => $this->remove_errors($_POST['username']),
+                        'email' => $this->remove_errors($_POST['email']),
+                        'passcode' => $this->remove_errors($_POST['passcode'])
+                    ];
+        
+                    if(empty($d['first_name'])){
+                        $d['first_name'] = 'Please enter First name';
+                    }
 
+                    if(empty($d['last_name'])){
+                        $d['last_name'] = 'Please enter Last name';
+                    }
+
+                    if(empty($d['username'])){
+                        $d['username'] = 'Please enter Username';
+                    }
+      
+                    if(empty($d['email'])){
+                        $d['email'] = 'Please enter email';
+                    }else{
+                        if($this->userModel->findUserByEmail($d['email'])){
+                            $d['email'] = 'Email already exist';
+                        }
+                    }
+ 
+                    if(empty($d['passcode'])){
+                        $d['passcode'] = 'Please enter your password';
+                    }elseif(strlen($d['passcode']) < 6){
+                        $d['passcode'] = 'Password must be atleast six characters';
+                    }
+
+ 
+                    if(empty($d['first_name']) && empty($d['last_name']) && empty($d['email']) && empty($d['passcode'])){
+                        $d['passcode'] = ($d['passcode']);
+                        if($this->userModel->createuser($d)){
+                            flash('create_success', 'you are registerd you can login now');
+                        }
+                    }
+
+                
+                }
         }
 
         public function updateuser(){
