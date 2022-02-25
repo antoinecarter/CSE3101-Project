@@ -133,7 +133,7 @@
                     WHERE
                         id = :id";
             
-            $update_user = [
+            $updateuser = [
                 "id" => $id,
                 "first_name" => $this->remove_errors($this->first_name) ,
                 "last_name" => $this->remove_errors($this->last_name) ,

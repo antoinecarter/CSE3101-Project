@@ -122,21 +122,16 @@
         }
 
         public function updateuser(){
-            $method = $_SERVER['REQUEST_METHOD'];
-
-            if($method == "GET"){
-                include_once __DIR__."/../view/updateuser.php";
-            }else{
-               
                 $d = array(
-                            'id'		 => $this->remove_errors($_GET['id']),
-                            'first_name' => $this->remove_errors($_GET['first_name']),
-                            'last_name'  => $this->remove_errors($_GET['last_name']),
-                            'email'		 => $this->remove_errors($_GET['email']),
-                            'passcode'	 => $this->remove_errors($_GET['passcode'])
+                            'id'		=> $_REQUEST['id'],
+                            'name' 		=> $_REQUEST['name'],
+                            'last_name' => $_REQUEST['last_name'],
+                            'email'		=> $_REQUEST['email']
                             );		
-        }
-    }
+                    parent::update();		
+            }    
+            
+        
     
         public function viewuser(){
 
@@ -146,7 +141,6 @@
             $method = $_SERVER['REQUEST_METHOD'];
 
             if($method == "GET"){
-            }else{
                 $d = [
                    'id' => $this->remove_errors($_GET['id'])
                 ];
