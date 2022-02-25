@@ -133,7 +133,7 @@
             
         
     
-        public function viewuser($id){
+        public function viewuser($id, $d){
                 $user = $this->userModel->getUserById($id);
         
                 $d = [
