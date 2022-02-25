@@ -166,6 +166,12 @@
         public function delete($id)
         {
             $this->connection->query( "DELETE FROM users WHERE id= :id");
+            $this->connection->bind(':id', $id);
+                if($this->connection->execute()){
+                    return true;
+                }else{
+                    return false;
+                }
             try{
                 //$statement = $this->connection->prepare($sql);
                 //$statement->execute(['id'=> $id]);
@@ -203,6 +209,14 @@
                 return false;
             }
             
+        }
+
+        public function getUserById($id){
+            $this->connection->query('SELECT * FROM posts WHERE id = :id');
+            $this->connection->bind(':id', $id);
+            $row = $this->connection->record();
+    
+            return $row;
         }
 
         public function verify($role)

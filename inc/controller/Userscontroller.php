@@ -128,7 +128,7 @@
                             'last_name' => $_REQUEST['last_name'],
                             'email'		=> $_REQUEST['email']
                             );		
-                    parent::update();		
+                    parent::update($id, $d);		
             }    
             
         
@@ -137,16 +137,26 @@
 
         }
 
-        public function deleteuser(){
-            $method = $_SERVER['REQUEST_METHOD'];
-
-            if($method == "GET"){
-                $d = [
-                   'id' => $this->remove_errors($_GET['id'])
-                ];
+        //delete post
+        public function delete($id){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //check for owner
+                $deluser = $this->userModel->getUserById($id);
+                if($deluser->id != $_SESSION['id']){
+                    redirect('');
+                }
+                
+                //call delete method from post model
+                if($this->userModel->deleteuser($id)){
+                    redirect('');
+                }else{
+                    die('something went wrong');
+                }
+            }else{
+                redirect('');
+            }
         }
-    }
-
+              
         public function approveuser(){
 
         }
