@@ -30,7 +30,7 @@
 
                 if(empty($d['username']) || empty($d['passcode'])){
                     //alert('login',"Please fill out all inputs");
-                    $d['last_name'] || $d['passcode'] = 'Please fill out all inputs';
+                    $d['username'] || $d['passcode'] = 'Please fill out all inputs';
                     header("location: ../index.php");
                     exit();
                 }
@@ -89,19 +89,23 @@
 
                     if(empty($d['username'])){
                         $d['username'] = 'Please enter Username';
+                    }else{
+                        if($this->userModel->findUsernameORPassword($d['username'],$d['passcode'])){
+                            $d['username'] = 'Email already exist';
+                        }
                     }
       
                     if(empty($d['email'])){
                         $d['email'] = 'Please enter email';
                     }else{
-                        if($this->userModel->findUserByEmail($d['email'])){
+                        if($this->userModel->findEmail($d['email'])){
                             $d['email'] = 'Email already exist';
                         }
                     }
  
                     if(empty($d['passcode'])){
                         $d['passcode'] = 'Please enter your password';
-                    }elseif(strlen($d['passcode']) < 6){
+                    }elseif(($d['passcode']) < 6){
                         $d['passcode'] = 'Password must be atleast six characters';
                     }
 
@@ -118,9 +122,21 @@
         }
 
         public function updateuser(){
+            $method = $_SERVER['REQUEST_METHOD'];
 
+            if($method == 'GET'){
+            }else{
+                include_once __DIR__."/../view/updateuser.php";
+                $d = array(
+                            'id'		 => $_REQUEST['id'],
+                            'first_name' => $_REQUEST['first_name'],
+                            'last_name'  => $_REQUEST['last_name'],
+                            'email'		 => $_REQUEST['email'],
+                            'passcode'	 => $_REQUEST['passcode']
+                            );		
         }
-
+    
+    }
         public function viewuser(){
 
         }

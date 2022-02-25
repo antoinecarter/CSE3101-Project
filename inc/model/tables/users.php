@@ -190,6 +190,21 @@
             }    
         }
         
+        public function findEmail($email){
+            $email = $this->remove_errors($email);
+            $this->connection->query("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $this->connection->bind(':email', $email);
+
+            $row = $this->connection->record();
+
+            if($this->connection->rowCount()>0){
+                return $row;
+            }else{
+                return false;
+            }
+            
+        }
+
         public function verify($role)
         {
             if($this->role == $role){
