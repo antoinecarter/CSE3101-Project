@@ -1,94 +1,12 @@
 
 <html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <style>
-
-    body{
-       margin: 0;
-       padding: 0;
-       background-color: lightblue;
-
-    }
-
-    div{
-      width: 320px;
-      height: 420px;
-      background: #000;
-      color: #fff;
-      top: 50%;
-      left: 50%;
-      position: absolute;
-      transform: translate(-50%,-50%);
-      box-sizing: border-box;
-      padding: 70px 30px;
-      border-radius: 5rem;
-
-    }
-    
-    div h1{
-      margin: 0;
-      text-align: center;
-      padding: 0 0 10px;
-      font-size: 50px;
-    }
-    
-    div p{
-      font-weight: bold;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-
-    }
-
-    div p input[type="text"], input[type="password"]{
-     
-      height: 40px;
-      padding-left: 12px;
-    }
-
-    
-    div input{
-      width: 100%;
-      margin-bottom: 20px;
-      border-radius: 7.25rem;
-      
-    }
-
-    .login_bu {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
-    }
-
-    .cancel_bu {
-    color: #fff;
-    background-color: #e52342;
-    border-color: #e52342;
-    }
-
-    .lc {
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    
-
-    }
-    .lc {
-    cursor: pointer;
-    opacity: 0.9;
-    }
-
-    .lc:hover {
-    opacity: 1;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.scss" type="text/css">
 </head>
 
   <?php
