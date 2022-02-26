@@ -4,7 +4,7 @@
         background-color: lightblue;
     }
     
-    div {
+    .login {
         width: 320px;
         height: 420px;
         background: #000;
@@ -18,30 +18,34 @@
         border-radius: 5rem;
     }
     
-    div h1 {
+    .login h1 {
         margin: 0;
         text-align: center;
         padding: 0 0 10px;
         font-size: 50px;
     }
     
-    div p {
+    .login p {
         font-weight: bold;
         margin: 0;
         padding: 0;
         text-align: center;
     }
     
-    div p input[type="text"],
+    .login p input[type="text"],
     input[type="password"] {
         height: 40px;
         padding-left: 12px;
     }
     
-   div input {
+   .login input {
         width: 100%;
         margin-bottom: 20px;
         border-radius: 7.25rem;
+    }
+
+    h1{
+        text-align: center;
     }
     
     .login_bu {
