@@ -121,3 +121,4 @@ Model:
         
         Lateness
             id, org_id, emp_id, work_date, shift_id, shift_hours, timeclock_id, min_time_in, hours_deducted(compare the min_time_in to the start_time for shift)
+            

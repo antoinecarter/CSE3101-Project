@@ -14,6 +14,7 @@
                 username VARCHAR(30) NOT NULL,
                 passcode VARCHAR(100) NOT NULL, 
                 employee_no INT,
+                org_id INT,
                 role VARCHAR(20) NOT NULL DEFAULT 'USER',
                 can_create INT DEFAULT 0 COMMENT '1=Yes, 0=No', 
                 can_view INT DEFAULT 0 COMMENT '1=Yes, 0=No',

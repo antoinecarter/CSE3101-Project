@@ -3,6 +3,7 @@
     include_once __DIR__."/interface.php";
 
     class User implements crud {
+        private $org_id;
         private $first_name;
         private $last_name;
         private $email;
@@ -68,94 +69,59 @@
             header('Location: /CSE3101-Project/login');
         }
         
-        public function create($d)
-        {
-            $this->connection->query("INSERT INTO users(first_name, last_name, email, username, passcode, role, status, start_date) 
-                                VALUES (:first_name, :last_name, :email, :username, :passcode, :role, :status, :start_date)");
-            
-            $new_user = [
-                "first_name" => $this->remove_errors($this->first_name) ,
-                "last_name" => $this->remove_errors($this->last_name) ,
-                "email" => $this->remove_errors($this->email) ,
-                "username" => $this->remove_errors($this->username) ,
-                "passcode" => $this->remove_errors($this->passcode) ,
-                "role" => $this->remove_errors($this->role), 
-                "start_date" => $this->remove_errors($this->start_date),
-                "status" => $this->remove_errors($this->status) 
-            ];
-
+        public function create()
+        {            
             try{
-                //$statement = $this->connection->query($sql);
-                //$statement->exec($new_user);
-                //$this->id = $this->connection->lastInsertId();
+                $this->connection->query("INSERT INTO users(first_name, last_name, email, username, passcode, role, status, start_date) 
+                                                VALUES (:first_name, :last_name, :email, :username, :passcode, :role, :status, :start_date)");
+                $this->connection->bind(':first_name',$this->first_name);
+                $this->connection->bind(':last_name',$this->last_name);
+                $this->connection->bind(':email',$this->email);
+                $this->connection->bind(':username',$this->username);
+                $this->connection->bind(':passcode',$this->passcode);
+                $this->connection->bind(':role',$this->role);
+                $this->connection->bind(':status',$this->status);
+                $this->connection->bind(':start_date',$this->start_date);
+                
+                $statement = $this->connection->record();
+                $this->id = $statement['id'];
                 $message = 'Account Created';
                 return $message;
-                header("location: /CSE3101-Project/");
             }catch(PDOException $message){
                 echo $message->getMessage();
             }
             
         }
-/*
-        public function view_all()
-        {
-            if($this->role == 'ADMIN'){
-                $sql = "SELECT * FROM users";
-            }
-
-            
-            $statement = $this->connection->prepare($sql);
-            return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
-        }
-        */
 
         public function update($id, $d)
         {
-            $this->connection->query("UPDATE 
-                        users 
-                    SET 
-                        first_name = :first_name, 
-                        last_name = :last_name,
-                        email = :email,
-                        username = :username,
-                        passcode = :passcode,
-                        employee_no = :emp_no,
-                        role = :role,
-                        can_create = :c_create,
-                        can_view = :c_view,
-                        can_update = :c_update,
-                        can_delete = :c_delete,
-                        can_verify = :c_verify,
-                        can_approve = :c_approve,
-                        start_date = :start_date,
-                        end_date = :end_date,
-                        status = :status
-                    WHERE
-                        id = :id");
+            $this->connection->query("UPDATE users 
+                                        SET 
+                                            org_id = :org_id, first_name = :first_name, last_name = :last_name, email = :email, username = :username, passcode = :passcode, employee_no = :emp_no, role = :role, can_create = :c_create, can_view = :c_view, can_update = :c_update, can_delete = :c_delete, can_verify = :c_verify, can_approve = :c_approve, start_date = :start_date, end_date = :end_date, status = :status
+                                        WHERE
+                                            id = :id");
             
-            $updateuser = [
-                "id" => $id,
-                "first_name" => $this->remove_errors($this->first_name) ,
-                "last_name" => $this->remove_errors($this->last_name) ,
-                "email" => $this->remove_errors($this->email) ,
-                "username" => $this->remove_errors($this->username) ,
-                "passcode" => $this->remove_errors($this->passcode) ,
-                "role" => $this->remove_errors($this->role),
-                "emp_no" => $this->remove_errors($this->emp_no),
-                "c_create" => $this->remove_errors($this->can_create),
-                "c_view" => $this->remove_errors($this->can_view),
-                "c_update" => $this->remove_errors($this->can_update),
-                "c_delete" => $this->remove_errors($this->can_delete),
-                "c_verify" => $this->remove_errors($this->can_verify),
-                "c_approve" => $this->remove_errors($this->can_approve),
-                "start_date" => $this->remove_errors($this->start_date),
-                "status" => $this->remove_errors($this->status),
-                "end_date" => $this->remove_errors($this->end_date)
-            ];
+            $this->connection->bind(':id', $id);
+            $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
+            $this->connection->bind(':first_name', $this->remove_errors($d['first_name']));
+            $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
+            $this->connection->bind(':email', $this->remove_errors($d['email']));
+            $this->connection->bind(':username', $this->remove_errors($d['username']));
+            $this->connection->bind(':passcode', $this->remove_errors($d['passcode']));
+            $this->connection->bind(':role', $this->remove_errors($d['role']));
+            $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
+            $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
+            $this->connection->bind(':c_view', $this->remove_errors($d['can_view']));
+            $this->connection->bind(':c_update', $this->remove_errors($d['can_update']));
+            $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
+            $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
+            $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
+            $this->connection->bind(':start_date', $this->remove_errors($d['start_date']));
+            $this->connection->bind(':end_date', $this->remove_errors($d['end_date']));
+            $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
-                //$statement = $this->connection->prepare($sql);
-                //$statement->exec($update_user);
+                $statement = $this->connection->record();
                 $message = "User Account Updated";
                 return $message;
             }catch(PDOException $message){
@@ -180,7 +146,7 @@
                 echo $message->getMessage();
             }         
         }
-        
+        /*
         public function deleteuser($id)
         {
             $this->connection->query( "DELETE FROM users WHERE id= :id");
@@ -197,7 +163,7 @@
             }catch(PDOException $message){
                 echo $message->getMessage();
             }         
-        }
+        }*/
 
         public function view($role, $id)
         {
@@ -207,7 +173,7 @@
                 //$statement->execute();
                 //return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
             }else{
-                $sql = "SELECT * FROM users WHERE id= :id";
+                $this->connection->query("SELECT * FROM users WHERE id= :id");
                 //$statement = $this->connection->prepare($sql);
                 //$statement->execute(['id' => $id]);
                 //return $statement->fetchObject();
@@ -230,27 +196,36 @@
         }
 
         public function getUserById($id){
-            $this->connection->query('SELECT * FROM posts WHERE id = :id');
+            $this->connection->query('SELECT * FROM user WHERE id = :id');
             $this->connection->bind(':id', $id);
             $row = $this->connection->record();
     
             return $row;
         }
 
-        public function verify($role)
+        public function verify($id)
         {
-            if($this->role == $role){
-
+            $this->connection->query('SELECT * FROM users WHERE id = :id');
+            $this->connection->bind(':id', $id);
+            $row = $this->connection->record();
+            if($row['can_verify'] == 0){
+                return false;
+            }else{
+                return true;
             }
+            
         }
 
-        public function approve($role)
+        public function approve($id)
         {
-            
-        }
-        public function createuser()
-        {
-            
+            $this->connection->query('SELECT * FROM users WHERE id = :id');
+            $this->connection->bind(':id', $id);
+            $row = $this->connection->record();
+            if($row['can_approve'] == 0){
+                return false;
+            }else{
+                return true;
+            }
         }
 
         public function get_fname(){
@@ -305,6 +280,18 @@
             return $this->can_approve;
         }
 
+        public function get_start_date(){
+            return $this->start_date;
+        }
+
+        public function get_end_date(){
+            return $this->end_date;
+        }
+
+        public function get_status(){
+            return $this->status;
+        }
+
         public function set_fname($fname){
             return $this->first_name = $fname;
         }
@@ -355,6 +342,18 @@
 
         public function set_can_approve($can_approve){
             return $this->can_approve =$can_approve;
+        }
+
+        public function set_start_date($start_date){
+            return $this->start_date = $start_date;
+        }
+
+        public function set_end_date($end_date){
+            return $this->end_date = $end_date;
+        }
+
+        public function set_status($status){
+            return $this->status = $status;
         }
     }
 

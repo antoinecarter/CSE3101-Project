@@ -10,7 +10,7 @@
 
         public function __construct()
         {
-            $this->userModel = new User;
+            $this->userModel = new User();
         }
 
         public function home(){
@@ -28,16 +28,16 @@
                     'passcode' => $this->remove_errors($_POST['passcode']) 
                 ];
 
-                if(empty($d['username']) || empty($d['passcode'])){
+                if(empty($_POST['username']) || empty($_POST['passcode'])){
                     //alert('login',"Please fill out all inputs");
-                    $d['username'] || $d['passcode'] = 'Please fill out all inputs';
+                    $_POST['username'] || $_POST['passcode'] = 'Please fill out all inputs';
                     header("location: ../index.php");
                     exit();
                 }
                 
 
-                if($this->userModel->findUsernameORPassword($d['username'], $d['passcode'])){
-                    $valid = $this->userModel->login($d['username'], $d['passcode']);
+                if($this->userModel->findUsernameORPassword($_POST['username'], $_POST['passcode'])){
+                    $valid = $this->userModel->login($_POST['username'], $_POST['passcode']);
                     if($valid){
                         session_start();
                         $_SESSION['id'] = $valid['id'];
@@ -66,64 +66,91 @@
         }
 
         public function createuser(){
-                $method = $_SERVER['REQUEST_METHOD'];
- 
-                    if ($method == "GET"){
-                        include_once __DIR__."/../view/newuser.php";
-                    }else{
-                    $d = [
-                        'first_name' => $this->remove_errors($_POST['first_name']),
-                        'last_name' => $this->remove_errors($_POST['last_name']),
-                        'username' => $this->remove_errors($_POST['username']),
-                        'email' => $this->remove_errors($_POST['email']),
-                        'passcode' => $this->remove_errors($_POST['passcode'])
-                    ];
-        
-                    if(empty($d['first_name'])){
-                        $d['first_name'] = 'Please enter First name';
-                    }
+            $method = $_SERVER['REQUEST_METHOD'];
 
-                    if(empty($d['last_name'])){
-                        $d['last_name'] = 'Please enter Last name';
-                    }
-
-                    if(empty($d['username'])){
-                        $d['username'] = 'Please enter Username';
-                    }else{
-                        if($this->userModel->findUsernameORPassword($d['username'],$d['passcode'])){
-                            $d['username'] = 'Email already exist';
-                        }
-                    }
-      
-                    if(empty($d['email'])){
-                        $d['email'] = 'Please enter email';
-                    }else{
-                        if($this->userModel->findEmail($d['email'])){
-                            $d['email'] = 'Email already exist';
-                        }
-                    }
- 
-                    if(empty($d['passcode'])){
-                        $d['passcode'] = 'Please enter your password';
-                    }elseif(($d['passcode']) < 6){
-                        $d['passcode'] = 'Password must be atleast six characters';
-                    }
-
- 
-                    if(empty($d['first_name']) && empty($d['last_name']) && empty($d['email']) && empty($d['passcode'])){
-                        $d['passcode'] = ($d['passcode']);
-                        if($this->userModel->createuser($d)){
-                            flash('create_success', 'you are registerd you can login now');
-                        }
-                    }
-
-                
+            if ($method == "GET"){
+                include_once __DIR__."/../view/newuser.php";
+            }else{
+                if(empty($_POST['fName'])){
+                    $message = 'Please enter First name';
+                    return $message;
                 }
+
+                if(empty($_POST['lName'])){
+                    $message = 'Please enter Last name';
+                    return $message;
+                }
+
+                if(empty($_POST['username'])){
+                    $message = 'Please enter Username';
+                    return $message;
+                }else{
+                    if($this->userModel->findUsernameORPassword($_POST['username'],$_POST['passcode'])){
+                        $message = 'Username already exist';
+                        return $message;
+                    }
+                }
+
+                if(empty($_POST['email'])){
+                    $message = 'Please enter email';
+                    return $message;
+                }else{
+                    if($this->userModel->findEmail($_POST['email'])){
+                        $message = 'Email already exist';
+                        return $message;
+                    }
+                }
+
+                if(empty($_POST['passcode'])){
+                    $message = 'Please enter your password';
+                }elseif(($_POST['passcode']) < 6){
+                    $message = 'Password must be atleast six characters';
+                    return $message;
+                }
+
+                /*
+                if(empty($_POST['fName']) && empty($_POST['lName']) && empty($_POST['email']) && empty($_POST['passcode'])){
+                    $message = ($_POST['passcode']);
+                    if($this->userModel->createuser($d)){
+                        flash('create_success', 'you are registerd you can login now');
+                    }
+                }*/
+
+                if(empty($_POST['role'])){
+                    $message = 'Please select role';
+                    return $message;
+                }
+                
+                if(empty($_POST['status'])){
+                    $message = 'Please select status';
+                    return $message;
+                }
+
+                if(empty($_POST['start_date'])){
+                    $message = 'Please input start date';
+                    return $message;
+                }
+
+                $new_user = new User();
+                $new_user->set_fname($_POST['fName']);
+                $new_user->set_lname($_POST['lName']);
+                $new_user->set_email($_POST['email']);
+                $new_user->set_username($_POST['username']);
+                $new_user->set_passcode($_POST['passcode']);
+                $new_user->set_role($_POST['role']);
+                $new_user->set_start_date($_POST['start_date']);
+                $new_user->set_status($_POST['status']);
+                $new_user->create();
+                $message = 'User Created';
+                return $message;
+            }
         }
 
-        public function updateuser($id){
+        public function updateuser(){
+
                 $d = array(
                             'id'		    => $_REQUEST['id'],
+                            'org_id'        => $_REQUEST['org_id'],
                             'first_name' 	=> $_REQUEST['first_name'],
                             'last_name'     => $_REQUEST['last_name'],
                             'email'		    => $_REQUEST['email'],
@@ -143,48 +170,46 @@
 
 
                             );		
-                    parent::update($id, $d);		
+                    parent::update($d['id'], $d);		
             }    
             
+        public function viewuser(){
+            $id = $_GET['user_id'];
+            $user = $this->userModel->getUserById($id);
+            return $user;
+        }
         
-    
-        public function viewuser($id, $d){
-                $user = $this->userModel->getUserById($id);
-        
-                $d = [
-                    'user' => $user
-                ];
-        
-                header('posts/show', $d);
-            }
-        
-
-        //delete post
-        public function delete($id){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                //check for owner
+        public function deleteuser(){
+            if($_SERVER['REQUEST_METHOD'] = 'POST'){
+                $id = $_POST['id'];
                 $deluser = $this->userModel->getUserById($id);
-                if($deluser->id != $_SESSION['id']){
-                    redirect('');
-                }
-                
-                //call delete method from post model
-                if($this->userModel->deleteuser($id)){
-                    redirect('');
+                if($deluser['id'] != $_SESSION['id']){
+                    if(($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')){
+                        $this->userModel->delete($id);
+                        header('Location: ');
+                        $message = "User deleted";
+                        return $message;
+                    }else{
+                        $message = 'User is an Admin/You are not an Admin';
+                        return $message;
+                    }
                 }else{
-                    die('something went wrong');
+                    $message = 'Error! Cannot delete logged-in user';
+                    return $message;
                 }
-            }else{
-                redirect('');
             }
         }
               
         public function approveuser(){
-
+            $id = $_SESSION['id'];
+            $app = $this->userModel->approve($id);
+            return $app;
         }
 
         public function verifyuser(){
-
+            $id = $_SESSION['id'];
+            $ver = $this->userModel->verify($id);
+            return $ver;
         }
 
     }
