@@ -3,26 +3,16 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/style.scss" type="text/css">
     </head>
     <div>
         <?php
-        require __DIR__."/inc.php";
-            echo $_SESSION['id'];
+        include __DIR__."/header.php";
         ?>
     </div>
 <body>
+
    <div class="home">
-        <h1>
-          Human Resource Management System
-        </h1>
-        <div class="nav">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
+
         </div>
 
 </div>
