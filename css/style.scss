@@ -106,6 +106,7 @@
            padding-top: 2px;
            background-color: rgb(6, 57, 88);
            border-radius: 33px 0px 33px 0px;
+           border: 2px solid rgb(255, 255, 255);
        }
        
        .cur_user {
@@ -262,4 +263,29 @@
            .sidebar a {
                font-size: 18px;
            }
+       }
+       
+       .wrapper {
+           display: grid;
+           margin-top: 120px;
+           margin-left: 3%;
+           margin-bottom: 3%;
+           grid-template-rows: 200px 200px;
+           grid-template-columns: 200px 200px 200px 200px 0px;
+           grid-gap: 50px;
+       }
+       
+       .box {
+           width: 200px;
+           background-color: rgb(6, 57, 88);
+           color: #fff;
+           border-radius: 5px;
+           padding: 20px;
+           font-size: 150%;
+           cursor: pointer;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           border-top: 3px solid rgb(0, 0, 0);
+           border-left: 3px solid rgb(0, 0, 0);
        }
