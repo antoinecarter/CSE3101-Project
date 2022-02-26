@@ -12,12 +12,12 @@
         ?>
     </div>
 <body>
-   
+   <div class="home">
         <h1>
           Human Resource Management System
         </h1>
 
-
+</div>
 </body>
   
 </html>
