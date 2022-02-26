@@ -13,6 +13,7 @@
     </div>
 <body>
     <div class="home">
+        <h1>Welcome</h1>
 
     </div>
 
