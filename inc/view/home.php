@@ -12,18 +12,19 @@
 <body>
 
    <div class="home">
-
+<h1>Human Resources Dashboard</h1>
+<h3>DTB for life bro</h3>
 <div class="wrapper">
-  <div class="box a">A</div>
-  <div class="box b">B</div>
-  <div class="box c">C</div>
-  <div class="box d">D</div>
-  <div class="box e">E</div>
-  <div class="box f">F</div>
-  <div class="box f">F</div>
-  <div class="box f">F</div>
-  <div class="box f">F</div>
-  <div class="box f">F</div>
+  <div class="box a">Activity</div>
+  <div class="box b">Applicant</div>
+  <div class="box c">Apprasial</div>
+  <div class="box d">Calendar</div>
+  <div class="box e">Deduction</div>
+  <div class="box f">Employee</div>
+  <div class="box f">Leave</div>
+  <div class="box f">Payroll</div>
+  <div class="box f">IDEK</div>
+  <div class="box f">IDEK</div>
 
 </div>
         </div>
