@@ -122,11 +122,11 @@
        .topnav_button {
            top: 5rem;
            left: 18px;
-           padding-left: 600px;
+           padding-left: 900px;
        }
        
        .topnav_button a {
-           display: block;
+           display: flex;
            text-align: center;
            padding: 10px 0;
        }
@@ -138,10 +138,10 @@
        
        @media screen and (min-width: 600px) {
            .topnav_button {
-               display: block;
+               display: flex;
                position: static;
                width: auto;
-               margin-right: 20px;
+               margin-right: 2px;
                background: none;
            }
            .topnav_button a {

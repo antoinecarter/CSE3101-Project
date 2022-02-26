@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.scss" type="text/css">
   </head>
-  <body>
+  
     <header>
       <nav class="top-nav">
       <a class="cur_user"> HMRS  </a>
@@ -18,12 +18,13 @@
           <div class="dropmenu">
           <button class="dropbb"><?php require __DIR__."/inc.php"; echo $_SESSION['username'];?>  ▼</button>
         <div class="dropmenu-content">
-          <a href="#">User Profile</a>
-          <a href="#">Logout</a>
-        </div>
+          <a href="#">Profile</a>
+          <a href="action=logout"> Logout</a>
+        </div> 
 
       </nav>
     </header>
+    <body>
   </body>
 
 
