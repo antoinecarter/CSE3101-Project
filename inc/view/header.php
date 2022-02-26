@@ -13,10 +13,13 @@
 
         <div id="mySidebar" class="sidebar">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
+          <a href="#">Departments</a>
+          <a href="#">HR Config</a>
+          <a href="#">Payroll Management</a>
+          <a href="#">Employee Management</a>
+          <a href="#">Attendance Management</a>
+          <a href="#">Leave Management</a>
+          <a href="#">Employee Management</a>
         </div>
 
         <div id="main">
