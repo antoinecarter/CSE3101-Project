@@ -65,6 +65,17 @@
             
         }
 
+
+    public function logout(){
+        unset($_SESSION['id']);
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        session_destroy();
+        header("Location:/CSE3101-Project/inc/view/login.php");
+
+    }
+
+
         public function createuser(){
                 $method = $_SERVER['REQUEST_METHOD'];
  
@@ -189,6 +200,7 @@
 
     }
 
+
     $init = new UsersController;
 
     if($_SERVER['REQUEST_METHOD'] == 'post'){
@@ -202,4 +214,3 @@
     }
 
 ?>
-

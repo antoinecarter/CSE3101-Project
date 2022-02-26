@@ -6,10 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.scss" type="text/css">
   </head>
-  <body>
+  
     <header>
-      <nav class="top-nav">
-      <a class="cur_user"> HMRS  </a>
+      <nav class="side-top-nav">
+      </head>
+
+        <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a>
+        </div>
+
+        <div id="main">
+          <button class="openbtn" onclick="openNav()">☰</button>  
+
+        </div>
+        <script src="./js/script.js"></script>
+        <div></div>
+
+
+        <a class="cur_user"> HMRS  </a>
 
         <div class="topnav_button">
           <a href="./home">home</a>
@@ -18,16 +36,21 @@
           <div class="dropmenu">
           <button class="dropbb"><?php require __DIR__."/inc.php"; echo $_SESSION['username'];?>  ▼</button>
         <div class="dropmenu-content">
-          <a href="#">User Profile</a>
-          <a href="#">Logout</a>
-        </div>
+          <a href="#">Profile</a>
+          <a href="action=logout"> Logout</a>
+        </div> 
+
 
       </nav>
+      <script src="./js/script.js"></script>
+
+  </div>
+</div>
+      
     </header>
+    <body>
   </body>
 
-
-  <script src="./script.js"></script>
 </html>
 
   

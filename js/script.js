@@ -1,6 +1,9 @@
-const hamburger = document.querySelector('.hamburger');
-const navLink = document.querySelector('.nav__link');
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
 
-hamburger.addEventListener('click', () => {
-  navLink.classList.toggle('hide');
-});
+function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
