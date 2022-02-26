@@ -1,0 +1,289 @@
+       body {
+           margin: 0;
+           padding: 0;
+           background-color: lightblue;
+       }
+       
+       .login {
+           width: 320px;
+           height: 420px;
+           background: #000;
+           color: #fff;
+           top: 50%;
+           left: 50%;
+           position: absolute;
+           transform: translate(-50%, -50%);
+           box-sizing: border-box;
+           padding: 70px 30px;
+           border-radius: 5rem;
+       }
+       
+       .login h1 {
+           margin: 0;
+           text-align: center;
+           padding: 0 0 10px;
+           font-size: 50px;
+       }
+       
+       .login p {
+           font-weight: bold;
+           margin: 0;
+           padding: 0;
+           text-align: center;
+       }
+       
+       .login p input[type="text"],
+       input[type="password"] {
+           height: 40px;
+           padding-left: 12px;
+       }
+       
+       .login input {
+           width: 100%;
+           margin-bottom: 20px;
+           border-radius: 7.25rem;
+       }
+       
+       .home h1 {
+           text-align: center;
+       }
+       
+       .login_bu {
+           color: #fff;
+           background-color: #28a745;
+           border-color: #28a745;
+       }
+       
+       .cancel_bu {
+           color: #fff;
+           background-color: #e52342;
+           border-color: #e52342;
+       }
+       
+       .lc {
+           font-weight: 400;
+           text-align: center;
+           vertical-align: middle;
+           user-select: none;
+           border: 1px solid transparent;
+           padding: 0.375rem 0.75rem;
+           font-size: 1rem;
+           line-height: 1.5;
+           border-radius: 0.25rem;
+       }
+       
+       .lc {
+           cursor: pointer;
+           opacity: 0.9;
+       }
+       
+       .lc:hover {
+           opacity: 1;
+       }
+       
+       //Top-Nav Bar
+       .nav {
+           width: 85%;
+           padding: 35px 0;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           border-radius: 3px;
+       }
+       
+       a {
+           text-decoration: none;
+           color: rgb(255, 255, 255);
+           font-size: 20px;
+           font-weight: bold;
+           text-transform: uppercase;
+       }
+       /* nav styles */
+       
+       .side-top-nav {
+           display: flex;
+           align-items: center;
+           padding-top: 2px;
+           background-color: rgb(6, 57, 88);
+           border-radius: 33px 0px 33px 0px;
+           border: 2px solid rgb(255, 255, 255);
+       }
+       
+       .cur_user {
+           font-size: 22px;
+           color: rgb(250, 250, 250);
+       }
+       
+       .topnav_links {
+           padding-right: 20px;
+           cursor: pointer;
+       }
+       
+       .topnav_button {
+           top: 5rem;
+           left: 18px;
+           padding-left: 830px;
+       }
+       
+       .topnav_button a {
+           display: flex;
+           text-align: center;
+           padding: 10px 0;
+       }
+       
+       .topnav_button a:hover {
+           background-color: rgb(53, 100, 145);
+           border-radius: 30px 0px 30px 0px;
+       }
+       
+       @media screen and (min-width: 600px) {
+           .topnav_button {
+               display: flex;
+               position: static;
+               width: auto;
+               margin-right: 2px;
+               background: none;
+           }
+           .topnav_button a {
+               display: inline-block;
+               padding: 15px 20px;
+           }
+           .topnav_links {
+               display: none;
+           }
+       }
+       
+       .dropbb {
+           font-size: 17px;
+           border: none;
+           outline: none;
+           color: white;
+           padding: 14px 16px;
+           background-color: inherit;
+           font-family: inherit;
+           margin: 0;
+           text-transform: uppercase;
+       }
+       
+       .dropmenu-content {
+           display: none;
+           position: absolute;
+           background-color: rgb(6, 57, 88);
+           box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
+           z-index: 1;
+       }
+       
+       .dropmenu-content a {
+           float: none;
+           color: rgb(255, 255, 255);
+           padding: 12px 16px;
+           text-decoration: none;
+           display: block;
+           text-align: center;
+       }
+       
+       .dropmenu:hover .dropbb {
+           background-color: rgb(53, 100, 145);
+           color: white;
+           border-radius: 30px 0px 30px 0px;
+       }
+       
+       .dropmenu-content a:hover {
+           background-color: rgb(53, 100, 145);
+           color: rgb(255, 255, 255);
+       }
+       
+       .dropmenu:hover .dropmenu-content {
+           display: block;
+       }
+       
+       //sadadsa
+       .side-body {
+           font-family: "Lato", sans-serif;
+       }
+       
+       .sidebar {
+           height: 100%;
+           width: 0;
+           position: fixed;
+           z-index: 1;
+           top: 0;
+           left: 0;
+           background-color: #111;
+           overflow-x: hidden;
+           transition: 0.5s;
+           padding-top: 60px;
+       }
+       
+       .sidebar a {
+           padding: 8px 8px 8px 32px;
+           text-decoration: none;
+           font-size: 25px;
+           color: #818181;
+           display: block;
+           transition: 0.3s;
+       }
+       
+       .sidebar a:hover {
+           color: #f1f1f1;
+       }
+       
+       .sidebar .closebtn {
+           position: absolute;
+           top: 0;
+           right: 25px;
+           font-size: 36px;
+           margin-left: 50px;
+       }
+       
+       .openbtn {
+           font-size: 20px;
+           cursor: pointer;
+           background-color: #111;
+           color: white;
+           padding: 10px 15px;
+           border: none;
+       }
+       
+       .openbtn:hover {
+           background-color: #444;
+       }
+       
+       #main {
+           transition: margin-left .5s;
+           padding: 16px;
+       }
+       /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+       
+       @media screen and (max-height: 450px) {
+           .sidebar {
+               padding-top: 15px;
+           }
+           .sidebar a {
+               font-size: 18px;
+           }
+       }
+       
+       .wrapper {
+           display: grid;
+           margin-top: 120px;
+           margin-left: 3%;
+           margin-bottom: 3%;
+           grid-template-rows: 250px 250px;
+           grid-template-columns: 200px 200px 200px 200px 0px;
+           grid-gap: 50px;
+       }
+       
+       .box {
+           width: 200px;
+           background-color: rgb(6, 57, 88);
+           color: #fff;
+           border-radius: 5px;
+           font-size: 150%;
+           cursor: pointer;
+           display: flex;
+           justify-content: center;
+           align-items: top;
+           border-top: 3px solid rgb(0, 0, 0);
+           border-left: 3px solid rgb(0, 0, 0);
+       }
