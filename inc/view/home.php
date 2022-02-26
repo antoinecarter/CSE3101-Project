@@ -16,6 +16,9 @@
         <h1>
           Human Resource Management System
         </h1>
+        <div class="nav">
+            
+        </div>
 
 </div>
 </body>
