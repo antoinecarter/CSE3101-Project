@@ -80,3 +80,12 @@
     .lc:hover {
         opacity: 1;
     }
+
+    .nav{
+        width: 85%;
+        margin: auto;
+        padding: 35px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
