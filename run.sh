@@ -1,5 +1,6 @@
 #!/usr/bin/bash
-cp inc/view /opt/lampp/htdocs/
+cp -r inc/view /opt/lampp/htdocs/
+cp -r css/ /opt/lampp/htdocs
 sudo killall apache2
 cd /opt/lampp/
 sudo ./xampp start
