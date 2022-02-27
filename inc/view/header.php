@@ -28,7 +28,7 @@
       <button class="openbtn" onclick="openNav()">☰</button>
 
     </div>
-    <script src="./js/script.js"></script>
+
     <div></div>
 
 
@@ -48,8 +48,7 @@
 
   </nav>
   <script src="./js/script.js"></script>
-</header>
-<body>
+
 <?php
 
 ?>
