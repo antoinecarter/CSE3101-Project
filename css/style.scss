@@ -59,7 +59,13 @@
        }
        
        .home h1 {
+           font-size: 40px;
            text-align: center;
+           border: 4px solid rgb(6, 57, 88);
+           color: white;
+           background-color: rgb(6, 57, 88);
+           margin: 0px 350px 0px 350px;
+           border-radius: 40px 40px 40px 40px;
        }
        
        .login_bu {
