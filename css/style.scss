@@ -223,7 +223,7 @@
            z-index: 1;
            top: 0;
            left: 0;
-           background-color: #111;
+           background-color: rgb(6, 57, 88);
            overflow-x: hidden;
            transition: 0.5s;
            padding-top: 60px;
@@ -233,13 +233,13 @@
            padding: 8px 8px 8px 32px;
            text-decoration: none;
            font-size: 25px;
-           color: #818181;
+           color: #e2e2e2;
            display: block;
            transition: 0.3s;
        }
        
        .sidebar a:hover {
-           color: #f1f1f1;
+           color: rgb(53, 100, 145);
        }
        
        .sidebar .closebtn {
@@ -253,14 +253,15 @@
        .openbtn {
            font-size: 20px;
            cursor: pointer;
-           background-color: #111;
-           color: white;
+           background-color: rgb(6, 57, 88);
+           color: rgb(255, 255, 255);
            padding: 10px 15px;
-           border: none;
+           border: 3px solid rgb(255, 255, 255);
+           ;
        }
        
        .openbtn:hover {
-           background-color: #444;
+           background-color: rgb(255, 255, 255);
        }
        
        #main {
