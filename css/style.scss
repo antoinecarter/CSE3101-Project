@@ -227,17 +227,52 @@
            padding-top: 60px;
        }
        
-       .sidebar a {
-           padding: 8px 8px 8px 22px;
+       .sidebar-dr {
+           padding: 8px 8px 18px 22px;
+           margin: 38px 8px 18px 22px;
            text-decoration: none;
-           font-size: 25px;
+           color: #ffffff;
+           background-color: rgb(6, 57, 88);
+           display: block;
+           transition: 0.3s;
+           border: none;
+           cursor: pointer;
+           font-size: 16px;
+           text-align: left;
+           font-family: inherit;
+       }
+       
+       .sidebar-dr:hover {
+           background-color: rgb(53, 100, 145);
+           border-radius: 30px 0px 30px 0px;
+           padding-bottom: 30px;
+       }
+       
+       .active {
+           background-color: rgb(53, 100, 145);
+           border-radius: 30px 0px 30px 0px;
+       }
+       
+       .dropdown-contain {
+           display: none;
+           background-color: rgb(27, 106, 155);
+           margin-left: 5px;
+           margin-right: 5px;
+           text-align: left;
+       }
+       
+       .dropdown-contain a {
+           padding: 8px 8px 18px 22px;
+           text-decoration: none;
            color: #e2e2e2;
            display: block;
            transition: 0.3s;
+           border: none;
+           cursor: pointer;
        }
        
-       .sidebar a:hover {
-           background-color: rgb(53, 100, 145);
+       .dropdown-contain a:hover {
+           background-color: rgb(6, 57, 88);
            border-radius: 30px 0px 30px 0px;
            padding-bottom: 30px;
        }
