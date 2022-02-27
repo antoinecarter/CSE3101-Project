@@ -10,12 +10,13 @@
         ?>
     </div>
 <body>
-
-   <div class="home">
-
-        </div>
-
-</div>
+    <div class="cards">
+        <?php
+          for ($x = 0; $x <= 14; $x+=2) {
+            echo "<div class=card$x><p>Hello World</p></div>";
+          }
+        ?> 
+    </div>
 </body>
   
 </html>

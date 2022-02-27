@@ -16,20 +16,26 @@
         <a class="navbar-brand" href="#">
           <h1 class="brand">HRMS</h1>
         </a>   
-        <a class="nav-link" href="#">Profile</a>
         <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Profile</a>
+           
       </div>
     </nav>
-    <div class="cards">
-       <div>
-         <p>Hello World  </p>
-       </div>
-        <?php
-          for ($x = 0; $x <= 12; $x+=2) {
-            echo "<div class=card$x><p>Hello World</p></div>";
-          }
-        ?> 
-    </div>  
+    <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+
+        <ul class="menu__box">
+          <li><a class="menu__item" href="#">Department</a></li>
+          <li><a class="menu__item" href="#">HR Config</a></li>
+          <li><a class="menu__item" href="#">Payroll Management</a></li>
+          <li><a class="menu__item" href="#">Employee Management</a></li>
+          <li><a class="menu__item" href="#">Attendance Management</a></li>
+          <li><a class="menu__item" href="#">Leave Management</a></li>
+        </ul>
+    </div>
   </body>
 </html>
 
