@@ -1,34 +1,28 @@
 <?php
-    include_once __DIR__."/inc/model/Database.php";
-    $db = new Database();
-    $db->init();
+require_once __DIR__ . "/inc/model/Database.php";
+$db = new Database();
+$db->init();
+
+require_once __DIR__ . "/inc/controller/Userscontroller.php";
+require_once __DIR__. "/inc/view/inc.php";
+$usercontroller = new UsersController();
+
+$path = $_SERVER["REQUEST_URI"];
+
+if ($path == "/CSE3101-Project/"){
+    $usercontroller->userlogin();
+} else if ($path == "/CSE3101-Project/home"){
+    if(isset($_SESSION['id'])){
+        $usercontroller->home();
+    }
+} else if ($path == "/CSE3101-Project/Users"){
+    if(isset($_SESSION['id'])){
+        $usercontroller->tblusers();
+    }
+} else if ($path == "/CSE3101-Project/Users/Registration"){
+    if(isset($_SESSION['id'])){
+        $usercontroller->frmusers();
+    }
+}
+
 ?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            HRMIS
-        </title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-
-    </head>
-    <body>
-        <main>
-            <?php
-                include __DIR__."/inc/controller/Userscontroller.php";
-                $usercontroller = new UsersController;
-
-                $path = $_SERVER["REQUEST_URI"];
-
-                if($path == "/CSE3101-Project/"){
-                    $usercontroller->userlogin();
-                }else if($path == "/CSE3101-Project/home"){    
-                        $usercontroller->home();
-                }
-            ?>
-        </main>
-    </body>
-</html>
