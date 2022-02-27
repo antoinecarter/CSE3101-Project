@@ -14,7 +14,7 @@
     </head>
 
     <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</b>
       <a href="#">Departments▼</a>
       <a href="#">HR Config▼</a>
       <a href="#">Payroll Management▼</a>
@@ -28,7 +28,7 @@
       <button class="openbtn" onclick="openNav()">☰</button>
 
     </div>
-    <script src="./js/script.js"></script>
+
     <div></div>
 
 
@@ -48,8 +48,7 @@
 
   </nav>
   <script src="./js/script.js"></script>
-</header>
-<body>
+
 <?php
 
 ?>

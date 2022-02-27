@@ -59,7 +59,13 @@
        }
        
        .home h1 {
+           font-size: 40px;
            text-align: center;
+           border: 4px solid rgb(6, 57, 88);
+           color: white;
+           background-color: rgb(6, 57, 88);
+           margin: 0px 350px 0px 350px;
+           border-radius: 40px 40px 40px 40px;
        }
        
        .login_bu {
@@ -97,8 +103,6 @@
        
        //Top-Nav Bar
        .nav {
-           width: 85%;
-           padding: 35px 0;
            display: flex;
            align-items: center;
            justify-content: space-between;
@@ -110,14 +114,14 @@
            color: rgb(255, 255, 255);
            font-size: 20px;
            font-weight: bold;
-           text-transform: uppercase;
        }
        /* nav styles */
        
        .side-top-nav {
            display: flex;
+           position: fixed;
            align-items: center;
-           padding-top: 2px;
+           top: 0px;
            background-color: rgb(6, 57, 88);
            border-radius: 33px 0px 33px 0px;
            border: 2px solid rgb(255, 255, 255);
@@ -128,15 +132,10 @@
            color: rgb(250, 250, 250);
        }
        
-       .topnav_links {
-           padding-right: 20px;
-           cursor: pointer;
-       }
-       
        .topnav_button {
            top: 5rem;
            left: 18px;
-           padding-left: 830px;
+           padding-left: 897px;
        }
        
        .topnav_button a {
@@ -181,9 +180,8 @@
        
        .dropmenu-content {
            display: none;
-           position: absolute;
+           position: fixed;
            background-color: rgb(6, 57, 88);
-           box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
            z-index: 1;
        }
        
@@ -211,9 +209,9 @@
            display: block;
        }
        
-       //sadadsa
+       //side-nav
        .side-body {
-           font-family: "Lato", sans-serif;
+           font-size: medium;
        }
        
        .sidebar {
@@ -230,7 +228,7 @@
        }
        
        .sidebar a {
-           padding: 8px 8px 8px 32px;
+           padding: 8px 8px 8px 22px;
            text-decoration: none;
            font-size: 25px;
            color: #e2e2e2;
@@ -241,6 +239,22 @@
        .sidebar a:hover {
            background-color: rgb(53, 100, 145);
            border-radius: 30px 0px 30px 0px;
+           padding-bottom: 30px;
+       }
+       
+       .sidebar b {
+           margin-top: 7px;
+           padding: 0px 4px 0px 4px;
+           text-decoration: none;
+           font-size: 25px;
+           color: #e2e2e2;
+           display: block;
+           transition: 0.3s;
+       }
+       
+       .sidebar b:hover {
+           background-color: rgb(53, 100, 145);
+           border-radius: 30px 30px 30px 30px;
        }
        
        .sidebar .closebtn {
@@ -252,17 +266,16 @@
        }
        
        .openbtn {
-           font-size: 20px;
+           font-size: 10px;
            cursor: pointer;
            background-color: rgb(6, 57, 88);
            color: rgb(255, 255, 255);
            padding: 10px 15px;
            border: 3px solid rgb(255, 255, 255);
-           ;
        }
        
        .openbtn:hover {
-           background-color: rgb(255, 255, 255);
+           background-color: rgb(53, 100, 145);
        }
        
        #main {
@@ -282,8 +295,8 @@
        
        .wrapper {
            display: grid;
-           margin-top: 120px;
-           margin-left: 3%;
+           margin-top: 70px;
+           margin-left: 5%;
            margin-bottom: 3%;
            grid-template-rows: 250px 250px;
            grid-template-columns: 200px 200px 200px 200px 0px;
