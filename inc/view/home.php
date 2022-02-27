@@ -3,9 +3,9 @@ include __DIR__."/header.php";
 ?>
 
 
-<div class="home">
+<div class="home" style = "margin-top: 100px;">
     <h1>Human Resources Dashboard</h1>
-    <h3>DTB for life bro</h3>
+
     <div class="wrapper">
         <div class="box a">Activity</div>
         <div class="box b">Applicant</div>

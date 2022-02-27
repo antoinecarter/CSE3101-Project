@@ -14,21 +14,21 @@
     </head>
 
     <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="#">Departments</a>
-      <a href="#">HR Config</a>
-      <a href="#">Payroll Management</a>
-      <a href="#">Employee Management</a>
-      <a href="#">Attendance Management</a>
-      <a href="#">Leave Management</a>
-      <a href="#">Employee Management</a>
+      <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</b>
+      <a href="#">Departments▼</a>
+      <a href="#">HR Config▼</a>
+      <a href="#">Payroll Management▼</a>
+      <a href="#">Employee Management▼</a>
+      <a href="#">Attendance Management▼</a>
+      <a href="#">Leave Management▼</a>
+      <a href="#">Employee Management▼</a>
     </div>
 
     <div id="main">
       <button class="openbtn" onclick="openNav()">☰</button>
 
     </div>
-    <script src="./js/script.js"></script>
+
     <div></div>
 
 
@@ -48,8 +48,7 @@
 
   </nav>
   <script src="./js/script.js"></script>
-</header>
-<body>
+
 <?php
 
 ?>
