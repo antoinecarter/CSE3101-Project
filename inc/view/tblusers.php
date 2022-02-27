@@ -5,14 +5,20 @@ $statement = $usercontroller->viewusers();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
-    <?php echo $num_rows; ?>
+    <?php echo $num_rows; 
+    $path = $_SERVER["REQUEST_URI"];
+    $url = $_SERVER['REQUEST_SCHEME'] . '://';
+    $url .= $_SERVER['HTTP_HOST'];
+    $url .= $_SERVER['REQUEST_URI'];
+    $url_components = parse_url($url);
+    parse_str($url_components['path'], $params);
+    print_r($url_components['path']); ?>
     <h5>Home/User Accounts</h5>
 </div>
 <div>
     <h2>Listing of User Accounts</h2>
 </div>
 <div>
-    <?php echo $_SESSION['id']; ?>
     <a href="./Users/Registration"><button>Add New</button></a>
 </div>
 <div>
@@ -34,7 +40,7 @@ $num_rows = $statement->rowCount();
                 while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             ?>
                 <tr>
-                    <td><a href="Users/Registration/Edit/<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="include/edit.png"></a></td>
+                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="include/edit.png"></a></td>
                     <td><?php echo $row['username']; ?></td>
                     <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
                     <td><?php echo $row['email']; ?></td>

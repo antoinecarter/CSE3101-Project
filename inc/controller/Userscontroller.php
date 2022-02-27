@@ -33,6 +33,11 @@ class UsersController extends User
         include_once __DIR__ . "/../view/frmusers.php";
     }
 
+    public function edtusers()
+    {
+        include_once __DIR__ . "/../view/edtusers.php";
+    }
+
     public function userlogin()
     {
         if (isset($_SESSION['id'])) {
@@ -158,7 +163,7 @@ class UsersController extends User
 
     public function updateuser()
     {
-
+        $update_user = new User();
         $d = array(
             'id'            => $_REQUEST['id'],
             'org_id'        => $_REQUEST['org_id'],
@@ -181,12 +186,21 @@ class UsersController extends User
 
 
         );
-        parent::update($d['id'], $d);
+        $update_user->update($d['id'], $d);
     }
 
     public function viewuser()
     {
-        $id = $_REQUEST['id'];
+        
+        $url = $_SERVER['REQUEST_SCHEME'] . '://';
+        $url .= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+
+        $url_components = parse_url($url);
+        if(isset($url_components['query'])){
+            parse_str($url_components['query'], $params);
+        };
+        $id = $params['id'];
         $user = $this->userModel->getUserById($id);
         return $user;
     }

@@ -8,6 +8,14 @@ require_once __DIR__. "/inc/view/inc.php";
 
 
 $path = $_SERVER["REQUEST_URI"];
+$url = $_SERVER['REQUEST_SCHEME'] . '://';
+$url .= $_SERVER['HTTP_HOST'];
+$url .= $_SERVER['REQUEST_URI'];
+
+$url_components = parse_url($url);
+if(isset($url_components['query'])){
+    parse_str($url_components['query'], $params);
+};
 
 if ($path == "/CSE3101-Project/"){
     $usercontroller->log();
@@ -22,6 +30,12 @@ if ($path == "/CSE3101-Project/"){
 } else if ($path == "/CSE3101-Project/Users/Registration"){
     if(isset($_SESSION['id'])){
         $usercontroller->frmusers();
+    }
+} else if($path == ('/CSE3101-Project/Users/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $params['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $usercontroller->edtusers();
+        }
     }
 } 
 ?>
