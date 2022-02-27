@@ -9,15 +9,15 @@
         <?php echo $num_rows; ?>
         <h5>Home/User Accounts</h5>
     </div>
-    <div class="tope">
+    <div>
         <h2>Listing of User Accounts</h2>
     </div>
     <div>
         <?php echo $_SESSION['id']; ?>
         <a href="./Users/Registration"><button>Add New</button></a>
     </div>
-    <div class="tble">
-        <table class="users">
+    <div>
+        <table>
             <thead>
                 <th>Edit</th>
                 <th>Username</th>
