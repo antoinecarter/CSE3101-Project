@@ -9,14 +9,9 @@
   
         <h5>Home/User Accounts</h5>
     </div>
-    <div>
-        <h2>Listing of User Accounts</h2>
-    </div>
-    <div>
-
-        <a href="./Users/Registration"><button>Add New</button></a>
-    </div>
     <div class = "usrtb">
+        <h2>Listing of User Accounts
+        <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table>
             <thead>
                 <th>Edit</th>

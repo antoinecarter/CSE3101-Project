@@ -311,7 +311,7 @@
        }
        
        .openbtn:hover {
-           background-color: rgb(53, 100, 145);
+           background-color: rgb(6, 57, 88);
        }
        
        #main {
@@ -403,9 +403,31 @@
            margin-block-start: 3px;
        }
        
+       .usrtb h2 {
+           text-align: left;
+       }
+       
+       .usrtb button {
+           background-color: rgb(53, 100, 145);
+           text-align: center;
+           color: #fff;
+           border-color: #1154d1;
+           font-weight: bold;
+           margin-left: 720px;
+           margin-top: 10px;
+           padding: 0;
+           text-align: center;
+           padding: 7px 7px 7px 7px;
+           border-radius: 16px;
+       }
+       
        .usrtb {
            margin-top: 50px;
            margin-left: 150px;
            background-color: rgb(6, 57, 88);
            color: white;
+       }
+       
+       .form-usr {
+           margin-top: 80px;
        }
