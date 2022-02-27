@@ -1,7 +1,3 @@
-       @font-face {
-        font-family: 'Lobster', cursive;'
-        src: url("/css/Lobster-Regular.ttf") format("truetype");
-       }
 
        body {
            margin: 0;
@@ -271,6 +267,18 @@
 
 
        .brand{
-        font-family: 'Lobster', cursive;'
+        font-family: 'League Gothic', sans-serif;
         font-weight: bolder;
+        font-size: 64px;
+        margin: 0px;
+       }
+
+       .nav-link{
+        color: #000;
+       }
+
+       .cards{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
        }
