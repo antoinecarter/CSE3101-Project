@@ -15,7 +15,7 @@ $num_rows = $statement->rowCount();
     <?php echo $_SESSION['id']; ?>
     <a href="./Users/Registration"><button>Add New</button></a>
 </div>
-<div>
+<div class="tble">
     <table>
         <thead>
             <th>Edit</th>
@@ -34,7 +34,7 @@ $num_rows = $statement->rowCount();
                 while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             ?>
                 <tr>
-                    <td><a href="Users/Registration/Edit/<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="include/edit.png"></a></td>
+                    <td><a href="Users/Registration/Edit/<?php echo $row['id'];?>"><img alt= "" style="width:30px; height:30px" src="include/edit.png"></a></td>
                     <td><?php echo $row['username']; ?></td>
                     <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
                     <td><?php echo $row['email']; ?></td>
