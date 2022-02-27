@@ -12,12 +12,12 @@
     <div>
         <h2>Listing of User Accounts</h2>
     </div>
-    <div>
+    <div class="container">
         <?php echo $_SESSION['id']; ?>
-        <a href="./Users/Registration"><button>Add New</button></a>
+        <a href="./Users/Registration"><button class="btn">Add New</button></a>
     </div>
     <div>
-        <table>
+        <table class="center">
             <thead>
                 <th>Edit</th>
                 <th>Username</th>
