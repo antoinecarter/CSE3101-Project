@@ -5,7 +5,7 @@
         $cred = $usercontroller->createuser();
     }
 ?>
-<div>
+<div class = "form-usr">
     <div><?php echo $_SESSION['id']; 
         if(isset($cred)){ echo $cred;}?></div>
     <form method="post" action="">
