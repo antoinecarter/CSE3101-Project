@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./css/style.scss" type="text/css">
 </head>
 
-<header>
+
   <nav class="side-top-nav">
     </head>
 

@@ -6,17 +6,17 @@
     $num_rows = $statement->rowCount();
     ?>
     <div class="breadcrumb">
-        <?php echo $num_rows; ?>
+  
         <h5>Home/User Accounts</h5>
     </div>
     <div>
         <h2>Listing of User Accounts</h2>
     </div>
     <div>
-        <?php echo $_SESSION['id']; ?>
+
         <a href="./Users/Registration"><button>Add New</button></a>
     </div>
-    <div>
+    <div class = "usrtb">
         <table>
             <thead>
                 <th>Edit</th>
@@ -42,8 +42,10 @@
                         <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
                         <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                         <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                        
                     </tr>
                 <?php } ?>
+                <td>      <?php echo $num_rows; ?></td>
             </tbody>
         </table>
     </div>
