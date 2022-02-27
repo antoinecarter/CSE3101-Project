@@ -230,7 +230,7 @@
        }
        
        .sidebar a {
-           padding: 8px 8px 8px 32px;
+           padding: 8px 8px 8px 22px;
            text-decoration: none;
            font-size: 25px;
            color: #e2e2e2;
@@ -241,6 +241,22 @@
        .sidebar a:hover {
            background-color: rgb(53, 100, 145);
            border-radius: 30px 0px 30px 0px;
+           padding-bottom: 30px;
+       }
+       
+       .sidebar b {
+           margin-top: 7px;
+           padding: 0px 4px 0px 4px;
+           text-decoration: none;
+           font-size: 25px;
+           color: #e2e2e2;
+           display: block;
+           transition: 0.3s;
+       }
+       
+       .sidebar b:hover {
+           background-color: rgb(53, 100, 145);
+           border-radius: 30px 30px 30px 30px;
        }
        
        .sidebar .closebtn {
@@ -252,17 +268,16 @@
        }
        
        .openbtn {
-           font-size: 20px;
+           font-size: 10px;
            cursor: pointer;
            background-color: rgb(6, 57, 88);
            color: rgb(255, 255, 255);
            padding: 10px 15px;
            border: 3px solid rgb(255, 255, 255);
-           ;
        }
        
        .openbtn:hover {
-           background-color: rgb(255, 255, 255);
+           background-color: rgb(53, 100, 145);
        }
        
        #main {

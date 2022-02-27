@@ -14,7 +14,7 @@
     </head>
 
     <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</b>
       <a href="#">Departments▼</a>
       <a href="#">HR Config▼</a>
       <a href="#">Payroll Management▼</a>
