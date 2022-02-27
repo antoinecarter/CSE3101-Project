@@ -9,7 +9,8 @@
         include __DIR__."/header.php";
         ?>
     </div>
-<body>
+<body class=main-home>
+    <h1 class="main-h1">Human Resources Dashboard</h1>
     <div class="cards">
         <?php
           for ($x = 0; $x <= 14; $x+=2) {

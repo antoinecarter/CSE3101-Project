@@ -287,7 +287,7 @@
         }
         .menu__btn {
           position: fixed;
-          top: 30px;
+          top: 45px;
           left: 20px;
           width: 26px;
           height: 26px;
@@ -365,7 +365,8 @@
         .cards{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
+            grid-gap: 100px 50px;
+            margin: 30px auto;
         }
 
         .navbar-nav li:hover .dropdown-menu {
@@ -376,3 +377,30 @@
             text-decoration: underline;
             transform: rotate(-90deg);
         } 
+
+        .main-home{
+            background-color: #f2f3f4;
+        }
+
+        .main-h1{
+            text-align: center;
+            margin: 10px auto 75px auto;
+        }
+
+        .cards div{
+            margin: auto;
+            padding: 115px;
+            border:  #f2f3f4;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 10px;
+            background-color:  #fff;
+        }
+
+        .cards div:hover{
+            transform: scale(1.1);
+        }
+
+        .cards p{
+            text-align: center;
+        }
