@@ -303,3 +303,30 @@
            border-top: 3px solid rgb(0, 0, 0);
            border-left: 3px solid rgb(0, 0, 0);
        }
+       .tble{
+           box-sizing: border-box;
+           margin: 0;
+           padding: 0;
+           border-radius: 0.2rem;
+           
+       }
+      
+       table{
+          border-collapse: collapse;
+          box-shadow: 0 5px 10px black;
+          text-align: center;
+          overflow: hidden;
+       }
+
+       thead{
+           box-shadow: 0 5px 10px gray;
+       }
+
+       th{
+           padding: 1rem 2rem;
+           text-transform: uppercase;
+           letter-spacing: 0.1rem;
+           font-size: 0.7rem;
+           font-weight: 900;
+           
+       }
