@@ -5,12 +5,12 @@ $db->init();
 
 require_once __DIR__ . "/inc/controller/Userscontroller.php";
 require_once __DIR__. "/inc/view/inc.php";
-$usercontroller = new UsersController();
+
 
 $path = $_SERVER["REQUEST_URI"];
 
 if ($path == "/CSE3101-Project/"){
-    $usercontroller->userlogin();
+    $usercontroller->log();
 } else if ($path == "/CSE3101-Project/home"){
     if(isset($_SESSION['id'])){
         $usercontroller->home();
@@ -23,6 +23,5 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $usercontroller->frmusers();
     }
-}
-
+} 
 ?>

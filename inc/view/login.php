@@ -1,26 +1,30 @@
-
 <html>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.scss" type="text/css">
-</head>
 
-  <?php
-    session_start();
-    if(isset($_POST['submit'])){
-      $cred = $usercontroller->message;
-    }
-  ?>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="http://localhost/CSE3101-Project/" />
+  <link rel="stylesheet" href="./css/style.scss" type="text/css">
+</head>
+<?php include_once __DIR__ . "/../../index.php";
+$login = new UsersController();
+if (isset($_POST['submit'])) {
+  $cred = $login->userlogin();
+}
+?>
+
 <body>
+  <?php if(isset($cred)){ 
+  ?>
+  <div style="background-color:blue; height:100px;"> <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
   <div class="login">
     <h1>Login</h1>
-    <?php if(isset($cred)){ ?>
-      <div style="margin-top: 50px"class="alert"> <?php echo $cred; ?> </div>
-    <?php } ?>
+
     <form method="post" action="">
       <input type="hidden" name="type" value="login">
       <p>
@@ -36,6 +40,7 @@
         <button type="submit" name="submit" class="lc login_bu" formmethod="post"><span>Login</span></button> <button type="reset" class="lc cancel_bu"><span>Cancel</span></button>
       </p>
     </form>
-    </div>
+  </div>
 </body>
+
 </html>

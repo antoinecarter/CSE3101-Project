@@ -18,6 +18,11 @@ class UsersController extends User
         include_once __DIR__ . "/../view/home.php";
     }
 
+    public function log()
+    {
+        include_once __DIR__ . "/../view/login.php";
+    }
+
     public function tblusers()
     {
         include_once __DIR__ . "/../view/tblusers.php";
@@ -30,7 +35,6 @@ class UsersController extends User
 
     public function userlogin()
     {
-        session_start();
         if (isset($_SESSION['id'])) {
             session_unset();
             session_destroy();
@@ -41,22 +45,14 @@ class UsersController extends User
         if ($method == "GET") {
             include_once __DIR__ . "/../view/login.php";
         } else {
-            $d = [
-                'username' => $this->remove_errors($_POST['username']),
-                'passcode' => $this->remove_errors($_POST['passcode'])
-            ];
-
             if (empty($_POST['username']) || empty($_POST['passcode'])) {
-                //alert('login',"Please fill out all inputs");
-                $_POST['username'] || $_POST['passcode'] = 'Please fill out all inputs';
-                header("location: ../index.php");
-                exit();
+                $message = 'Please fill out all inputs';
+                return $message;
             }
-
 
             if ($this->userModel->findUsernameORPassword($_POST['username'], $_POST['passcode'])) {
                 $valid = $this->userModel->login($_POST['username'], $_POST['passcode']);
-                if ($valid) {
+                if (isset($valid)) {
                     session_start();
                     $_SESSION['id'] = $valid['id'];
                     $_SESSION['username'] = $valid['username'];
@@ -65,17 +61,12 @@ class UsersController extends User
                     header('Location: /CSE3101-Project/home');
                     exit();
                 } else {
-                    $this->message = "Username/Password Incorrect";
-                    //alert('login',"Username/Password Incorrect");
-                    header("Location: /CSE3101-Project/");
-
-                    exit();
+                    $message = "Username/Password Incorrect";         
+                    return $message;
                 }
             } else {
-                //alert('login',"User not found");
-                $this->message = "User not found";
-                header("Location: /CSE3101-Project/");
-                exit();
+                $message = "Username/Password Incorrect";    
+                return $message;
             }
         }
     }
@@ -98,12 +89,12 @@ class UsersController extends User
         if ($method == "GET") {
             include_once __DIR__ . "/../view/newuser.php";
         } else {
-            if (empty($_POST['fName'])) {
+            if (empty($_POST['first_name'])) {
                 $message = 'Please enter First name';
                 return $message;
             }
 
-            if (empty($_POST['lName'])) {
+            if (empty($_POST['last_name'])) {
                 $message = 'Please enter Last name';
                 return $message;
             }
@@ -134,14 +125,6 @@ class UsersController extends User
                 $message = 'Password must be atleast six characters';
                 return $message;
             }
-
-            /*
-                if(empty($_POST['fName']) && empty($_POST['lName']) && empty($_POST['email']) && empty($_POST['passcode'])){
-                    $message = ($_POST['passcode']);
-                    if($this->userModel->createuser($d)){
-                        flash('create_success', 'you are registerd you can login now');
-                    }
-                }*/
 
             if (empty($_POST['role'])) {
                 $message = 'Please select role';
@@ -203,9 +186,16 @@ class UsersController extends User
 
     public function viewuser()
     {
-        $id = $_GET['user_id'];
+        $id = $_REQUEST['id'];
         $user = $this->userModel->getUserById($id);
         return $user;
+    }
+
+    public function viewusers(){
+        $id =  $_SESSION['id'];
+        $role = $_SESSION['role'];
+        $statement = $this->userModel->view($role, $id);
+        return $statement;
     }
 
     public function deleteuser()

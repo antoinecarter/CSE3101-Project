@@ -103,11 +103,16 @@
 
         public function record(){
             $this->execute();
-            return $this->statement->fetch(PDO::FETCH_ASSOC);
+            return $this->statement->fetch(PDO::FETCH_OBJ);
         }
 
         public function rowCount(){
             return $this->statement->rowCount();
+        }
+
+        public function getStatement(){
+            $this->execute();
+            return $this->statement;
         }
 
         

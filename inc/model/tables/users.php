@@ -3,6 +3,7 @@
     include_once __DIR__."/interface.php";
 
     class User implements crud {
+        private $id;
         private $org_id;
         private $first_name;
         private $last_name;
@@ -44,9 +45,9 @@
             $this->connection->bind(':username', $username);
             $this->connection->bind(':passcode', $passcode);
 
-            $row = $this->connection->record();
+            $row = $this->connection->getStatement();
 
-            if($this->connection->rowCount()>0){
+            if($row->rowCount()>0){
                 return $row;
             }else{
                 return false;
@@ -61,7 +62,7 @@
             if($row == false){
                 return false;
             }
-            return $row;
+            return $row->fetch(PDO::FETCH_ASSOC);
         }
 
         public function logout(){
@@ -83,10 +84,8 @@
                 $this->connection->bind(':status',$this->status);
                 $this->connection->bind(':start_date',$this->start_date);
                 
-                $statement = $this->connection->record();
+                $statement = $this->connection->getStatement();
                 $this->id = $statement['id'];
-                $message = 'Account Created';
-                return $message;
             }catch(PDOException $message){
                 echo $message->getMessage();
             }
@@ -121,7 +120,7 @@
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
-                $statement = $this->connection->record();
+                $statement = $this->connection->getStatement();
                 $message = "User Account Updated";
                 return $message;
             }catch(PDOException $message){
@@ -167,16 +166,15 @@
 
         public function view($role, $id)
         {
-            if($this->role == $role){
+            if($role == 'ADMIN'){
                 $this->connection->query("SELECT * FROM users");
-                //$statement = $this->connection->prepare($sql);
-                //$statement->execute();
-                //return $statement->fetchAll(PDO::FETCH_CLASS, 'User');
+                $statement = $this->connection->getStatement();
+                return $statement;
             }else{
                 $this->connection->query("SELECT * FROM users WHERE id= :id");
-                //$statement = $this->connection->prepare($sql);
-                //$statement->execute(['id' => $id]);
-                //return $statement->fetchObject();
+                $this->connection->bind(':id', $id);
+                $statement = $this->connection->getStatement();
+                return $statement;
             }    
         }
         
@@ -196,9 +194,9 @@
         }
 
         public function getUserById($id){
-            $this->connection->query('SELECT * FROM user WHERE id = :id');
+            $this->connection->query('SELECT * FROM users WHERE id = :id');
             $this->connection->bind(':id', $id);
-            $row = $this->connection->record();
+            $row = $this->connection->getStatement();
     
             return $row;
         }
@@ -207,7 +205,7 @@
         {
             $this->connection->query('SELECT * FROM users WHERE id = :id');
             $this->connection->bind(':id', $id);
-            $row = $this->connection->record();
+            $row = $this->connection->getStatement();
             if($row['can_verify'] == 0){
                 return false;
             }else{
@@ -220,12 +218,16 @@
         {
             $this->connection->query('SELECT * FROM users WHERE id = :id');
             $this->connection->bind(':id', $id);
-            $row = $this->connection->record();
+            $row = $this->connection->getStatement();
             if($row['can_approve'] == 0){
                 return false;
             }else{
                 return true;
             }
+        }
+
+        public function get_id(){
+            return $this->id;
         }
 
         public function get_fname(){

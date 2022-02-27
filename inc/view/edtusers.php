@@ -1,41 +1,47 @@
 <?php
     include __DIR__."/header.php";
     $usercontroller = new UsersController();
-    if(isset($_POST['create_user'])){
-        $cred = $usercontroller->createuser();
+    if(isset($_POST['update_user'])){
+        $cred = $usercontroller->updateuser();
     }
+    $statement = $usercontroller->viewuser();
+    
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
 <div>
     <div><?php echo $_SESSION['id']; 
         if(isset($cred)){ echo $cred;}?></div>
     <form method="post" action="">
         <div>
-            <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+            <a href="/Users"> <button> Back</button></a>
+            <button type="submit" name="update_user">Apply Changes</button>
         </div>
         <div>
             <label for="id"></label>
-            <input type="hidden" name="id">
+            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
+            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
             <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
+            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
             <label for="email">Email</label>
-            <input type="text" name="email" required>
+            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
             <label for="username">Username</label>
-            <input type="text" name="username" required>
+            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
             <label for="passcode">Password</label>
             <input type="password" name="passcode" required>
             <label for="role">Role</label>
             <select name="role" id="" required>
+                <option value="<?php echo $row['role']; ?>" selected><?php echo $row['role']; ?></option>
                 <option value="ADMIN">ADMIN</option>
                 <option value="USER">USER</option>
             </select>
             <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" required>
+            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required>
             <label for="end_date">Effective To</label>
-            <input type="date" name="end_date">
+            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>">
             <label for="status">Status</label>
             <select name="status" id="" required>
+                <option value="<?php echo $row['status']; ?>" selected><?php if($row['role'] == 'KEYED'){ echo 'Keyed'; } elseif($row['role'] == 'VERIFY'){ echo 'Verify'; } else { echo 'Unverify';}?></option>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>

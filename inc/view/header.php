@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="http://localhost/CSE3101-Project/" />
   <link rel="stylesheet" href="./css/style.scss" type="text/css">
 </head>
 
@@ -37,10 +38,10 @@
       <a href="./Users">User Accounts</a>
 
       <div class="dropmenu">
-        <button class="dropbb"><?php require_once __DIR__."/../../index.php"; require_once __DIR__ . "/inc.php";
+        <button class="dropbb"><?php require_once __DIR__."/../../index.php";
                                 echo $_SESSION['username']; ?> ▼</button>
         <div class="dropmenu-content">
-          <a href="" name="logout"> Logout</a>
+          <a href="./" name="logout"> Logout</a>
         </div>
       </div>
     </div>
@@ -49,5 +50,7 @@
   <script src="./js/script.js"></script>
 </header>
 <body>
+<?php
 
+?>
   
