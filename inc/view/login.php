@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 <body>
   <?php if(isset($cred)){ 
   ?>
-  <div style="background-color:blue; height:100px;"> <?php echo $cred; ?> </div>
+  <div class = "error-login" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
   <div class="login">

@@ -18,6 +18,20 @@
            border-radius: 5rem;
        }
        
+       .error-login {
+           font-size: 30px;
+           font-weight: bold;
+           margin-top: 50px;
+           text-align: center;
+           background-color: #e52342;
+           color: white;
+           margin-left: 450px;
+           padding-top: 12px;
+           height: 50px;
+           width: 450px;
+           border-radius: 30px 30px 30px 30px;
+       }
+       
        .login h1 {
            margin: 0;
            text-align: center;
