@@ -49,7 +49,7 @@
   </nav>
   <script src="./js/script.js"></script>
 
-<?php
-
-?>
+  <body>
+    <div>
+    <div style="height: 100px;"></div>
   

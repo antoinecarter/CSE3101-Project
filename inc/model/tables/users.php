@@ -106,7 +106,7 @@
             $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
             $this->connection->bind(':email', $this->remove_errors($d['email']));
             $this->connection->bind(':username', $this->remove_errors($d['username']));
-            $this->connection->bind(':passcode', $this->remove_errors($d['passcode']));
+            $this->connection->bind(':passcode', $this->remove_errors(md5($d['passcode'])));
             $this->connection->bind(':role', $this->remove_errors($d['role']));
             $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
             $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
@@ -115,8 +115,8 @@
             $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
             $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
             $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
-            $this->connection->bind(':start_date', $this->remove_errors($d['start_date']));
-            $this->connection->bind(':end_date', $this->remove_errors($d['end_date']));
+            $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
+            $this->connection->bind(':end_date', $this->remove_errors(date('Y-m-d', strtotime($d['end_date']))));
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
