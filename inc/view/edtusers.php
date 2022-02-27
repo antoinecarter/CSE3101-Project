@@ -8,7 +8,7 @@
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
-<div>
+<div class = "edit-usr">
     <div><?php echo $_SESSION['id']; 
         if(isset($cred)){ echo $cred;}?></div>
     <form method="post" action="">

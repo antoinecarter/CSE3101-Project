@@ -30,7 +30,7 @@
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <tr>
-                        <td><a href="Users/Registration/Edit/<?php echo $row['id'];?>"><img alt= "" style="width:30px; height:30px" src="include/edit.png"></a></td>
+                        <td><a href="./inc/view/edtusers.php"<?php echo $row['id'];?>"><img alt= "" style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
                         <td><?php echo $row['email']; ?></td>
