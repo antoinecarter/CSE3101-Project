@@ -39,8 +39,9 @@
                         <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                         
                     </tr>
+                    
                 <?php } ?>
-                <td>      <?php echo $num_rows; ?></td>
+                <td> Num Of Users: <?php echo $num_rows; ?></td>
             </tbody>
         </table>
     </div>
