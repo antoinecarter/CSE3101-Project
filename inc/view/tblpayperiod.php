@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-$statement = $usercontroller->viewusers();
+$payperiodsModel = new PayperiodsController();
+$statement = $payperiodsModel->viewpayp();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,7 +12,7 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Home/User Accounts</h5>
+    <h5>Pay Period</h5>
 </div>
 <div class = "usrtb">
         <h2>Listing of User Accounts

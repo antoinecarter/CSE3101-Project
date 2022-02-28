@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-$statement = $usercontroller->viewusers();
+$timeclocksModel = new TimeclocksController();
+$statement = $timeclocksModel->viewtime();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,10 +12,10 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Home/User Accounts</h5>
+    <h5>Time</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of User Accounts
+        <h2>Listing of time
         <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table>
             <thead>
@@ -44,7 +44,6 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
         </tbody>
     </table>
 </div>

@@ -1,12 +1,12 @@
 <?php
     include __DIR__."/header.php";
-    $usercontroller = new UsersController();
-    if(isset($_POST['update_user'])){
-        $cred = $usercontroller->updateuser();
-    }else if (isset($_POST['delete_user'])){
-        $cred = $usercontroller->deleteuser();
+    $shiftsModel = new ShiftsController();
+    if(isset($_POST['update_shift'])){
+        $cred = $shiftsModel->updateshift();
+    }else if (isset($_POST['delete_shift'])){
+        $cred = $shiftsModel->deleteshift();
     }
-    $statement = $usercontroller->viewuser();
+    $statement = $shiftsModel->viewshift();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -15,7 +15,7 @@
         <?php if(isset($row['id'])){?>
             <div>
     <form method="post" action="">
-        <h2>Update User</h2>
+        <h2>Update shift</h2>
         <div>
             <p>
             <label for="id"></label>
@@ -123,8 +123,8 @@
         </div>
         <?php } ?>
         <div>
-                <button type="submit" name="update_user">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_user"> Delete</button></a> <?php } ?>
+                <button type="submit" name="update_shift">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_shift"> Delete</button></a> <?php } ?>
  
  
             </div>

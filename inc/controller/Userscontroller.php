@@ -39,7 +39,7 @@ class UsersController extends User
     }
 
     public function delusers(){
-        include_once __DIR__ . "/../view/delusers.php";
+        include_once __DIR__ . "/../view/delete.php";
     }
 
     public function userlogin()
@@ -226,12 +226,14 @@ class UsersController extends User
             $url_components = parse_url($url);
             if(isset($url_components['query'])){
                 parse_str($url_components['query'], $params);
-            };
+            }
             $id = $params['id'];
-            $deluser = $this->userModel->getUserById($id);
+            $statement = $this->userModel->getUserById($id);
+            $deluser = $statement->fetch(PDO::FETCH_ASSOC);
             if ($deluser['id'] != $_SESSION['id']) {
                 if (($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                     $message = $this->userModel->delete($id);
+                    $this->delusers();
                     return $message;
                 } else {
                     $message = 'User is an Admin/You are not an Admin';

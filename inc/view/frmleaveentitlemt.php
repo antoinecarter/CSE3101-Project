@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-if (isset($_POST['create_user'])) {
-    $cred = $usercontroller->createuser();
+$leaveentitlemtModel = new LeaveentitlemtController();
+if (isset($_POST['create_leav'])) {
+    $cred = $leaveentitlemtModel->createleav();
 }
 ?>
 <div class = "form-usr">
@@ -13,9 +13,10 @@ if (isset($_POST['create_user'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new user</h2>
+        <h2>Create new Department</h2>
           
         </div>
+        <div>
         <div>
                  <p>
             <label for="id"></label>
@@ -77,50 +78,9 @@ if (isset($_POST['create_user'])) {
             <label for="emp_no">Employee No.</label>
             <input type="text" name="emp_no">
             </p>
+
            <p>
-            <label for="can_create">Can Create</label>
-            <select name="can_create" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
-            <select name="can_view" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
-            <select name="can_update" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_delete">Can Delete</label>
-            <select name="can_delete" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
-            <select name="can_verify" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
-            <select name="can_approve" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_leav">Create</button> <?php } ?>
       </p>
         </div>
         <?php } ?>

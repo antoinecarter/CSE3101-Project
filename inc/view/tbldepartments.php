@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-$statement = $usercontroller->viewusers();
+$departmentsModel = new DepartmentsController();
+$statement = $departmentsModel->viewdpt();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,17 +12,16 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Home/User Accounts</h5>
+    <h5>Departments</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of User Accounts
+        <h2>Listing of Departments
         <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Username</th>
-                <th>Fullname</th>
-                <th>Email</th>
+                <th>Department </th>
+
                 <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
                 <th>Effective From</th>
                 <th>Effective To</th>
@@ -36,15 +35,12 @@ $num_rows = $statement->rowCount();
                 ?>
                 <tr>
                     <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['department_name']; ?></td>
                     <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
         </tbody>
     </table>
 </div>

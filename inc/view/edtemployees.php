@@ -1,12 +1,12 @@
 <?php
     include __DIR__."/header.php";
-    $usercontroller = new UsersController();
-    if(isset($_POST['update_user'])){
-        $cred = $usercontroller->updateuser();
-    }else if (isset($_POST['delete_user'])){
-        $cred = $usercontroller->deleteuser();
+    $employeesModel = new EmployeesController();
+    if(isset($_POST['update_emp'])){
+        $cred = $employeesModel->updateemp();
+    }else if (isset($_POST['delete_emp'])){
+        $cred = $employeesModel->deleteemp();
     }
-    $statement = $usercontroller->viewuser();
+    $statement = $employeesModel->viewemp();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -15,7 +15,7 @@
         <?php if(isset($row['id'])){?>
             <div>
     <form method="post" action="">
-        <h2>Update User</h2>
+        <h2>Update Employee</h2>
         <div>
             <p>
             <label for="id"></label>
@@ -77,54 +77,14 @@
             <label for="emp_no">Employee No.</label>
             <input type="text" name="emp_no">
             </p>
-           <p>
-            <label for="can_create">Can Create</label>
-            <select name="can_create" id="">
-                <option value="1" <?php if($row['can_create'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_create'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
-            <select name="can_view" id="">
-                <option value="1" <?php if($row['can_view'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_view'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
-            <select name="can_update" id="">
-                <option value="1" <?php if($row['can_update'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_update'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_delete">Can Delete</label>
-            <select name="can_delete" id="">
-                <option value="1" <?php if($row['can_delete'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_delete'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
-            <select name="can_verify" id="">
-                <option value="1" <?php if($row['can_verify'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_verify'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
-            <select name="can_approve" id="">
-                <option value="1" <?php if($row['can_approve'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_approve'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
+         
+ 
            
         </div>
         <?php } ?>
         <div>
-                <button type="submit" name="update_user">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_user"> Delete</button></a> <?php } ?>
+                <button type="submit" name="update_emp">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_emp"> Delete</button></a> <?php } ?>
  
  
             </div>
