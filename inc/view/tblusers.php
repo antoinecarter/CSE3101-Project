@@ -45,7 +45,7 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <a> Num Of Users: <?php echo $num_rows; ?></a>
+            <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
         </tbody>
     </table>
 </div>

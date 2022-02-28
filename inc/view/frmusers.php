@@ -6,8 +6,11 @@
     }
 ?>
 <div class = "form-usr">
-    <div class = "exist"><?php
-        if(isset($cred)){ echo $cred;}?></div>
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
     <form method="post" action="">
         <div>
         <h2>Create new user</h2>
