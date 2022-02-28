@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
 $attendancecontroller = new AttendanceController();
-if (isset($_POST['create_att'])) {
-    $cred = $attendancecontroller->createatt();
+if (isset($_POST['create_attendance'])) {
+    $cred = $attendancecontroller->createattendance();
 }
 ?>
 <div class = "form-usr">
@@ -59,7 +59,7 @@ if (isset($_POST['create_att'])) {
             <input type="text" name="emp_no">
             </p>
            <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_att">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_attendance">Create</button> <?php } ?>
       </p>
         </div>
         <?php } ?>

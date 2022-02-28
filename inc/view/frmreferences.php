@@ -77,49 +77,7 @@ if (isset($_POST['create_ref'])) {
             <label for="emp_no">Employee No.</label>
             <input type="text" name="emp_no">
             </p>
-           <p>
-            <label for="can_create">Can Create</label>
-            <select name="can_create" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
-            <select name="can_view" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
-            <select name="can_update" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_delete">Can Delete</label>
-            <select name="can_delete" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
-            <select name="can_verify" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
-            <select name="can_approve" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
+
       <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_ref">Create</button> <?php } ?>
       </p>
         </div>

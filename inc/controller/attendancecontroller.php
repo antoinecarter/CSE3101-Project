@@ -32,7 +32,7 @@ class AttendanceController extends attendance
         include_once __DIR__ . "/../view/delete.php";
     }
 
-    public function createatt()
+    public function createattendance()
     {
         $method = $_SERVER['REQUEST_METHOD'];
 
@@ -64,7 +64,7 @@ class AttendanceController extends attendance
     }
     }
 
-    public function deleteatt()
+    public function deleteattendance()
     {
         {
             if ($_SERVER['REQUEST_METHOD'] = 'POST') {
@@ -78,11 +78,11 @@ class AttendanceController extends attendance
                 }
                 $id = $params['id'];
                 $statement = $this->attendanceModel->getAttById($id);
-                $delatt = $statement->fetch(PDO::FETCH_ASSOC);
-                if ($delatt['id'] != $_SESSION['id']) {
-                    if (($delatt['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                $delattendance = $statement->fetch(PDO::FETCH_ASSOC);
+                if ($delattendance['id'] != $_SESSION['id']) {
+                    if (($delattendance['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                         $message = $this->attendanceModel->delete($id);
-                        $this->delatt();
+                        $this->delattendance();
                         return $message;
                     } else {
                         $message = 'User is an Admin/You are not an Admin';
@@ -96,7 +96,7 @@ class AttendanceController extends attendance
         }
     }
 
-    public function viewatt()
+    public function viewattendance()
     {
         
         $url = $_SERVER['REQUEST_SCHEME'] . '://';
@@ -112,7 +112,7 @@ class AttendanceController extends attendance
         return $attendance;
     }
 
-    public function viewatts()
+    public function viewattendances()
     {
         $id =  $_SESSION['id'];
         $role = $_SESSION['role'];
@@ -121,10 +121,10 @@ class AttendanceController extends attendance
     
     }
 
-    public function updateatt()
+    public function updateattendance()
     {
     
-            $update_att = new attendance();
+            $update_attendance = new attendance();
             $d = array(
                 'id'            => $_REQUEST['id'],
                 'org_id'        => $_REQUEST['org_id'],
@@ -135,7 +135,7 @@ class AttendanceController extends attendance
                 'emp_no'        => $_REQUEST['emp_no']
 
             );
-            $message = $update_att->update($d['id'], $d);
+            $message = $update_attendance->update($d['id'], $d);
             include_once __DIR__ . "/../view/edtattendance.php";
             return $message;
         }

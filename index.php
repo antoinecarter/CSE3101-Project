@@ -4,6 +4,7 @@ $db = new Database();
 $db->init();
 
 require_once __DIR__ . "/inc/controller/Userscontroller.php";
+require_once __DIR__ . "/inc/controller/attendancecontroller.php";
 require_once __DIR__. "/inc/view/inc.php";
 
 
@@ -35,6 +36,22 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         if(($_SESSION['id'] == $params['id']) || ($_SESSION['role'] == 'ADMIN')){
             $usercontroller->edtusers();
+        }
+    }
+} else if($path == ('')){
+
+}if ($path == "/CSE3101-Project/Attendance"){
+    if(isset($_SESSION['id'])){
+        $attendancecontroller->tblattendance();
+    }
+} else if ($path == "/CSE3101-Project/Attendance/Registration"){
+    if(isset($_SESSION['id'])){
+        $attendancecontroller->frmuattendance();
+    }
+} else if($path == ('/CSE3101-Project/Attendance/Registration/Edit?id='.$paras['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $attendancecontroller->edtattendance();
         }
     }
 } else if($path == ('')){

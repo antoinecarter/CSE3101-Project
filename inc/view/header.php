@@ -41,7 +41,7 @@
   </div>
       <button class="sidebar-dr">Attendance Management ▼</button>
       <div class="dropdown-contain">
-    <a href="#">Link 1</a>
+    <a href="./Attendance">Attendance</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
   </div>

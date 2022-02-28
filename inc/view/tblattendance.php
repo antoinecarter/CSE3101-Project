@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $attendancecontroller = new AttendanceController();
-$statement = $attendancecontroller->viewatt();
+$statement = $attendancecontroller->viewattendance();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

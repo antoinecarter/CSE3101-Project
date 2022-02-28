@@ -1,12 +1,12 @@
 <?php
     include __DIR__."/header.php";
     $attendancecontroller = new AttendanceController();
-    if(isset($_POST['update_att'])){
-        $cred = $attendancecontroller->updateatt();
-    }else if (isset($_POST['delete_att'])){
-        $cred = $attendancecontroller->deleteatt();
+    if(isset($_POST['update_attendance'])){
+        $cred = $attendancecontroller->updateattendance();
+    }else if (isset($_POST['delete_attendance'])){
+        $cred = $attendancecontroller->deleteattendance();
     }
-    $statement = $attendancecontroller->viewatt();
+    $statement = $attendancecontroller->viewattendance();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -61,8 +61,8 @@
         </div>
         <?php } ?>
         <div>
-                <button type="submit" name="update_att">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_att"> Delete</button></a> <?php } ?>
+                <button type="submit" name="update_attendance">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_attendance"> Delete</button></a> <?php } ?>
  
  
             </div>
