@@ -13,9 +13,12 @@
 <div class = "edit-usr">
     <div><?php echo $_SESSION['id']; 
         if(isset($cred)){ echo $cred;}?></div>
+        <?php if(isset($row['id'])){?>
+            <div>
     <form method="post" action="">
         <div>
             <button type="submit" name="update_user">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id'];?>> <button name="delete_user"> Delete</button></a><?php } ?>
         </div>
         <div>
             <label for="id"></label>
@@ -28,8 +31,8 @@
             <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
             <label for="username">Username</label>
             <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
-            <label for="passcode">Password(Please re-enter password if any changes)</label>
-            <input type="password" name="passcode" required>
+            <label for="passcode">Password</label>
+            <input type="password" name="passcode">
             <label for="role">Role</label>
             <select name="role" id="" required>
                 <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
@@ -87,9 +90,10 @@
         <?php } ?>
         
     </form>
+    </div>
+    <?php } ?>
     <div>
         <a href="./Users"> <button>Return</button></a>
-        <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id'];?>> <button name="delete_user"> Delete</button></a><?php } ?>
     </div>
 </div>
 

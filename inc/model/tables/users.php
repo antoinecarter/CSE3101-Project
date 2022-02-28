@@ -106,29 +106,55 @@
                 $this->connection->execute();
             }
 
-            $this->connection->query("UPDATE users 
+            if($d['passcode'] != NULL){
+                $this->connection->query("UPDATE users 
                                         SET 
                                             org_id = :org_id, first_name = :first_name, last_name = :last_name, email = :email, username = :username, passcode = :passcode, employee_no = :emp_no, role = :role, can_create = :c_create, can_view = :c_view, can_update = :c_update, can_delete = :c_delete, can_verify = :c_verify, can_approve = :c_approve, start_date = :start_date, status = :status
                                         WHERE
                                             id = :id");
             
-            $this->connection->bind(':id', $id);
-            $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
-            $this->connection->bind(':first_name', $this->remove_errors($d['first_name']));
-            $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
-            $this->connection->bind(':email', $this->remove_errors($d['email']));
-            $this->connection->bind(':username', $this->remove_errors($d['username']));
-            $this->connection->bind(':passcode', $this->remove_errors(md5($d['passcode'])));
-            $this->connection->bind(':role', $this->remove_errors($d['role']));
-            $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
-            $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
-            $this->connection->bind(':c_view', $this->remove_errors($d['can_view']));
-            $this->connection->bind(':c_update', $this->remove_errors($d['can_update']));
-            $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
-            $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
-            $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
-            $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
-            $this->connection->bind(':status', $this->remove_errors($d['status']));
+                $this->connection->bind(':id', $id);
+                $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
+                $this->connection->bind(':first_name', $this->remove_errors($d['first_name']));
+                $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
+                $this->connection->bind(':email', $this->remove_errors($d['email']));
+                $this->connection->bind(':username', $this->remove_errors($d['username']));
+                $this->connection->bind(':passcode', $this->remove_errors(md5($d['passcode'])));
+                $this->connection->bind(':role', $this->remove_errors($d['role']));
+                $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
+                $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
+                $this->connection->bind(':c_view', $this->remove_errors($d['can_view']));
+                $this->connection->bind(':c_update', $this->remove_errors($d['can_update']));
+                $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
+                $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
+                $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
+                $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
+                $this->connection->bind(':status', $this->remove_errors($d['status']));
+            }else{
+                $this->connection->query("UPDATE users 
+                                        SET 
+                                            org_id = :org_id, first_name = :first_name, last_name = :last_name, email = :email, username = :username, employee_no = :emp_no, role = :role, can_create = :c_create, can_view = :c_view, can_update = :c_update, can_delete = :c_delete, can_verify = :c_verify, can_approve = :c_approve, start_date = :start_date, status = :status
+                                        WHERE
+                                            id = :id");
+            
+                $this->connection->bind(':id', $id);
+                $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
+                $this->connection->bind(':first_name', $this->remove_errors($d['first_name']));
+                $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
+                $this->connection->bind(':email', $this->remove_errors($d['email']));
+                $this->connection->bind(':username', $this->remove_errors($d['username']));
+                $this->connection->bind(':role', $this->remove_errors($d['role']));
+                $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
+                $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
+                $this->connection->bind(':c_view', $this->remove_errors($d['can_view']));
+                $this->connection->bind(':c_update', $this->remove_errors($d['can_update']));
+                $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
+                $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
+                $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
+                $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
+                $this->connection->bind(':status', $this->remove_errors($d['status']));
+            }
+            
 
             try{
                 $this->connection->execute();
