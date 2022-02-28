@@ -13,22 +13,42 @@
                 $this->salaryModel = new salary();
             }
         
-            public function create($d)
+
+            public function tblsalary()
+            {
+                include_once __DIR__ . "/../view/tblsalary.php";
+            }
+        
+            public function frmsalary()
+            {
+                include_once __DIR__ . "/../view/frmsalary.php";
+            }
+        
+            public function edtsalary()
+            {
+                include_once __DIR__ . "/../view/edtsalary.php";
+            }
+        
+            public function delsalary(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createsal($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deletesal($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewsal($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updatesal($id, $d)
             {
                 
             }

@@ -13,23 +13,43 @@
             {
                 $this->shiftsModel = new shifts();
             }
+
+            
+            public function tblshifts()
+            {
+                include_once __DIR__ . "/../view/tblshifts.php";
+            }
+
+            public function frmshifts()
+            {
+                include_once __DIR__ . "/../view/frmshifts.php";
+            }
+
+            public function edtshifts()
+            {
+                include_once __DIR__ . "/../view/edtshifts.php";
+            }
+
+            public function delshifts(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
         
-            public function create($d)
+            public function createshift($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteshift($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewshift($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateshift($id, $d)
             {
                 
             }

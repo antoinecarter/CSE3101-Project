@@ -12,23 +12,43 @@
             {
                 $this->leaverequestsModel = new leaverequests();
             }
+
+                    
+            public function tblleaverequests()
+            {
+                include_once __DIR__ . "/../view/tblleaverequests.php";
+            }
+
+            public function frmleaverequests()
+            {
+                include_once __DIR__ . "/../view/frmleaverequests.php";
+            }
+
+            public function edtleaverequests()
+            {
+                include_once __DIR__ . "/../view/edtleaverequests.php";
+            }
+
+            public function delleaverequests(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
         
-            public function create($d)
+            public function createlevreq($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deletelevreq($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewlevreq($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updatelevreq($id, $d)
             {
                 
             }

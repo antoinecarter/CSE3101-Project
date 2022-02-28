@@ -14,22 +14,42 @@
                 $this->payperiodsModel = new payperiods();
             }
         
-            public function create($d)
+
+            public function tblpayperiods()
+            {
+                include_once __DIR__ . "/../view/tblpayperiods.php";
+            }
+        
+            public function frmpayperiods()
+            {
+                include_once __DIR__ . "/../view/frmpayperiods.php";
+            }
+        
+            public function edtpayperiods()
+            {
+                include_once __DIR__ . "/../view/edtpayperiods.php";
+            }
+        
+            public function delpayperiods(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createpayp($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deletepayp($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewpayp($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updatepayp($id, $d)
             {
                 
             }

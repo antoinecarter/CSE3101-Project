@@ -14,22 +14,42 @@
                 $this->worklocationsModel = new worklocations();
             }
         
-            public function create($d)
+
+            public function tblworklocations()
+            {
+                include_once __DIR__ . "/../view/tblworklocations.php";
+            }
+
+            public function frmworklocations()
+            {
+                include_once __DIR__ . "/../view/frmworklocations.php";
+            }
+
+            public function edtworklocations()
+            {
+                include_once __DIR__ . "/../view/edtworklocations.php";
+            }
+
+            public function delworklocations(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function creatework($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deletework($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewwork($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updatework($id, $d)
             {
                 
             }

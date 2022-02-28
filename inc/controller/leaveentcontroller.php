@@ -13,23 +13,43 @@
             {
                 $this->leaveentitlemtModel = new leaveentitlemt();
             }
+
+            
+            public function tblleaveentitlemt()
+            {
+                include_once __DIR__ . "/../view/tblleaveentitlemt.php";
+            }
+
+            public function frmleaveentitlemt()
+            {
+                include_once __DIR__ . "/../view/frmleaveentitlemt.php";
+            }
+
+            public function edtleaveentitlemt()
+            {
+                include_once __DIR__ . "/../view/edtleaveentitlemt.php";
+            }
+
+            public function delleaveentitlemt(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
         
-            public function create($d)
+            public function createleven($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteleven($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewleven($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateleven($id, $d)
             {
                 
             }

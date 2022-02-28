@@ -13,22 +13,42 @@
                 $this->employeesModel = new employees();
             }
         
-            public function create($d)
+            
+            public function tblemployees()
+            {
+                include_once __DIR__ . "/../view/tblemployees.php";
+            }
+
+            public function frmemployees()
+            {
+                include_once __DIR__ . "/../view/frmemployees.php";
+            }
+
+            public function edtemployees()
+            {
+                include_once __DIR__ . "/../view/edtemployees.php";
+            }
+
+            public function delemployees(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createemps($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteemps($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewemps($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateemps($id, $d)
             {
                 
             }

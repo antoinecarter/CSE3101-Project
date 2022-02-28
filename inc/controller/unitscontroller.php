@@ -13,22 +13,42 @@
                 $this->unitsModel = new units();
             }
         
-            public function create($d)
+
+            public function tblunits()
+            {
+                include_once __DIR__ . "/../view/tblunits.php";
+            }
+        
+            public function frmunits()
+            {
+                include_once __DIR__ . "/../view/frmunits.php";
+            }
+        
+            public function edtunits()
+            {
+                include_once __DIR__ . "/../view/edtunits.php";
+            }
+        
+            public function delunits(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createunits($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteunits($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewunits($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateunits($id, $d)
             {
                 
             }

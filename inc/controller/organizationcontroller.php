@@ -13,22 +13,42 @@
                 $this->organizationsModel = new organizations();
             }
         
-            public function create($d)
+
+            public function tblorganizations()
+            {
+                include_once __DIR__ . "/../view/tblorganizations.php";
+            }
+        
+            public function frmorganizations()
+            {
+                include_once __DIR__ . "/../view/frmorganizations.php";
+            }
+        
+            public function edtorganizations()
+            {
+                include_once __DIR__ . "/../view/edtorganizations.php";
+            }
+        
+            public function delorganizations(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createorg($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteorg($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function vieworg($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateorg($id, $d)
             {
                 
             }

@@ -13,22 +13,42 @@
                 $this->referencesModel = new references();
             }
         
-            public function create($d)
+
+            public function tblreferences()
+            {
+                include_once __DIR__ . "/../view/tblreferences.php";
+            }
+        
+            public function frmreferences()
+            {
+                include_once __DIR__ . "/../view/frmreferences.php";
+            }
+        
+            public function edtreferences()
+            {
+                include_once __DIR__ . "/../view/edtreferences.php";
+            }
+        
+            public function delreferences(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+            public function createref($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deleteref($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewref($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updateref($id, $d)
             {
                 
             }

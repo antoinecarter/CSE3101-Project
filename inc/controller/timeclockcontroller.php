@@ -13,23 +13,43 @@
             {
                 $this->timeclocksModel = new timeclocks();
             }
+
+                    
+            public function tbltimeclocks()
+            {
+                include_once __DIR__ . "/../view/tbltimeclocks.php";
+            }
+
+            public function frmtimeclocks()
+            {
+                include_once __DIR__ . "/../view/frmtimeclocks.php";
+            }
+
+            public function edttimeclocks()
+            {
+                include_once __DIR__ . "/../view/edttimeclocks.php";
+            }
+
+            public function deltimeclocks(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
         
-            public function create($d)
+            public function createtime($d)
             {
                 
             }
         
-            public function delete($id)
+            public function deletetime($id)
             {
                 
             }
         
-            public function view($role, $id)
+            public function viewtime($role, $id)
             {
                 
             }
         
-            public function update($id, $d)
+            public function updatetime($id, $d)
             {
                 
             }

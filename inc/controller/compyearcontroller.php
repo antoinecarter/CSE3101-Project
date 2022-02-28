@@ -13,22 +13,41 @@
                 $this->compyearModel = new compyear();
             }
 
-            public function create($d)
+            public function tblcompyear()
+            {
+                include_once __DIR__ . "/../view/tblcompyear.php";
+            }
+        
+            public function frmcompyear()
+            {
+                include_once __DIR__ . "/../view/frmcompyear.php";
+            }
+        
+            public function edtcompyear()
+            {
+                include_once __DIR__ . "/../view/edtcompyear.php";
+            }
+        
+            public function delcompyear(){
+                include_once __DIR__ . "/../view/delete.php";
+            }
+
+        public function createcompyr($d)
         {
             
         }
 
-        public function delete($id)
+        public function deletecompyr($id)
         {
             
         }
 
-        public function view($role, $id)
+        public function viewcompyr($role, $id)
         {
             
         }
 
-        public function update($id, $d)
+        public function updatecompyr($id, $d)
         {
             
         }
