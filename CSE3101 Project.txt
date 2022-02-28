@@ -45,6 +45,45 @@ Views:
         Leave Request
         Leave Taken
 
+Categories of Models:
+    HR Configuration
+        References
+        Organization
+            Company Year
+            Work Location   
+        Shifts
+    
+    *Payroll Configuration
+        *Pay Period
+    
+    Organisation Management
+        Organisation structures
+        Departments
+        Units
+        Positions
+    
+    Employee Management 
+        Individuals
+            Address
+            National Identifiers
+
+        Employees
+            Salary
+            Leave Entitlement
+            Attendance Details
+
+    
+    Leave Management
+        Leave Request
+        Leave Track
+    
+    Attendance Management
+        Timeclock
+        Absence
+        Lateness
+        
+
+
 Model: 
     Connection Details:
         host: localhost
