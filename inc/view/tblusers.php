@@ -6,17 +6,12 @@
     $num_rows = $statement->rowCount();
     ?>
     <div class="breadcrumb">
-        <?php echo $num_rows; ?>
+  
         <h5>Home/User Accounts</h5>
     </div>
-    <div>
-        <h2>Listing of User Accounts</h2>
-    </div>
-    <div class="container">
-        <?php echo $_SESSION['id']; ?>
-        <a href="./Users/Registration"><button class="btn">Add New</button></a>
-    </div>
-    <div>
+<div class = "usrtb">
+        <h2>Listing of User Accounts
+        <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table class="center">
             <thead>
                 <th>Edit</th>
@@ -35,15 +30,17 @@
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                     <tr>
-                        <td><a href="Users/Registration/Edit/<?php echo $row['id'];?>"><img alt= "" style="width:30px; height:30px" src="include/edit.png"></a></td>
+                        <td><a href="./inc/view/edtusers.php"<?php echo $row['id'];?>"><img alt= "" style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
                         <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                         <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                        
                     </tr>
                 <?php } ?>
+                <td>      <?php echo $num_rows; ?></td>
             </tbody>
         </table>
     </div>
