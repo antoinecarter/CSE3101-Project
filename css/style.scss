@@ -321,9 +321,6 @@ a {
     padding: 16px;
 }
 
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
 @media screen and (max-height: 450px) {
     .sidebar {
         padding-top: 15px;
@@ -427,6 +424,12 @@ td {
     border-radius: 16px;
 }
 
+.usrtb button:hover {
+    opacity: 1;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
 .usrtb {
     margin-top: 50px;
     margin-left: 120px;
@@ -438,7 +441,89 @@ td {
 }
 
 .form-usr {
-    margin-top: 80px;
+    width: 550px;
+    margin-top: 120px;
+    text-align: center;
+    margin-left: 420px;
+    margin-right: 305px;
+    background-color: rgb(6, 57, 88);
+    color: white;
+    display: block;
+    border: 1px #000 solid;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-radius: 30px 30px 30px 30px;
+    border: 10px rgb(247, 247, 247) solid
+}
+
+.form-usr h2 {
+    margin-bottom: 50px;
+    font-size: 40px;
+}
+
+.form-usr p input[type="text"],
+input[type="password"] input[type="date"] {
+    height: 40px;
+    padding-left: 12px;
+    font-size: 20px;
+}
+
+.form-usr select {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    background-color: rgb(53, 100, 145);
+    border-radius: 30px 30px 30px 30px;
+}
+
+.form-usr select:hover {
+    opacity: 1;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.form-usr input {
+    width: 400px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 7.25rem;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+.form-usr button {
+    width: 200px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    border-radius: 7.25rem;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.form-usr button:hover {
+    opacity: 1;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.exist {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 50px;
+    text-align: center;
+    background-color: #e52342;
+    color: white;
+    margin-left: 74px;
+    height: 50px;
+    width: 400px;
+    border-radius: 30px 30px 30px 30px;
 }
 
 .edit-usr {

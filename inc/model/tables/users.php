@@ -130,7 +130,7 @@
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
-                $statement = $this->connection->getStatement();
+                $this->connection->execute();
                 $message = "User Account Updated";
                 return $message;
             }catch(PDOException $message){
@@ -143,7 +143,7 @@
             $this->connection->query( "DELETE FROM users WHERE id= :id");
             $this->connection->bind(':id', $id);
             try{
-                $statement = $this->connection->getStatement();
+                $this->connection->execute();
                 $message = "User Account Removed";
                 return $message;
             }catch(PDOException $message){

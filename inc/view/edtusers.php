@@ -15,7 +15,7 @@
         if(isset($cred)){ echo $cred;}?></div>
     <form method="post" action="">
         <div>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users"> <button name="delete_user"> Delete</button></a> ><?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button name="delete_user"> Delete</button></a> ><?php } ?>
             <button type="submit" name="update_user">Apply Changes</button>
         </div>
         <div>
