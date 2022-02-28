@@ -219,9 +219,7 @@ class UsersController extends User
             $deluser = $this->userModel->getUserById($id);
             if ($deluser['id'] != $_SESSION['id']) {
                 if (($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
-                    $this->userModel->delete($id);
-                    header('Location: ');
-                    $message = "User deleted";
+                    $message = $this->userModel->delete($id);
                     return $message;
                 } else {
                     $message = 'User is an Admin/You are not an Admin';
