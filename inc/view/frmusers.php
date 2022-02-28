@@ -6,10 +6,11 @@
     }
 ?>
 <div class = "form-usr">
-    <div><?php echo $_SESSION['id']; 
+    <div><?php echo $_SESSION['role']; 
         if(isset($cred)){ echo $cred;}?></div>
     <form method="post" action="">
         <div>
+        <h2>Create new user</h2>
             <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
         </div>
         <div>

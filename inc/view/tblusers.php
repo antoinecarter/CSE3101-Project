@@ -1,5 +1,4 @@
-
-    <?php
+<?php
     include __DIR__ . "/header.php";
     $usercontroller = new UsersController();
     $statement = $usercontroller->viewusers();
@@ -9,10 +8,10 @@
   
         <h5>Home/User Accounts</h5>
     </div>
-<div class = "usrtb">
+    <div class = "usrtb">
         <h2>Listing of User Accounts
         <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <table class="center">
+        <table>
             <thead>
                 <th>Edit</th>
                 <th>Username</th>
@@ -37,15 +36,15 @@
                         <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
                         <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                         <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
-                        
+
                     </tr>
-                    
+
                 <?php } ?>
+    
                 <td> Num Of Users: <?php echo $num_rows; ?></td>
             </tbody>
         </table>
     </div>
-
     <?php
     include __DIR__ . "/footer.php";
     ?>
