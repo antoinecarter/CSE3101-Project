@@ -14,7 +14,7 @@
     </head>
 
     <div id="mySidebar" class="sidebar">
-      <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</b>
+      <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</b>
       <button class="sidebar-dr">Departments ▼</button>
       <div class="dropdown-contain">
     <a href="#">Link 1</a>

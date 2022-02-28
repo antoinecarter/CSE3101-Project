@@ -15,32 +15,28 @@ $num_rows = $statement->rowCount();
     print_r($url_components['path']); ?>
     <h5>Home/User Accounts</h5>
 </div>
-<div class="top">
-    <h2>Listing of User Accounts</h2>
-</div>
-<div>
-    <a href="./Users/Registration"><button>Add New</button></a>
-</div>
-<div class="tble">
-    <table class="users">
-        <thead>
-            <th>Edit</th>
-            <th>Username</th>
-            <th>Fullname</th>
-            <th>Email</th>
-            <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-            <th>Effective From</th>
-            <th>Effective To</th>
-        </thead>
-        <tbody>
-            <?php
-                if($num_rows == 0){
-                    echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
-                }
-                while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-            ?>
+<div class = "usrtb">
+        <h2>Listing of User Accounts
+        <a href="./Users/Registration"><button>Add New</button></a></h2>
+        <table class="center">
+            <thead>
+                <th>Edit</th>
+                <th>Username</th>
+                <th>Fullname</th>
+                <th>Email</th>
+                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
+                <th>Effective From</th>
+                <th>Effective To</th>
+            </thead>
+            <tbody>
+                <?php
+                    if($num_rows == 0){
+                        echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
+                    }
+                    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+                ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="include/edit.png"></a></td>
+                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['username']; ?></td>
                     <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
                     <td><?php echo $row['email']; ?></td>
@@ -49,6 +45,7 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
+            <td> Num Of Users: <?php echo $num_rows; ?></td>
         </tbody>
     </table>
 </div>
