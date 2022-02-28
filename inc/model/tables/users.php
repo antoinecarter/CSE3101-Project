@@ -84,8 +84,9 @@
                 $this->connection->bind(':status',$this->status);
                 $this->connection->bind(':start_date',$this->start_date);
                 
-                $statement = $this->connection->getStatement();
-                $this->id = $statement['id'];
+                $this->connection->execute();
+                
+                $this->id = $this->connection->get_connection()->lastInsertId();
             }catch(PDOException $message){
                 echo $message->getMessage();
             }
@@ -130,7 +131,7 @@
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
-                $statement = $this->connection->getStatement();
+                $this->connection->execute();
                 $message = "User Account Updated";
                 return $message;
             }catch(PDOException $message){
@@ -143,7 +144,7 @@
             $this->connection->query( "DELETE FROM users WHERE id= :id");
             $this->connection->bind(':id', $id);
             try{
-                $statement = $this->connection->getStatement();
+                $this->connection->execute();
                 $message = "User Account Removed";
                 return $message;
             }catch(PDOException $message){

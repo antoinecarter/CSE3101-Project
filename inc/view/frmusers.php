@@ -83,6 +83,10 @@
         <?php } ?>
         
     </form>
+    <div>
+        <a href="./Users"> <button>Return</button></a>
+        
+    </div>
 </div>
 
 <?php
