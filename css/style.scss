@@ -1,465 +1,446 @@
-       body {
-           margin: 0;
-           padding: 0;
-           background-color: lightblue;
-       }
-       
-       .login {
-           width: 320px;
-           height: 420px;
-           background: #000;
-           color: #fff;
-           top: 50%;
-           left: 50%;
-           position: absolute;
-           transform: translate(-50%, -50%);
-           box-sizing: border-box;
-           padding: 70px 30px;
-           border-radius: 5rem;
-       }
-       
-       .error-login {
-           font-size: 30px;
-           font-weight: bold;
-           margin-top: 50px;
-           text-align: center;
-           background-color: #e52342;
-           color: white;
-           margin-left: 450px;
-           padding-top: 12px;
-           height: 50px;
-           width: 450px;
-           border-radius: 30px 30px 30px 30px;
-       }
-       
-       .login h1 {
-           margin: 0;
-           text-align: center;
-           padding: 0 0 10px;
-           font-size: 50px;
-       }
-       
-       .login p {
-           font-weight: bold;
-           margin: 0;
-           padding: 0;
-           text-align: center;
-       }
-       
-       .login p input[type="text"],
-       input[type="password"] {
-           height: 40px;
-           padding-left: 12px;
-       }
-       
-       .login input {
-           width: 100%;
-           margin-bottom: 20px;
-           border-radius: 7.25rem;
-       }
-       
-       .home h1 {
-           font-size: 40px;
-           text-align: center;
-           border: 4px solid rgb(6, 57, 88);
-           color: white;
-           background-color: rgb(6, 57, 88);
-           margin: 0px 350px 0px 350px;
-           border-radius: 40px 40px 40px 40px;
-           border: #fff solid;
-       }
-       
-       .login_bu {
-           color: #fff;
-           background-color: #28a745;
-           border-color: #28a745;
-       }
-       
-       .cancel_bu {
-           color: #fff;
-           background-color: #e52342;
-           border-color: #e52342;
-       }
-       
-       .lc {
-           font-weight: 400;
-           text-align: center;
-           vertical-align: middle;
-           user-select: none;
-           border: 1px solid transparent;
-           padding: 0.375rem 0.75rem;
-           font-size: 1rem;
-           line-height: 1.5;
-           border-radius: 0.25rem;
-       }
-       
-       .lc {
-           cursor: pointer;
-           opacity: 0.9;
-       }
-       
-       .lc:hover {
-           opacity: 1;
-       }
-       
-       //Top-Nav Bar
-       .nav {
-           display: flex;
-           align-items: center;
-           justify-content: space-between;
-           border-radius: 3px;
-       }
-       
-       a {
-           text-decoration: none;
-           color: rgb(255, 255, 255);
-           font-size: 20px;
-           font-weight: bold;
-       }
-       /* nav styles */
-       
-       .side-top-nav {
-           display: flex;
-           position: fixed;
-           align-items: center;
-           top: 0px;
-           background-color: rgb(6, 57, 88);
-           border-radius: 33px 0px 33px 0px;
-           border: 2px solid rgb(255, 255, 255);
-       }
-       
-       .cur_user {
-           font-size: 22px;
-           color: rgb(250, 250, 250);
-       }
-       
-       .topnav_button {
-           top: 5rem;
-           left: 18px;
-           padding-left: 897px;
-       }
-       
-       .topnav_button a {
-           display: flex;
-           text-align: center;
-           padding: 10px 0;
-       }
-       
-       .topnav_button a:hover {
-           background-color: rgb(53, 100, 145);
-           border-radius: 30px 0px 30px 0px;
-       }
-       
-       @media screen and (min-width: 600px) {
-           .topnav_button {
-               display: flex;
-               position: static;
-               width: auto;
-               margin-right: 2px;
-               background: none;
-           }
-           .topnav_button a {
-               display: inline-block;
-               padding: 15px 20px;
-           }
-           .topnav_links {
-               display: none;
-           }
-       }
-       
-       .dropbb {
-           font-size: 17px;
-           border: none;
-           outline: none;
-           color: white;
-           padding: 14px 16px;
-           background-color: inherit;
-           font-family: inherit;
-           margin: 0;
-           text-transform: uppercase;
-       }
-       
-       .dropmenu-content {
-           display: none;
-           position: fixed;
-           background-color: rgb(6, 57, 88);
-           z-index: 1;
-       }
-       
-       .dropmenu-content a {
-           float: none;
-           color: rgb(255, 255, 255);
-           padding: 12px 16px;
-           text-decoration: none;
-           display: block;
-           text-align: center;
-       }
-       
-       .dropmenu:hover .dropbb {
-           background-color: rgb(53, 100, 145);
-           color: white;
-           border-radius: 30px 0px 30px 0px;
-       }
-       
-       .dropmenu-content a:hover {
-           background-color: rgb(53, 100, 145);
-           color: rgb(255, 255, 255);
-       }
-       
-       .dropmenu:hover .dropmenu-content {
-           display: block;
-       }
-       
-       //side-nav
-       .side-body {
-           font-size: medium;
-       }
-       
-       .sidebar {
-           height: 100%;
-           width: 0;
-           position: fixed;
-           z-index: 1;
-           top: 0;
-           left: 0;
-           background-color: rgb(6, 57, 88);
-           overflow-x: hidden;
-           transition: 0.5s;
-           padding-top: 60px;
-       }
-       
-       .sidebar-dr {
-           padding: 8px 8px 18px 22px;
-           margin: 38px 8px 18px 22px;
-           text-decoration: none;
-           color: #ffffff;
-           background-color: rgb(6, 57, 88);
-           display: block;
-           transition: 0.3s;
-           border: none;
-           cursor: pointer;
-           font-size: 16px;
-           text-align: left;
-           font-family: inherit;
-       }
-       
-       .sidebar-dr:hover {
-           background-color: rgb(53, 100, 145);
-           border-radius: 30px 0px 30px 0px;
-           padding-bottom: 30px;
-       }
-       
-       .active {
-           background-color: rgb(53, 100, 145);
-           border-radius: 30px 0px 30px 0px;
-       }
-       
-       .dropdown-contain {
-           display: none;
-           background-color: rgb(27, 106, 155);
-           margin-left: 5px;
-           margin-right: 5px;
-           text-align: left;
-       }
-       
-       .dropdown-contain a {
-           padding: 8px 8px 18px 22px;
-           text-decoration: none;
-           color: #e2e2e2;
-           display: block;
-           transition: 0.3s;
-           border: none;
-           cursor: pointer;
-       }
-       
-       .dropdown-contain a:hover {
-           background-color: rgb(6, 57, 88);
-           border-radius: 30px 0px 30px 0px;
-           padding-bottom: 30px;
-       }
-       
-       .sidebar b {
-           margin-top: 7px;
-           padding: 0px 4px 0px 4px;
-           text-decoration: none;
-           font-size: 25px;
-           color: #e2e2e2;
-           display: block;
-           transition: 0.3s;
-       }
-       
-       .sidebar b:hover {
-           background-color: rgb(53, 100, 145);
-           border-radius: 30px 30px 30px 30px;
-       }
-       
-       .sidebar .closebtn {
-           position: absolute;
-           top: 0;
-           right: 25px;
-           font-size: 36px;
-           margin-left: 50px;
-       }
-       
-       .openbtn {
-           font-size: 10px;
-           cursor: pointer;
-           background-color: rgb(6, 57, 88);
-           color: rgb(255, 255, 255);
-           padding: 10px 15px;
-           border: 3px solid rgb(255, 255, 255);
-       }
-       
-       .openbtn:hover {
-           background-color: rgb(6, 57, 88);
-       }
-       
-       #main {
-           transition: margin-left .5s;
-           padding: 16px;
-       }
-       /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-       
-       @media screen and (max-height: 450px) {
-           .sidebar {
-               padding-top: 15px;
-           }
-           .sidebar a {
-               font-size: 18px;
-           }
-       }
-       
-       .wrapper {
-           display: grid;
-           margin-top: 70px;
-           margin-left: 5%;
-           margin-bottom: 3%;
-           grid-template-rows: 250px 250px;
-           grid-template-columns: 200px 200px 200px 200px 0px;
-           grid-gap: 50px;
-       }
-       
-       .box {
-           width: 200px;
-           background-color: rgb(6, 57, 88);
-           color: #fff;
-           border-radius: 5px;
-           font-size: 150%;
-           cursor: pointer;
-           display: flex;
-           justify-content: center;
-           align-items: top;
-           border-top: 3px solid rgb(0, 0, 0);
-           border-left: 3px solid rgb(0, 0, 0);
-       }
-       .center{
-           margin-left: auto;
-           margin-right: auto;
-           
-       }
-       .container{
-           display: flex;
-           flex-direction: row;
-           justify-content: space-evenly;
-           align-items: center;
-           text-align: center;
-           min-height: 10vh;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightblue;
+}
 
-       }
-       .tble {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        border-radius: 0.2rem;
+.login {
+    width: 320px;
+    height: 420px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 5rem;
+}
+
+.error-login {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 50px;
+    text-align: center;
+    background-color: #e52342;
+    color: white;
+    margin-left: 450px;
+    padding-top: 12px;
+    height: 50px;
+    width: 450px;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.login h1 {
+    margin: 0;
+    text-align: center;
+    padding: 0 0 10px;
+    font-size: 50px;
+}
+
+.login p {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.login p input[type="text"],
+input[type="password"] {
+    height: 40px;
+    padding-left: 12px;
+}
+
+.login input {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 7.25rem;
+}
+
+.home h1 {
+    font-size: 40px;
+    text-align: center;
+    border: 4px solid rgb(6, 57, 88);
+    color: white;
+    background-color: rgb(6, 57, 88);
+    margin: 0px 350px 0px 350px;
+    border-radius: 40px 40px 40px 40px;
+    border: #fff solid;
+}
+
+.login_bu {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.cancel_bu {
+    color: #fff;
+    background-color: #e52342;
+    border-color: #e52342;
+}
+
+.lc {
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+}
+
+.lc {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.lc:hover {
+    opacity: 1;
+}
+
+//Top-Nav Bar
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+}
 
 
-       .btn{
-           width: 150px;
-           height: 50px;
-           border: none;
-           border-radius: 4px;
-           background-color: yellow;
+/* nav styles */
 
-       }
-      
-       table{
-          border-collapse: collapse;
-          box-shadow: 0 5px 10px black;
-          text-align: center;
-          overflow: hidden;
-         
-       }
-       
-       thead {
-           box-shadow: 0 5px 10px gray;
-       }
-       
-       th {
-           padding: 1rem 2rem;
-           text-transform: uppercase;
-           letter-spacing: 0.1rem;
-           font-size: 0.7rem;
-           font-weight: 900;
-       }
-       
-       td {
-           padding: 1rem 2rem;
-       }
-       
-       .breadcrumb {
-           margin-top: 80px;
-           font-size: 30px;
-           font-weight: bold;
-           text-align: center;
-           background-color: rgb(6, 57, 88);
-           color: white;
-           margin-left: 450px;
-           padding-top: 12px;
-           height: 50px;
-           width: 450px;
-           border-radius: 30px 30px 30px 30px;
-           border: #fff solid;
-           display: block;
-       }
-       
-       .breadcrumb h5 {
-           display: block;
-           margin-block-start: 3px;
-       }
-       
-       .usrtb h2 {
-           text-align: left;
-           padding-left: 10px;
-       }
-       
-       .usrtb button {
-           background-color: rgb(53, 100, 145);
-           text-align: center;
-           color: #fff;
-           border-color: #1154d1;
-           font-weight: bold;
-           margin-left: 790px;
-           margin-top: 10px;
-           padding: 0;
-           text-align: center;
-           padding: 7px 7px 7px 7px;
-           border-radius: 16px;
-       }
-       
-       .usrtb {
-           margin-top: 50px;
-           margin-left: 120px;
-           margin-right: 105px;
-           background-color: rgb(6, 57, 88);
-           color: white;
-           display: block;
-           border: 1px #000 solid;
-       }
-       
-       .form-usr {
-           margin-top: 80px;
-       }
-       
-       .edit-usr {
-           margin-top: 80px;
-       }}
+.side-top-nav {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    top: 0px;
+    background-color: rgb(6, 57, 88);
+    border-radius: 33px 0px 33px 0px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.cur_user {
+    font-size: 22px;
+    color: rgb(250, 250, 250);
+}
+
+.topnav_button {
+    top: 5rem;
+    left: 18px;
+    padding-left: 897px;
+}
+
+.topnav_button a {
+    display: flex;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.topnav_button a:hover {
+    background-color: rgb(53, 100, 145);
+    border-radius: 30px 0px 30px 0px;
+}
+
+@media screen and (min-width: 600px) {
+    .topnav_button {
+        display: flex;
+        position: static;
+        width: auto;
+        margin-right: 2px;
+        background: none;
+    }
+    .topnav_button a {
+        display: inline-block;
+        padding: 15px 20px;
+    }
+    .topnav_links {
+        display: none;
+    }
+}
+
+.dropbb {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.dropmenu-content {
+    display: none;
+    position: fixed;
+    background-color: rgb(6, 57, 88);
+    z-index: 1;
+}
+
+.dropmenu-content a {
+    float: none;
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropmenu:hover .dropbb {
+    background-color: rgb(53, 100, 145);
+    color: white;
+    border-radius: 30px 0px 30px 0px;
+}
+
+.dropmenu-content a:hover {
+    background-color: rgb(53, 100, 145);
+    color: rgb(255, 255, 255);
+}
+
+.dropmenu:hover .dropmenu-content {
+    display: block;
+}
+
+//side-nav
+.side-body {
+    font-size: medium;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(6, 57, 88);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar-dr {
+    padding: 8px 8px 18px 22px;
+    margin: 38px 8px 18px 22px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: rgb(6, 57, 88);
+    display: block;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    font-family: inherit;
+}
+
+.sidebar-dr:hover {
+    background-color: rgb(53, 100, 145);
+    border-radius: 30px 0px 30px 0px;
+    padding-bottom: 30px;
+}
+
+.active {
+    background-color: rgb(53, 100, 145);
+    border-radius: 30px 0px 30px 0px;
+}
+
+.dropdown-contain {
+    display: none;
+    background-color: rgb(27, 106, 155);
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: left;
+}
+
+.dropdown-contain a {
+    padding: 8px 8px 18px 22px;
+    text-decoration: none;
+    color: #e2e2e2;
+    display: block;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-contain a:hover {
+    background-color: rgb(6, 57, 88);
+    border-radius: 30px 0px 30px 0px;
+    padding-bottom: 30px;
+}
+
+.sidebar b {
+    margin-top: 7px;
+    padding: 0px 4px 0px 4px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #e2e2e2;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar b:hover {
+    background-color: rgb(53, 100, 145);
+    border-radius: 30px 30px 30px 30px;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 10px;
+    cursor: pointer;
+    background-color: rgb(6, 57, 88);
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    border: 3px solid rgb(255, 255, 255);
+}
+
+.openbtn:hover {
+    background-color: rgb(6, 57, 88);
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+.wrapper {
+    display: grid;
+    margin-top: 70px;
+    margin-left: 5%;
+    margin-bottom: 3%;
+    grid-template-rows: 250px 250px;
+    grid-template-columns: 200px 200px 200px 200px 0px;
+    grid-gap: 50px;
+}
+
+.box {
+    width: 200px;
+    background-color: rgb(6, 57, 88);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 150%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    border-top: 3px solid rgb(0, 0, 0);
+    border-left: 3px solid rgb(0, 0, 0);
+}
+
+.tble {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0.2rem;
+}
+
+table {
+    border-collapse: collapse;
+    box-shadow: 0 5px 10px black;
+    text-align: center;
+    overflow: hidden;
+}
+
+thead {
+    box-shadow: 0 5px 10px gray;
+}
+
+th {
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+td {
+    padding: 1rem 2rem;
+}
+
+.breadcrumb {
+    margin-top: 80px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(6, 57, 88);
+    color: white;
+    margin-left: 450px;
+    padding-top: 12px;
+    height: 50px;
+    width: 450px;
+    border-radius: 30px 30px 30px 30px;
+    border: #fff solid;
+    display: block;
+}
+
+.breadcrumb h5 {
+    display: block;
+    margin-block-start: 3px;
+}
+
+.usrtb h2 {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.usrtb button {
+    background-color: rgb(53, 100, 145);
+    text-align: center;
+    color: #fff;
+    border-color: #1154d1;
+    font-weight: bold;
+    margin-left: 790px;
+    margin-top: 10px;
+    padding: 0;
+    text-align: center;
+    padding: 7px 7px 7px 7px;
+    border-radius: 16px;
+}
+
+.usrtb {
+    margin-top: 50px;
+    margin-left: 120px;
+    margin-right: 105px;
+    background-color: rgb(6, 57, 88);
+    color: white;
+    display: block;
+    border: 1px #000 solid;
+}
+
+.form-usr {
+    margin-top: 80px;
+}
+
+.edit-usr {
+    margin-top: 80px;
+}
