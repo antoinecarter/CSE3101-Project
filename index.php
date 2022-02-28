@@ -37,5 +37,5 @@ if ($path == "/CSE3101-Project/"){
             $usercontroller->edtusers();
         }
     }
-} 
+} else if($path == (''))
 ?>
