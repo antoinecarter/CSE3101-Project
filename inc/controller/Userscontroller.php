@@ -38,6 +38,10 @@ class UsersController extends User
         include_once __DIR__ . "/../view/edtusers.php";
     }
 
+    public function delusers(){
+        include_once __DIR__ . "/../view/delusers.php";
+    }
+
     public function userlogin()
     {
         if (isset($_SESSION['id'])) {
@@ -215,7 +219,15 @@ class UsersController extends User
     public function deleteuser()
     {
         if ($_SERVER['REQUEST_METHOD'] = 'POST') {
-            $id = $_POST['id'];
+            $url = $_SERVER['REQUEST_SCHEME'] . '://';
+            $url .= $_SERVER['HTTP_HOST'];
+            $url .= $_SERVER['REQUEST_URI'];
+
+            $url_components = parse_url($url);
+            if(isset($url_components['query'])){
+                parse_str($url_components['query'], $params);
+            };
+            $id = $params['id'];
             $deluser = $this->userModel->getUserById($id);
             if ($deluser['id'] != $_SESSION['id']) {
                 if (($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
