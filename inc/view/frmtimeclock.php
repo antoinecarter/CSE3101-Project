@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-if (isset($_POST['create_user'])) {
-    $cred = $usercontroller->createuser();
+$timeclocksModel = new TimeclocksController();
+if (isset($_POST['create_time'])) {
+    $cred = $timeclocksModel->createtime();
 }
 ?>
 <div class = "form-usr">
@@ -13,7 +13,7 @@ if (isset($_POST['create_user'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new user</h2>
+        <h2>Create new time</h2>
           
         </div>
         <div>
@@ -120,7 +120,7 @@ if (isset($_POST['create_user'])) {
             </select>
             </p>
            <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_time">Create</button> <?php } ?>
       </p>
         </div>
         <?php } ?>

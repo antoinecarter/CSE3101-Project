@@ -1,12 +1,12 @@
 <?php
     include __DIR__."/header.php";
-    $individualsModel = new IndividualsController();
-    if(isset($_POST['update_indv'])){
-        $cred = $individualsModel->updateindv();
-    }else if (isset($_POST['delete_indv'])){
-        $cred = $individualsModel->deleteindv();
+    $leaveentitlemtModel = new LeaveentitlemtController();
+    if(isset($_POST['update_leav'])){
+        $cred = $leaveentitlemtModel->updateleav();
+    }else if (isset($_POST['delete_leav'])){
+        $cred = $leaveentitlemtModel->deleteleav();
     }
-    $statement = $individualsModel->viewindv();
+    $statement = $leaveentitlemtModel->viewleav();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -14,10 +14,10 @@
     <div><?php if(isset($cred)){ echo $cred;}?></div>
         <?php if(isset($row['id'])){?>
             <div>
-    <form method="post" action="">
-        <h2>Update Individual</h2>
+            <form method="post" action="">
+        <h2>Update Leave</h2>
         <div>
-            <p>
+        <p>
             <label for="id"></label>
             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             </p>
@@ -82,8 +82,8 @@
         </div>
         <?php } ?>
         <div>
-                <button type="submit" name="update_indv">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_indv"> Delete</button></a> <?php } ?>
+                <button type="submit" name="update_leav">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_leav"> Delete</button></a> <?php } ?>
  
  
             </div>

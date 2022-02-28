@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-if (isset($_POST['create_user'])) {
-    $cred = $usercontroller->createuser();
+$unitsModel = new UnitsController();
+if (isset($_POST['create_units'])) {
+    $cred = $unitsModel->createunits();
 }
 ?>
 <div class = "form-usr">
@@ -13,7 +13,7 @@ if (isset($_POST['create_user'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new user</h2>
+        <h2>Create new units</h2>
           
         </div>
         <div>
@@ -120,7 +120,7 @@ if (isset($_POST['create_user'])) {
             </select>
             </p>
            <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_units">Create</button> <?php } ?>
       </p>
         </div>
         <?php } ?>

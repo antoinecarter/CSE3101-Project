@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$salaryModel = new SalaryController();
-$statement = $salaryModel->viewsal();
+$leaveentitlemtModel = new LeaveentitlemtController();
+$statement = $leaveentitlemtModel->viewleav();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,10 +12,10 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Salary</h5>
+    <h5>Departments</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Salaries
+        <h2>Listing of Departments
         <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table>
             <thead>
@@ -44,7 +44,6 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-  
         </tbody>
     </table>
 </div>

@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$usercontroller = new UsersController();
-$statement = $usercontroller->viewusers();
+$organizationsModel = new OrganizationsController();
+$statement = $organizationsModel->vieworg();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,10 +12,10 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Home/User Accounts</h5>
+    <h5>Organization</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of User Accounts
+        <h2>Listing of Organiztions
         <a href="./Users/Registration"><button>Add New</button></a></h2>
         <table>
             <thead>

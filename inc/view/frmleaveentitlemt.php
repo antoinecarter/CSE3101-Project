@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
-$departmentsModel = new DepartmentsController();
-if (isset($_POST['create_dpt'])) {
-    $cred = $departmentsModel->createdpt();
+$leaveentitlemtModel = new LeaveentitlemtController();
+if (isset($_POST['create_leav'])) {
+    $cred = $leaveentitlemtModel->createleav();
 }
 ?>
 <div class = "form-usr">
@@ -17,13 +17,30 @@ if (isset($_POST['create_dpt'])) {
           
         </div>
         <div>
+        <div>
                  <p>
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
            <p>
-            <label for="department_name">Department Name</label>
-            <input type="text" name="department_name" required>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" required>
+            </p>
+           <p>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" required>
+            </p>
+           <p>
+            <label for="email">Email</label>
+            <input type="text" name="email" required>
+            </p>
+           <p>
+            <label for="username">Username</label>
+            <input type="text" name="username" required>
+            </p>
+           <p>
+            <label for="passcode">Password</label>
+            <input type="password" name="passcode" required>
             </p>
            <p>
             <label for="role">Role</label>
@@ -63,7 +80,7 @@ if (isset($_POST['create_dpt'])) {
             </p>
 
            <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_dpt">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_leav">Create</button> <?php } ?>
       </p>
         </div>
         <?php } ?>
