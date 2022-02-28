@@ -44,7 +44,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if ($path == "/CSE3101-Project/Attendance/Registration"){
     if(isset($_SESSION['id'])){
-        $attendancecontroller->frmuattendance();
+        $attendancecontroller->frmattendance();
     }
 } else if($path == ('/CSE3101-Project/Attendance/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
