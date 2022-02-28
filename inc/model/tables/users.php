@@ -84,8 +84,9 @@
                 $this->connection->bind(':status',$this->status);
                 $this->connection->bind(':start_date',$this->start_date);
                 
-                $statement = $this->connection->getStatement();
-                $this->id = $statement['id'];
+                $this->connection->execute();
+                
+                $this->id = $this->connection->get_connection()->lastInsertId();
             }catch(PDOException $message){
                 echo $message->getMessage();
             }

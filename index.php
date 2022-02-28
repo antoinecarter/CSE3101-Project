@@ -37,5 +37,9 @@ if ($path == "/CSE3101-Project/"){
             $usercontroller->edtusers();
         }
     }
-} else if($path == (''))
+} else if($path == ('/CSE3101-Project/Users/Registration/Delete?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        $usercontroller->deleteuser();
+    }
+}
 ?>
