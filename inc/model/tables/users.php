@@ -94,9 +94,20 @@
 
         public function update($id, $d)
         {
+            if($d['end_date'] == null){
+                $this->connection->query("UPDATE users SET end_date = NULL where id = :id");
+                $this->connection->bind(':id', $id);
+                $this->connection->execute();
+            }else{
+                $this->connection->query("UPDATE users SET end_date = :end_date where id = :id");
+                $this->connection->bind(':id', $id);
+                $this->connection->bind(':end_date', $this->remove_errors(date('Y-m-d', strtotime($d['end_date']))));
+                $this->connection->execute();
+            }
+
             $this->connection->query("UPDATE users 
                                         SET 
-                                            org_id = :org_id, first_name = :first_name, last_name = :last_name, email = :email, username = :username, passcode = :passcode, employee_no = :emp_no, role = :role, can_create = :c_create, can_view = :c_view, can_update = :c_update, can_delete = :c_delete, can_verify = :c_verify, can_approve = :c_approve, start_date = :start_date, end_date = :end_date, status = :status
+                                            org_id = :org_id, first_name = :first_name, last_name = :last_name, email = :email, username = :username, passcode = :passcode, employee_no = :emp_no, role = :role, can_create = :c_create, can_view = :c_view, can_update = :c_update, can_delete = :c_delete, can_verify = :c_verify, can_approve = :c_approve, start_date = :start_date, status = :status
                                         WHERE
                                             id = :id");
             
@@ -106,7 +117,7 @@
             $this->connection->bind(':last_name', $this->remove_errors($d['last_name']));
             $this->connection->bind(':email', $this->remove_errors($d['email']));
             $this->connection->bind(':username', $this->remove_errors($d['username']));
-            $this->connection->bind(':passcode', $this->remove_errors($d['passcode']));
+            $this->connection->bind(':passcode', $this->remove_errors(md5($d['passcode'])));
             $this->connection->bind(':role', $this->remove_errors($d['role']));
             $this->connection->bind(':emp_no', $this->remove_errors($d['emp_no']));
             $this->connection->bind(':c_create', $this->remove_errors($d['can_create']));
@@ -115,8 +126,7 @@
             $this->connection->bind(':c_delete', $this->remove_errors($d['can_delete']));
             $this->connection->bind(':c_approve', $this->remove_errors($d['can_approve']));
             $this->connection->bind(':c_verify', $this->remove_errors($d['can_verify']));
-            $this->connection->bind(':start_date', $this->remove_errors($d['start_date']));
-            $this->connection->bind(':end_date', $this->remove_errors($d['end_date']));
+            $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
@@ -132,15 +142,10 @@
         {
             $this->connection->query( "DELETE FROM users WHERE id= :id");
             $this->connection->bind(':id', $id);
-                if($this->connection->execute()){
-                    return true;
-                }else{
-                    return false;
-                }
             try{
-                //$statement = $this->connection->prepare($sql);
-                //$statement->execute(['id'=> $id]);
-                header('Location: ');
+                $statement = $this->connection->getStatement();
+                $message = "User Account Removed";
+                return $message;
             }catch(PDOException $message){
                 echo $message->getMessage();
             }         
@@ -228,6 +233,10 @@
 
         public function get_id(){
             return $this->id;
+        }
+
+        public function get_ord_id(){
+            return $this->org_id;
         }
 
         public function get_fname(){

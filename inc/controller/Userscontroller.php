@@ -33,6 +33,11 @@ class UsersController extends User
         include_once __DIR__ . "/../view/frmusers.php";
     }
 
+    public function edtusers()
+    {
+        include_once __DIR__ . "/../view/edtusers.php";
+    }
+
     public function userlogin()
     {
         if (isset($_SESSION['id'])) {
@@ -87,7 +92,7 @@ class UsersController extends User
         $method = $_SERVER['REQUEST_METHOD'];
 
         if ($method == "GET") {
-            include_once __DIR__ . "/../view/newuser.php";
+            include_once __DIR__ . "/../view/frmusers.php";
         } else {
             if (empty($_POST['first_name'])) {
                 $message = 'Please enter First name';
@@ -158,7 +163,7 @@ class UsersController extends User
 
     public function updateuser()
     {
-
+        $update_user = new User();
         $d = array(
             'id'            => $_REQUEST['id'],
             'org_id'        => $_REQUEST['org_id'],
@@ -169,24 +174,33 @@ class UsersController extends User
             'passcode'        => $_REQUEST['passcode'],
             'role'            => $_REQUEST['role'],
             'emp_no'        => $_REQUEST['emp_no'],
-            'c_create'        => $_REQUEST['can_create'],
-            'c_view'        => $_REQUEST['can_view'],
-            'c_update'        => $_REQUEST['can_update'],
-            'c_delete'        => $_REQUEST['can_delete'],
-            'c_verify'        => $_REQUEST['can_verify'],
-            'c_approve'        => $_REQUEST['can_approve'],
+            'can_create'        => $_REQUEST['can_create'],
+            'can_view'        => $_REQUEST['can_view'],
+            'can_update'        => $_REQUEST['can_update'],
+            'can_delete'        => $_REQUEST['can_delete'],
+            'can_verify'        => $_REQUEST['can_verify'],
+            'can_approve'        => $_REQUEST['can_approve'],
             'start_date'    => $_REQUEST['start_date'],
             'status'        => $_REQUEST['status'],
             'end_date'        => $_REQUEST['end_date']
-
-
         );
-        parent::update($d['id'], $d);
+        $message = $update_user->update($d['id'], $d);
+        include_once __DIR__ . "/../view/edtusers.php";
+        return $message;
     }
 
     public function viewuser()
     {
-        $id = $_REQUEST['id'];
+        
+        $url = $_SERVER['REQUEST_SCHEME'] . '://';
+        $url .= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+
+        $url_components = parse_url($url);
+        if(isset($url_components['query'])){
+            parse_str($url_components['query'], $params);
+        };
+        $id = $params['id'];
         $user = $this->userModel->getUserById($id);
         return $user;
     }
@@ -205,9 +219,7 @@ class UsersController extends User
             $deluser = $this->userModel->getUserById($id);
             if ($deluser['id'] != $_SESSION['id']) {
                 if (($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
-                    $this->userModel->delete($id);
-                    header('Location: ');
-                    $message = "User deleted";
+                    $message = $this->userModel->delete($id);
                     return $message;
                 } else {
                     $message = 'User is an Admin/You are not an Admin';

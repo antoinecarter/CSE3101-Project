@@ -86,7 +86,6 @@
   </nav>
   <script src="./js/script.js"></script>
 
-<?php
-
-?>
+  <body>
+    <div>
   
