@@ -419,6 +419,7 @@
            width: 450px;
            border-radius: 30px 30px 30px 30px;
            border: #fff solid;
+           display: block;
        }
        
        .breadcrumb h5 {
@@ -428,6 +429,7 @@
        
        .usrtb h2 {
            text-align: left;
+           padding-left: 10px;
        }
        
        .usrtb button {
@@ -436,7 +438,7 @@
            color: #fff;
            border-color: #1154d1;
            font-weight: bold;
-           margin-left: 720px;
+           margin-left: 790px;
            margin-top: 10px;
            padding: 0;
            text-align: center;
@@ -446,9 +448,12 @@
        
        .usrtb {
            margin-top: 50px;
-           margin-left: 150px;
+           margin-left: 120px;
+           margin-right: 105px;
            background-color: rgb(6, 57, 88);
            color: white;
+           display: block;
+           border: 1px #000 solid;
        }
        
        .form-usr {
