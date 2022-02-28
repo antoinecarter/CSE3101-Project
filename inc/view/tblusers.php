@@ -5,14 +5,13 @@ $statement = $usercontroller->viewusers();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
-    <?php echo $num_rows; 
+    <?php 
     $path = $_SERVER["REQUEST_URI"];
     $url = $_SERVER['REQUEST_SCHEME'] . '://';
     $url .= $_SERVER['HTTP_HOST'];
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
-    parse_str($url_components['path'], $params);
-    print_r($url_components['path']); ?>
+    parse_str($url_components['path'], $params);?>
     <h5>Home/User Accounts</h5>
 </div>
 <div class = "usrtb">
@@ -45,7 +44,7 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <td> Num Of Users: <?php echo $num_rows; ?></td>
+            <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
         </tbody>
     </table>
 </div>
