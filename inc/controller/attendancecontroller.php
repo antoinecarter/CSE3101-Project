@@ -1,16 +1,16 @@
 <?php
 
-include_once __DIR__ . "/../model/tables/attendance.php";
+include_once __DIR__ . "/../model/tables/attendancedetails.php";
 include_once __DIR__ . "/../alert.php";
 
-class AttendanceController extends attendance
+class AttendanceController extends AttendanceDetail
 {
     private $attendanceModel;
     public $message;
 
     public function __construct()
     {
-        $this->attendanceModel = new attendance();
+        $this->attendanceModel = new AttendanceDetail();
     }
 
     public function tblattendance()

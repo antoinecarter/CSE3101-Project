@@ -153,11 +153,11 @@ Model:
             id, org_id, shift_type, shift_code, start_time, end_time, (calc)shift_hours, lunch_start, lunch_end, (calc)lunch_hours, start_date, end_date, status
         
         Timeclock
-            id, org_id, work_date, day, emp_id, shift_id, shift_hours, (computed)pay_period_id, time_in, time_out, min_time_in(checks the value inserted for time_in and compares with its own value, the lesser is saved), max_time_out(checks the value inserted for time_out and compares with its own value, the greater is saved), hours_worked, status
+            id, org_id, work_date, day, emp_id, shift_id, shift_hours, time_in, time_out, min_time_in(checks the value inserted for time_in and compares with its own value, the lesser is saved), max_time_out(checks the value inserted for time_out and compares with its own value, the greater is saved), hours_worked, status
 
         Absence
-            id, org_id, emp_id, work_date, shift_id, shift_hours, (computed)pay_period_id, status
+            id, org_id, emp_id, work_date, shift_id, shift_hours, status
         
         Lateness
-            id, org_id, emp_id, work_date, shift_id, shift_hours, timeclock_id, min_time_in, hours_deducted(compare the min_time_in to the start_time for shift)
+            id, org_id, emp_id, work_date, shift_id, shift_hours, timeclock_id, min_time_in, hours_deducted(compare the min_time_in to the start_time for shift), status
             
