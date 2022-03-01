@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $positionsModel = new PositionsController();
-$statement = $positionsModel->viewpos();
+$statement = $positionsModel->viewposs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

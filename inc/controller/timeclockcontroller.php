@@ -114,7 +114,7 @@
                 return $timeclocks;
             }
         
-            public function viewatimes()
+            public function viewtimes()
             {
                 $id =  $_SESSION['id'];
                 $role = $_SESSION['role'];

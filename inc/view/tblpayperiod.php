@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $payperiodsModel = new PayperiodsController();
-$statement = $payperiodsModel->viewpayp();
+$statement = $payperiodsModel->viewpayps();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

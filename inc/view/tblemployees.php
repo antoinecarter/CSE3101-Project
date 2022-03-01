@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $employeesModel = new EmployeesController();
-$statement = $employeesModel->viewemp();
+$statement = $employeesModel->viewemps();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

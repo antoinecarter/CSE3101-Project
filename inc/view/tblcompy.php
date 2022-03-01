@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $compyearcontroller = new CompyearController();
-$statement = $compyearcontroller->viewcompyr();
+$statement = $compyearcontroller->viewcompyrs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

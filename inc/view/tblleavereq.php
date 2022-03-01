@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $leaverequestsModel = new LeaverequestsController();
-$statement = $leaverequestsModel->viewleavreq();
+$statement = $leaverequestsModel->viewleavreqs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

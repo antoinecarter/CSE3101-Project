@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $individualsModel = new IndividualsController();
-$statement = $individualsModel->viewindv();
+$statement = $individualsModel->viewindvs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

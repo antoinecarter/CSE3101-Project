@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $worklocationsModel = new WorklocationsController();
-$statement = $worklocationsModel->viewworkl();
+$statement = $worklocationsModel->viewworkls();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

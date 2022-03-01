@@ -97,7 +97,7 @@
                 }
             }
         
-            public function viepos()
+            public function viewpos()
             {
                 
                 $url = $_SERVER['REQUEST_SCHEME'] . '://';

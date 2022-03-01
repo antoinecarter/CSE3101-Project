@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $unitsModel = new UnitsController();
-$statement = $unitsModel->viewunits();
+$statement = $unitsModel->viewunitss();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

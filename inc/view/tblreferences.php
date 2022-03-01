@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $referencesModel = new ReferencesController();
-$statement = $referencesModel->viewref();
+$statement = $referencesModel->viewrefs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

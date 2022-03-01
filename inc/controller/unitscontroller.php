@@ -82,7 +82,7 @@
                         if ($delunits['id'] != $_SESSION['id']) {
                             if (($delunits['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->unitsModel->delete($id);
-                                $this->delunits();
+                                $this->delunit();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
