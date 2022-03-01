@@ -7,16 +7,15 @@ include __DIR__."/header.php";
     <h1>Human Resources Dashboard</h1>
 
     <div class="wrapper">
-        <div class="box a">Activity</div>
-        <div class="box b">Applicant</div>
-        <div class="box c">Apprasial</div>
-        <div class="box d">Calendar</div>
-        <div class="box e">Deduction</div>
+        <div class="box a">Departments</div>
+        <div class="box b">Organizational Structure</div>
+        <div class="box c">Units</div>
+        <div class="box d">Positions</div>
+        <div class="box e">Shifts</div>
         <div class="box f">Employee</div>
         <div class="box f">Leave</div>
-        <div class="box f">Payroll</div>
-        <div class="box f">IDEK</div>
-        <div class="box f">IDEK</div>
+        <div class="box f">References</div>
+        <div class="box f">Timeclock</div>
 
     </div>
 </div>

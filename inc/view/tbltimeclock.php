@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $timeclocksModel = new TimeclocksController();
-$statement = $timeclocksModel->viewtime();
+$statement = $timeclocksModel->viewtimes();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

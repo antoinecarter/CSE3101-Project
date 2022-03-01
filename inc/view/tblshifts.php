@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $shiftsModel = new ShiftsController();
-$statement = $shiftsModel->viewshift();
+$statement = $shiftsModel->viewshifts();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

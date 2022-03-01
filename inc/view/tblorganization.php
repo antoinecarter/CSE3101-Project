@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $organizationsModel = new OrganizationsController();
-$statement = $organizationsModel->vieworg();
+$statement = $organizationsModel->vieworgs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

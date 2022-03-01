@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $salaryModel = new SalaryController();
-$statement = $salaryModel->viewsal();
+$statement = $salaryModel->viewsals();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

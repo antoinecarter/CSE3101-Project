@@ -17,9 +17,9 @@
       <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</b>
       <button class="sidebar-dr">Departments ▼</button>
       <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="./Departments">Departments</a>
+    <a href="./Units">Units</a>
+
   </div>
       <button class="sidebar-dr">HR Config ▼</button>
       <div class="dropdown-contain">
@@ -27,17 +27,10 @@
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
   </div>
-      <button class="sidebar-dr">Payroll Management ▼</button>
-      <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
       <button class="sidebar-dr">Employee Management ▼</button>
       <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+      <a href="./Employees">Employees</a>
+
   </div>
       <button class="sidebar-dr">Attendance Management ▼</button>
       <div class="dropdown-contain">
@@ -46,12 +39,6 @@
     <a href="#">Link 3</a>
   </div>
       <button class="sidebar-dr">Leave Management ▼</button>
-      <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-      <button class="sidebar-dr">Employee Management ▼</button>
       <div class="dropdown-contain">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>

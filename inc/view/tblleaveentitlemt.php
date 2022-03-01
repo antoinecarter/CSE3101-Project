@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $leaveentitlemtModel = new LeaveentitlemtController();
-$statement = $leaveentitlemtModel->viewleav();
+$statement = $leaveentitlemtModel->viewleavs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">

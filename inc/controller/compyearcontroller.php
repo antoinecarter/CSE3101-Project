@@ -13,22 +13,22 @@
                 $this->compyearModel = new compyear();
             }
 
-            public function tblcompyear()
+            public function tblcompy()
             {
                 include_once __DIR__ . "/../view/tblcompy.php";
             }
         
-            public function frmcompyear()
+            public function frmcompy()
             {
                 include_once __DIR__ . "/../view/frmcompy.php";
             }
         
-            public function edtcompyear()
+            public function edtcompy()
             {
                 include_once __DIR__ . "/../view/edtcompy.php";
             }
         
-            public function delcompyear(){
+            public function delcompy(){
                 include_once __DIR__ . "/../view/delete.php";
             }
 

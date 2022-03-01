@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $departmentsModel = new DepartmentsController();
-$statement = $departmentsModel->viewdpt();
+$statement = $departmentsModel->viewdpts();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
