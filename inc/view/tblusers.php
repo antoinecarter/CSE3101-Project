@@ -17,8 +17,15 @@ $num_rows = $statement->rowCount();
 <div class = "usrtb">
         <h2>Listing of User Accounts
         <a href="./Users/Registration"><button>Add New</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+
+
+
+        <div class="tblfx">
+     
         <table>
             <thead>
+                <tr>
                 <th>Edit</th>
                 <th>Username</th>
                 <th>Fullname</th>
@@ -26,6 +33,7 @@ $num_rows = $statement->rowCount();
                 <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
                 <th>Effective From</th>
                 <th>Effective To</th>
+                </tr>
             </thead>
             <tbody>
                 <?php
@@ -44,7 +52,7 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+            <script src="./js/script.js"></script>
         </tbody>
     </table>
 </div>
