@@ -14,7 +14,6 @@ include __DIR__."/header.php";
         <div class="box e">Shifts</div>
         <div class="box f">Employee</div>
         <div class="box f">Leave</div>
-        <div class="box f">Payroll</div>
         <div class="box f">References</div>
         <div class="box f">Timeclock</div>
 
