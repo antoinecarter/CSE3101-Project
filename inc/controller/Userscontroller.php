@@ -67,6 +67,7 @@ class UsersController extends User
                     $_SESSION['username'] = $valid['username'];
                     $_SESSION['pass'] = $valid['passcode'];
                     $_SESSION['role'] = $valid['role'];
+                    $_SESSION['org_id'] = $valid['org_id'];
                     header('Location: /CSE3101-Project/home');
                     exit();
                 } else {
@@ -86,6 +87,7 @@ class UsersController extends User
         unset($_SESSION['id']);
         unset($_SESSION['username']);
         unset($_SESSION['email']);
+        unset($_SESSION['org_id']);
         session_destroy();
         include_once __DIR__ . "/../view/login.php";
     }

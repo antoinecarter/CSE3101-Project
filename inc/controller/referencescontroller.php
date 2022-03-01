@@ -10,7 +10,7 @@
         
             public function __construct()
             {
-                $this->referencesModel = new references();
+                $this->referencesModel = new reference();
             }
         
 
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_references = new references();
+                    $new_references = new reference();
                     $new_references->set_fname($_POST['first_name']);
                     $new_references->set_lname($_POST['last_name']);
                     $new_references->set_start_date($_POST['start_date']);
@@ -83,7 +83,7 @@
                         if ($delref['id'] != $_SESSION['id']) {
                             if (($delref['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->referencesModel->delete($id);
-                                $this->delref();
+                                $this->delreferences();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -125,7 +125,7 @@
             public function updateref()
             {
             
-                    $update_ref = new references();
+                    $update_ref = new reference();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

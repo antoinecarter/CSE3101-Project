@@ -99,7 +99,7 @@ Model:
             id, org_id, first_name, last_name, email, username, passcode, employee_no, role, can_create, can_view, can_update, can_delete, can_verify, can_approve, start_date, end_date, status
             
         Individuals
-            id, org_id, first_name, surname, middle_name, maiden_name, date_of_birth, place_of_birth, date_of_marriage, place_of_marriage, email, nationality, ethnicity, status
+            id, org_id, first_name, surname, sex, date_of_birth, place_of_birth, email, nationality, ethnicity, status
 
         National Identifiers
             id, org_id, ind_id, identifier, identifier_num, start_date, end_date
@@ -117,16 +117,16 @@ Model:
             id, org_id, emp_id, rule_option, rule_value, start_date, end_date
         
         Leave Entitlement  
-            id, org_id, emp_id, leave_type, quantity, monthly_rate, (calc)leave_earn, start_date, end_date
+            id, org_id, emp_id, leave_type, quantity, monthly_rate, (calc)leave_earn, max_accumulation, start_date, end_date
         
         Leave Request
-            id, org_id, emp_id, leave_type, from_date, to_date, resumption_date, pay_period_id, approved_by, approved_date, status
+            id, org_id, emp_id, leave_type, from_date, to_date, resumption_date, approved_by, approved_date, status
         
         Leave Track 
-            id, org_id, comp_year_id, leave_req_id, emp_id, leave_type, entitled_days, leave_earned, leave_used
+            id, org_id, emp_id, comp_year_id, leave_ent_id, leave_req_id,  leave_type, entitled_days, leave_earned, leave_used
         
         Organization
-            id, org_type, short_name, full_name, address, telephone, fax, email, country, nis_reg_no, tax_reg_no, country, currency, start_date, end_date, status
+            id, org_type, short_name, full_name, address, telephone, fax, email, country, start_date, end_date, status
         
         Work Location
             id, org_id, location_code, location_desc, address, telephone, start_date, end_date, status
@@ -147,7 +147,7 @@ Model:
             id, org_id, org_struct_id, parent_dept_id, unit_code, unit_name, unit_level (+1 from parent_dept level), start_date, end_date, status
 
         Positions
-            id, org_id, unit_id, pos_code, pos_name, overview/purpose, work_location_id, org_struct_id, position_level (+1 from parent_unit level), lower_sal, upper_sal, start_date, end_date, status
+            id, org_id, org_struct_id, parent_unit_id, pos_code, pos_name, pos_level (+1 from parent_unit level), overview/purpose, work_location_id, lower_sal, upper_sal, start_date, end_date, status
 
         Shifts
             id, org_id, shift_type, shift_code, start_time, end_time, (calc)shift_hours, lunch_start, lunch_end, (calc)lunch_hours, start_date, end_date, status

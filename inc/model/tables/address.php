@@ -1,21 +1,20 @@
 <?php
     include_once __DIR__."/../Database.php";
     include_once __DIR__."/interface.php";
-
-    class Organization implements crud {
+    
+    class Address implements crud {
 
         private $id;
-        private $org_type;
-        private $short_name;
-        private $full_name;
-        private $address;
-        private $telephone;
-        private $fax;
-        private $email;
+        private $org_id;
+        private $ind_id;
+        private $address_type;
+        private $lot;
+        private $address_line1;
+        private $address_line2;
+        private $address_line3;
         private $country;
         private $start_date;
         private $end_date;
-        private $status;
 
         protected $connection;
 
@@ -35,17 +34,16 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO organization(org_type, short_name, full_name, address, telephone, fax, email, country, status, start_date) 
-                                                VALUES (:org_type, :short_name, :full_name, :address, :telephone, :fax, :email, :country, :status, :start_date)");
-                $this->connection->bind(':org_type', $this->org_type);
-                $this->connection->bind(':short_name',$this->short_name);
-                $this->connection->bind(':full_name',$this->full_name);
-                $this->connection->bind(':address',$this->address);
-                $this->connection->bind(':telephone',$this->telephone);
-                $this->connection->bind(':fax',$this->fax);
-                $this->connection->bind(':email',$this->email);
+                $this->connection->query("INSERT INTO addresses(org_id, ind_id, address_type, lot, address_line1, address_line2, address_line3, country, start_date) 
+                                                VALUES (:org_id, :ind_id, :address_type, :lot, :address_line1, :address_line2, :address_line3, :country, :start_date)");
+                $this->connection->bind(':org_id', $this->org_id);
+                $this->connection->bind(':ind_id',$this->ind_id);
+                $this->connection->bind(':address_type',$this->address_type);
+                $this->connection->bind(':lot',$this->lot);
+                $this->connection->bind(':address_line1',$this->address_line1);
+                $this->connection->bind(':address_line2',$this->address_line2);
+                $this->connection->bind(':address_line3',$this->address_line3);
                 $this->connection->bind(':country',$this->country);
-                $this->connection->bind(':status',$this->status);
                 $this->connection->bind(':start_date',$this->start_date);
                 $this->connection->execute();
                 
@@ -59,34 +57,34 @@
         public function update($id, $d)
         {
             if($d['end_date'] == null){
-                $this->connection->query("UPDATE organization SET end_date = NULL where id = :id");
+                $this->connection->query("UPDATE addresses SET end_date = NULL where id = :id");
                 $this->connection->bind(':id', $id);
                 $this->connection->execute();
             }else{
-                $this->connection->query("UPDATE organization SET end_date = :end_date where id = :id");
+                $this->connection->query("UPDATE addresses SET end_date = :end_date where id = :id");
                 $this->connection->bind(':id', $id);
                 $this->connection->bind(':end_date', $this->remove_errors(date('Y-m-d', strtotime($d['end_date']))));
                 $this->connection->execute();
             }
-            $this->connection->query("UPDATE organization 
+            $this->connection->query("UPDATE addresses 
                                     SET 
-                                        org_type = :org_type, short_name = :short_name, full_name = :full_name, 
-                                        address = :address, telephone = :telephone,  fax = :fax, email = :email, 
-                                        country = :country, start_date = :start_date, status = :status
+                                        org_id = :org_id, ind_id = :ind_id, address_type = :address_type, 
+                                        lot = :lot,  address_line1 = :address_line1, address_line2 = :address_line2, 
+                                        address_line3 = :address_line3, country = :country, start_date = :start_date
                                     WHERE
                                         id = :id");
         
             $this->connection->bind(':id', $id);
-            $this->connection->bind(':org_type', $this->remove_errors($d['org_type']));
-            $this->connection->bind(':short_name', $this->remove_errors($d['short_name']));
-            $this->connection->bind(':full_name', $this->remove_errors($d['full_name']));
-            $this->connection->bind(':address', $this->remove_errors($d['address']));
-            $this->connection->bind(':telephone', $this->remove_errors($d['telephone']));
-            $this->connection->bind(':fax', $this->remove_errors($d['fax']));
-            $this->connection->bind(':email', $this->remove_errors($d['email']));
+            $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
+            $this->connection->bind(':ind_id', $this->remove_errors($d['ind_id']));
+            $this->connection->bind(':address_type', $this->remove_errors($d['address_type']));
+            $this->connection->bind(':lot', $this->remove_errors($d['lot']));
+            $this->connection->bind(':address_line1', $this->remove_errors($d['address_line1']));
+            $this->connection->bind(':address_line2', $this->remove_errors($d['address_line2']));
+            $this->connection->bind(':address_line3', $this->remove_errors($d['address_line3']));
             $this->connection->bind(':country', $this->remove_errors($d['country']));
             $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
-            $this->connection->bind(':status', $this->remove_errors($d['status']));
+
 
             try{
                 $this->connection->execute();
@@ -99,7 +97,7 @@
 
         public function delete($id)
         {
-            $this->connection->query( "DELETE FROM organization WHERE id= :id");
+            $this->connection->query( "DELETE FROM addresses WHERE id= :id");
             $this->connection->bind(':id', $id);
             try{
                 $this->connection->execute();
@@ -113,21 +111,23 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM organization");
+                $this->connection->query("SELECT * FROM addresses");
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
         }
 
-        public function findOrg(){
-            $this->connection->query("SELECT id, full_name FROM organization WHERE org_type = 'APP_USER'");
+        public function findAddress($ind_id, $org_id){
+            $this->connection->query('SELECT id, CONCAT(address_type, ": Lot ", lot, " ",address_line1, ", ", address_line2, ", ", country) as address FROM addresses WHERE org_id = :org_id and ind_id = :ind_id');
+            $this->connection->bind(':org_id', $org_id);
+            $this->connection->bind(':ind_id', $ind_id);
             $statement = $this->connection->getStatement();
             $row = $statement->fetch(PDO::FETCH_ASSOC);
             return $row;
         }
 
-        public function getOrgById($id){
-            $this->connection->query('SELECT * FROM organization WHERE id = :id');
+        public function getAddressById($id){
+            $this->connection->query('SELECT * FROM addresses WHERE id = :id');
             $this->connection->bind(':id', $id);
             $row = $this->connection->getStatement();
     
@@ -153,31 +153,35 @@
         }
 
         public function get_org_id(){
-            return $this->org_type;
+            return $this->org_id;
         }
 
-        public function get_short_name(){
-            return $this->short_name;
+        public function get_ind_id(){
+            return $this->ind_id;
         }
 
-        public function get_full_name(){
-            return $this->full_name;
+        public function get_address_type(){
+            return $this->address_type;
         }
 
         public function get_address(){
             return $this->address;
         }
 
-        public function get_telephone(){
-            return $this->telephone;
+        public function get_lot(){
+            return $this->lot;
         }
 
-        public function get_fax(){
-            return $this->fax;
+        public function get_address_line1(){
+            return $this->address_line1;
         }
 
-        public function get_email(){
-            return $this->email;
+        public function get_address_line2(){
+            return $this->address_line2;
+        }
+
+        public function get_address_line3(){
+            return $this->address_line3;
         }
 
         public function get_country(){
@@ -192,40 +196,40 @@
             return $this->end_date;
         }
 
-        public function get_status(){
-            return $this->status;
-        }
-
         public function set_id($id){
             return $this->id = $id;
         }
 
-        public function set_org_type($org_type){
-            return $this->org_type = $org_type;
+        public function set_org_id($org_id){
+            return $this->org_id = $org_id;
         }
 
-        public function set_short_name($short_name){
-            return $this->short_name = $short_name;
+        public function set_ind_id($ind_id){
+            return $this->ind_id = $ind_id;
         }
 
-        public function set_full_name($full_name){
-            return $this->full_name = $full_name;
+        public function set_address_type($address_type){
+            return $this->address_type = $address_type;
         }
 
         public function set_address($address){
             return $this->address = $address;
         }
 
-        public function set_telephone($telephone){
-            return $this->telephone = $telephone;
+        public function set_lot($lot){
+            return $this->lot = $lot;
         }
 
-        public function set_fax($fax){
-            return $this->fax = $fax;
+        public function set_address_line1($address_line1){
+            return $this->address_line1 = $address_line1;
         }
 
-        public function set_email($email){
-            return $this->email = $email;
+        public function set_address_line2($address_line2){
+            return $this->address_line2 = $address_line2;
+        }
+
+        public function set_address_line3($address_line3){
+            return $this->address_line3 = $address_line3;
         }
 
         public function set_country($country){
@@ -239,8 +243,6 @@
             return $this->end_date = $end_date;
         }
 
-        public function set_status($status){
-            return $this->status = $status;
-        }
+        
     }
 ?>

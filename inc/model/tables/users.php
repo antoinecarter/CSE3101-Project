@@ -177,24 +177,6 @@
                 echo $message->getMessage();
             }         
         }
-        /*
-        public function deleteuser($id)
-        {
-            $this->connection->query( "DELETE FROM users WHERE id= :id");
-            $this->connection->bind(':id', $id);
-                if($this->connection->execute()){
-                    return true;
-                }else{
-                    return false;
-                }
-            try{
-                //$statement = $this->connection->prepare($sql);
-                //$statement->execute(['id'=> $id]);
-                header('Location: ');
-            }catch(PDOException $message){
-                echo $message->getMessage();
-            }         
-        }*/
 
         public function view($role, $id)
         {
@@ -215,9 +197,10 @@
             $this->connection->query("SELECT * FROM users WHERE email = :email LIMIT 1");
             $this->connection->bind(':email', $email);
 
-            $row = $this->connection->record();
-
+            $statement = $this->connection->getStatement();
+            
             if($this->connection->rowCount()>0){
+                $row = $statement->fetch(PDO::FETCH_ASSOC);
                 return $row;
             }else{
                 return false;
@@ -262,7 +245,7 @@
             return $this->id;
         }
 
-        public function get_ord_id(){
+        public function get_org_id(){
             return $this->org_id;
         }
 
@@ -328,6 +311,10 @@
 
         public function get_status(){
             return $this->status;
+        }
+
+        public function set_org_id($org_id){
+            return $this->org_id = $org_id;
         }
 
         public function set_fname($fname){
