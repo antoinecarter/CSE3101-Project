@@ -1,14 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Lato&family=Merriweather&family=Noto+Sans+Mono&family=Open+Sans&family=Poppins&display=swap');
 body {
     margin: 0;
     padding: 0;
-    background-color: lightblue;
-    font-family: src url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Lato&family=Merriweather&family=Noto+Sans+Mono&family=Open+Sans&family=Poppins&display=swap');
+    background-color: #32375e;
 }
 
 .login {
     width: 320px;
     height: 420px;
-    background: #000;
+    background: #11132b;
     color: #fff;
     top: 50%;
     left: 50%;
@@ -62,9 +62,9 @@ input[type="password"] {
 .home h1 {
     font-size: 40px;
     text-align: center;
-    border: 4px solid rgb(6, 57, 88);
+    border: 4px solid #15172b;
     color: white;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     margin: 0px 350px 0px 350px;
     border-radius: 40px 40px 40px 40px;
     border: #fff solid;
@@ -126,7 +126,7 @@ a {
     position: fixed;
     align-items: center;
     top: 0px;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     border-radius: 33px 0px 33px 0px;
     border: 2px solid rgb(255, 255, 255);
 }
@@ -149,7 +149,7 @@ a {
 }
 
 .topnav_button a:hover {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     border-radius: 30px 0px 30px 0px;
 }
 
@@ -185,7 +185,7 @@ a {
 .dropmenu-content {
     display: none;
     position: fixed;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     z-index: 1;
 }
 
@@ -199,13 +199,13 @@ a {
 }
 
 .dropmenu:hover .dropbb {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     color: white;
     border-radius: 30px 0px 30px 0px;
 }
 
 .dropmenu-content a:hover {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     color: rgb(255, 255, 255);
 }
 
@@ -225,7 +225,7 @@ a {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -236,7 +236,7 @@ a {
     margin: 38px 8px 18px 22px;
     text-decoration: none;
     color: #ffffff;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     display: block;
     transition: 0.3s;
     border: none;
@@ -247,19 +247,19 @@ a {
 }
 
 .sidebar-dr:hover {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     border-radius: 30px 0px 30px 0px;
     padding-bottom: 30px;
 }
 
 .active {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     border-radius: 30px 0px 30px 0px;
 }
 
 .dropdown-contain {
     display: none;
-    background-color: rgb(27, 106, 155);
+    background-color: #32375e;
     margin-left: 5px;
     margin-right: 5px;
     text-align: left;
@@ -276,7 +276,7 @@ a {
 }
 
 .dropdown-contain a:hover {
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     border-radius: 30px 0px 30px 0px;
     padding-bottom: 30px;
 }
@@ -292,7 +292,7 @@ a {
 }
 
 .sidebar b:hover {
-    background-color: rgb(53, 100, 145);
+    background-color: #32375e;
     border-radius: 30px 30px 30px 30px;
 }
 
@@ -307,14 +307,14 @@ a {
 .openbtn {
     font-size: 10px;
     cursor: pointer;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: rgb(255, 255, 255);
     padding: 10px 15px;
     border: 3px solid rgb(255, 255, 255);
 }
 
 .openbtn:hover {
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
 }
 
 #main {
@@ -343,7 +343,7 @@ a {
 
 .box {
     width: 200px;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: #fff;
     border-radius: 5px;
     font-size: 150%;
@@ -355,42 +355,12 @@ a {
     border-left: 3px solid rgb(0, 0, 0);
 }
 
-.tble {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border-radius: 0.2rem;
-}
-
-table {
-    border-collapse: collapse;
-    box-shadow: 0 5px 10px black;
-    text-align: center;
-    overflow: hidden;
-}
-
-thead {
-    box-shadow: 0 5px 10px gray;
-}
-
-th {
-    padding: 1rem 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-size: 0.7rem;
-    font-weight: 900;
-}
-
-td {
-    padding: 1rem 2rem;
-}
-
 .breadcrumb {
     margin-top: 80px;
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: white;
     margin-left: 450px;
     padding-top: 12px;
@@ -413,7 +383,7 @@ td {
 }
 
 .usrtb button {
-    background-color: rgb(53, 100, 145);
+    background-color: #cbce0b;
     text-align: center;
     color: #fff;
     border: 1px solid #ffffff;
@@ -436,51 +406,181 @@ td {
 
 .usrtb {
     margin-top: 50px;
+    margin-bottom: 50px;
     margin-left: 120px;
     margin-right: 105px;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: white;
     display: block;
-    border: 1px #000 solid;
+    border: 4px rgb(255, 255, 255) solid;
+    border-radius: 7px 7px 7px 7px;
+}
+
+.tblfx {
+    overflow-y: auto;
+    height: 400px;
+    display: flex;
+}
+
+.tblfx thead th {
+    position: sticky;
+    top: 0;
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    background-color: #15172b;
+    background: #15172b;
+}
+
+.tblfx table {
+    border-collapse: separate;
+    width: 100%;
+    height: 550px;
+}
+
+.tblfx td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
 }
 
 .form-usr {
-    width: 550px;
+    width: 1100px;
     margin-top: 120px;
     text-align: center;
-    margin-left: 420px;
+    margin-left: 140px;
     margin-right: 305px;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: white;
     display: block;
-    border: 1px #000 solid;
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: bold;
     border-radius: 30px 30px 30px 30px;
-    border: 10px rgb(247, 247, 247) solid
+    border: 7px rgb(247, 247, 247) solid
+}
+
+.form-usr p label {
+    align-items: center;
+    margin-bottom: 1000px;
 }
 
 .form-usr h2 {
     margin-bottom: 50px;
     font-size: 40px;
+    text-decoration: underline;
 }
 
-.form-usr p input[type="text"],
-input[type="password"] input[type="date"] {
-    height: 40px;
+.form-usr h3 {
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.form-usr span {
+    font-size: 17px;
+    text-align: left;
+    padding-left: 130px;
+    padding-right: 67px;
+    margin-right: 80px;
+}
+
+.form-usr span1 {
+    font-size: 17px;
+    text-align: left;
+    padding-left: 100px;
+    margin-right: 150px;
+}
+
+.form-usr p input[type="date"] {
+    margin-top: 0px;
+    font-weight: bold;
+    width: 300px;
+    height: 37px;
     padding-left: 12px;
-    font-size: 20px;
+    margin-left: 22px;
+    font-size: 17px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.form-usr p input[type="text"] {
+    width: 300px;
+    height: 37px;
+    padding-left: 32px;
+    margin-top: 0px;
+    font-size: 17px;
+    margin-left: 13px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.form-usr p input[type="password"] {
+    width: 300px;
+    height: 37px;
+    margin-right: 22px;
+    padding-left: 32px;
+    margin-top: 0px;
+    font-size: 17px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.form-usr p input[placeholder="Enter First Name"],
+input[placeholder="Enter First Name"],
+input[placeholder="Enter Last Name"],
+input[placeholder="Enter Username"],
+input[placeholder="Enter Email"],
+input[placeholder="Enter Passcode"],
+input[placeholder=" Enter Employee No."],
+input[placeholder=" Enter Organization"] {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-decoration-color: #e2e2e2;
+}
+
+.form-usr p input:focus {
+    outline: 0;
+    border: 2px solid #149e1b;
 }
 
 .form-usr select {
+    font-size: 17px;
+    text-align: center;
+    padding-left: 20px;
+    margin-right: 20px;
     width: 300px;
     height: 40px;
-    text-align: center;
-    font-size: 20px;
     color: #fff;
-    background-color: rgb(53, 100, 145);
-    border-radius: 30px 30px 30px 30px;
+    background-color: #32375e;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.form-usr select:focus {
+    outline: 0;
+    border: 2px solid #149e1b;
 }
 
 .form-usr select:hover {
@@ -492,9 +592,9 @@ input[type="password"] input[type="date"] {
 .form-usr input {
     width: 400px;
     margin-bottom: 20px;
+    margin-top: 20px;
     margin-left: 50px;
     margin-right: 50px;
-    border-radius: 7.25rem;
     font-size: 20px;
     padding-left: 30px;
 }
@@ -512,6 +612,17 @@ input[type="password"] input[type="date"] {
     border: 1px solid #ffffff;
     border-color: #28a745;
     font-weight: bold;
+    border-radius: 30px 30px 30px 30px;
+    -webkit-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-usr button:focus {
+    outline: 0;
+    border: 2px solid #ffffff;
 }
 
 .form-usr button:hover {
@@ -525,7 +636,7 @@ input[type="password"] input[type="date"] {
     font-weight: bold;
     margin-top: 50px;
     text-align: center;
-    background-color: #e52342;
+    background-color: #0ba6c2;
     color: white;
     margin-left: 74px;
     height: 50px;
@@ -534,42 +645,144 @@ input[type="password"] input[type="date"] {
 }
 
 .edit-usr {
-    width: 550px;
+    width: 1100px;
     margin-top: 120px;
     text-align: center;
-    margin-left: 420px;
+    margin-left: 140px;
     margin-right: 305px;
-    background-color: rgb(6, 57, 88);
+    background-color: #15172b;
     color: white;
     display: block;
-    border: 1px #000 solid;
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: bold;
     border-radius: 30px 30px 30px 30px;
-    border: 10px rgb(247, 247, 247) solid
+    border: 7px rgb(247, 247, 247) solid
+}
+
+.edit-usr p label {
+    align-items: center;
+    margin-bottom: 1000px;
 }
 
 .edit-usr h2 {
     margin-bottom: 50px;
     font-size: 40px;
+    text-decoration: underline;
 }
 
-.edit-usr p input[type="text"],
-input[type="password"] input[type="date"] {
-    height: 40px;
+.edit-usr h3 {
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.edit-usr span {
+    font-size: 17px;
+    text-align: left;
+    padding-left: 130px;
+    padding-right: 67px;
+    margin-right: 80px;
+}
+
+.edit-usr span1 {
+    font-size: 17px;
+    text-align: left;
+    padding-left: 100px;
+    margin-right: 150px;
+}
+
+.edit-usr p input[type="date"] {
+    margin-top: 0px;
+    font-weight: bold;
+    width: 300px;
+    height: 37px;
     padding-left: 12px;
-    font-size: 20px;
+    margin-left: 22px;
+    font-size: 17px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.edit-usr p input[type="text"] {
+    width: 300px;
+    height: 37px;
+    padding-left: 32px;
+    margin-top: 0px;
+    font-size: 17px;
+    margin-left: 13px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.edit-usr p input[type="password"] {
+    width: 300px;
+    height: 37px;
+    margin-right: 22px;
+    padding-left: 32px;
+    margin-top: 0px;
+    font-size: 17px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.edit-usr p input[placeholder="Enter First Name"],
+input[placeholder="Enter First Name"],
+input[placeholder="Enter Last Name"],
+input[placeholder="Enter Username"],
+input[placeholder="Enter Email"],
+input[placeholder="Enter Passcode"],
+input[placeholder=" Enter Employee No."],
+input[placeholder=" Enter Organization"] {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-decoration-color: #e2e2e2;
+}
+
+.edit-usr p input:focus {
+    outline: 0;
+    border: 2px solid #149e1b;
 }
 
 .edit-usr select {
+    font-size: 17px;
+    text-align: center;
+    padding-left: 20px;
+    margin-right: 20px;
     width: 300px;
     height: 40px;
-    text-align: center;
-    font-size: 20px;
     color: #fff;
-    background-color: rgb(53, 100, 145);
-    border-radius: 30px 30px 30px 30px;
+    background-color: #32375e;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.edit-usr select:focus {
+    outline: 0;
+    border: 2px solid #149e1b;
 }
 
 .edit-usr select:hover {
@@ -581,9 +794,9 @@ input[type="password"] input[type="date"] {
 .edit-usr input {
     width: 400px;
     margin-bottom: 20px;
+    margin-top: 20px;
     margin-left: 50px;
     margin-right: 50px;
-    border-radius: 7.25rem;
     font-size: 20px;
     padding-left: 30px;
 }
@@ -591,16 +804,27 @@ input[type="password"] input[type="date"] {
 .edit-usr button {
     width: 200px;
     height: 50px;
-    margin-bottom: 7px;
-    margin-top: 7px;
+    margin-bottom: 20px;
+    margin-top: 40px;
     border-radius: 7.25rem;
     font-size: 20px;
     text-align: center;
     color: #fff;
     background-color: #28a745;
-    border-color: #28a745;
     border: 1px solid #ffffff;
+    border-color: #28a745;
     font-weight: bold;
+    border-radius: 30px 30px 30px 30px;
+    -webkit-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.edit-usr button:focus {
+    outline: 0;
+    border: 2px solid #ffffff;
 }
 
 .edit-usr button:hover {
@@ -608,3 +832,5 @@ input[type="password"] input[type="date"] {
     cursor: pointer;
     opacity: 0.9;
 }
+
+//Top

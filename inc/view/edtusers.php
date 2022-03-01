@@ -21,43 +21,49 @@
             <label for="id"></label>
             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             </p>
+            <span1>First Name </span1>                                                   
+            <span1>Last Name</span1>
+            <span1>Email </span1> 
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
+            <label for="first_name"></label>
+            <input type="text" name="first_name" placeholder="Enter First Name" value="<?php echo $row['first_name']; ?>" required>
+            
+            <label for="last_name"></label>
+            <input type="text" name="last_name" placeholder="Enter Last Name" value="<?php echo $row['last_name']; ?>"required>
+
+            <label for="email"></label>
+            <input type="text" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>" required>
             </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
-           </p>
-           <p>
-            <label for="passcode">Password</label>
+                                                              
+            <span>Username</span>
+            <span>Password</span>  
+            <p>
+           
+            <label for="username"></label>
+            <input type="text" name="username" placeholder="Enter Username" value="<?php echo $row['username']; ?>" required>
+ 
+            <label for="passcode"></label>
             <input type="password" name="passcode">
            </p>
+           <span>Effective From</span>
+            <span>Effective To</span>
            <p>
-            <label for="role">Role</label>
+            <label for="start_date"></label>
+            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+       
+            <label for="end_date"></label>
+            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+            </p>
+            <span>Role</span>
+            <span>Status</span>
+            <p>
+            <label for="role"></label>
             <select name="role" id="" required>
                 <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
                 <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
             </select>
-            </p>
-           <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="status">Status</label>
+ 
+            <label for="status"></label>
             <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
                 <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
                 <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
@@ -69,51 +75,55 @@
         <div style="height:100px;"></div>
         <?php if($_SESSION['role'] == 'ADMIN'){ ?>
         <div>
+        <span>Organization</span>
+            <span>Employee No.</span>
             <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
+            <label for="org_id"></label>
+            <input type="text" placeholder=" Enter Organization" name="org_id">
+
+            <label for="emp_no"></label>
+            <input type="text" placeholder=" Enter Employee No." name="emp_no">
             </p>
+            <span>Can Create</span>
+            <span>Can View</span>
+            <span>Can Update</span>
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-           <p>
-            <label for="can_create">Can Create</label>
+            <label for="can_create"></label>
             <select name="can_create" id="">
                 <option value="1" <?php if($row['can_create'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_create'] == 0){?>selected <?php } ?>>No</option>
             </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
+    
+            <label for="can_view"></label>
             <select name="can_view" id="">
                 <option value="1" <?php if($row['can_view'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_view'] == 0){?>selected <?php } ?>>No</option>
             </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
+
+            <label for="can_update"></label>
             <select name="can_update" id="">
                 <option value="1" <?php if($row['can_update'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_update'] == 0){?>selected <?php } ?>>No</option>
             </select>
             </p>
+
+            <span>Can Delete</span>
+            <span>Can Verify</span>
+            <span>Can Approve</span>
            <p>
-            <label for="can_delete">Can Delete</label>
+            <label for="can_delete"></label>
             <select name="can_delete" id="">
                 <option value="1" <?php if($row['can_delete'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_delete'] == 0){?>selected <?php } ?>>No</option>
             </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
+
+            <label for="can_verify"></label>
             <select name="can_verify" id="">
                 <option value="1" <?php if($row['can_verify'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_verify'] == 0){?>selected <?php } ?>>No</option>
             </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
+
+            <label for="can_approve"></label>
             <select name="can_approve" id="">
                 <option value="1" <?php if($row['can_approve'] == 1){?>selected <?php } ?>>Yes</option>
                 <option value="0" <?php if($row['can_approve'] == 0){?>selected <?php } ?>>No</option>
@@ -132,7 +142,7 @@
     <?php } ?>
     <div>
                 
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Users" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
     </div>

@@ -17,6 +17,8 @@ $num_rows = $statement->rowCount();
 <div class = "usrtb">
         <h2>Listing of shift
         <a href="./Users/Registration"><button>Add New</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
