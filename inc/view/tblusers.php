@@ -35,7 +35,9 @@ $num_rows = $statement->rowCount();
                 <th>Effective To</th>
                 </tr>
             </thead>
+            </div>
             <tbody>
+
                 <?php
                     if($num_rows == 0){
                         echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';

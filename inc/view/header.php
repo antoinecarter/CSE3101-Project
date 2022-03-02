@@ -54,6 +54,7 @@
     <div>
 
     </div>
+    </div>
 
 
     <a href="./home" class="cur_user"> HMRIS </a>

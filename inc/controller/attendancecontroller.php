@@ -42,7 +42,12 @@ class AttendanceController extends AttendanceDetail
             if (empty($_POST['org_id'])) {
                 $message = 'Please enter Organization ID';
                 return $message;
-            }
+            }  else {
+                if ($this->attendanceModel->findAttDtl($_POST['org_id'], $_POST['id'])) {
+                    $message = 'Organization already exist';
+                    return $message;
+                }
+            } 
 
             if (empty($_POST['emp_id'])) {
                 $message = 'Please enter Employee ID';
@@ -141,8 +146,9 @@ class AttendanceController extends AttendanceDetail
                 'id'            => $_REQUEST['id'],
                 'org_id'        => $_REQUEST['org_id'],
                 'start_date'    => $_REQUEST['start_date'],
+                'end_date'        => $_REQUEST['end_date'],
                 'role'            => $_REQUEST['role'],
-                'emp_no'        => $_REQUEST['emp_no'],
+                'emp_id'        => $_REQUEST['emp_id'],
                 'rule_option'        => $_REQUEST['rule_option'],
                 'rule_value'        => $_REQUEST['rule_value']
 

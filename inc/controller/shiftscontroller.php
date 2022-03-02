@@ -41,28 +41,71 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmshifts.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter orginazation id';
+                        return $message;
+                    }
+
+                    if (empty($_POST['shift_type'])) {
+                        $message = 'Please input shift typed';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['shift_code'])) {
+                        $message = 'Please input shift code';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['start_time'])) {
+                        $message = 'Please input start time';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['end_time'])) {
+                        $message = 'Please input end time';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['lunch_start'])) {
+                        $message = 'Please input lunch start';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['lunch_end'])) {
+                        $message = 'Please input lunch end';
                         return $message;
                     }
         
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date attented';
+                        $message = 'Please input start date';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
+                        return $message;
+                    }
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
                         return $message;
                     }
         
                     $new_shifts = new Shift();
-                    $new_shifts->set_fname($_POST['first_name']);
-                    $new_shifts->set_lname($_POST['last_name']);
+                    $new_shifts->set_org_id($_POST['org_id']);
+                    $new_shifts->set_shift_type($_POST['shift_type']);
+                    $new_shifts->set_shift_code($_POST['shift_code']);
+                    $new_shifts->set_start_time($_POST['start_time']);
+                    $new_shifts->set_end_time($_POST['end_time']);
+                    $new_shifts->set_lunch_start($_POST['lunch_start']);
+                    $new_shifts->set_lunch_end($_POST['lunch_end']);
                     $new_shifts->set_start_date($_POST['start_date']);
+                    $new_shifts->set_end_date($_POST['end_date']);
+                    $new_shifts->set_status($_POST['status']);
                     $new_shifts->create();
                     $message = 'shifts Created';
                     return $message;
+
             }
             }
         
@@ -84,7 +127,7 @@
                         if ($delshift['id'] != $_SESSION['id']) {
                             if (($delshift['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->shiftsModel->delete($id);
-                                $this->delshift();
+                                $this->delshifts();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -129,12 +172,15 @@
                     $update_shift = new Shift();
                     $d = array(
                         'id'            => $_REQUEST['id'],
-                        'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'shift_type'        => $_REQUEST['shift_type'],
+                        'shift_code'     => $_REQUEST['shift_code'],
+                        'start_time'     => $_REQUEST['start_time'],
+                        'end_time'    => $_REQUEST['end_time'],
+                        'lunch_start'            => $_REQUEST['lunch_start'],
+                        'lunch_end'            => $_REQUEST['lunch_end'],
+                        'start_date'            => $_REQUEST['start_date'],
+                        'end_date'            => $_REQUEST['end_date'],
+                        'status'            => $_REQUEST['status']
         
                     );
                     $message = $update_shift->update($d['id'], $d);

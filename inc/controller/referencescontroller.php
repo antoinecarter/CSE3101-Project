@@ -40,24 +40,60 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmreferences.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter org id';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['table_name'])) {
+                        $message = 'Please input table name';
                         return $message;
                     }
+        
+        
+                    if (empty($_POST['table_desc'])) {
+                        $message = 'Please input table desc';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['table_value'])) {
+                        $message = 'Please input table value';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['value_desc'])) {
+                        $message = 'Please input value desc';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
+                        return $message;
+                    }
+        
         
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date attented';
+                        $message = 'Please input start date';
                         return $message;
                     }
         
                     $new_references = new Reference();
-                    $new_references->set_fname($_POST['first_name']);
-                    $new_references->set_lname($_POST['last_name']);
+                    $new_references->set_org_id($_POST['org_id']);
+                    $new_references->set_table_name($_POST['table_name']);
+                    $new_references->set_table_desc($_POST['table_desc']);
+                    $new_references->set_table_value($_POST['table_value']);
+                    $new_references->set_value_desc($_POST['value_desc']);
+                    $new_references->set_end_date($_POST['end_date']);
+                    $new_references->set_status($_POST['status']);
                     $new_references->set_start_date($_POST['start_date']);
                     $new_references->create();
                     $message = 'references Created';
@@ -129,11 +165,13 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'table_name'     => $_REQUEST['table_name'],
+                        'table_desc'     => $_REQUEST['table_desc'],
+                        'table_value'    => $_REQUEST['table_value'],
+                        'value_desc'            => $_REQUEST['value_desc'],
+                        'end_date'            => $_REQUEST['end_date'],
+                        'status'            => $_REQUEST['status'],
+                        'start_date'        => $_REQUEST['start_date']
         
                     );
                     $message = $update_ref->update($d['id'], $d);

@@ -39,28 +39,46 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmacompy.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter Organization Id';
+                        return $message;
+                    }else {
+                        if ($this->compyearModel->findCompYear($_POST['org_id'])) {
+                            $message = 'Username already exist';
+                            return $message;
+                        }
+                    }
+        
+                    if (empty($_POST['year'])) {
+                        $message = 'Please enter year';
+                        return $message;
+                    }
+
+                    if (empty($_POST['start_year'])) {
+                        $message = 'Please enter year';
+                        return $message;
+                    }
+                    
+                    if (empty($_POST['end_year'])) {
+                        $message = 'Please enter year';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
-                        return $message;
-                    }
-        
-                    if (empty($_POST['start_date'])) {
-                        $message = 'Please input date Year';
+                    if (empty($_POST['payment_frequency'])) {
+                        $message = 'Please input payment';
                         return $message;
                     }
         
                     $new_compyear = new Compyear();
-                    $new_compyear->set_fname($_POST['first_name']);
-                    $new_compyear->set_lname($_POST['last_name']);
-                    $new_compyear->set_start_date($_POST['start_date']);
+                    $new_compyear->set_org_id($_POST['org_id']);
+                    $new_compyear->set_year($_POST['year']);
+                    $new_compyear->set_start_year($_POST['start_year']);
+                    $new_compyear->set_end_year($_POST['end_year']);
+                    $new_compyear->set_payment_frequency($_POST['payment_frequency']);
                     $new_compyear->create();
                     $message = 'Company Year Created';
                     return $message;
+
             }
             }
         
@@ -77,12 +95,12 @@
                             parse_str($url_components['query'], $params);
                         }
                         $id = $params['id'];
-                        $statement = $this->compyearModel->getCompyrById($id);
+                        $statement = $this->compyearModel->getCompYearById($id);
                         $delcompyr = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($delcompyr['id'] != $_SESSION['id']) {
                             if (($delcompyr['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->compyearModel->delete($id);
-                                $this->delcompyr();
+                                $this->delcompy();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -108,7 +126,7 @@
                     parse_str($url_components['query'], $params);
                 };
                 $id = $params['id'];
-                $compyear = $this->compyearModel->getCompyrById($id);
+                $compyear = $this->compyearModel->getCompYearById($id);
                 return $compyear;
             }
         
@@ -128,12 +146,12 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no'],
-        
+                        'year'     => $_REQUEST['year'],
+                        'start_year'     => $_REQUEST['start_year'],
+                        'end_year'    => $_REQUEST['end_year'],
+                        'payment_frequency'    => $_REQUEST['payment_frequency'],
+                        'role'            => $_REQUEST['role']
+   
                     );
                     $message = $update_compyr->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtcompy.php";

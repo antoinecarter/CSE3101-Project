@@ -40,27 +40,81 @@
                     if ($method == "GET") {
                         include_once __DIR__ . "/../view/frmindividuals.php";
                     } else {
+                        if (empty($_POST['org_id'])) {
+                            $message = 'Please enter Orginazation id';
+                            return $message;
+                        }else {
+                            if ($this->individualsModel->findIndividual($_POST['org_id'])) {
+                                $message = 'Username already exist';
+                                return $message;
+                            }
+                        }
+            
                         if (empty($_POST['first_name'])) {
-                            $message = 'Please enter First name';
+                            $message = 'Please enter first name';
                             return $message;
                         }
             
-                        if (empty($_POST['last_name'])) {
-                            $message = 'Please enter Last name';
+                        if (empty($_POST['surname'])) {
+                            $message = 'Please input surname ';
                             return $message;
                         }
             
-                        if (empty($_POST['start_date'])) {
-                            $message = 'Please input date ';
+            
+                        if (empty($_POST['sex'])) {
+                            $message = 'Please input sex ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['date_of_birth'])) {
+                            $message = 'Please input date of birth ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['place_of_birth'])) {
+                            $message = 'Please input place of birth ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['email'])) {
+                            $message = 'Please input email ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['nationality'])) {
+                            $message = 'Please input nationality ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['ethnicity'])) {
+                            $message = 'Please input ethnicity ';
+                            return $message;
+                        }
+            
+            
+                        if (empty($_POST['status'])) {
+                            $message = 'Please input status ';
                             return $message;
                         }
             
                         $new_individuals = new Individual();
-                        $new_individuals->set_fname($_POST['first_name']);
-                        $new_individuals->set_lname($_POST['last_name']);
-                        $new_individuals->set_start_date($_POST['start_date']);
+                        $new_individuals->set_org_id($_POST['org_id']);
+                        $new_individuals->set_first_name($_POST['first_name']);
+                        $new_individuals->set_surname($_POST['surname']);
+                        $new_individuals->set_sex($_POST['sex']);
+                        $new_individuals->set_date_of_birth($_POST['date_of_birth']);
+                        $new_individuals->set_place_of_birth($_POST['place_of_birth']);
+                        $new_individuals->set_email($_POST['email']);
+                        $new_individuals->set_nationality($_POST['nationality']);
+                        $new_individuals->set_ethnicity($_POST['ethnicity']);
+                        $new_individuals->set_status($_POST['status']);
                         $new_individuals->create();
-                        $message = 'Individuals Created';
+                        $message = 'Individual Created';
                         return $message;
                 }
                 }
@@ -78,12 +132,12 @@
                                 parse_str($url_components['query'], $params);
                             }
                             $id = $params['id'];
-                            $statement = $this->individualsModel->getIndvById($id);
+                            $statement = $this->individualsModel->getIndById($id);
                             $delindv = $statement->fetch(PDO::FETCH_ASSOC);
                             if ($delindv['id'] != $_SESSION['id']) {
                                 if (($delindv['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                     $message = $this->individualsModel->delete($id);
-                                    $this->delindv();
+                                    $this->delindividuals();
                                     return $message;
                                 } else {
                                     $message = 'User is an Admin/You are not an Admin';
@@ -109,7 +163,7 @@
                         parse_str($url_components['query'], $params);
                     };
                     $id = $params['id'];
-                    $individuals = $this->individualsModel->getIndvById($id);
+                    $individuals = $this->individualsModel->getIndById($id);
                     return $individuals;
                 }
             
@@ -130,10 +184,14 @@
                             'id'            => $_REQUEST['id'],
                             'org_id'        => $_REQUEST['org_id'],
                             'first_name'     => $_REQUEST['first_name'],
-                            'last_name'     => $_REQUEST['last_name'],
-                            'start_date'    => $_REQUEST['start_date'],
-                            'role'            => $_REQUEST['role'],
-                            'emp_no'        => $_REQUEST['emp_no']
+                            'surname'     => $_REQUEST['surname'],
+                            'sex'    => $_REQUEST['sex'],
+                            'date_of_birth'            => $_REQUEST['date_of_birth'],
+                            'place_of_birth'            => $_REQUEST['place_of_birth'],
+                            'email'            => $_REQUEST['email'],
+                            'nationality'            => $_REQUEST['nationality'],
+                            'ethnicity'            => $_REQUEST['ethnicity'],
+                            'status'        => $_REQUEST['status']
             
                         );
                         $message = $update_indv->update($d['id'], $d);

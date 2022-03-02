@@ -39,25 +39,75 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmunits.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter orginazation id';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['org_struct_id'])) {
+                        $message = 'Please input org_struct_id';
                         return $message;
                     }
+        
+        
+                    if (empty($_POST['parent_dept_id'])) {
+                        $message = 'Please input parent dept_id';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['unit_code'])) {
+                        $message = 'Please input unit code';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['unit_name'])) {
+                        $message = 'Please input unit name';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['unit_level'])) {
+                        $message = 'Please input unit level';
+                        return $message;
+                    }
+        
         
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date attented';
+                        $message = 'Please input start date';
                         return $message;
                     }
         
+        
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['start_date'])) {
+                        $message = 'Please input ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
+                        return $message;
+                    }
+        
+        
                     $new_units = new Unit();
-                    $new_units->set_fname($_POST['first_name']);
-                    $new_units->set_lname($_POST['last_name']);
+                    $new_units->set_org_id($_POST['org_id']);
+                    $new_units->set_org_struct_id($_POST['org_struct_id']);
+                    $new_units->set_parent_dept_id($_POST['parent_dept_id']);
+                    $new_units->set_unit_code($_POST['unit_code']);
+                    $new_units->set_unit_name($_POST['unit_name']);
+                    $new_units->set_unit_level($_POST['unit_level']);
                     $new_units->set_start_date($_POST['start_date']);
+                    $new_units->set_end_date($_POST['end_date']);
+                    $new_units->set_status($_POST['status']);
                     $new_units->create();
                     $message = 'units Created';
                     return $message;
@@ -77,12 +127,12 @@
                             parse_str($url_components['query'], $params);
                         }
                         $id = $params['id'];
-                        $statement = $this->unitsModel->getUnitsById($id);
+                        $statement = $this->unitsModel->getUnitById($id);
                         $delunits = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($delunits['id'] != $_SESSION['id']) {
                             if (($delunits['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->unitsModel->delete($id);
-                                $this->delunit();
+                                $this->delunits();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -108,7 +158,7 @@
                     parse_str($url_components['query'], $params);
                 };
                 $id = $params['id'];
-                $units = $this->unitsModel->getUnitsById($id);
+                $units = $this->unitsModel->getUnitById($id);
                 return $units;
             }
         
@@ -128,11 +178,13 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'org_struct_id'     => $_REQUEST['org_struct_id'],
+                        'parent_dept_id'     => $_REQUEST['parent_dept_id'],
+                        'unit_code'    => $_REQUEST['unit_code'],
+                        'unit_level'            => $_REQUEST['unit_level'],
+                        'start_date'            => $_REQUEST['start_date'],
+                        'end_date'            => $_REQUEST['end_date'],
+                        'status'            => $_REQUEST['status']
         
                     );
                     $message = $update_units->update($d['id'], $d);

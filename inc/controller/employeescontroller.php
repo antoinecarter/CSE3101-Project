@@ -40,28 +40,85 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmemployees.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter Organization Id';
+                        return $message;
+                    } else {
+                        if ($this->employeesModel->findEmp($_POST['org_id'])) {
+                            $message = 'Username already exist';
+                            return $message;
+                        }
+                    }
+
+                    if (empty($_POST['emp_no'])) {
+                        $message = 'Please enter Employee Number';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['ind_id'])) {
+                        $message = 'Please input Ind Id ';
                         return $message;
                     }
-        
-                    if (empty($_POST['start_date'])) {
+                
+                    if (empty($_POST['position_id'])) {
+                        $message = 'Please input Position Id ';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['payment_frequency'])) {
+                        $message = 'Please input Payment Frequency ';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['emp_type'])) {
+                        $message = 'Please input Employee type ';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['emp_status'])) {
+                        $message = 'Please input Employee Status ';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['emp_date'])) {
                         $message = 'Please input date ';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['rate_of_pay'])) {
+                        $message = 'Please input Rate of pay ';
+                        return $message;
+                    }
+        
+                
+                    if (empty($_POST['shift_id'])) {
+                        $message = 'Please input Shift id ';
+                        return $message;
+                    }
+        
+                
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input Status ';
                         return $message;
                     }
         
                     $new_employees = new Employee();
-                    $new_employees->set_fname($_POST['first_name']);
-                    $new_employees->set_lname($_POST['last_name']);
-                    $new_employees->set_start_date($_POST['start_date']);
+                    $new_employees->set_org_id($_POST['org_id']);
+                    $new_employees->set_emp_no($_POST['emp_no']);
+                    $new_employees->set_ind_id($_POST['ind_id']);
+                    $new_employees->set_position_id($_POST['position_id']);
+                    $new_employees->set_payment_frequency($_POST['payment_frequency']);
+                    $new_employees->set_emp_type($_POST['emp_type']);
+                    $new_employees->set_emp_status($_POST['emp_status']);
+                    $new_employees->set_emp_date($_POST['emp_date']);
+                    $new_employees->set_rate_of_pay($_POST['rate_of_pay']);
+                    $new_employees->set_shift_id($_POST['shift_id']);
+                    $new_employees->set_status($_POST['status']);
                     $new_employees->create();
-                    $message = 'employees Created';
+                    $message = 'Employee Created';
                     return $message;
+
+     
             }
             }
         
@@ -83,7 +140,7 @@
                         if ($delemp['id'] != $_SESSION['id']) {
                             if (($delemp['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->employeesModel->delete($id);
-                                $this->delemp();
+                                $this->delemployees();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -129,11 +186,16 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'emp_no'     => $_REQUEST['emp_no'],
+                        'ind_id'     => $_REQUEST['ind_id'],
+                        'position_id'    => $_REQUEST['position_id'],
+                        'payment_frequency'            => $_REQUEST['payment_frequency'],
+                        'emp_type'        => $_REQUEST['emp_type'],
+                        'emp_status'        => $_REQUEST['emp_status'],
+                        'emp_date'        => $_REQUEST['emp_date'],
+                        'rate_of_pay'        => $_REQUEST['rate_of_pay'],
+                        'shift_id'        => $_REQUEST['shift_id'],
+                        'status'        => $_REQUEST['status']
         
                     );
                     $message = $update_emp->update($d['id'], $d);

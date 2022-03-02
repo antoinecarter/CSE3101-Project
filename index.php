@@ -4,6 +4,8 @@ $db = new Database();
 $db->init();
 
 require_once __DIR__ . "/inc/controller/Userscontroller.php";
+require_once __DIR__ . "/inc/controller/absencecontroller.php";
+require_once __DIR__ . "/inc/controller/addresscontroller.php";
 require_once __DIR__ . "/inc/controller/attendancecontroller.php";
 require_once __DIR__ . "/inc/controller/compyearcontroller.php";
 require_once __DIR__ . "/inc/controller/departmentscontroller.php";
@@ -12,12 +14,15 @@ require_once __DIR__ . "/inc/controller/unitscontroller.php";
 require_once __DIR__ . "/inc/controller/timeclockcontroller.php";
 require_once __DIR__ . "/inc/controller/shiftscontroller.php";
 require_once __DIR__ . "/inc/controller/referencescontroller.php";
+require_once __DIR__ . "/inc/controller/natidentifierscontroller.php";
 require_once __DIR__ . "/inc/controller/salarycontroller.php";
 require_once __DIR__ . "/inc/controller/positionscontroller.php";
-require_once __DIR__ . "/inc/controller/payperiodcontroller.php";
 require_once __DIR__ . "/inc/controller/organizationcontroller.php";
+require_once __DIR__ . "/inc/controller/orgstructurecontroller.php";
 require_once __DIR__ . "/inc/controller/leavereqcontroller.php";
+require_once __DIR__ . "/inc/controller/leavetrackcontroller.php";
 require_once __DIR__ . "/inc/controller/leaveentcontroller.php";
+require_once __DIR__ . "/inc/controller/latenesscontroller.php";
 require_once __DIR__ . "/inc/controller/individualscontroller.php";
 require_once __DIR__ . "/inc/controller/employeescontroller.php";
 
@@ -71,7 +76,36 @@ if ($path == "/CSE3101-Project/"){
         }
     }
 
-    
+} else if($path == "/CSE3101-Project/Absence"){
+    if(isset($_SESSION['id'])){
+        $absencecontroller->tblabsence();
+    }
+} else if ($path == "/CSE3101-Project/Absence/Registration"){
+    if(isset($_SESSION['id'])){
+        $absencecontroller->frmabsence();
+    }
+} else if($path == ('/CSE3101-Project/Absence/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $absencecontroller->edtabsence();
+        }
+    }
+
+} else if($path == "/CSE3101-Project/Address"){
+    if(isset($_SESSION['id'])){
+        $addresscontroller->tbladdress();
+    }
+} else if ($path == "/CSE3101-Project/Address/Registration"){
+    if(isset($_SESSION['id'])){
+        $addresscontroller->frmaddress();
+    }
+} else if($path == ('/CSE3101-Project/Address/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $addresscontroller->edtaddress();
+        }
+    }
+
 
 } else if($path == "/CSE3101-Project/Compyear"){
     if(isset($_SESSION['id'])){
@@ -102,6 +136,69 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
             $individualscontroller->edtindividuals();
+        }
+    }
+
+} else if($path == "/CSE3101-Project/Lateness"){
+    if(isset($_SESSION['id'])){
+        $latenesscontroller->tbllateness();
+    }
+} else if ($path == "/CSE3101-Project/Lateness/Registration"){
+    if(isset($_SESSION['id'])){
+        $latenesscontroller->frmlateness();
+    }
+} else if($path == ('/CSE3101-Project/Lateness/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $latenesscontroller->edtlateness();
+        }
+    }
+    
+
+} else if($path == "/CSE3101-Project/Leavetrack"){
+    if(isset($_SESSION['id'])){
+        $leavetrackcontroller->tblleavetrack();
+    }
+} else if ($path == "/CSE3101-Project/Leavetrack/Registration"){
+    if(isset($_SESSION['id'])){
+        $leavetrackcontroller->frmleavetrack();
+    }
+} else if($path == ('/CSE3101-Project/Leavetrack/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $leavetrackcontroller->edtleavetrack();
+        }
+    }
+
+
+} else if($path == "/CSE3101-Project/NationalIdentifier"){
+    if(isset($_SESSION['id'])){
+        $nationalidentifiercontroller->tblleavetrack();
+    }
+} else if ($path == "/CSE3101-Project/NationalIdentifier/Registration"){
+    if(isset($_SESSION['id'])){
+        $nationalidentifiercontroller->frmleavetrack();
+    }
+} else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $nationalidentifiercontroller->edtleavetrack();
+        }
+    }
+
+
+} else if($path == "/CSE3101-Project/Orgstructure"){
+    if(isset($_SESSION['id'])){
+        $orgstructurecontroller->tblorgstructure();
+    }
+} else if ($path == "/CSE3101-Project/Orgstructure/Registration"){
+    if(isset($_SESSION['id'])){
+        $orgstructurecontroller->frmorgstructure();
+    }
+} else if($path == ('/CSE3101-Project/Orgstructure/Registration/Edit?id='.$params['id'])){
+    if(isset($_SESSION['id'])){
+        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+            $orgstructurecontroller->edtorgstructure();
         }
     }
 
@@ -153,23 +250,6 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
             $organizationscontroller->edtorganizations();
-        }
-    }
-
-    
-
-} else if($path == "/CSE3101-Project/Payperiods"){
-    if(isset($_SESSION['id'])){
-        $payperiodscontroller->tblpayperiods();
-    }
-} else if ($path == "/CSE3101-Project/Payperiods/Registration"){
-    if(isset($_SESSION['id'])){
-        $payperiodscontroller->frmpayperiods();
-    }
-} else if($path == ('/CSE3101-Project/Payperiods/Registration/Edit?id='.$params['id'])){
-    if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
-            $payperiodscontroller->edtpayperiods();
         }
     }
 

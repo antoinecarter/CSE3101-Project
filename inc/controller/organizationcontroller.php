@@ -40,28 +40,86 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmorganization.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_type'])) {
+                        $message = 'Please enter orginization type';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['short_name'])) {
+                        $message = 'Please input short name';
                         return $message;
                     }
+        
+        
+                    if (empty($_POST['full_name'])) {
+                        $message = 'Please input full name';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['address'])) {
+                        $message = 'Please input address';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['telephone'])) {
+                        $message = 'Please input telephone';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['fax'])) {
+                        $message = 'Please input fax';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['email'])) {
+                        $message = 'Please input email';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['country'])) {
+                        $message = 'Please input country';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
+                        return $message;
+                    }
+        
         
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date attented';
+                        $message = 'Please input date start date';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
                         return $message;
                     }
         
                     $new_organizations = new Organization();
-                    $new_organizations->set_fname($_POST['first_name']);
-                    $new_organizations->set_lname($_POST['last_name']);
+                    $new_organizations->set_org_type($_POST['org_type']);
+                    $new_organizations->set_short_name($_POST['short_name']);
+                    $new_organizations->set_full_name($_POST['full_name']);
+                    $new_organizations->set_address($_POST['address']);
+                    $new_organizations->set_telephone($_POST['telephone']);
+                    $new_organizations->set_fax($_POST['fax']);
+                    $new_organizations->set_email($_POST['email']);
+                    $new_organizations->set_country($_POST['country']);
+                    $new_organizations->set_end_date($_POST['end_date']);
                     $new_organizations->set_start_date($_POST['start_date']);
+                    $new_organizations->set_status($_POST['status']);
                     $new_organizations->create();
                     $message = 'Organiztion Created';
                     return $message;
+
             }
             }
         
@@ -83,7 +141,7 @@
                         if ($delorg['id'] != $_SESSION['id']) {
                             if (($delorg['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->organizationsModel->delete($id);
-                                $this->delorg();
+                                $this->delorganizations();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -127,13 +185,17 @@
             
                     $update_org = new Organization();
                     $d = array(
-                        'id'            => $_REQUEST['id'],
-                        'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'org_type'            => $_REQUEST['org_type'],
+                        'short_name'        => $_REQUEST['short_name'],
+                        'full_name'     => $_REQUEST['full_name'],
+                        'address'     => $_REQUEST['address'],
+                        'telephone'    => $_REQUEST['telephone'],
+                        'fax'            => $_REQUEST['fax'],
+                        'email'            => $_REQUEST['email'],
+                        'country'            => $_REQUEST['country'],
+                        'end_date'            => $_REQUEST['end_date'],
+                        'start_date'            => $_REQUEST['start_date'],
+                        'status'        => $_REQUEST['status']
         
                     );
                     $message = $update_org->update($d['id'], $d);
