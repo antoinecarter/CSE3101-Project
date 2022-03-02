@@ -6,7 +6,8 @@ if (isset($_POST['create_compyr'])) {
 }
 
 $orgcontroller = new OrganizationsController();
-
+$refcontroller = new ReferencesController();
+$payfreq = $refcontroller->refList('TBLPAYMENTFREQUENCY', $_SESSION['org_id']);
 $orgs = $orgcontroller->orgList();
 ?>
 <div class = "form-usr">
@@ -45,8 +46,8 @@ $orgs = $orgcontroller->orgList();
             <select name="payment_frequency" required>
                 <option value="">--Select Payment Frequency--</option>
                 
-                <?php while($countries){ ?>
-                    <option value="<?php echo $countries['value_desc']; ?>"><?php echo $countries['value_desc'];?></option>
+                <?php while($payfreq){ ?>
+                    <option value="<?php echo $payfreq['value_desc']; ?>"><?php echo $payfreq['value_desc'];?></option>
                 <?php } ?>
             </select>
            </p>
@@ -57,7 +58,7 @@ $orgs = $orgcontroller->orgList();
             <input type="date" name="start_year" required>
         
             <label for="end_year"></label>
-            <input type="date" name="end_year">
+            <input type="date" name="end_year" required>
             </p>
 
            <p>
@@ -65,7 +66,7 @@ $orgs = $orgcontroller->orgList();
         <div style="height:100px;"></div>
         
            <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN' && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
 
       </p>
   
