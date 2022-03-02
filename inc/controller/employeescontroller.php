@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/employees.php";
         include_once __DIR__ . "/../alert.php";
         
-        class EmployeesController extends employees
+        class EmployeesController extends Employee
         {
             private $employeesModel;
             public $message;
         
             public function __construct()
             {
-                $this->employeesModel = new employees();
+                $this->employeesModel = new Employee();
             }
         
             
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_employees = new employees();
+                    $new_employees = new Employee();
                     $new_employees->set_fname($_POST['first_name']);
                     $new_employees->set_lname($_POST['last_name']);
                     $new_employees->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updateemp()
             {
             
-                    $update_emp = new employees();
+                    $update_emp = new Employee();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/leavereq.php";
         include_once __DIR__ . "/../alert.php";
         
-        class LeaverequestsController extends leaverequests
+        class LeaverequestsController extends LeaveRequest
         {
             private $leaverequestsModel;
             public $message;
         
             public function __construct()
             {
-                $this->leaverequestsModel = new leaverequests();
+                $this->leaverequestsModel = new LeaveRequest();
             }
 
                     
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_leaverequests = new leaverequests();
+                    $new_leaverequests = new LeaveRequest();
                     $new_leaverequests->set_fname($_POST['first_name']);
                     $new_leaverequests->set_lname($_POST['last_name']);
                     $new_leaverequests->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updateleavreq()
             {
             
-                    $update_leavreq = new leaverequests();
+                    $update_leavreq = new LeaveRequest();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

@@ -12,22 +12,24 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Attendance</h5>
+        <h5>Attendance</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Attendances
-        <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <h2>Listing of Attendance
+        <a href="./Attendance/Registration"><button>Add Att.</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Attendance Recorded: <?php echo $num_rows; ?></a>
+
         <div class="tblfx">
+     
         <table>
             <thead>
+                <tr>
                 <th>Edit</th>
-                <th>Username</th>
-                <th>Fullname</th>
-                <th>Email</th>
-                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-                <th>Effective From</th>
-                <th>Effective To</th>
+                <th>Organization Id</th>
+                <th>Employee Id</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                </tr>
             </thead>
             <tbody>
                 <?php
@@ -37,16 +39,14 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
+                    <td><a href="./Attendance/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['org_id']; ?></td>
+                    <td><?php echo $row['emp_id']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-
+            <script src="./js/script.js"></script>
         </tbody>
     </table>
 </div>

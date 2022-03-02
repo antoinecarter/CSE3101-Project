@@ -10,7 +10,7 @@
         
             public function __construct()
             {
-                $this->referencesModel = new reference();
+                $this->referencesModel = new Reference();
             }
         
 
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_references = new reference();
+                    $new_references = new Reference();
                     $new_references->set_fname($_POST['first_name']);
                     $new_references->set_lname($_POST['last_name']);
                     $new_references->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updateref()
             {
             
-                    $update_ref = new reference();
+                    $update_ref = new Reference();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

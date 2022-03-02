@@ -4,14 +4,14 @@
         include_once __DIR__ . "/../model/tables/timeclock.php";
         include_once __DIR__ . "/../alert.php";
         
-        class TimeclocksController extends timeclocks
+        class TimeclocksController extends Timeclock
         {
             private $timeclocksModel;
             public $message;
         
             public function __construct()
             {
-                $this->timeclocksModel = new timeclocks();
+                $this->timeclocksModel = new Timeclock();
             }
 
                     
@@ -56,7 +56,7 @@
                         return $message;
                     }
         
-                    $new_timeclocks = new timeclocks();
+                    $new_timeclocks = new Timeclock();
                     $new_timeclocks->set_fname($_POST['first_name']);
                     $new_timeclocks->set_lname($_POST['last_name']);
                     $new_timeclocks->set_start_date($_POST['start_date']);
@@ -126,7 +126,7 @@
             public function updatetime()
             {
             
-                    $update_time = new timeclocks();
+                    $update_time = new Timeclock();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

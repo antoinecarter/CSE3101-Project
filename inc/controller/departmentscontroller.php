@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/departments.php";
         include_once __DIR__ . "/../alert.php";
         
-        class DepartmentsController extends departments
+        class DepartmentsController extends Department
         {
             private $departmentsModel;
             public $message;
         
             public function __construct()
             {
-                $this->departmentsModel = new departments();
+                $this->departmentsModel = new Department();
             }
 
             
@@ -50,7 +50,7 @@
                         return $message;
                     }
         
-                    $new_departments = new departments();
+                    $new_departments = new Department();
                     $new_departments->set_dname($_POST['department_name']);
                     $new_departments->set_start_date($_POST['start_date']);
                     $new_departments->create();
@@ -119,7 +119,7 @@
             public function updatedpt()
             {
             
-                    $update_dpt = new departments();
+                    $update_dpt = new Department();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

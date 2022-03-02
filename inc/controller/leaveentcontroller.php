@@ -4,14 +4,14 @@
         include_once __DIR__ . "/../model/tables/leaveent.php";
         include_once __DIR__ . "/../alert.php";
         
-        class LeaveentitlemtController extends leaveentitlemt
+        class LeaveentitlemtController extends LeaveEntitlement
         {
             private $leaveentitlemtModel;
             public $message;
         
             public function __construct()
             {
-                $this->leaveentitlemtModel = new leaveentitlemt();
+                $this->leaveentitlemtModel = new LeaveEntitlement();
             }
 
             
@@ -56,7 +56,7 @@
                         return $message;
                     }
         
-                    $new_leaveentitlemt = new leaveentitlemt();
+                    $new_leaveentitlemt = new LeaveEntitlement();
                     $new_leaveentitlemt->set_fname($_POST['first_name']);
                     $new_leaveentitlemt->set_lname($_POST['last_name']);
                     $new_leaveentitlemt->set_start_date($_POST['start_date']);
@@ -126,7 +126,7 @@
             public function updateleav()
             {
             
-                    $update_leav = new leaveentitlemt();
+                    $update_leav = new LeaveEntitlement();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/salary.php";
         include_once __DIR__ . "/../alert.php";
         
-        class SalaryController extends salary
+        class SalaryController extends Salary
         {
             private $salaryModel;
             public $message;
         
             public function __construct()
             {
-                $this->salaryModel = new salary();
+                $this->salaryModel = new Salary();
             }
         
 
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_salary = new salary();
+                    $new_salary = new Salary();
                     $new_salary->set_fname($_POST['first_name']);
                     $new_salary->set_lname($_POST['last_name']);
                     $new_salary->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updatesal()
             {
             
-                    $update_sal = new salary();
+                    $update_sal = new Salary();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

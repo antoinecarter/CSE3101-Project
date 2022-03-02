@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $attendancecontroller = new AttendanceController();
-if (isset($_POST['create_attendance'])) {
+if (isset($_POST['create_user'])) {
     $cred = $attendancecontroller->createattendance();
 }
 ?>
@@ -13,7 +13,7 @@ if (isset($_POST['create_attendance'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create Attendance</h2>
+        <h2>Create new Attendance</h2>
           
         </div>
         <div>
@@ -21,52 +21,56 @@ if (isset($_POST['create_attendance'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-           <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
+            <span>Organization</span>
+            <span>Employee No.</span>
+        <p>
+            <label for="org_id"></label>
+            <input type="text" placeholder=" Enter Organization" name="org_id">
+           
+            <label for="emp_no"></label>
+            <input type="text" placeholder=" Enter Employee No." name="emp_no">
             </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="start_date">Effective From</label>
+            <span>Effective From</span>
+            <span>Effective To</span>
+            <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
             </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required>
-                <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+            <span>Rule Option</span>
+            <span>Rule Value</span>
+            <p>
+            <label for="rule_option"></label>
+            <select name="rule_option" id="" required>
+          
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+        
             </select>
+      
+            <label for="rule_value"></label>
+            <select name="rule_value" id="" required>
+
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+       
+            </select>
+
             </p>
-           <p>
-        </div>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-           <p>
+            </p>    
+   
+
       <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_attendance">Create</button> <?php } ?>
+
       </p>
+  
         </div>
-        <?php } ?>
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Attendance" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>

@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/compyear.php";
         include_once __DIR__ . "/../alert.php";
         
-        class CompyearController extends compyear
+        class CompyearController extends Compyear
         {
             private $compyearModel;
             public $message;
         
             public function __construct()
             {
-                $this->compyearModel = new compyear();
+                $this->compyearModel = new Compyear();
             }
 
             public function tblcompy()
@@ -54,7 +54,7 @@
                         return $message;
                     }
         
-                    $new_compyear = new compyear();
+                    $new_compyear = new Compyear();
                     $new_compyear->set_fname($_POST['first_name']);
                     $new_compyear->set_lname($_POST['last_name']);
                     $new_compyear->set_start_date($_POST['start_date']);
@@ -124,7 +124,7 @@
             public function updatecompyr()
             {
             
-                    $update_compyr = new compyear();
+                    $update_compyr = new Compyear();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

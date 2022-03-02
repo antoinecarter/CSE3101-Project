@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/units.php";
         include_once __DIR__ . "/../alert.php";
         
-        class UnitsController extends units
+        class UnitsController extends Unit
         {
             private $unitsModel;
             public $message;
         
             public function __construct()
             {
-                $this->unitsModel = new units();
+                $this->unitsModel = new Unit();
             }
 
             public function tblunits()
@@ -54,7 +54,7 @@
                         return $message;
                     }
         
-                    $new_units = new units();
+                    $new_units = new Unit();
                     $new_units->set_fname($_POST['first_name']);
                     $new_units->set_lname($_POST['last_name']);
                     $new_units->set_start_date($_POST['start_date']);
@@ -124,7 +124,7 @@
             public function updateunits()
             {
             
-                    $update_units = new units();
+                    $update_units = new Unit();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

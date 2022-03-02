@@ -97,12 +97,11 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM attendancedetails WHERE emp_id = :id");
-                $this->connection->bind(':id', $id);
+                $this->connection->query("SELECT * FROM attendancedetails");
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT * FROM attendancedetails  WHERE emp_id = :id');
+                $this->connection->query('SELECT * FROM attendancedetails  WHERE id = :id');
                 $this->connection->bind(':id', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;

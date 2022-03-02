@@ -4,14 +4,14 @@
         include_once __DIR__ . "/../model/tables/worklocations.php";
         include_once __DIR__ . "/../alert.php";
         
-        class WorklocationsController extends worklocations
+        class WorklocationsController extends Worklocation
         {
             private $worklocationsModel;
             public $message;
         
             public function __construct()
             {
-                $this->worklocationsModel = new worklocations();
+                $this->worklocationsModel = new Worklocation();
             }
         
 
@@ -56,7 +56,7 @@
                         return $message;
                     }
         
-                    $new_worklocations = new worklocations();
+                    $new_worklocations = new Worklocation();
                     $new_worklocations->set_fname($_POST['first_name']);
                     $new_worklocations->set_lname($_POST['last_name']);
                     $new_worklocations->set_start_date($_POST['start_date']);
@@ -126,7 +126,7 @@
             public function updateworkl()
             {
             
-                    $update_workl = new worklocations();
+                    $update_workl = new Worklocation();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/organization.php";
         include_once __DIR__ . "/../alert.php";
         
-        class OrganizationsController extends organizations
+        class OrganizationsController extends Organization
         {
             private $organizationsModel;
             public $message;
         
             public function __construct()
             {
-                $this->organizationsModel = new organizations();
+                $this->organizationsModel = new Organization();
             }
         
 
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_organizations = new organizations();
+                    $new_organizations = new Organization();
                     $new_organizations->set_fname($_POST['first_name']);
                     $new_organizations->set_lname($_POST['last_name']);
                     $new_organizations->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updateorg()
             {
             
-                    $update_org = new organizations();
+                    $update_org = new Organization();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

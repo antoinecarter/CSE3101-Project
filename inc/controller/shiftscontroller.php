@@ -4,14 +4,14 @@
         include_once __DIR__ . "/../model/tables/shifts.php";
         include_once __DIR__ . "/../alert.php";
         
-        class ShiftsController extends shifts
+        class ShiftsController extends Shift
         {
             private $shiftsModel;
             public $message;
         
             public function __construct()
             {
-                $this->shiftsModel = new shifts();
+                $this->shiftsModel = new Shift();
             }
 
             
@@ -56,7 +56,7 @@
                         return $message;
                     }
         
-                    $new_shifts = new shifts();
+                    $new_shifts = new Shift();
                     $new_shifts->set_fname($_POST['first_name']);
                     $new_shifts->set_lname($_POST['last_name']);
                     $new_shifts->set_start_date($_POST['start_date']);
@@ -126,7 +126,7 @@
             public function updateshift()
             {
             
-                    $update_shift = new shifts();
+                    $update_shift = new Shift();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

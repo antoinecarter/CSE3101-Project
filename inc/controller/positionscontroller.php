@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/positions.php";
         include_once __DIR__ . "/../alert.php";
         
-        class PositionsController extends positions
+        class PositionsController extends Position
         {
             private $positionsModel;
             public $message;
         
             public function __construct()
             {
-                $this->positionsModel = new positions();
+                $this->positionsModel = new Position();
             }
         
             
@@ -55,7 +55,7 @@
                         return $message;
                     }
         
-                    $new_positions = new positions();
+                    $new_positions = new Position();
                     $new_positions->set_fname($_POST['first_name']);
                     $new_positions->set_lname($_POST['last_name']);
                     $new_positions->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
             public function updatepos()
             {
             
-                    $update_pos = new positions();
+                    $update_pos = new Position();
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],

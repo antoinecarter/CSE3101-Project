@@ -39,26 +39,38 @@ class AttendanceController extends AttendanceDetail
         if ($method == "GET") {
             include_once __DIR__ . "/../view/frmattendance.php";
         } else {
-            if (empty($_POST['first_name'])) {
-                $message = 'Please enter First name';
+            if (empty($_POST['org_id'])) {
+                $message = 'Please enter Organization ID';
                 return $message;
             }
 
-            if (empty($_POST['last_name'])) {
-                $message = 'Please enter Last name';
+            if (empty($_POST['emp_id'])) {
+                $message = 'Please enter Employee ID';
+                return $message;
+            }
+
+            if (empty($_POST['rule_option'])) {
+                $message = 'Please input Rule';
+                return $message;
+            }
+            if (empty($_POST['rule_value'])) {
+                $message = 'Please input Rule Value';
                 return $message;
             }
 
             if (empty($_POST['start_date'])) {
-                $message = 'Please input date attented';
+                $message = 'Please input Date';
                 return $message;
             }
 
-            $new_attendance = new attendance();
-            $new_attendance->set_fname($_POST['first_name']);
-            $new_attendance->set_lname($_POST['last_name']);
+            $new_attendance = new AttendanceDetail();
+            $new_attendance->set_org_id($_POST['org_id']);
+            $new_attendance->set_emp_id($_POST['emp_id']);
+            $new_attendance->set_rule_option($_POST['rule_option']);
+            $new_attendance->set_rule_value($_POST['rule_value']);
             $new_attendance->set_start_date($_POST['start_date']);
             $new_attendance->create();
+
             $message = 'Attendance Created';
             return $message;
     }
@@ -77,7 +89,7 @@ class AttendanceController extends AttendanceDetail
                     parse_str($url_components['query'], $params);
                 }
                 $id = $params['id'];
-                $statement = $this->attendanceModel->getAttById($id);
+                $statement = $this->attendanceModel->getAttDtlById($id);
                 $delattendance = $statement->fetch(PDO::FETCH_ASSOC);
                 if ($delattendance['id'] != $_SESSION['id']) {
                     if (($delattendance['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
@@ -108,7 +120,7 @@ class AttendanceController extends AttendanceDetail
             parse_str($url_components['query'], $params);
         };
         $id = $params['id'];
-        $attendance = $this->attendanceModel->getAttById($id);
+        $attendance = $this->attendanceModel->getAttDtlById($id);
         return $attendance;
     }
 
@@ -124,15 +136,15 @@ class AttendanceController extends AttendanceDetail
     public function updateattendance()
     {
     
-            $update_attendance = new attendance();
+            $update_attendance = new AttendanceDetail();
             $d = array(
                 'id'            => $_REQUEST['id'],
                 'org_id'        => $_REQUEST['org_id'],
-                'first_name'     => $_REQUEST['first_name'],
-                'last_name'     => $_REQUEST['last_name'],
                 'start_date'    => $_REQUEST['start_date'],
                 'role'            => $_REQUEST['role'],
-                'emp_no'        => $_REQUEST['emp_no']
+                'emp_no'        => $_REQUEST['emp_no'],
+                'rule_option'        => $_REQUEST['rule_option'],
+                'rule_value'        => $_REQUEST['rule_value']
 
             );
             $message = $update_attendance->update($d['id'], $d);

@@ -3,14 +3,14 @@
         include_once __DIR__ . "/../model/tables/individuals.php";
         include_once __DIR__ . "/../alert.php";
         
-        class IndividualsController extends individuals
+        class IndividualsController extends Individual
         {
             private $individualsModel;
             public $message;
         
             public function __construct()
             {
-                $this->individualsModel = new individuals();
+                $this->individualsModel = new Individual();
             }
         
             
@@ -55,7 +55,7 @@
                             return $message;
                         }
             
-                        $new_individuals = new individuals();
+                        $new_individuals = new Individual();
                         $new_individuals->set_fname($_POST['first_name']);
                         $new_individuals->set_lname($_POST['last_name']);
                         $new_individuals->set_start_date($_POST['start_date']);
@@ -125,7 +125,7 @@
                 public function updateindv()
                 {
                 
-                        $update_indv = new individuals();
+                        $update_indv = new Individual();
                         $d = array(
                             'id'            => $_REQUEST['id'],
                             'org_id'        => $_REQUEST['org_id'],
