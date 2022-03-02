@@ -34,14 +34,16 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO salaries(org_id, emp_id, salary, nis_deduct, taxable, monthly_basic, start_date) 
-                                                VALUES (:org_id, :emp_id, :salary, :nis_deduct, :taxable, :monthly_basic, :start_date)");
+                $this->connection->query("INSERT INTO salaries(org_id, emp_id, salary, nis_deduct, taxable, monthly_basic, daily_rate, hourly_rate, start_date) 
+                                                VALUES (:org_id, :emp_id, :salary, :nis_deduct, :taxable, :monthly_basic, :daily_rate, :hourly_rate, :start_date)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':emp_id',$this->emp_id);
                 $this->connection->bind(':salary',$this->salary);
                 $this->connection->bind(':nis_deduct',$this->nis_deduct);
                 $this->connection->bind(':taxable',$this->taxable);
                 $this->connection->bind(':monthly_basic',$this->monthly_basic);
+                $this->connection->bind(':daily_rate',$this->daily_rate);
+                $this->connection->bind(':hourly_rate',$this->hourly_rate);
                 $this->connection->bind(':start_date',$this->start_date);
                 $this->connection->execute();
                 
@@ -68,7 +70,7 @@
                                     SET 
                                         org_id = :org_id, emp_id = :emp_id, salary = :salary, 
                                         nis_deduct = :nis_deduct,  taxable = :taxable, monthly_basic = :monthly_basic, 
-                                        start_date = :start_date
+                                        daily_rate = :daily_rate, hourly_rate = :hourly_rate, start_date = :start_date
                                     WHERE
                                         id = :id");
         
@@ -79,6 +81,8 @@
             $this->connection->bind(':nis_deduct', $this->remove_errors($d['nis_deduct']));
             $this->connection->bind(':taxable', $this->remove_errors($d['taxable']));
             $this->connection->bind(':monthly_basic', $this->remove_errors($d['monthly_basic']));
+            $this->connection->bind(':daily_rate', $this->remove_errors($d['daily_rate']));
+            $this->connection->bind(':hourly_rate', $this->remove_errors($d['hourly_rate']));
             $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
 
             try{

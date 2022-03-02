@@ -33,14 +33,13 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO leaveent(org_id, emp_id, leave_type, quantity, monthly_rate, start_date) 
-                                                VALUES (:org_id, :emp_id, :leave_type, :quantity, :monthly_rate, :start_date)");
+                $this->connection->query("INSERT INTO leaveent(org_id, emp_id, leave_type, quantity, max_accumulation, start_date) 
+                                                VALUES (:org_id, :emp_id, :leave_type, :quantity, :max_accumulation, :start_date)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':emp_id',$this->emp_id);
                 $this->connection->bind(':leave_type',$this->leave_type);
                 $this->connection->bind(':quantity',$this->quantity);
                 $this->connection->bind(':max_accumulation',$this->max_accumulation);
-                $this->connection->bind(':monthly_rate',$this->monthly_rate);
                 $this->connection->bind(':start_date',$this->start_date);
                 $this->connection->execute();
                 
@@ -66,7 +65,7 @@
             $this->connection->query("UPDATE leaveent 
                                     SET 
                                         org_id = :org_id, emp_id = :emp_id, leave_type = :leave_type, 
-                                        quantity = :quantity, max_accumulation = :max_accumulation,  monthly_rate = :monthly_rate, 
+                                        quantity = :quantity, max_accumulation = :max_accumulation,
                                         start_date = :start_date
                                     WHERE
                                         id = :id");
@@ -77,7 +76,6 @@
             $this->connection->bind(':leave_type', $this->remove_errors($d['leave_type']));
             $this->connection->bind(':quantity', $this->remove_errors($d['quantity']));
             $this->connection->bind(':max_accumulation', $this->remove_errors($d['max_accumulation']));
-            $this->connection->bind(':monthly_rate', $this->remove_errors($d['monthly_rate']));
             $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
 
             try{

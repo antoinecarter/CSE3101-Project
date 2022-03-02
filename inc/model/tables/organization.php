@@ -152,7 +152,7 @@
             return $this->id;
         }
 
-        public function get_org_id(){
+        public function get_org_type(){
             return $this->org_type;
         }
 

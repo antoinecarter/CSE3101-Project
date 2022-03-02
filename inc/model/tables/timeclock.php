@@ -36,8 +36,8 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO timeclocks(org_id, work_date, day, emp_id, shift_id, shift_hours, time_in, time_out, status) 
-                                                VALUES (:org_id, :work_date, :day, :emp_id, :shift_id, :shift_hours, :time_in, :time_out, :status)");
+                $this->connection->query("INSERT INTO timeclocks(org_id, work_date, day, emp_id, shift_id, shift_hours, time_in, time_out, min_time_in, max_time_out, status) 
+                                                VALUES (:org_id, :work_date, :day, :emp_id, :shift_id, :shift_hours, :time_in, :time_out, :min_time_in, :max_time_out, :status)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':work_date',$this->work_date);
                 $this->connection->bind(':day',$this->day);
@@ -46,6 +46,8 @@
                 $this->connection->bind(':shift_hours',$this->shift_hours);
                 $this->connection->bind(':time_in',$this->time_in);
                 $this->connection->bind(':time_out',$this->time_out);
+                $this->connection->bind(':min_time_in',$this->min_time_in);
+                $this->connection->bind(':max_time_out',$this->max_time_out);
                 $this->connection->bind(':status',$this->status);
                 $this->connection->execute();
                 
@@ -63,7 +65,7 @@
                                         org_id = :org_id, work_date = :work_date, day = :day, 
                                         emp_id = :emp_id, shift_id = :shift_id, shift_hours = :shift_hours, time_in = :time_in, 
                                         time_out = :time_out, min_time_in = :min_time_in, max_time_out = :max_time_out, 
-                                        hours_worked = :hours_worked,  status = :status
+                                        status = :status
                                     WHERE
                                         id = :id");
         
@@ -78,7 +80,6 @@
             $this->connection->bind(':time_out', $this->remove_errors(date('H:i', strtotime($d['time_out']))));
             $this->connection->bind(':min_time_in', $this->remove_errors(date('H:i', strtotime($d['min_time_in']))));
             $this->connection->bind(':max_time_out', $this->remove_errors(date('H:i', strtotime($d['max_time_out']))));
-            $this->connection->bind(':hours_worked', $this->remove_errors($d['hours_worked']));
             $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
