@@ -30,8 +30,8 @@
             <label for="org_id"></label>
             <input type="text" placeholder=" Enter Organization" name="org_id">
 
-            <label for="emp_no"></label>
-            <input type="text" placeholder=" Enter Employee No." name="emp_no">
+            <label for="emp_id"></label>
+            <input type="text" placeholder=" Enter Employee No." name="emp_id">
             </p>
         </p>
            <span>Effective From</span>
@@ -63,7 +63,7 @@
 
         <div>
                 <button type="submit" name="update_attendance">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Attendance/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_attendance"> Delete</button></a> <?php } ?>
+            <?php if($row['org_id'] != 'VERIFY'){ ?><a href="./Attendance/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_attendance"> Delete</button></a> <?php } ?>
  
  
             </div>

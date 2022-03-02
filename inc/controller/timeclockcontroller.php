@@ -41,28 +41,93 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmtimeclock.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter organization id';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['work_date'])) {
+                        $message = 'Please input work date';
                         return $message;
                     }
         
-                    if (empty($_POST['start_date'])) {
-                        $message = 'Please input date attented';
+        
+                    if (empty($_POST['day'])) {
+                        $message = 'Please input day';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['emp_id'])) {
+                        $message = 'Please input employee id';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['shift_id'])) {
+                        $message = 'Please input shift id';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['shift_hours'])) {
+                        $message = 'Please input shift hours';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['time_in'])) {
+                        $message = 'Please input time in';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['time_out'])) {
+                        $message = 'Please input time out';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['min_time_in'])) {
+                        $message = 'Please input min_time_in';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['max_time_out'])) {
+                        $message = 'Please input max_time_out';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['hours_worked'])) {
+                        $message = 'Please input hours worked';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
                         return $message;
                     }
         
                     $new_timeclocks = new Timeclock();
-                    $new_timeclocks->set_fname($_POST['first_name']);
-                    $new_timeclocks->set_lname($_POST['last_name']);
-                    $new_timeclocks->set_start_date($_POST['start_date']);
+                    $new_timeclocks->set_org_id($_POST['org_id']);
+                    $new_timeclocks->set_work_date($_POST['work_date']);
+                    $new_timeclocks->set_day($_POST['day']);
+                    $new_timeclocks->set_emp_id($_POST['emp_id']);
+                    $new_timeclocks->set_shift_id($_POST['shift_id']);
+                    $new_timeclocks->set_shift_hours($_POST['shift_hours']);
+                    $new_timeclocks->set_time_in($_POST['time_in']);
+                    $new_timeclocks->set_time_out($_POST['time_out']);
+                    $new_timeclocks->set_min_time_in($_POST['min_time_in']);
+                    $new_timeclocks->set_max_time_out($_POST['max_time_out']);
+                    $new_timeclocks->set_hours_worked($_POST['hours_worked']);
+                    $new_timeclocks->set_status($_POST['status']);
                     $new_timeclocks->create();
                     $message = 'timeclocks Created';
                     return $message;
+
             }
             }
         
@@ -79,12 +144,12 @@
                             parse_str($url_components['query'], $params);
                         }
                         $id = $params['id'];
-                        $statement = $this->timeclocksModel->getTimeById($id);
+                        $statement = $this->timeclocksModel->getTimeClockById($id);
                         $deltime = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($deltime['id'] != $_SESSION['id']) {
                             if (($deltime['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->timeclocksModel->delete($id);
-                                $this->deltime();
+                                $this->deltimeclocks();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -110,7 +175,7 @@
                     parse_str($url_components['query'], $params);
                 };
                 $id = $params['id'];
-                $timeclocks = $this->timeclocksModel->getTimeById($id);
+                $timeclocks = $this->timeclocksModel->getTimeClockById($id);
                 return $timeclocks;
             }
         
@@ -130,11 +195,17 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'work_date'     => $_REQUEST['work_date'],
+                        'day'     => $_REQUEST['day'],
+                        'emp_id'     => $_REQUEST['emp_id'],
+                        'shift_id'     => $_REQUEST['shift_id'],
+                        'shift_hours'     => $_REQUEST['shift_hours'],
+                        'time_in'     => $_REQUEST['time_in'],
+                        'time_out'     => $_REQUEST['time_out'],
+                        'min_time_in'    => $_REQUEST['min_time_in'],
+                        'max_time_out'            => $_REQUEST['max_time_out'],
+                        'hours_worked'            => $_REQUEST['hours_worked'],
+                        'status'        => $_REQUEST['status']
         
                     );
                     $message = $update_time->update($d['id'], $d);

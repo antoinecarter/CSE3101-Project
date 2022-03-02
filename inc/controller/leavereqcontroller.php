@@ -40,28 +40,73 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmleavereq.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter org id';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['emp_id'])) {
+                        $message = 'Please enter emp id';
                         return $message;
                     }
         
-                    if (empty($_POST['start_date'])) {
-                        $message = 'Please input date ';
+                    if (empty($_POST['leave_type'])) {
+                        $message = 'Please input leave type ';
                         return $message;
                     }
+        
+        
+                    if (empty($_POST['from_date'])) {
+                        $message = 'Please input from date ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['to_date'])) {
+                        $message = 'Please input to date ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['resumption_date'])) {
+                        $message = 'Please input resumption date ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['approved_by'])) {
+                        $message = 'Please input approved by ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['approved_date'])) {
+                        $message = 'Please input approved date ';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status ';
+                        return $message;
+                    }
+    
         
                     $new_leaverequests = new LeaveRequest();
-                    $new_leaverequests->set_fname($_POST['first_name']);
-                    $new_leaverequests->set_lname($_POST['last_name']);
-                    $new_leaverequests->set_start_date($_POST['start_date']);
+                    $new_leaverequests->set_org_id($_POST['org_id']);
+                    $new_leaverequests->set_emp_id($_POST['emp_id']);
+                    $new_leaverequests->set_leave_type($_POST['leave_type']);
+                    $new_leaverequests->set_from_date($_POST['from_date']);
+                    $new_leaverequests->set_to_date($_POST['to_date']);
+                    $new_leaverequests->set_resumption_date($_POST['resumption_date']);
+                    $new_leaverequests->set_approved_by($_POST['approved_by']);
+                    $new_leaverequests->set_approved_date($_POST['approved_date']);
+                    $new_leaverequests->set_status($_POST['status']);
                     $new_leaverequests->create();
-                    $message = 'leaverequests Created';
+                    $message = 'leave requests Created';
                     return $message;
+
+        
             }
             }
         
@@ -78,12 +123,12 @@
                             parse_str($url_components['query'], $params);
                         }
                         $id = $params['id'];
-                        $statement = $this->leaverequestsModel->getLeavreqById($id);
+                        $statement = $this->leaverequestsModel->getleaverequestsById($id);
                         $delleavreq = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($delleavreq['id'] != $_SESSION['id']) {
                             if (($delleavreq['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->leaverequestsModel->delete($id);
-                                $this->delleavreq();
+                                $this->delleaverequests();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -109,7 +154,7 @@
                     parse_str($url_components['query'], $params);
                 };
                 $id = $params['id'];
-                $leaverequests = $this->leaverequestsModel->getLeavreqById($id);
+                $leaverequests = $this->leaverequestsModel->getleaverequestsById($id);
                 return $leaverequests;
             }
         
@@ -129,11 +174,14 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'emp_id'     => $_REQUEST['emp_id'],
+                        'leave_type'     => $_REQUEST['leave_type'],
+                        'from_date'    => $_REQUEST['from_date'],
+                        'to_date'            => $_REQUEST['to_date'],
+                        'resumption_date'            => $_REQUEST['resumption_date'],
+                        'approved_by'            => $_REQUEST['approved_by'],
+                        'approved_date'            => $_REQUEST['approved_date'],
+                        'status'        => $_REQUEST['status']
         
                     );
                     $message = $update_leavreq->update($d['id'], $d);

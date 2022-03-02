@@ -40,15 +40,76 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmpositions.php";
                 } else {
-                    if (empty($_POST['first_name'])) {
-                        $message = 'Please enter First name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter organization id';
                         return $message;
                     }
         
-                    if (empty($_POST['last_name'])) {
-                        $message = 'Please enter Last name';
+                    if (empty($_POST['org_struct_id'])) {
+                        $message = 'Please input org struct id';
                         return $message;
                     }
+        
+        
+                    if (empty($_POST['parent_unit_id'])) {
+                        $message = 'Please input parent_unit_id';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['pos_code'])) {
+                        $message = 'Please input position code';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['pos_name'])) {
+                        $message = 'Please input position name';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['pos_level'])) {
+                        $message = 'Please input position level';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['overview'])) {
+                        $message = 'Please input overview';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['wk_loc_id'])) {
+                        $message = 'Please input wk_loc_id';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['lower_sal'])) {
+                        $message = 'Please input lower_sal';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['upper_sal'])) {
+                        $message = 'Please input upper_sal';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
+                        return $message;
+                    }
+        
+        
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input status';
+                        return $message;
+                    }
+        
         
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input date';
@@ -56,12 +117,24 @@
                     }
         
                     $new_positions = new Position();
-                    $new_positions->set_fname($_POST['first_name']);
-                    $new_positions->set_lname($_POST['last_name']);
+                    $new_positions->set_org_id($_POST['org_id']);
+                    $new_positions->set_org_struct_id($_POST['org_struct_id']);
+                    $new_positions->set_parent_unit_id($_POST['parent_unit_id']);
+                    $new_positions->set_pos_code($_POST['pos_code']);
+                    $new_positions->set_pos_name($_POST['pos_name']);
+                    $new_positions->set_pos_level($_POST['pos_level']);
+                    $new_positions->set_overview($_POST['overview']);
+                    $new_positions->set_wk_loc_id($_POST['wk_loc_id']);
+                    $new_positions->set_lower_sal($_POST['lower_sal']);
+                    $new_positions->set_upper_sal($_POST['upper_sal']);
+                    $new_positions->set_end_date($_POST['end_date']);
+                    $new_positions->set_status($_POST['status']);
                     $new_positions->set_start_date($_POST['start_date']);
                     $new_positions->create();
                     $message = 'positions Created';
                     return $message;
+
+    
             }
             }
         
@@ -83,7 +156,7 @@
                         if ($delpos['id'] != $_SESSION['id']) {
                             if (($delpos['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->positionsModel->delete($id);
-                                $this->delpos();
+                                $this->delpositions();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -129,11 +202,18 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'org_struct_id'     => $_REQUEST['org_struct_id'],
+                        'parent_unit_id'     => $_REQUEST['parent_unit_id'],
+                        'pos_code'     => $_REQUEST['pos_code'],
+                        'pos_name'     => $_REQUEST['pos_name'],
+                        'pos_level'     => $_REQUEST['pos_level'],
+                        'overview'     => $_REQUEST['overview'],
+                        'wk_loc_id'    => $_REQUEST['wk_loc_id'],
+                        'lower_sal'    => $_REQUEST['lower_sal'],
+                        'upper_sal'    => $_REQUEST['upper_sal'],
+                        'end_date'    => $_REQUEST['end_date'],
+                        'status'            => $_REQUEST['status'],
+                        'start_date'        => $_REQUEST['start_date']
         
                     );
                     $message = $update_pos->update($d['id'], $d);

@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $attendancecontroller = new AttendanceController();
-if (isset($_POST['create_user'])) {
+if (isset($_POST['create_attendance'])) {
     $cred = $attendancecontroller->createattendance();
 }
 ?>
@@ -21,14 +21,14 @@ if (isset($_POST['create_user'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span>Organization</span>
-            <span>Employee No.</span>
+            <span>Organization Id</span>
+            <span>Employee Id</span>
         <p>
             <label for="org_id"></label>
             <input type="text" placeholder=" Enter Organization" name="org_id">
            
-            <label for="emp_no"></label>
-            <input type="text" placeholder=" Enter Employee No." name="emp_no">
+            <label for="emp_id"></label>
+            <input type="text" placeholder=" Enter Employee No." name="emp_id">
             </p>
             <span>Effective From</span>
             <span>Effective To</span>

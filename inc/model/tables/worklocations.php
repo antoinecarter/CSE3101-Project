@@ -118,7 +118,7 @@
             return $row;
         }
 
-        public function getRefById($id){
+        public function getWkLocationById($id){
             $this->connection->query('SELECT * FROM worklocations WHERE id = :id');
             $this->connection->bind(':id', $id);
             $row = $this->connection->getStatement();

@@ -40,21 +40,56 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmdepartments.php";
                 } else {
-                    if (empty($_POST['department_name'])) {
-                        $message = 'Please enter Departments name';
+                    if (empty($_POST['org_id'])) {
+                        $message = 'Please enter Organization id';
                         return $message;
+                    }else {
+                        if ($this->departmentsModel->findDepartments($_POST['org_id'])) {
+                            $message = 'Username already exist';
+                            return $message;
+                        }
                     }
         
+                    if (empty($_POST['org_struct_id'])) {
+                        $message = 'Please input Org. Structure id';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['dept_code'])) {
+                        $message = 'Please input Department code';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['dept_name'])) {
+                        $message = 'Please input Department Name';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['dept_level'])) {
+                        $message = 'Please input department level';
+                        return $message;
+                    }
+                
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date department';
+                        $message = 'Please input date';
+                        return $message;
+                    }
+                
+                    if (empty($_POST['status'])) {
+                        $message = 'Please input Status';
                         return $message;
                     }
         
                     $new_departments = new Department();
-                    $new_departments->set_dname($_POST['department_name']);
+                    $new_departments->set_org_id($_POST['org_id']);
+                    $new_departments->set_org_struct_id($_POST['org_struct_id']);
+                    $new_departments->set_dept_code($_POST['dept_code']);
+                    $new_departments->set_dept_name($_POST['dept_name']);
+                    $new_departments->set_dept_level($_POST['dept_level']);
                     $new_departments->set_start_date($_POST['start_date']);
+                    $new_departments->set_status($_POST['status']);
                     $new_departments->create();
-                    $message = 'departments Created';
+                    $message = 'Department Created';
                     return $message;
             }
             }
@@ -72,12 +107,12 @@
                             parse_str($url_components['query'], $params);
                         }
                         $id = $params['id'];
-                        $statement = $this->departmentsModel->getDptById($id);
+                        $statement = $this->departmentsModel->getDeptById($id);
                         $deldpt = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($deldpt['id'] != $_SESSION['id']) {
                             if (($deldpt['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->departmentsModel->delete($id);
-                                $this->deldpt();
+                                $this->deldepartments();
                                 return $message;
                             } else {
                                 $message = 'User is an Admin/You are not an Admin';
@@ -103,7 +138,7 @@
                     parse_str($url_components['query'], $params);
                 };
                 $id = $params['id'];
-                $departments = $this->departmentsModel->getDptById($id);
+                $departments = $this->departmentsModel->getDeptById($id);
                 return $departments;
             }
         
@@ -123,11 +158,12 @@
                     $d = array(
                         'id'            => $_REQUEST['id'],
                         'org_id'        => $_REQUEST['org_id'],
-                        'first_name'     => $_REQUEST['first_name'],
-                        'last_name'     => $_REQUEST['last_name'],
-                        'start_date'    => $_REQUEST['start_date'],
-                        'role'            => $_REQUEST['role'],
-                        'emp_no'        => $_REQUEST['emp_no']
+                        'org_struct_id'     => $_REQUEST['org_struct_id'],
+                        'dept_code'     => $_REQUEST['dept_code'],
+                        'dept_name'    => $_REQUEST['dept_name'],
+                        'dept_level'            => $_REQUEST['dept_level'],
+                        'start_date'            => $_REQUEST['start_date'],
+                        'status'        => $_REQUEST['status']
         
                     );
                     $message = $update_dpt->update($d['id'], $d);
