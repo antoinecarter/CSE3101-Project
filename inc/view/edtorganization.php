@@ -1,105 +1,116 @@
 <?php
-    include __DIR__."/header.php";
-    $organizationsModel = new OrganizationsController();
-    if(isset($_POST['update_org'])){
-        $cred = $organizationsModel->updateorg();
-    }else if (isset($_POST['delete_org'])){
-        $cred = $organizationsModel->deleteorg();
-    }
-    $statement = $organizationsModel->vieworg();
-    
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+include __DIR__ . "/header.php";
+$orgcontroller = new OrganizationsController();
+if (isset($_POST['create_organization'])) {
+    $cred = $orgcontroller->updateorg();
+    header('Location: /CSE3101-Project/Organizations');
+}
+
+$refcontroller = new ReferencesController();
+$countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
 ?>
-<div class = "edit-usr">
-    <div><?php if(isset($cred)){ echo $cred;}?></div>
-        <?php if(isset($row['id'])){?>
-            <div>
+<div class = "form-usr">
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
     <form method="post" action="">
-        <h2>Update Organization</h2>
         <div>
+        <h2>Create/Edit Organization</h2>
+          
+        </div>
+        <div>
+                 <p>
+            <label for="id"></label>
+            <input type="hidden" name="id">
+            </p>
+            <span1>Organization Type</span1>                                                   
+            <span1>Short Name</span1>
+            <span1>Full Name</span1>  
+           <p>
+            <label for="org_type"></label>
+            <select name="org_type" required>
+                <option value="">--Select Organization Type--</option>
+                <option value="APP_USER">APP USER</option>
+                <option value="REMITTANCE">REMITTANCE</option>
+                <option value="BANK">BANK</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+
+            <label for="short_name" ></label>
+            <input type="text" placeholder="Enter Short Name" name="short_name" required>
+
+            <label for="full_name" ></label>
+            <input type="text" placeholder="Enter Full Name" name="full_name" required>
+           </p>
+           <span>Address</span>
+           <span>Country</span>   
+           <p>
+            <label for="address" ></label>
+            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Email"></textarea>
+
+            <label for="country"></label>
+            <select name="country" required>
+                <option value="">--Select Country--</option>
+                
+                <?php while($countries){ ?>
+                    <option value="<?php echo $countries['value_desc']; ?>"><?php echo $countries['value_desc'];?></option>
+                <?php } ?>
+            </select>
+            </p>
             <p>
             <label for="id"></label>
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id">
             </p>
+            <span1>Telephone</span1>                                                   
+            <span1>Fax</span1>
+            <span1>Email</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
+            <label for="telephone"></label>
+            <input type="text" placeholder="Enter Telephone Number" name="telephone">
+
+            <label for="fax" ></label>
+            <input type="text" placeholder="Enter Fax Number" name="fax" required>
+
+            <label for="email" ></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode">
-           </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
-                <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
-            </select>
-            </p>
-           <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-                <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
-                <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
-                <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option>
-            </select>
-        </div>
-        </p>
-           <p>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
+            <span>Start Date</span>
+            <span>End Date</span>
             <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
+            <label for="start_date"></label>
+            <input type="date" name="start_date" required>
+        
+            <label for="end_date"></label>
+            <input type="date" name="end_date">
             </p>
+            <span>Status</span>
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
+            <label for="status"></label>
+            <select name="status" id="" required>
+                <option value="KEYED">Keyed</option>
+                <option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option>
+            </select>
             </p>
 
-           
+           <p>
         </div>
-        <?php } ?>
+        <div style="height:100px;"></div>
         <div>
-                <button type="submit" name="update_org">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_org"> Delete</button></a> <?php } ?>
+                <button type="submit" name="update_organization">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Organizations/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_reference"> Delete</button></a> <?php } ?>
  
  
-            </div>
+            </div> 
     </form>
-    <?php } ?>
     <div>
-                
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Organizations" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
-    </div>
-    
-    
-    
 </div>
 
 <?php
-    include_once __DIR__."/footer.php";
+include_once __DIR__ . "/footer.php";
 ?>

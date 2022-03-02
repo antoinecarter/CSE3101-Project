@@ -86,13 +86,6 @@
                         return $message;
                     }
         
-        
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
-                        return $message;
-                    }
-        
-        
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input date start date';
                         return $message;
@@ -125,32 +118,30 @@
         
             public function deleteorg()
             {
-                {
-                    if ($_SERVER['REQUEST_METHOD'] = 'POST') {
-                        $url = $_SERVER['REQUEST_SCHEME'] . '://';
-                        $url .= $_SERVER['HTTP_HOST'];
-                        $url .= $_SERVER['REQUEST_URI'];
-            
-                        $url_components = parse_url($url);
-                        if(isset($url_components['query'])){
-                            parse_str($url_components['query'], $params);
-                        }
-                        $id = $params['id'];
-                        $statement = $this->organizationsModel->getOrgById($id);
-                        $delorg = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delorg['id'] != $_SESSION['id']) {
-                            if (($delorg['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
-                                $message = $this->organizationsModel->delete($id);
-                                $this->delorganizations();
-                                return $message;
-                            } else {
-                                $message = 'User is an Admin/You are not an Admin';
-                                return $message;
-                            }
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $url = $_SERVER['REQUEST_SCHEME'] . '://';
+                    $url .= $_SERVER['HTTP_HOST'];
+                    $url .= $_SERVER['REQUEST_URI'];
+        
+                    $url_components = parse_url($url);
+                    if(isset($url_components['query'])){
+                        parse_str($url_components['query'], $params);
+                    }
+                    $id = $params['id'];
+                    $statement = $this->organizationsModel->getOrgById($id);
+                    $delorg = $statement->fetch(PDO::FETCH_ASSOC);
+                    if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                        if (in_array($delorg['status'], array('UNVERIFY', 'KEYED'))) {
+                            $message = $this->organizationsModel->delete($id);
+                            $this->delorganizations();
+                            return $message;
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Cannot delete verified record!';
                             return $message;
                         }
+                    } else {
+                        $message = 'Not permitted to delete record!';
+                        return $message;
                     }
                 }
             }
@@ -201,6 +192,11 @@
                     $message = $update_org->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtorganization.php";
                     return $message;
+                }
+            
+                public function orgList(){
+                    $list = $this->organizationsModel->findOrg();
+                    return $list;
                 }
             
         }

@@ -68,6 +68,12 @@ class UsersController extends User
                     $_SESSION['pass'] = $valid['passcode'];
                     $_SESSION['role'] = $valid['role'];
                     $_SESSION['org_id'] = $valid['org_id'];
+                    $_SESSION['can_create'] = $valid['can_create'];
+                    $_SESSION['can_view'] = $valid['can_view'];
+                    $_SESSION['can_update'] = $valid['can_update'];
+                    $_SESSION['can_delete'] = $valid['can_delete'];
+                    $_SESSION['can_verify'] = $valid['can_verify'];
+                    $_SESSION['can_approve'] = $valid['can_approve'];
                     header('Location: /CSE3101-Project/home');
                     exit();
                 } else {
@@ -88,6 +94,12 @@ class UsersController extends User
         unset($_SESSION['username']);
         unset($_SESSION['email']);
         unset($_SESSION['org_id']);
+        unset($_SESSION['can_create']);
+        unset($_SESSION['can_view']);
+        unset($_SESSION['can_update']);
+        unset($_SESSION['can_delete']);
+        unset($_SESSION['can_verify']);
+        unset($_SESSION['can_approve']);
         session_destroy();
         include_once __DIR__ . "/../view/login.php";
     }
@@ -163,7 +175,9 @@ class UsersController extends User
             $new_user->set_status($_POST['status']);
             $new_user->create();
             $message = 'User Created';
+            //include_once __DIR__ . "/../view/frmusers.php";
             return $message;
+            
         }
     }
 
@@ -220,7 +234,7 @@ class UsersController extends User
 
     public function deleteuser()
     {
-        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $url = $_SERVER['REQUEST_SCHEME'] . '://';
             $url .= $_SERVER['HTTP_HOST'];
             $url .= $_SERVER['REQUEST_URI'];

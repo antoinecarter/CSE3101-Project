@@ -3,7 +3,12 @@ include __DIR__ . "/header.php";
 $usercontroller = new UsersController();
 if (isset($_POST['create_user'])) {
     $cred = $usercontroller->createuser();
+    header('Location: /CSE3101-Project/Users');
 }
+$orgcontroller = new OrganizationsController();
+$empcontroller = new EmployeesController();
+$orgs = $orgcontroller->orgList();
+$emps = $empcontroller->empList($_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +18,7 @@ if (isset($_POST['create_user'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new user</h2>
+        <h2>Create/Edit User Account</h2>
           
         </div>
         <div>
@@ -78,10 +83,21 @@ if (isset($_POST['create_user'])) {
             <span>Employee No.</span>
         <p>
             <label for="org_id"></label>
-            <input type="text" placeholder=" Enter Organization" name="org_id">
+            <select name="org_id">
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
+            </select>
            
             <label for="emp_no"></label>
-            <input type="text" placeholder=" Enter Employee No." name="emp_no">
+            <select name="emp_no" id="">
+                <option value="">--Attach Employee--</option>
+                <?php while($emps){ ?>
+                    <option value="<?php echo $emps['id']; ?>"><?php echo $emps['employee'];?></option>
+                <?php } ?>
+            </select>
             </p>
             <span>Can Create</span>
             <span>Can View</span>
@@ -89,12 +105,14 @@ if (isset($_POST['create_user'])) {
            <p>
             <label for="can_create"></label>
             <select name="can_create" id="">
+                <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
      
             <label for="can_view"></label>
             <select name="can_view" id="">
+            <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
@@ -102,6 +120,7 @@ if (isset($_POST['create_user'])) {
       
             <label for="can_update"></label>
             <select name="can_update" id="">
+            <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
@@ -112,18 +131,21 @@ if (isset($_POST['create_user'])) {
            <p>
             <label for="can_delete"></label>
             <select name="can_delete" id="">
+            <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
 
             <label for="can_verify"></label>
             <select name="can_verify" id="">
+            <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
         
             <label for="can_approve"></label>
             <select name="can_approve" id="">
+            <option value="">--Select--</option>
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>

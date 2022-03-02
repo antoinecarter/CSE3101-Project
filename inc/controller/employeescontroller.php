@@ -202,6 +202,11 @@
                     include_once __DIR__ . "/../view/edtemployees.php";
                     return $message;
                 }
+
+            public function empList($org_id){
+                $list = $this->employeesModel->findEmp($org_id);
+                return $list;
+            }
             
         }
         ?>

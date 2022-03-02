@@ -9,13 +9,17 @@
     $statement = $usercontroller->viewuser();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $orgcontroller = new OrganizationsController();
+    $empcontroller = new EmployeesController();
+    $orgs = $orgcontroller->orgList();
+    $emps = $empcontroller->empList($_SESSION['org_id']);
 ?>
 <div class = "edit-usr">
     <div><?php if(isset($cred)){ echo $cred;}?></div>
         <?php if(isset($row['id'])){?>
             <div>
     <form method="post" action="">
-        <h2>Update User</h2>
+        <h2>Create/Edit User Account</h2>
         <div>
             <p>
             <label for="id"></label>
@@ -79,10 +83,20 @@
             <span>Employee No.</span>
             <p>
             <label for="org_id"></label>
-            <input type="text" placeholder=" Enter Organization" name="org_id">
+            <select name="org_id">
+                <option value="">--Select Organization--</option>
 
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $row['org_id']; ?>" <?php if($row['org_id'] == $orgs['id']){ ?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
+            </select>
             <label for="emp_no"></label>
-            <input type="text" placeholder=" Enter Employee No." name="emp_no">
+            <select name="emp_no" id="">
+                <option value="">--Attach Employee--</option>
+                <?php while($emps){ ?>
+                    <option value="<?php echo $row['emp_no']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
+                <?php } ?>
+            </select>
             </p>
             <span>Can Create</span>
             <span>Can View</span>

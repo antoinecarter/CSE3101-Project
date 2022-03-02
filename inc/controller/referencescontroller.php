@@ -69,12 +69,6 @@
                     }
         
         
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
-                        return $message;
-                    }
-        
-        
                     if (empty($_POST['status'])) {
                         $message = 'Please input status';
                         return $message;
@@ -96,15 +90,15 @@
                     $new_references->set_status($_POST['status']);
                     $new_references->set_start_date($_POST['start_date']);
                     $new_references->create();
-                    $message = 'references Created';
+                    $message = 'Reference Created';
                     return $message;
             }
             }
         
             public function deleteref()
             {
-                {
-                    if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+                
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $url = $_SERVER['REQUEST_SCHEME'] . '://';
                         $url .= $_SERVER['HTTP_HOST'];
                         $url .= $_SERVER['REQUEST_URI'];
@@ -116,21 +110,21 @@
                         $id = $params['id'];
                         $statement = $this->referencesModel->getRefById($id);
                         $delref = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delref['id'] != $_SESSION['id']) {
-                            if (($delref['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delref['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->referencesModel->delete($id);
                                 $this->delreferences();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
-                        }
+                        }   
                     }
-                }
+                
             }
         
             public function viewref()
@@ -143,10 +137,10 @@
                 $url_components = parse_url($url);
                 if(isset($url_components['query'])){
                     parse_str($url_components['query'], $params);
-                };
-                $id = $params['id'];
-                $references = $this->referencesModel->getRefById($id);
-                return $references;
+                    $id = $params['id'];
+                    $references = $this->referencesModel->getRefById($id);
+                    return $references;
+                }  
             }
         
             public function viewrefs()
@@ -178,6 +172,11 @@
                     include_once __DIR__ . "/../view/edtreferences.php";
                     return $message;
                 }
+
+            public function refList($table_name, $org_id){
+                $list = $this->referencesModel->findRef($table_name, $org_id);
+                return $list;
+            }
             
         }
         ?>

@@ -1,9 +1,14 @@
 <?php
 include __DIR__ . "/header.php";
-$referencesModel = new ReferencesController();
-if (isset($_POST['create_ref'])) {
-    $cred = $referencesModel->createref();
+$refcontroller = new ReferencesController();
+if (isset($_POST['create_reference'])) {
+    $cred = $refcontroller->createref();
+    header('Location: /CSE3101-Project/References');
 }
+$orgcontroller = new OrganizationsController();
+
+$orgs = $orgcontroller->orgList();
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +18,7 @@ if (isset($_POST['create_ref'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new ref</h2>
+        <h2>Create/Edit Reference</h2>
           
         </div>
         <div>
@@ -21,71 +26,61 @@ if (isset($_POST['create_ref'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>Table Name</span1>
+            <span1>Table Description</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+            <label for="org_id"></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+            <label for="table_name" ></label>
+            <input type="text" placeholder="Enter Table Name" name="table_name" required>
+
+            <label for="table_desc" ></label>
+            <input type="text" placeholder="Enter Table Description" name="table_desc" required>
+           </p>
+           <span>Table Value</span>
+           <span>Value Description</span>   
            <p>
-            <label for="start_date">Effective From</label>
+            <label for="table_value" ></label>
+            <input type="text" placeholder="Enter Username" name="table_value" required>
+        
+            <label for="value_desc"></label>
+            <input type="password" placeholder="Enter Passcode" name="value_desc" required>
+            </p>
+            <span>Start Date</span>
+            <span>End Date</span>
+            <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
             </p>
+            <span>Status</span>
            <p>
-            <label for="status">Status</label>
+            <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>
             </select>
             </p>
+
            <p>
         </div>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_ref">Create</button> <?php } ?>
-      </p>
-        </div>
-        <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_reference">Create</button> <?php } ?>
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./References" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>

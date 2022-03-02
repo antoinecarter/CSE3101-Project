@@ -134,7 +134,7 @@
         }
 
         public function findEmp($org_id){
-            $this->connection->query('SELECT a.id, CONCAT(b.surname, ", ", b.first_name, ":- ", c.pos_name, " (Emp No: ", a.emp_no, ")") as employee FROM employees a inner join individuals b on a.ind_id = b.id inner join positions c on a.position_id = c.id WHERE org_id = :org_id and a.status = "VERIFY"');
+            $this->connection->query('SELECT a.id as id, CONCAT(b.surname, ", ", b.first_name, ":- ", c.pos_name, " (Emp No: ", a.emp_no, ")") as employee FROM employees a inner join individuals b on a.ind_id = b.id inner join positions c on a.position_id = c.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             $row = $statement->fetch(PDO::FETCH_ASSOC);
