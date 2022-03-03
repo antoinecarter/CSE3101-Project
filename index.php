@@ -37,7 +37,7 @@ $url .= $_SERVER['REQUEST_URI'];
 $url_components = parse_url($url);
 if(isset($url_components['query'])){
     parse_str($url_components['query'], $params);
-};
+}
 
 if ($path == "/CSE3101-Project/"){
     $usercontroller->log();
@@ -71,7 +71,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Attendance/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if(($_SESSION['role'] == 'ADMIN')){
             $attendancecontroller->edtattendance();
         }
     }
@@ -86,7 +86,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Absence/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $absencecontroller->edtabsence();
         }
     }
@@ -101,7 +101,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Address/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $addresscontroller->edtaddress();
         }
     }
@@ -117,7 +117,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Compyear/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $compyearcontroller->edtcompy();
         }
     }
@@ -134,7 +134,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Individuals/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $individualscontroller->edtindividuals();
         }
     }
@@ -149,7 +149,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Lateness/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $latenesscontroller->edtlateness();
         }
     }
@@ -165,7 +165,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Leavetrack/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $leavetrackcontroller->edtleavetrack();
         }
     }
@@ -181,7 +181,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $nationalidentifierscontroller->edtnationalidentifiers();
         }
     }
@@ -197,7 +197,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Orgstructure/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $orgstructurecontroller->edtorgstructure();
         }
     }
@@ -214,7 +214,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Units/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $unitscontroller->edtunits();
         }
     }
@@ -231,7 +231,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Timeclocks/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $timeclockscontroller->edttimeclocks();
         }
     }
@@ -248,7 +248,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Organizations/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $organizationscontroller->edtorganizations();
         }
     }
@@ -265,7 +265,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Positions/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $positionscontroller->edtpositions();
         }
     }
@@ -282,7 +282,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/References/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $referencescontroller->edtreferences();
         }
     }
@@ -299,7 +299,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Salary/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $salarycontroller->edtsalary();
         }
     }
@@ -316,7 +316,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Shifts/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $shiftscontroller->edtshifts();
         }
     }
@@ -333,7 +333,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Worklocations/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $worklocationscontroller->edtworklocations();
         }
     }
@@ -350,7 +350,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Leaverequests/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $leaverequestscontroller->edtleaverequests();
         }
     }
@@ -367,7 +367,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Leaveentitlemt/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $leaveentitlemtcontroller->edtleaveentitlemt();
         }
     }
@@ -385,7 +385,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Employees/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $employeescontroller->edtemployees();
         }
     }
@@ -402,7 +402,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Departments/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
+        if( ($_SESSION['role'] == 'ADMIN')){
             $departmentscontroller->edtdepartments();
         }
     }
