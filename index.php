@@ -109,7 +109,7 @@ if ($path == "/CSE3101-Project/"){
 
 } else if($path == "/CSE3101-Project/Compyear"){
     if(isset($_SESSION['id'])){
-        $ccompyearcontroller->tblcompy();
+        $compyearcontroller->tblcompy();
     }
 } else if ($path == "/CSE3101-Project/Compyear/Registration"){
     if(isset($_SESSION['id'])){
@@ -173,16 +173,16 @@ if ($path == "/CSE3101-Project/"){
 
 } else if($path == "/CSE3101-Project/NationalIdentifier"){
     if(isset($_SESSION['id'])){
-        $nationalidentifiercontroller->tblleavetrack();
+        $nationalidentifierscontroller->tblnationalidentifiers();
     }
 } else if ($path == "/CSE3101-Project/NationalIdentifier/Registration"){
     if(isset($_SESSION['id'])){
-        $nationalidentifiercontroller->frmleavetrack();
+        $nationalidentifierscontroller->frmnationalidentifiers();
     }
 } else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
         if(($_SESSION['id'] == $paras['id']) || ($_SESSION['role'] == 'ADMIN')){
-            $nationalidentifiercontroller->edtleavetrack();
+            $nationalidentifierscontroller->edtnationalidentifiers();
         }
     }
 

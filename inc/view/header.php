@@ -15,35 +15,48 @@
 
     <div id="mySidebar" class="sidebar">
       <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</b>
-      <button class="sidebar-dr">Departments ▼</button>
-      <div class="dropdown-contain">
-    <a href="./Departments">Departments</a>
-    <a href="./Units">Units</a>
-
-  </div>
       <button class="sidebar-dr">HR Config ▼</button>
       <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="./References">References</a>
+    <a href="./Organizations">Organizations</a>
+    <a href="./Compyear">Company Year</a>
+    <a href="./Worklocations">Work Locations</a>
+    <a href="./Shifts">Shifts</a>
   </div>
+
+    <button class="sidebar-dr">Organization Management▼</button>
+      <div class="dropdown-contain">
+    <a href="./Orgstructure">Organazation Structure</a>
+    <a href="./Departments">Departments</a>
+    <a href="./Units">Units</a>
+    <a href="./Positions">Positions</a>
+  </div>
+
       <button class="sidebar-dr">Employee Management ▼</button>
       <div class="dropdown-contain">
+    <a href="./Individuals">Individuals</a>
+    <a href="./Address">Address</a>
+    <a href="./NationalIdentifier">National Identifier</a>
       <a href="./Employees">Employees</a>
-
+      <a href="./Salary">Salary</a>
+    <a href="./Attendance">Attendance Det.</a>
+    <a href="./Leaveentitlemt">Leave Entitlement </a>
   </div>
+
       <button class="sidebar-dr">Attendance Management ▼</button>
       <div class="dropdown-contain">
-    <a href="./Attendance">Attendance</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="./Absence">Absence</a>
+    <a href="./Lateness">Lateness</a>
+    <a href="./Timeclocks">Timeclocks</a>
   </div>
+
       <button class="sidebar-dr">Leave Management ▼</button>
       <div class="dropdown-contain">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="./Leavetrack">Leave Track</a>
+    <a href="./Leaverequests">Leave Requests </a>
   </div>
+
+
     </div>
 
     <div id="main">

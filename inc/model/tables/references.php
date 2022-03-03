@@ -31,7 +31,7 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO references(org_id, table_name, table_desc, table_value, value_desc, status, start_date) 
+                $this->connection->query("INSERT INTO lookup(org_id, table_name, table_desc, table_value, value_desc, status, start_date) 
                                                 VALUES (:org_id, :table_name, :table_desc, :table_value, :value_desc,  :status, :start_date)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':table_name',$this->table_name);
@@ -52,16 +52,16 @@
         public function update($id, $d)
         {
             if($d['end_date'] == null){
-                $this->connection->query("UPDATE references SET end_date = NULL where id = :id");
+                $this->connection->query("UPDATE lookup SET end_date = NULL where id = :id");
                 $this->connection->bind(':id', $id);
                 $this->connection->execute();
             }else{
-                $this->connection->query("UPDATE references SET end_date = :end_date where id = :id");
+                $this->connection->query("UPDATE lookup SET end_date = :end_date where id = :id");
                 $this->connection->bind(':id', $id);
                 $this->connection->bind(':end_date', $this->remove_errors(date('Y-m-d', strtotime($d['end_date']))));
                 $this->connection->execute();
             }
-                $this->connection->query("UPDATE references 
+                $this->connection->query("UPDATE lookup 
                                         SET 
                                             org_id = :org_id, table_name = :table_name, table_desc = :table_desc, 
                                             table_value = :table_value, value_desc = :value_desc, start_date = :start_date, 
@@ -89,7 +89,7 @@
 
         public function delete($id)
         {
-            $this->connection->query( "DELETE FROM references WHERE id= :id");
+            $this->connection->query( "DELETE FROM lookup WHERE id= :id");
             $this->connection->bind(':id', $id);
             try{
                 $this->connection->execute();
@@ -103,7 +103,7 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM references");
+                $this->connection->query("SELECT * FROM lookup");
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -112,7 +112,7 @@
 
         public function findRef($table_name, $org_id){
             $table_name = $this->remove_errors($table_name);
-            $this->connection->query("SELECT table_value, value_desc FROM references WHERE table_name = :table_name and org_id = :org_id");
+            $this->connection->query("SELECT table_value, value_desc FROM lookup WHERE table_name = :table_name and org_id = :org_id");
             $this->connection->bind(':table_name', $table_name);
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
@@ -121,7 +121,7 @@
         }
 
         public function getRefById($id){
-            $this->connection->query('SELECT * FROM references WHERE id = :id');
+            $this->connection->query('SELECT * FROM lookup WHERE id = :id');
             $this->connection->bind(':id', $id);
             $row = $this->connection->getStatement();
     

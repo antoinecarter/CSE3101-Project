@@ -92,8 +92,10 @@
                     $new_shifts->set_shift_code($_POST['shift_code']);
                     $new_shifts->set_start_time($_POST['start_time']);
                     $new_shifts->set_end_time($_POST['end_time']);
+                    $new_shifts->set_shift_hours($_POST['shift_hours']);
                     $new_shifts->set_lunch_start($_POST['lunch_start']);
                     $new_shifts->set_lunch_end($_POST['lunch_end']);
+                    $new_shifts->set_lunch_hours($_POST['lunch_hours']);
                     $new_shifts->set_start_date($_POST['start_date']);
                     $new_shifts->set_end_date($_POST['end_date']);
                     $new_shifts->set_status($_POST['status']);
@@ -167,12 +169,15 @@
                     $update_shift = new Shift();
                     $d = array(
                         'id'            => $_REQUEST['id'],
+                        'org_id'            => $_REQUEST['org_id'],
                         'shift_type'        => $_REQUEST['shift_type'],
                         'shift_code'     => $_REQUEST['shift_code'],
                         'start_time'     => $_REQUEST['start_time'],
                         'end_time'    => $_REQUEST['end_time'],
+                        'shift_hours'    => $_REQUEST['shift_hours'],
                         'lunch_start'            => $_REQUEST['lunch_start'],
                         'lunch_end'            => $_REQUEST['lunch_end'],
+                        'lunch_hours'            => $_REQUEST['lunch_hours'],
                         'start_date'            => $_REQUEST['start_date'],
                         'end_date'            => $_REQUEST['end_date'],
                         'status'            => $_REQUEST['status']

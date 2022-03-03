@@ -46,7 +46,7 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <script src="./js/script.js"></script>
+           
         </tbody>
     </table>
 </div>

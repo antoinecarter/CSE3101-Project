@@ -64,7 +64,12 @@ class AttendanceController extends AttendanceDetail
             }
 
             if (empty($_POST['start_date'])) {
-                $message = 'Please input Date';
+                $message = 'Please input start Date';
+                return $message;
+            }
+
+            if (empty($_POST['end_date'])) {
+                $message = 'Please input end Date';
                 return $message;
             }
 
@@ -74,6 +79,7 @@ class AttendanceController extends AttendanceDetail
             $new_attendance->set_rule_option($_POST['rule_option']);
             $new_attendance->set_rule_value($_POST['rule_value']);
             $new_attendance->set_start_date($_POST['start_date']);
+            $new_attendance->set_end_date($_POST['end_date']);
             $new_attendance->create();
 
             $message = 'Attendance Created';
