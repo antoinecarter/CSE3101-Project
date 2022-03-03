@@ -63,11 +63,6 @@ class NationalidentifiersController extends NationalIdentifier
                 return $message;
             }
 
-            if (empty($_POST['end_date'])) {
-                $message = 'Please input end date';
-                return $message;
-            }
-
             $new_nationalidentifiers = new NationalIdentifier();
             $new_nationalidentifiers->set_org_id($_POST['org_id']);
             $new_nationalidentifiers->set_ind_id($_POST['ind_id']);
@@ -102,7 +97,7 @@ class NationalidentifiersController extends NationalIdentifier
                 if ($delnationalidentifiers['id'] != $_SESSION['id']) {
                     if (($delnationalidentifiers['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                         $message = $this->nationalidentifiersModel->delete($id);
-                        $this->delnationalidentifiers();
+                        $this->delnationalidentifiers($params);
                         return $message;
                     } else {
                         $message = 'User is an Admin/You are not an Admin';

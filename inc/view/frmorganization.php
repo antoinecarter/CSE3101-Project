@@ -54,8 +54,8 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
             <select name="country" required>
                 <option value="">--Select Country--</option>
                 
-                <?php while($countries){ ?>
-                    <option value="<?php echo $countries['value_desc']; ?>"><?php echo $countries['value_desc'];?></option>
+                <?php while($country = $countries->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $country['value_desc']; ?>"><?php echo $country['value_desc'];?></option>
                 <?php } ?>
             </select>
             </p>
@@ -90,8 +90,8 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
 

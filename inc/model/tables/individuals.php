@@ -109,7 +109,7 @@
         
 
         public function findIndividual($org_id){
-            $this->connection->query('SELECT id, CONCAT(surname, ", ", first_name, ":-(DOB: ", date_format(date_of_birth, "%d-%b-%Y"), ")(", sex, ")") as Individual FROM individuals WHERE org_id = :org_id');
+            $this->connection->query('SELECT a.id as id, CONCAT(a.surname, ", ", a.first_name, ":-(DOB: ", date_format(a.date_of_birth, "%d-%b-%Y"), ")(", a.sex, ")") as individual FROM individuals a WHERE org_id = :org_id');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -122,6 +122,18 @@
             $row = $this->connection->getStatement();
     
             return $row;
+        }
+
+        public function alreadyexist($surname, $first_name){
+            $this->connection->query('SELECT * FROM individuals WHERE surname=:surname and first_name=:first_name');
+            $this->connection->bind(':surname', $surname);
+            $this->connection->bind(':first_name', $first_name);
+            $row = $this->connection->getStatement();
+            if($row->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public function verify($id)

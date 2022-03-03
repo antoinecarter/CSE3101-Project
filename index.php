@@ -96,11 +96,11 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $addresscontroller->tbladdress();
     }
-} else if ($path == "/CSE3101-Project/Address/Registration"){
+} else if ($path == "/CSE3101-Project/Address/Registration?parent_id=".$params['parent_id']."&id=".$params['id']){
     if(isset($_SESSION['id'])){
         $addresscontroller->frmaddress();
     }
-} else if($path == ('/CSE3101-Project/Address/Registration/Edit?id='.$params['id'])){
+} else if($path == ("/CSE3101-Project/Address/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $addresscontroller->edtaddress();

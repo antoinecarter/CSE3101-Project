@@ -94,7 +94,7 @@
             <select name="emp_no" id="">
                 <option value="">--Attach Employee--</option>
                 <?php while($emps){ ?>
-                    <option value="<?php echo $emps['id']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
+                    <option value="<?php echo $emps['emp_no']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
                 <?php } ?>
             </select>
             </p>

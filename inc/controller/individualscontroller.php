@@ -43,11 +43,11 @@
                         if (empty($_POST['org_id'])) {
                             $message = 'Please enter Orginazation id';
                             return $message;
-                        }else {
-                            if ($this->individualsModel->findIndividual($_POST['org_id'])) {
-                                $message = 'Username already exist';
-                                return $message;
-                            }
+                        }
+
+                        if($this->individualsModel->alreadyexist($_POST['surname'], $_POST['first_name'])){
+                            $message = 'Individual already exist';
+                            return $message;
                         }
             
                         if (empty($_POST['first_name'])) {
@@ -103,7 +103,7 @@
                         }
             
                         $new_individuals = new Individual();
-                        $new_individuals->set_org_id($_POST['org_id']);
+                        $new_individuals->set_org_id($_SESSION['org_id']);
                         $new_individuals->set_first_name($_POST['first_name']);
                         $new_individuals->set_surname($_POST['surname']);
                         $new_individuals->set_sex($_POST['sex']);
@@ -134,17 +134,17 @@
                             $id = $params['id'];
                             $statement = $this->individualsModel->getIndById($id);
                             $delindv = $statement->fetch(PDO::FETCH_ASSOC);
-                            if ($delindv['id'] != $_SESSION['id']) {
-                                if (($delindv['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                            if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                                if (in_array($delindv['status'], array('UNVERIFY', 'KEYED'))){
                                     $message = $this->individualsModel->delete($id);
                                     $this->delindividuals();
                                     return $message;
                                 } else {
-                                    $message = 'User is an Admin/You are not an Admin';
+                                    $message = 'Cannot delete verified record!';
                                     return $message;
                                 }
                             } else {
-                                $message = 'Error! Cannot delete logged-in user';
+                                $message = 'Not permitted to delete record!';
                                 return $message;
                             }
                         }
@@ -198,6 +198,9 @@
                         include_once __DIR__ . "/../view/edtindividuals.php";
                         return $message;
                     }
-                
+                public function individualsList($org_id){
+                    $list= $this->individualsModel->findIndividual($org_id);
+                    return $list;
+                }
             }
             ?>

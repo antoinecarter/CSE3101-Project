@@ -34,8 +34,8 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id'];?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -49,10 +49,10 @@ $orgs = $orgcontroller->orgList();
            <span>Value Description</span>   
            <p>
             <label for="table_value" ></label>
-            <input type="text" placeholder="Enter Username" name="table_value" required>
+            <input type="text" placeholder="Enter Table Value" name="table_value" required>
         
             <label for="value_desc"></label>
-            <input type="password" placeholder="Enter Passcode" name="value_desc" required>
+            <input type="text" placeholder="Enter Value Description" name="value_desc" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
@@ -68,8 +68,8 @@ $orgs = $orgcontroller->orgList();
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
 

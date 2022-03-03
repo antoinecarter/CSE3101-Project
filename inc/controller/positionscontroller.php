@@ -147,17 +147,17 @@
                         $id = $params['id'];
                         $statement = $this->positionsModel->getPosById($id);
                         $delpos = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delpos['id'] != $_SESSION['id']) {
-                            if (($delpos['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delpos['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->positionsModel->delete($id);
                                 $this->delpositions();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }

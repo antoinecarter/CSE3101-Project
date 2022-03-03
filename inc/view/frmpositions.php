@@ -22,7 +22,7 @@ $wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create/Edit Units</h2>
+        <h2>Create/Edit Positions</h2>
           
         </div>
         <div>
@@ -113,8 +113,8 @@ $wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?> <?php } ?>
             </select>
             </p>
         </div>

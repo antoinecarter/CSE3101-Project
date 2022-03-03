@@ -1,105 +1,137 @@
 <?php
     include __DIR__."/header.php";
-    $individualsModel = new IndividualsController();
+    $individualscontroller = new IndividualsController();
     if(isset($_POST['update_indv'])){
-        $cred = $individualsModel->updateindv();
+        $cred = $individualscontroller->updateindv();
     }else if (isset($_POST['delete_indv'])){
-        $cred = $individualsModel->deleteindv();
+        $cred = $individualscontroller->deleteindv();
     }
-    $statement = $individualsModel->viewindv();
+    $statement = $individualscontroller->viewindv();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $orgcontroller = new OrganizationsController();
+    $orgs = $orgcontroller->orgList();
+    $refcontroller = new ReferencesController();
+    $sex = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
+    $nationality = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
+    $ethnicity = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
+    $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
+
+    $addresscontroller = new AddressController();
+    $natidcontroller = new NationalidentifiersController();
+
 ?>
-<div class = "edit-usr">
-    <div><?php if(isset($cred)){ echo $cred;}?></div>
-        <?php if(isset($row['id'])){?>
-            <div>
+<div class = "form-usr">
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
     <form method="post" action="">
-        <h2>Update Individual</h2>
         <div>
-            <p>
+        <h2>Create/Edit Individual</h2>
+          
+        </div>
+        <div>
+                 <p>
             <label for="id"></label>
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>First Name</span1>
+            <span1>Surname</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
+            <label for="org_id" ></label>
+            <select name="org_id" readonly required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($orgs){ ?>
+                        <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                    <?php } ?>
+                </select>
+
+            <label for="first_name" ></label>
+            <input type="text" placeholder="Enter First Name" name="first_name" value="<?php echo $row['first_name'];?>" required>
+        
+            <label for="surname"></label>
+            <input type="text" placeholder="Enter Surname" name="surname" value="<?php echo $row['surname'];?>" required>
            </p>
+           <span>Sex</span>
+           <span>D.O.B</span>   
+           <span>Place of Birth</span>   
            <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode">
-           </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
-                <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
+            <label for="sex" ></label>
+            <select name="sex" required>
+                <option value="">--Select Sex--</option>
+                
+                <?php while($sex){ ?>
+                    <option value="<?php echo $sex['value_desc']; ?>"><?php echo $sex['value_desc'];?></option>
+                <?php } ?>
+            </select>
+        
+            <label for="date_of_birth"></label>
+            <input type="date" placeholder="Enter Position Name" name="date_of_birth" value="<?php echo $row['date_of_birth'];?>" required>
+
+            <label for="place_of_birth"></label>
+            <select name="place_of_birth" required>
+                <option value="">--Select Place of Birth--</option>
+                
+                <?php while($pob){ ?>
+                    <option value="<?php echo $pob['value_desc']; ?>" <?php if($row['place_of_birth'] == $pob['value_desc']){ ?> selected <?php }?> ><?php echo $pob['value_desc'];?></option>
+                <?php } ?>
             </select>
             </p>
+
+            <span>Email</span>
+           <span>Nationality</span>   
+           <span>Ethnicity</span>   
            <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-                <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
-                <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
-                <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option>
+           <label for="email"></label>
+            <input type="text" placeholder="Enter Lower Salary Limit" name="email" value="<?php echo $row['email'];?>" required>
+
+            <label for="nationality"></label>
+            <select name="nationality" required>
+                <option value="">--Select Nationality--</option>
+                
+                <?php while($nationality){ ?>
+                    <option value="<?php echo $nationality['value_desc']; ?>" <?php if($row['nationality'] == $nationality['value_desc']){ ?> selected <?php }?>><?php echo $nationality['value_desc'];?></option>
+                <?php } ?>
             </select>
-        </div>
-        </p>
-           <p>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
+            <label for="ethnicity"></label>
+            <select name="ethnicity" required>
+                <option value="">--Select ethnicity--</option>
+                
+                <?php while($ethnicity){ ?>
+                    <option value="<?php echo $ethnicity['value_desc']; ?>" <?php if($row['ethnicity'] == $ethnicity['value_desc']){ ?> selected <?php }?>><?php echo $ethnicity['value_desc'];?></option>
+                <?php } ?>
+            </select>
+    
+            <span>Status</span>
             <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
+            <label for="status"></label>
+            <select name="status" id="" required>
+            <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
+                <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option> <?php } ?>
+            </select>
             </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-  
-           
         </div>
-        <?php } ?>
+        <div style="height:100px;"></div>
         <div>
                 <button type="submit" name="update_indv">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_indv"> Delete</button></a> <?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Individuals/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_indv"> Delete</button></a> <?php } ?>
  
- 
-            </div>
+            </div>>
+  
+        
     </form>
-    <?php } ?>
     <div>
-                
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Individuals" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
-    </div>
-    
-    
-    
 </div>
 
 <?php
+
     include_once __DIR__."/footer.php";
 ?>

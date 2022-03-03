@@ -68,6 +68,7 @@ class UsersController extends User
                     $_SESSION['pass'] = $valid['passcode'];
                     $_SESSION['role'] = $valid['role'];
                     $_SESSION['org_id'] = $valid['org_id'];
+                    $_SESSION['emp_no'] = $valid['emp_no'];
                     $_SESSION['can_create'] = $valid['can_create'];
                     $_SESSION['can_view'] = $valid['can_view'];
                     $_SESSION['can_update'] = $valid['can_update'];
@@ -274,6 +275,11 @@ class UsersController extends User
         $id = $_SESSION['id'];
         $ver = $this->userModel->verify($id);
         return $ver;
+    }
+
+    public function userList(){
+        $list = $this->userModel->findUser();
+        return $list;
     }
 }
 

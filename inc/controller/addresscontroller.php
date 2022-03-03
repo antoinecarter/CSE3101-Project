@@ -40,7 +40,7 @@ class AddressController extends Address
             include_once __DIR__ . "/../view/frmaddress.php";
         } else {
             if (empty($_POST['org_id'])) {
-                $message = 'Please enter Organization ID';
+                $message = 'Please enter Organization';
                 return $message;
             } 
 
@@ -81,11 +81,6 @@ class AddressController extends Address
 
             if (empty($_POST['start_date'])) {
                 $message = 'Please input start date';
-                return $message;
-            }
-
-            if (empty($_POST['end_date'])) {
-                $message = 'Please input end date';
                 return $message;
             }
 

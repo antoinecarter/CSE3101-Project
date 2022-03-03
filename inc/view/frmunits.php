@@ -85,8 +85,8 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
         </div>

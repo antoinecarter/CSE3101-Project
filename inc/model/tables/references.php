@@ -116,8 +116,8 @@
             $this->connection->bind(':table_name', $table_name);
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            //$row = $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement;
         }
 
         public function getRefById($id){
