@@ -226,7 +226,8 @@ a {
     top: 0;
     left: 0;
     background-color: #15172b;
-    overflow-x: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
     transition: 0.5s;
     padding-top: 60px;
 }
@@ -424,10 +425,11 @@ a {
     width: 100%;
 }
 
-.tblfx thead th {
-    position: sticky;
+.tblfx thead tr th {
+    position: -webkit-sticky;
     top: 0;
     padding: 8px 16px;
+    z-index: 0;
     border: 2px solid #ccc;
     background-color: #15172b;
     background: #15172b;
