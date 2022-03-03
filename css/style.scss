@@ -547,6 +547,23 @@ a {
     transition: all 0.35s ease-in-out;
 }
 
+.form-usr p input[type="time"] {
+    width: 240px;
+    height: 37px;
+    margin-right: 22px;
+    padding-left: 32px;
+    margin-top: 0px;
+    font-size: 17px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
 .form-usr p input::placeholder {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;

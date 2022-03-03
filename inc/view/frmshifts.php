@@ -53,7 +53,7 @@ $orgs = $orgcontroller->orgList();
            </p>
             <span>Start Time</span>
             <span>End Time</span>
-            <span>Shift Hours</span>
+            <span>Shift Hrs</span>
             <p>
             <label for="start_time"></label>
             <input type="time" name="start_time" required>
@@ -67,7 +67,7 @@ $orgs = $orgcontroller->orgList();
 
             <span>Lunch Start</span>
             <span>Lunch End</span>
-            <span>Lunch Hours</span>
+            <span>Lunch Hrs</span>
             <p>
             <label for="lunch_start"></label>
             <input type="time" name="lunch_start" required>
@@ -81,14 +81,15 @@ $orgs = $orgcontroller->orgList();
 
             <span>Start Date</span>
             <span>End Date</span>
-            <span>Status</span>
             <p>
             <label for="start_date"></label>
             <input type="date" name="start_date" required>
         
             <label for="end_date"></label>
             <input type="date" name="end_date">
-            
+                </p>
+            <span>Status</span>
+            <p>
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>

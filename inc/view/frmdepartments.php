@@ -30,7 +30,7 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             </p>
             <span1>Organization</span1>                                                   
             <span1>Org Structure Name</span1>
-            <span1>Parent Department</span1>  
+            <span1>Parent Dept.</span1>  
            <p>
             <label for="org_id" ></label>
             <select name="org_id" required>
@@ -59,9 +59,9 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
                 <?php } ?>
             </select>
            </p>
-           <span>Department Code</span>
-           <span>Department Name</span>   
-           <span>Department Level</span>   
+           <span>Dept. Code</span>
+           <span>Dept. Name</span>   
+           <span>Dept. Level</span>   
            <p>
             <label for="dept_code" ></label>
             <input type="text" placeholder="Enter Department Code" name="dept_code" required>
@@ -74,14 +74,15 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             </p>
             <span>Start Date</span>
             <span>End Date</span>
-            <span>Status</span>
-            <p>
+         <p>
             <label for="start_date"></label>
             <input type="date" name="start_date" required>
         
             <label for="end_date"></label>
             <input type="date" name="end_date">
-
+            </p>
+            <span>Status</span>
+                <p>
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>

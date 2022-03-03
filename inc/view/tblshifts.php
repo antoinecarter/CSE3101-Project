@@ -12,12 +12,12 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Salary</h5>
+    <h5>Shifts</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Salary
-        <a href="./Salary/Registration"><button>Add Sal.</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Salary: <?php echo $num_rows; ?></a>
+        <h2>Listing of Shifts
+        <a href="./Shifts/Registration"><button>Add Shift</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Shifts: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
@@ -43,7 +43,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Salary/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><a href="./Shifts/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['org_id']; ?></td>
                     <td><?php echo $row['shift_type']; ?></td>
                     <td><?php echo $row['shift_code']; ?></td>
