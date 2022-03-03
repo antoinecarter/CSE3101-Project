@@ -13,7 +13,7 @@ if (isset($_POST['create_emp'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create Employee</h2>
+        <h2>Create/Edit Employee</h2>
           
         </div>
         <div>
@@ -21,75 +21,98 @@ if (isset($_POST['create_emp'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization Id</span1>                                                   
+            <span1>Employee No.</span1>
+            <span1>Individual Id</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-            </p>
+           <label for="org_id"></label>
+            <input type="text" placeholder="Enter Payment Frequency" name="org_id" required>
+
+           <label for="emp_no"></label>
+            <input type="text" placeholder="Enter Payment Frequency" name="emp_no" required>
+
+           <label for="ind_id"></label>
+            <input type="text" placeholder="Enter Payment Frequency" name="ind_id" required>
+
+           </p>
+           <span style=" padding-left: 90px;">Position Id</span>
+           <span>Payment Freq.</span>   
+           <span>Employee Type</span>   
            <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+            <label for="position_id" ></label>
+            <input type="text" placeholder="Enter Position Id" name="position_id" required>
+        
+            <label for="payment_frequency"></label>
+            <input type="text" placeholder="Enter Payment Frequency" name="payment_frequency" required>
+
+            <select name="emp_type" id="" required>
+                <option value="KEYED">Keyed</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
-           <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" required>
+            <span style="padding-left: 20px;">Employee Status</span>
+            <span style="margin-right: 40px;">Employee Date</span>
+            <span>Annual Leave Date</span>
+         <p>
+
+         <select name="emp_status" id="" required>
+                <option value="KEYED">Keyed</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
+            </select>
+
+            <label for="emp_date"></label>
+            <input type="date" name="emp_date" required>
+        
+            <label for="ann_leave_date"></label>
+            <input type="date" name="ann_leave_date">
             </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date">
+            <span style="margin-right: 40px;">Rate of Pay</span>
+            <span style="margin-right: 40px;">Seperation Status</span>
+            <span>Seperation Date</span>
+                <p>
+            <label for="rate_of_pay"></label>
+            <input type="text" placeholder="Enter Rate of Pay " name="rate_of_pay" required>
+            
+            <select name="separation_status" id="" required>
+                <option value="KEYED">Keyed</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
+            </select>
+
+            <label for="separation_date"></label>
+            <input type="date" name="separation_date" required>
+
             </p>
-           <p>
-            <label for="status">Status</label>
+            <span>Shift Id</span>
+            <span>Status</span>
+                <p>
+                <label for="shift_id"></label>
+            <input type="text" placeholder="Enter Shift Id" name="shift_id" required>
+
+            <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
-           <p>
         </div>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
+        <div style="height:30px;"></div>
+        
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-  
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_emp">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_emp">Create</button> <?php } ?>
+
       </p>
-        </div>
-        <?php } ?>
+  
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Employees" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
-
 <?php
 include_once __DIR__ . "/footer.php";
 ?>

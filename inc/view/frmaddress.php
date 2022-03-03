@@ -3,7 +3,7 @@ include __DIR__ . "/header.php";
 $addresscontroller = new AddressController();
 if (isset($_POST['create_address'])) {
     $cred = $addresscontroller->createaddress();
-}
+
 
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
@@ -30,6 +30,7 @@ foreach($individuals as $individual){
         $ind_id =  $individual['id'];
     }
 }*/
+}
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -49,6 +50,7 @@ foreach($individuals as $individual){
             </p>
             <span1>Organization</span1>                                                   
             <span1>Individual</span1> 
+           <span>Address Type</span>
            <p>
             <label for="org_id" ></label>
             <select name="org_id" readonly required>
@@ -65,33 +67,16 @@ foreach($individuals as $individual){
                         <option value="<?php echo $individuals['id']; ?>"><?php echo $individuals['individual'];?></option>
                     <?php } ?>
                 </select>
-           </p>
-           <span>Address Type</span>
-           <span>Lot</span>       
-           <p>
-            <select name="address_type" id="">
+                <select name="address_type" id="">
                 <option value="HOME">HOME</option>
                 <option value="WORK">WORK</option>
             </select>
-           <label for="lot" ></label>
-            <input type="text" placeholder="Enter Lot" name="lot" required>
            </p>
-           <span>Address Line 1</span>
-           <span>Address Line 2</span>
-           <span>Address Line 3</span>
-           <label for="address_line1"></label>
-            <input type="text" placeholder="Enter Address Line 1" name="address_line1" required>
-
-            <label for="address_line2"></label>
-            <input type="text" placeholder="Enter Address Line 2" name="address_line2" required>
-
-            <label for="address_line3"></label>
-            <input type="text" placeholder="Enter Address Line 3" name="address_line3">
+           
            <span>Country</span>
-           <span>Start Date</span>   
-           <span>End Date</span>   
+           <span>Lot</span>       
            <p>
-            <label for="country" ></label>
+           <label for="country" ></label>
             <select name="country" required>
                 <option value="">--Select Country--</option>
                 
@@ -100,6 +85,27 @@ foreach($individuals as $individual){
                 <?php } ?>
             </select>
 
+           <label for="lot" ></label>
+            <input type="text" placeholder="Enter Lot" name="lot" required>
+           </p>
+           <span>Add. Line 1</span>
+           <span>Add. Line 2</span>
+           <span>Add. Line 3</span>
+           <p>
+           <label for="address_line1"></label>
+            <input type="text" placeholder="Enter Address Line 1" name="address_line1" required>
+
+            <label for="address_line2"></label>
+            <input type="text" placeholder="Enter Address Line 2" name="address_line2" required>
+
+            <label for="address_line3"></label>
+            <input type="text" placeholder="Enter Address Line 3" name="address_line3">
+                    </p>
+           <span>Start Date</span>   
+           <span>End Date</span>   
+           <p>
+
+
             <label for="start_date"></label>
             <input type="date" name="start_date" required>
         
@@ -107,7 +113,7 @@ foreach($individuals as $individual){
             <input type="date" name="end_date">
             </p>
         </div>
-        <div style="height:100px;"></div>
+        <div style="height:30px;"></div>
         
            <p>
       <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_address">Create</button> <?php } ?>
