@@ -37,16 +37,16 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>" <?php if($row['org_id'] == $orgs['id']){ ?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id'];?>" <?php if($row['org_id']==$org['id']){?> <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
             <label for="table_name" ></label>
-            <input type="text" placeholder="Enter Table Name" name="table_name" value="<?php $row['table_name']; ?>" required>
+            <input type="text" placeholder="TBL..." name="table_name" value="<?php $row['table_name']; ?>" required>
 
             <label for="table_desc" ></label>
-            <input type="text" placeholder="Enter Table Description" name="table_desc" value="<?php $row['table_desc']; ?>" required>
+            <input type="text" placeholder="Listing of ..." name="table_desc" value="<?php $row['table_desc']; ?>" required>
            </p>
            <span>Table Value</span>
            <span>Value Description</span>   
