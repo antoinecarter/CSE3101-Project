@@ -28,6 +28,7 @@ require_once __DIR__ . "/inc/controller/employeescontroller.php";
 
 require_once __DIR__. "/inc/view/inc.php";
 
+$params = ['parent_id' => '', 'id' => ''];
 
 $path = $_SERVER["REQUEST_URI"];
 $url = $_SERVER['REQUEST_SCHEME'] . '://';
