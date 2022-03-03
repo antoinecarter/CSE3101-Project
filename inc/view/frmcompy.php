@@ -34,8 +34,8 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -46,8 +46,8 @@ $orgs = $orgcontroller->orgList();
             <select name="payment_frequency" required>
                 <option value="">--Select Payment Frequency--</option>
                 
-                <?php while($payfreq){ ?>
-                    <option value="<?php echo $payfreq['value_desc']; ?>"><?php echo $payfreq['value_desc'];?></option>
+                <?php while($pf = $payfreq->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $pf['value_desc']; ?>"><?php echo $pf['value_desc'];?></option>
                 <?php } ?>
             </select>
            </p>
@@ -66,13 +66,13 @@ $orgs = $orgcontroller->orgList();
         <div style="height:100px;"></div>
         
            <p>
-      <?php if($_SESSION['role']=='ADMIN' && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN' && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_compyr">Create</button> <?php } ?>
 
       </p>
         
     </form>
     <div>
-    <a href="./Users" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
+    <a href="./Compyear" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>

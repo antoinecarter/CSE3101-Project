@@ -38,8 +38,8 @@
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -50,8 +50,8 @@
             <select name="payment_frequency" required>
                 <option value="">--Select Payment Frequency--</option>
                 
-                <?php while($payfreq){ ?>
-                    <option value="<?php echo $payfreq['value_desc']; ?>" <?php if($row['payment_frequency'] == $payfreq['value_desc']){ ?> selected <?php }?>><?php echo $payfreq['value_desc'];?></option>
+                <?php while($pf = $payfreq->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $pf['value_desc']; ?>"<?php if($row['payment_frequency'] == $pf['value_desc']){?> selected <?php } ?>><?php echo $pf['value_desc'];?></option>
                 <?php } ?>
             </select>
            </p>

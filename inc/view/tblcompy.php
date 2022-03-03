@@ -3,6 +3,9 @@ include __DIR__ . "/header.php";
 $compyearcontroller = new CompyearController();
 $statement = $compyearcontroller->viewcompyrs();
 $num_rows = $statement->rowCount();
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+$org = $orgs->fetch(PDO::FETCH_ASSOC);
 ?>
 <div class="breadcrumb">
     <?php 
@@ -25,7 +28,7 @@ $num_rows = $statement->rowCount();
             <thead>
                 <tr>
                 <th>Edit</th>
-                <th>Organization Id</th>
+                <th>Organization</th>
                 <th>Year</th>
                 <th>Start Year</th>
                 <th>End Year</th>
@@ -41,10 +44,10 @@ $num_rows = $statement->rowCount();
                 ?>
                 <tr>
                     <td><a href="./Compyear/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
-                    <td><?php echo date_format(date_create($row['year']), "Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['start_year']), "Y"); ?></td>
-                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_year']), "Y");}else{ echo '-';} ?></td>
+                    <td><?php if($row['org_id'] == $org['id']){ echo $org['full_name']; }?></td>
+                    <td><?php echo $row['year']; ?></td>
+                    <td><?php echo date_format(date_create($row['start_year']), "d-M-Y"); ?></td>
+                    <td><?php echo date_format(date_create($row['end_year']),"d-M-Y");?></td>
                     <td><?php echo $row['payment_frequency']; ?></td>
                 </tr>
             <?php } ?>
