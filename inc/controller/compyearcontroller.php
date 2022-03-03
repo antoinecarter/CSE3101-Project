@@ -39,6 +39,10 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmacompy.php";
                 } else {
+                    if($this->compyearModel->findYearAndPayfreq($_POST['year'], $_POST['payment_frequency'])){
+                        $message = "Year and Payment Frequency Already Exists";
+                        return $message;
+                    }
                     if (empty($_POST['org_id'])) {
                         $message = 'Please enter Organization';
                         return $message;

@@ -99,6 +99,19 @@
             return $statement;
         }
 
+        public function findYearAndPayfreq($year, $pf){
+            $this->connection->query("SELECT year, payment_frequency FROM companyyear where year = :year and payment_frequency = :payment_frequency");
+            $this->connection->bind(':year', $year);
+            $this->connection->bind(':payment_frequency', $pf);
+            $this->connection->execute();
+            if($this->connection->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }
+
         public function getCompYearById($id){
             $this->connection->query('SELECT * FROM companyyear WHERE id = :id');
             $this->connection->bind(':id', $id);

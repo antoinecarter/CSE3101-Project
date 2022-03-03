@@ -9,7 +9,7 @@ include __DIR__."/header.php";
     <div class="wrapper">
 
         <a class="box-e" href ="./Departments">Departments <br><br><br><br>Outline the departments that your organization is split into</a>
-        <a class="box-e" href ="./Absence">Absence <br><br><br><br>See lising of employee absences</a>
+        <a class="box-e" href ="./Absence">Absence <br><br><br><br>See listing of employee absences</a>
         <a class="box-e" href ="./Units">Units <br><br><br><br>Derive your units from the departments</a>
         <a class="box-e" href ="./Positions">Positions <br><br><br><br>Create positions and attach them to units</a>
         <a class="box-e" href ="./Shifts">Shifts <br><br><br><br>View shifts configured in the system</a>
