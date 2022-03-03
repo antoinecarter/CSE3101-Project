@@ -87,14 +87,14 @@
                 <option value="">--Select Organization--</option>
 
                 <?php while($orgs){ ?>
-                    <option value="<?php echo $row['org_id']; ?>" <?php if($row['org_id'] == $orgs['id']){ ?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                    <option value="<?php echo $orgs['id']; ?>" <?php if($row['org_id'] == $orgs['id']){ ?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
                 <?php } ?>
             </select>
             <label for="emp_no"></label>
             <select name="emp_no" id="">
                 <option value="">--Attach Employee--</option>
                 <?php while($emps){ ?>
-                    <option value="<?php echo $row['emp_no']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
+                    <option value="<?php echo $emps['id']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
                 <?php } ?>
             </select>
             </p>

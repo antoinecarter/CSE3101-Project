@@ -1,15 +1,15 @@
 <?php
 include __DIR__ . "/header.php";
-$departmentsModel = new DepartmentsController();
+$departmentscontroller = new DepartmentsController();
 if (isset($_POST['create_dpt'])) {
-    $cred = $departmentsModel->createdpt();
+    $cred = $departmentscontroller->createdpt();
 }
 
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 $orgstructcontroller = new OrgstructureController();
 $orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
-$depts= $departmentsModel->deptList($_SESSION['org_id']);
+$depts= $departmentscontroller->deptList($_SESSION['org_id']);
 
 ?>
 <div class = "form-usr">
@@ -67,10 +67,10 @@ $depts= $departmentsModel->deptList($_SESSION['org_id']);
             <input type="text" placeholder="Enter Department Code" name="dept_code" required>
         
             <label for="dept_name"></label>
-            <input type="password" placeholder="Enter Department Name" name="dept_name" required>
+            <input type="text" placeholder="Enter Department Name" name="dept_name" required>
 
             <label for="dept_level"></label>
-            <input type="password" placeholder="Enter Department Level" name="dept_level" required>
+            <input type="text" placeholder="Enter Department Level" name="dept_level" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
@@ -97,7 +97,6 @@ $depts= $departmentsModel->deptList($_SESSION['org_id']);
 
       </p>
   
-        </div>
         
     </form>
     <div>

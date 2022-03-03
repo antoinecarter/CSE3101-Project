@@ -87,17 +87,17 @@ class OrgstructureController extends Orgstructure
                 $id = $params['id'];
                 $statement = $this->orgstructureModel->getOrgStructById($id);
                 $delorgstructure = $statement->fetch(PDO::FETCH_ASSOC);
-                if ($delorgstructure['id'] != $_SESSION['id']) {
-                    if (($delorgstructure['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                    if (in_array($delorgstructure['status'], array('UNVERIFY', 'KEYED'))){
                         $message = $this->orgstructureModel->delete($id);
                         $this->delorgstructure();
                         return $message;
                     } else {
-                        $message = 'User is an Admin/You are not an Admin';
+                        $message = 'Cannot delete verified record!';
                         return $message;
                     }
                 } else {
-                    $message = 'Error! Cannot delete logged-in user';
+                    $message = 'Not permitted to delete record!';
                     return $message;
                 }
             }

@@ -58,7 +58,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 <option value="">--Select Country--</option>
                 
                 <?php while($countries){ ?>
-                    <option value="<?php echo $row['value_desc']; ?>"<?php if($row['value_desc'] == $countries['value_desc']){ ?> selected <?php }?>><?php echo $countries['value_desc'];?></option>
+                    <option value="<?php echo $countries['value_desc']; ?>"<?php if($row['country'] == $countries['value_desc']){ ?> selected <?php }?>><?php echo $countries['value_desc'];?></option>
                 <?php } ?>
             </select>
             </p>

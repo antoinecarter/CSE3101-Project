@@ -117,17 +117,17 @@
                         $id = $params['id'];
                         $statement = $this->departmentsModel->getDeptById($id);
                         $deldpt = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($deldpt['id'] != $_SESSION['id']) {
-                            if (($deldpt['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($deldpt['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->departmentsModel->delete($id);
                                 $this->deldepartments();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }
@@ -185,6 +185,12 @@
                 $list = $this->departmentsModel->findDepartments($org_id);
                 return $list;
             }
+
+            public function exdeptList($id, $org_id){
+                $list = $this->departmentsModel->excludeDepartment($id, $org_id);
+                return $list;
+            }
+            
             
         }
         ?>

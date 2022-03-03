@@ -6,9 +6,13 @@
     }else if (isset($_POST['delete_dpt'])){
         $cred = $departmentscontroller->deletedpt();
     }
-    $statement = $departmentscontroller->viewdpt();
-    
+    $statement = $departmentscontroller->viewdpt();   
     $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $orgcontroller = new OrganizationsController();
+    $orgs = $orgcontroller->orgList();
+    $orgstructcontroller = new OrgstructureController();
+    $orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+    $depts= $departmentscontroller->exdeptList($row['id'], $_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -24,7 +28,7 @@
         <div>
                  <p>
             <label for="id"></label>
-            <input type="hidden" name="id">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
             </p>
             <span1>Organization</span1>                                                   
             <span1>Org Structure Name</span1>
@@ -35,7 +39,7 @@
                 <option value="">--Select Organization--</option>
 
                 <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -44,7 +48,7 @@
                 <option value="">--Select Organization Structure--</option>
 
                 <?php while($orgstruct){ ?>
-                    <option value="<?php echo $orgstruct['id']; ?>"><?php echo $orgstruct['org_struct_name'];?></option>
+                    <option value="<?php echo $orgstruct['id']; ?>" <?php if($row['org_struct_id'] == $orgstruct['id']){?> selected <?php } ?>><?php echo $orgstruct['org_struct_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -53,7 +57,7 @@
                 <option value="">--Select Parent Department--</option>
 
                 <?php while($depts){ ?>
-                    <option value="<?php echo $depts['id']; ?>"><?php echo $depts['department'];?></option>
+                    <option value="<?php echo $depts['id']; ?>" <?php if($row['parent_dept_id'] == $depts['id']){?> selected <?php } ?>><?php echo $depts['department'];?></option>
                 <?php } ?>
             </select>
            </p>
@@ -62,39 +66,39 @@
            <span>Department Level</span>   
            <p>
             <label for="dept_code" ></label>
-            <input type="text" placeholder="Enter Department Code" name="dept_code" required>
+            <input type="text" placeholder="Enter Department Code" name="dept_code" value="<?php echo $row['dept_code'];?>" required>
         
             <label for="dept_name"></label>
-            <input type="password" placeholder="Enter Department Name" name="dept_name" required>
+            <input type="text" placeholder="Enter Department Name" name="dept_name" value="<?php echo $row['dept_name'];?>" required>
 
             <label for="dept_level"></label>
-            <input type="password" placeholder="Enter Department Level" name="dept_level" required>
+            <input type="text" placeholder="Enter Department Level" name="dept_level" value="<?php echo $row['dept_level'];?>" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
             <span>Status</span>
             <p>
             <label for="start_date"></label>
-            <input type="date" name="start_date" required>
+            <input type="date" name="start_date" value="<?php echo $row['start_date'];?>" required>
         
             <label for="end_date"></label>
-            <input type="date" name="end_date">
+            <input type="date" name="end_date" value="<?php echo $row['end_date'];?>">
 
             <label for="status"></label>
-            <select name="status" id="" required>
-                <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+            <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+                <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
+                <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
+                <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option>
             </select>
             </p>
         </div>
         <div style="height:100px;"></div>
-        
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_dpt">Create</button> <?php } ?>
-
-      </p>
-  
+        <div>
+                <button type="submit" name="update_dpt">Apply Changes</button>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Departments/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_dpt"> Delete</button></a> <?php } ?>
+ 
+ 
+            </div>
         
     </form>
     <div>

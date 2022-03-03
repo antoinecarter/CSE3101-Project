@@ -39,7 +39,7 @@
                 <option value="">--Select Organization--</option>
 
                 <?php while($orgs){ ?>
-                    <option value="<?php echo $row['org_id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -51,7 +51,7 @@
                 <option value="">--Select Payment Frequency--</option>
                 
                 <?php while($payfreq){ ?>
-                    <option value="<?php echo $row['value_desc']; ?>" <?php if($row['value_desc'] == $payfreq['value_desc']){ ?> selected <?php }?>><?php echo $payfreq['value_desc'];?></option>
+                    <option value="<?php echo $payfreq['value_desc']; ?>" <?php if($row['payment_frequency'] == $payfreq['value_desc']){ ?> selected <?php }?>><?php echo $payfreq['value_desc'];?></option>
                 <?php } ?>
             </select>
            </p>

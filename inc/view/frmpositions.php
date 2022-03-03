@@ -4,6 +4,15 @@ $positionsModel = new PositionsController();
 if (isset($_POST['create_pos'])) {
     $cred = $positionsModel->createpos();
 }
+
+$unitscontroller = new UnitsController();
+$orgcontroller = new OrganizationsController();
+$wkloccontroller = new WorklocationsController();
+$orgs = $orgcontroller->orgList();
+$orgstructcontroller = new OrgstructureController();
+$orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+$units= $unitscontroller->unitsList($_SESSION['org_id']);
+$wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +22,7 @@ if (isset($_POST['create_pos'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new Position</h2>
+        <h2>Create/Edit Units</h2>
           
         </div>
         <div>
@@ -21,75 +30,108 @@ if (isset($_POST['create_pos'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>Org Structure Name</span1>
+            <span1>Parent Unit</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+            <label for="org_id" ></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+            <label for="org_struct_id" ></label>
+            <select name="org_struct_id" required>
+                <option value="">--Select Organization Structure--</option>
+
+                <?php while($orgstruct){ ?>
+                    <option value="<?php echo $orgstruct['id']; ?>"><?php echo $orgstruct['org_struct_name'];?></option>
+                <?php } ?>
+            </select>
+
+            <label for="Parent Unit" ></label>
+            <select name="parent_unit_id">
+                <option value="">--Select Parent Unit--</option>
+
+                <?php while($units){ ?>
+                    <option value="<?php echo $units['id']; ?>"><?php echo $units['unit'];?></option>
+                <?php } ?>
+            </select>
+           </p>
+           <span>Position Code</span>
+           <span>Position Name</span>   
+           <span>Position Level</span>   
            <p>
-            <label for="start_date">Effective From</label>
+            <label for="pos_code" ></label>
+            <input type="text" placeholder="Enter Position Code" name="pos_code" required>
+        
+            <label for="pos_name"></label>
+            <input type="text" placeholder="Enter Position Name" name="pos_name" required>
+
+            <label for="pos_level"></label>
+            <input type="text" placeholder="Enter Position Level" name="pos_level" required>
+            </p>
+            <span>Overview</span>
+            <p>
+            <label for="overview" ></label>
+            <textarea name="overview" id="" cols="70" rows="1" placeholder="Overview/Purpose"></textarea>
+            </p>
+
+            <span>Work Location</span>
+           <span>Lower Salary Limit</span>   
+           <span>Upper Salary Limit</span>   
+           <p>
+            <label for="wk_loc_id" ></label>
+            <select name="wk_loc_id">
+                <option value="">--Select Work Location--</option>
+
+                <?php while($wkloc){ ?>
+                    <option value="<?php echo $wkloc['id']; ?>"><?php echo $wkloc['worklocation'];?></option>
+                <?php } ?>
+            </select>
+        
+            <label for="lower_sal"></label>
+            <input type="text" placeholder="Enter Lower Salary Limit" name="lower_sal" required>
+
+            <label for="upper_sal"></label>
+            <input type="text" placeholder="Enter Upper Salary Limit" name="upper_sal" required>
+            </p>
+
+            <span>Start Date</span>
+            <span>End Date</span>
+            <span>Status</span>
+            <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
-            </p>
-           <p>
-            <label for="status">Status</label>
+
+            <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>
             </select>
             </p>
-           <p>
         </div>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
+        
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
+      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_pos">Create</button> <?php } ?>
 
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_pos">Create</button> <?php } ?>
       </p>
-        </div>
-        <?php } ?>
+  
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Positions" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
-
 <?php
 include_once __DIR__ . "/footer.php";
 ?>

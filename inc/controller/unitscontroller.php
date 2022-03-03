@@ -40,18 +40,18 @@
                     include_once __DIR__ . "/../view/frmunits.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter orginazation id';
+                        $message = 'Please enter Organization';
                         return $message;
                     }
         
                     if (empty($_POST['org_struct_id'])) {
-                        $message = 'Please input org_struct_id';
+                        $message = 'Please input Organization Structure';
                         return $message;
                     }
         
         
                     if (empty($_POST['parent_dept_id'])) {
-                        $message = 'Please input parent dept_id';
+                        $message = 'Please input Parent Department';
                         return $message;
                     }
         
@@ -76,18 +76,6 @@
         
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input start date';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['start_date'])) {
-                        $message = 'Please input ';
                         return $message;
                     }
         
@@ -129,17 +117,17 @@
                         $id = $params['id'];
                         $statement = $this->unitsModel->getUnitById($id);
                         $delunits = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delunits['id'] != $_SESSION['id']) {
-                            if (($delunits['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delunits['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->unitsModel->delete($id);
                                 $this->delunits();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }
@@ -190,6 +178,11 @@
                     $message = $update_units->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtunits.php";
                     return $message;
+                }
+
+                public function unitsList($org_id){
+                    $list = $this->unitsModel->findUnits($org_id);
+                    return $list;
                 }
             
         }

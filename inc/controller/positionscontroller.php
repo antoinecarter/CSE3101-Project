@@ -41,18 +41,18 @@
                     include_once __DIR__ . "/../view/frmpositions.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter organization id';
+                        $message = 'Please enter Organization';
                         return $message;
                     }
         
                     if (empty($_POST['org_struct_id'])) {
-                        $message = 'Please input org struct id';
+                        $message = 'Please input Org Structure';
                         return $message;
                     }
         
         
                     if (empty($_POST['parent_unit_id'])) {
-                        $message = 'Please input parent_unit_id';
+                        $message = 'Please input Parent Unit';
                         return $message;
                     }
         
@@ -95,12 +95,6 @@
         
                     if (empty($_POST['upper_sal'])) {
                         $message = 'Please input upper_sal';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
                         return $message;
                     }
         
@@ -219,6 +213,11 @@
                     $message = $update_pos->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtpositions.php";
                     return $message;
+                }
+
+                public function positionsList($org_id){
+                    $list = $this->positionsModel->findPositions($org_id);
+                    return $list;
                 }
             
         }

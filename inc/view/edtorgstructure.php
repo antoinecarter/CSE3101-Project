@@ -36,7 +36,7 @@ $orgs = $orgcontroller->orgList();
                 <option value="">--Select Organization--</option>
 
                 <?php while($orgs){ ?>
-                    <option value="<?php echo $row['org_id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
                 <?php } ?>
             </select>
 

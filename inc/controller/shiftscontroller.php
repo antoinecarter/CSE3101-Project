@@ -92,10 +92,8 @@
                     $new_shifts->set_shift_code($_POST['shift_code']);
                     $new_shifts->set_start_time($_POST['start_time']);
                     $new_shifts->set_end_time($_POST['end_time']);
-                    $new_shifts->set_shift_hours($_POST['shift_hours']);
                     $new_shifts->set_lunch_start($_POST['lunch_start']);
                     $new_shifts->set_lunch_end($_POST['lunch_end']);
-                    $new_shifts->set_lunch_hours($_POST['lunch_hours']);
                     $new_shifts->set_start_date($_POST['start_date']);
                     $new_shifts->set_end_date($_POST['end_date']);
                     $new_shifts->set_status($_POST['status']);
@@ -121,8 +119,8 @@
                         $id = $params['id'];
                         $statement = $this->shiftsModel->getShiftById($id);
                         $delshift = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delshift['id'] != $_SESSION['id']) {
-                            if (($delshift['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delshift['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->shiftsModel->delete($id);
                                 $this->delshifts();
                                 return $message;
