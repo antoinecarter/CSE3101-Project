@@ -8,16 +8,16 @@ include __DIR__."/header.php";
 
     <div class="wrapper">
 
-        <a class="box-e" href ="./Departments">Departments <p>text here</p></a>
-        <a class="box-e" href ="./Absence">Absence</a>
-        <a class="box-e" href ="./Units">Units</a>
-        <a class="box-e" href ="./Positions">Positions</a>
-        <a class="box-e" href ="./Shifts">Shifts</a>
-        <a class="box-e" href ="./Employees">Employee</a>
-        <a class="box-e" href ="./Leavetrack">Leave</a>
-        <a class="box-e" href ="./References">References</a>
-        <a class="box-e" href ="./Timeclock">Timeclock</a>
-        <a class="box-e" href ="./Salary">Salary</a>
+        <a class="box-e" href ="./Departments">Departments <br><br>text here</a>
+        <a class="box-e" href ="./Absence">Absence <br><br>text here</a>
+        <a class="box-e" href ="./Units">Units <br><br>text here</a>
+        <a class="box-e" href ="./Positions">Positions <br><br>text here</a>
+        <a class="box-e" href ="./Shifts">Shifts <br><br>text here</a>
+        <a class="box-e" href ="./Employees">Employee <br><br>text here</a>
+        <a class="box-e" href ="./Leavetrack">Leave <br><br>text here</a>
+        <a class="box-e" href ="./References">References <br><br>text here</a>
+        <a class="box-e" href ="./Timeclock">Timeclock <br><br>text here</a>
+        <a class="box-e" href ="./Salary">Salary <br><br>text here</a>
 
     </div>
 </div>
