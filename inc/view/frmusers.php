@@ -77,86 +77,10 @@ $emps = $empcontroller->empList($_SESSION['org_id']);
            <p>
         </div>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-            <span>Organization</span>
-            <span>Employee No.</span>
-        <p>
-            <label for="org_id"></label>
-            <select name="org_id">
-                <option value="">--Select Organization--</option>
-                
-                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
-                    <option value="<?php echo $org['id'];?>"><?php echo $org['full_name'];?></option>
-                <?php } ?>
-            </select>
-           
-            <label for="emp_no"></label>
-            <select name="emp_no" id="">
-                <option value="">--Attach Employee--</option>
-                <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
-                    <option value="<?php echo $emp['id']; ?>"><?php echo $emp['employee'];?></option>
-                <?php } ?>
-            </select>
-            </p>
-            <span>Can Create</span>
-            <span>Can View</span>
-            <span>Can Update</span>
-           <p>
-            <label for="can_create"></label>
-            <select name="can_create" id="">
-                <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-     
-            <label for="can_view"></label>
-            <select name="can_view" id="">
-            <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-
-      
-            <label for="can_update"></label>
-            <select name="can_update" id="">
-            <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <span>Can Delete</span>
-           <span>Can Verify</span>
-            <span>Can Approve</span>
-           <p>
-            <label for="can_delete"></label>
-            <select name="can_delete" id="">
-            <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-
-            <label for="can_verify"></label>
-            <select name="can_verify" id="">
-            <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        
-            <label for="can_approve"></label>
-            <select name="can_approve" id="">
-            <option value="">--Select--</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
            <p>
       <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
 
       </p>
-  
-        </div>
-        <?php } ?>
         
     </form>
     <div>
