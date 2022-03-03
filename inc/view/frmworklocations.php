@@ -26,7 +26,7 @@ $orgs = $orgcontroller->orgList();
             </p>
             <span1>Organization</span1>                                                   
             <span1>Location Code</span1>
-            <span1>Location Description</span1>  
+            <span1>Location Descript.</span1>  
            <p>
             <label for="org_id" ></label>
             <select name="org_id" required>
@@ -45,11 +45,12 @@ $orgs = $orgcontroller->orgList();
             
            </p>
            <span>Address</span>
-           <span>Telephone</span>   
            <p>
             <label for="address" ></label>
             <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address"></textarea>
-
+                </p>
+           <span>Telephone</span>   
+                <p>
             <label for="telephone"></label>
             <input type="text" placeholder="Enter Telephone #" name="telephone" required>
 

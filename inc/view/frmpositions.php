@@ -5,14 +5,11 @@ if (isset($_POST['create_pos'])) {
     $cred = $positionsModel->createpos();
 }
 
-$unitscontroller = new UnitsController();
 $orgcontroller = new OrganizationsController();
-$wkloccontroller = new WorklocationsController();
+$refcontroller = new ReferencesController();
+$shifttype = $refcontroller->refList('TBLSHIFTTYPE', $_SESSION['org_id']);
 $orgs = $orgcontroller->orgList();
-$orgstructcontroller = new OrgstructureController();
-$orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
-$units= $unitscontroller->unitsList($_SESSION['org_id']);
-$wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -22,7 +19,7 @@ $wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create/Edit Positions</h2>
+        <h2>Create/Edit Position</h2>
           
         </div>
         <div>
@@ -102,14 +99,15 @@ $wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
 
             <span>Start Date</span>
             <span>End Date</span>
-            <span>Status</span>
             <p>
             <label for="start_date"></label>
             <input type="date" name="start_date" required>
         
             <label for="end_date"></label>
             <input type="date" name="end_date">
-
+                </p>
+            <span>Status</span>
+            <p>
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>

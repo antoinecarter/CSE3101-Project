@@ -9,14 +9,6 @@
     $statement = $positionsModel->viewpos();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
-    $unitscontroller = new UnitsController();
-    $orgcontroller = new OrganizationsController();
-    $wkloccontroller = new WorklocationsController();
-    $orgs = $orgcontroller->orgList();
-    $orgstructcontroller = new OrgstructureController();
-    $orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
-    $units= $unitscontroller->unitsList($_SESSION['org_id']);
-    $wkloc = $wkloccontroller->findWkLocation($_SESSION['org_id']);
 ?>
     <div class = "form-usr">
     <?php if(isset($cred)){ 

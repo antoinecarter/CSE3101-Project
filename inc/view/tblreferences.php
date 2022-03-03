@@ -5,7 +5,6 @@ $statement = $referencescontroller->viewrefs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
-
     <h5>References</h5>
 </div>
 <div class = "usrtb">
