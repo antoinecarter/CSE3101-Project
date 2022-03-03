@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$individualsModel = new IndividualsController();
-$statement = $individualsModel->viewindvs();
+$individualscontroller = new IndividualsController();
+$statement = $individualscontroller->viewindvs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -15,19 +15,23 @@ $num_rows = $statement->rowCount();
     <h5>Individuals</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Individual
-        <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <h2>Listing of Individuals
+        <a href="./Individuals/Registration"><button>Add Ind.</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Individuals: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Username</th>
-                <th>Fullname</th>
+                <th>Organization Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Place of Birth</th>
                 <th>Email</th>
-                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-                <th>Effective From</th>
-                <th>Effective To</th>
+                <th>Nationality</th>
+                <th>Ethnicity</th>
+                <th>State</th>
             </thead>
             <tbody>
                 <?php
@@ -37,16 +41,21 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
+                    <td><a href="./Individuals/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['org_id']; ?></td>
+                    <td><?php echo $row['first_name']; ?></td>
+                    <td><?php echo $row['surname']; ?></td>
+                    <td><?php echo $row['sex']; ?></td>
+                    <td><?php echo $row['payment_frequency']; ?></td>
+                    <td><?php echo date_format(date_create($row['date_of_birth']), "d-M-Y"); ?></td>
+                    <td><?php echo $row['place_of_birth']; ?></td>
                     <td><?php echo $row['email']; ?></td>
-                    <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
-                    <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                    <td><?php echo $row['nationality']; ?></td>
+                    <td><?php echo $row['ethnicity']; ?></td>
+                    <td><?php echo $row['status']; ?></td>
                 </tr>
             <?php } ?>
-         
+        
         </tbody>
     </table>
 </div>

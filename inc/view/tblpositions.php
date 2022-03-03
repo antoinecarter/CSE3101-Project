@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$positionsModel = new PositionsController();
-$statement = $positionsModel->viewposs();
+$positionscontroller = new PositionsController();
+$statement = $positionscontroller->viewposs();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -12,22 +12,29 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Position</h5>
+    <h5>Positions</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Postitions
-        <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <h2>Listing of Positions
+        <a href="./Positions/Registration"><button>Add Pos.</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Positions: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Username</th>
-                <th>Fullname</th>
-                <th>Email</th>
-                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-                <th>Effective From</th>
-                <th>Effective To</th>
+                <th>Organization Id</th>
+                <th>Organization Structure Id</th>
+                <th>Parent Unit Id</th>
+                <th>Position Code</th>
+                <th>Position Name</th>
+                <th>Position Level</th>
+                <th>Overview</th>
+                <th>Work Location id</th>
+                <th>Lower Salary</th>
+                <th>Upper Salary</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
             </thead>
             <tbody>
                 <?php
@@ -37,16 +44,24 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
+                    <td><a href="./Positions/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['org_id']; ?></td>
+                    <td><?php echo $row['org_struct_id']; ?></td>
+                    <td><?php echo $row['parent_unit_id']; ?></td>
+                    <td><?php echo $row['pos_code']; ?></td>
+                    <td><?php echo $row['pos_name']; ?></td>
+                    <td><?php echo $row['pos_level']; ?></td>
+                    <td><?php echo $row['overview']; ?></td>
+                    <td><?php echo $row['wk_loc_id']; ?></td>
+                    <td><?php echo $row['lower_sal']; ?></td>
+                    <td><?php echo $row['upper_sal']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
+                    <td><?php echo $row['status']; ?></td>
+
                 </tr>
             <?php } ?>
-   
+        
         </tbody>
     </table>
 </div>

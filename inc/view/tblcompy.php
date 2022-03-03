@@ -48,7 +48,6 @@ $num_rows = $statement->rowCount();
                     <td><?php echo $row['payment_frequency']; ?></td>
                 </tr>
             <?php } ?>
-            <script src="./js/script.js"></script>
         </tbody>
     </table>
 </div>

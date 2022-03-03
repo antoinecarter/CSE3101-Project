@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$employeesModel = new EmployeesController();
-$statement = $employeesModel->viewemps();
+$employeescontroller = new EmployeesController();
+$statement = $employeescontroller->viewemps();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -16,18 +16,26 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Employees
-        <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <a href="./Employees/Registration"><button>Add Emp.</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Employees: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Username</th>
-                <th>Fullname</th>
-                <th>Email</th>
-                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-                <th>Effective From</th>
-                <th>Effective To</th>
+                <th>Organization Id</th>
+                <th>Employee Id</th>
+                <th>Individual Id</th>
+                <th>Position Id</th>
+                <th>Payment Frequency</th>
+                <th>Employee Type</th>
+                <th>Employee Status</th>
+                <th>Employee Date</th>
+                <th>Annual Leave Date</th>
+                <th>Rate of Pay</th>
+                <th>Seperation Status</th>
+                <th>Seperation Date</th>
+                <th>shift Id</th>
+                <th>Status</th>
             </thead>
             <tbody>
                 <?php
@@ -37,13 +45,21 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['last_name'] .','. $row['first_name']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
-                    <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                    <td><a href="./Employees/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['org_id']; ?></td>
+                    <td><?php echo $row['emp_no']; ?></td>
+                    <td><?php echo $row['ind_id']; ?></td>
+                    <td><?php echo $row['position_id']; ?></td>
+                    <td><?php echo $row['payment_frequency']; ?></td>
+                    <td><?php echo $row['emp_type'];?></td>
+                    <td><?php echo $row['emp_status'];?></td>
+                    <td><?php echo date_format(date_create($row['emp_date']), "d-M-Y"); ?></td>
+                    <td><?php echo date_format(date_create($row['ann_leave_date']), "d-M-Y"); ?></td>
+                    <td><?php echo $row['rate_of_pay']; ?></td>
+                    <td><?php echo $row['seperation_status']; ?></td>
+                    <td><?php echo date_format(date_create($row['seperation_date']), "d-M-Y"); ?></td>
+                    <td><?php echo $row['shift_id']; ?></td>
+                    <td><?php echo $row['status']; ?></td>
                 </tr>
             <?php } ?>
         

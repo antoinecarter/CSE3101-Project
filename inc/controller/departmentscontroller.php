@@ -70,8 +70,19 @@
                         return $message;
                     }
                 
+                    if (empty($_POST['parent_dept_id'])) {
+                        $message = 'Please input Parent Department Id';
+                        return $message;
+                    }
+                
                     if (empty($_POST['start_date'])) {
-                        $message = 'Please input date';
+                        $message = 'Please input start date';
+                        return $message;
+                    }
+                
+                
+                    if (empty($_POST['end_date'])) {
+                        $message = 'Please input end date';
                         return $message;
                     }
                 
@@ -86,7 +97,9 @@
                     $new_departments->set_dept_code($_POST['dept_code']);
                     $new_departments->set_dept_name($_POST['dept_name']);
                     $new_departments->set_dept_level($_POST['dept_level']);
+                    $new_departments->set_parent_dept_id($_POST['parent_dept_id']);
                     $new_departments->set_start_date($_POST['start_date']);
+                    $new_departments->set_end_date($_POST['end_date']);
                     $new_departments->set_status($_POST['status']);
                     $new_departments->create();
                     $message = 'Department Created';
@@ -162,7 +175,9 @@
                         'dept_code'     => $_REQUEST['dept_code'],
                         'dept_name'    => $_REQUEST['dept_name'],
                         'dept_level'            => $_REQUEST['dept_level'],
+                        'parent_dept_id'            => $_REQUEST['parent_dept_id'],
                         'start_date'            => $_REQUEST['start_date'],
+                        'end_date'            => $_REQUEST['end_date'],
                         'status'        => $_REQUEST['status']
         
                     );

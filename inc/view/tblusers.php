@@ -12,6 +12,10 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
+
+    <body>
+        
+    
     <h5>Home/User Accounts</h5>
 </div>
 <div class = "usrtb">
@@ -54,9 +58,10 @@ $num_rows = $statement->rowCount();
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
-            <script src="./js/script.js"></script>
+            
         </tbody>
     </table>
+    </body>
 </div>
     <?php
     include __DIR__ . "/footer.php";

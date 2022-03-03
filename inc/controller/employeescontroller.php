@@ -81,12 +81,32 @@
                     }
                 
                     if (empty($_POST['emp_date'])) {
-                        $message = 'Please input date ';
+                        $message = 'Please input employee date ';
+                        return $message;
+                    }
+                
+                
+                    if (empty($_POST['ann_leave_date'])) {
+                        $message = 'Please input ann leave date ';
                         return $message;
                     }
                 
                     if (empty($_POST['rate_of_pay'])) {
                         $message = 'Please input Rate of pay ';
+                        return $message;
+                    }
+        
+                
+                
+                    if (empty($_POST['separation_status'])) {
+                        $message = 'Please input separation status ';
+                        return $message;
+                    }
+        
+                
+                
+                    if (empty($_POST['separation_date'])) {
+                        $message = 'Please input separation date ';
                         return $message;
                     }
         
@@ -111,7 +131,10 @@
                     $new_employees->set_emp_type($_POST['emp_type']);
                     $new_employees->set_emp_status($_POST['emp_status']);
                     $new_employees->set_emp_date($_POST['emp_date']);
+                    $new_employees->set_ann_leave_date($_POST['ann_leave_date']);
                     $new_employees->set_rate_of_pay($_POST['rate_of_pay']);
+                    $new_employees->set_separation_status($_POST['separation_status']);
+                    $new_employees->set_separation_date($_POST['separation_date']);
                     $new_employees->set_shift_id($_POST['shift_id']);
                     $new_employees->set_status($_POST['status']);
                     $new_employees->create();
@@ -193,7 +216,10 @@
                         'emp_type'        => $_REQUEST['emp_type'],
                         'emp_status'        => $_REQUEST['emp_status'],
                         'emp_date'        => $_REQUEST['emp_date'],
+                        'ann_leave_date'        => $_REQUEST['ann_leave_date'],
                         'rate_of_pay'        => $_REQUEST['rate_of_pay'],
+                        'separation_status'        => $_REQUEST['separation_status'],
+                        'separation_date'        => $_REQUEST['separation_date'],
                         'shift_id'        => $_REQUEST['shift_id'],
                         'status'        => $_REQUEST['status']
         

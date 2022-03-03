@@ -156,7 +156,7 @@ class AddressController extends Address
         return $address;
     }
 
-    public function viewaddresss()
+    public function viewaddreses()
     {
         $id =  $_SESSION['id'];
         $role = $_SESSION['role'];

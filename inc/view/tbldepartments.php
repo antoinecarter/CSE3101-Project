@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
-$departmentsModel = new DepartmentsController();
-$statement = $departmentsModel->viewdpts();
+$departmentscontroller = new DepartmentsController();
+$statement = $departmentscontroller->viewdpts();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -16,17 +16,22 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Departments
-        <a href="./Users/Registration"><button>Add New</button></a></h2>
-        <a style= "margin-left: 7px;"> Num Of Users: <?php echo $num_rows; ?></a>
+        <a href="./Departments/Registration"><button>Add Dpt</button></a></h2>
+        <a style= "margin-left: 7px;"> Num Of Departments: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Department </th>
+                <th>Organization Id</th>
+                <th>Organization Structure Id </th>
+                <th>Department Code </th>
+                <th>Department Name </th>
+                <th>Department Level </th>
+                <th>Parent Department Id </th>
 
-                <?php if($_SESSION['role'] == 'ADMIN'){ echo '<th>Role</th>'; } ?>
-                <th>Effective From</th>
-                <th>Effective To</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
             </thead>
             <tbody>
                 <?php
@@ -36,11 +41,16 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Users/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['department_name']; ?></td>
-                    <?php if($_SESSION['role'] == 'ADMIN'){?> <td><?php echo $row['role']; ?></td> <?php } ?>
+                    <td><a href="./Departments/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['org_id']; ?></td>
+                    <td><?php echo $row['org_struct_id']; ?></td>
+                    <td><?php echo $row['dept_code']; ?></td>
+                    <td><?php echo $row['dept_name']; ?></td>
+                    <td><?php echo $row['dept_level']; ?></td>
+                    <td><?php echo $row['parent_dept_id']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
+                    <td><?php echo $row['status']; ?></td>
                 </tr>
             <?php } ?>
         </tbody>
