@@ -7,7 +7,6 @@
         $cred = $usercontroller->deleteuser();
     }
     $statement = $usercontroller->viewuser();
-    
     $row = $statement->fetch(PDO::FETCH_ASSOC);
     $orgcontroller = new OrganizationsController();
     $empcontroller = new EmployeesController();

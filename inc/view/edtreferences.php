@@ -38,33 +38,33 @@ $orgs = $orgcontroller->orgList();
                 <option value="">--Select Organization--</option>
 
                 <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
-                    <option value="<?php echo $org['id'];?>" <?php if($row['org_id']==$org['id']){?> <?php } ?>><?php echo $org['full_name'];?></option>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
             <label for="table_name" ></label>
-            <input type="text" placeholder="TBL..." name="table_name" value="<?php $row['table_name']; ?>" required>
+            <input type="text" placeholder="TBL..." name="table_name" value="<?php echo $row['table_name']; ?>" required>
 
             <label for="table_desc" ></label>
-            <input type="text" placeholder="Listing of ..." name="table_desc" value="<?php $row['table_desc']; ?>" required>
+            <input type="text" placeholder="Listing of ..." name="table_desc" value="<?php echo $row['table_desc']; ?>" required>
            </p>
            <span>Table Value</span>
            <span>Value Description</span>   
            <p>
             <label for="table_value" ></label>
-            <input type="text" placeholder="Enter Table Value" name="table_value" value="<?php $row['table_value']; ?>"required>
+            <input type="text" placeholder="Enter Table Value" name="table_value" value="<?php echo $row['table_value']; ?>"required>
         
             <label for="value_desc"></label>
-            <input type="text" placeholder="Enter Value Description" name="value_desc" value="<?php $row['value_desc']; ?>" required>
+            <input type="text" placeholder="Enter Value Description" name="value_desc" value="<?php echo $row['value_desc']; ?>" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
             <p>
             <label for="start_date"></label>
-            <input type="date" name="start_date" value="<?php $row['start_date']; ?>"required>
+            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>"required>
         
             <label for="end_date"></label>
-            <input type="date" name="end_date" value="<?php $row['end_date']; ?>">
+            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>">
             </p>
             <span>Status</span>
            <p>
