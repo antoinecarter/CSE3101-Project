@@ -133,8 +133,7 @@
             $this->connection->query('SELECT id, CONCAT(a.pos_name, " :- ", b.location_desc) as Position FROM positions a inner join worklocations b on a.wk_loc_id = b.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getPosById($id){

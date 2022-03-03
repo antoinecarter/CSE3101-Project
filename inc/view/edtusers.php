@@ -86,15 +86,15 @@
             <select name="org_id">
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>" <?php if($row['org_id'] == $orgs['id']){ ?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
             <label for="emp_no"></label>
             <select name="emp_no" id="">
                 <option value="">--Attach Employee--</option>
-                <?php while($emps){ ?>
-                    <option value="<?php echo $emps['emp_no']; ?>" <?php if($row['emp_no'] == $emps['id']){ ?> selected <?php } ?>><?php echo $emps['employee'];?></option>
+                <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>" <?php if($row['emp_no'] == $emp['id']){ ?> selected <?php } ?>><?php echo $emp['employee'];?></option>
                 <?php } ?>
             </select>
             </p>

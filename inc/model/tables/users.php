@@ -211,8 +211,7 @@
         public function findUser(){
             $this->connection->query('SELECT * FROM users');
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getUserById($id){

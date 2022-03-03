@@ -122,7 +122,6 @@
         public function findOrg(){
             $this->connection->query("SELECT id, full_name FROM organization WHERE org_type = 'APP_USER'");
             $statement = $this->connection->getStatement();
-            //$row = $statement->fetch(PDO::FETCH_ASSOC);
             return $statement;
         }
 

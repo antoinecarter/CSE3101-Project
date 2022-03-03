@@ -127,8 +127,7 @@
             $this->connection->bind(':org_id', $org_id);
             $this->connection->bind(':ind_id', $ind_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getAddressById($id){

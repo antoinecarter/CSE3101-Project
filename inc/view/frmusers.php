@@ -85,17 +85,17 @@ $emps = $empcontroller->empList($_SESSION['org_id']);
             <label for="org_id"></label>
             <select name="org_id">
                 <option value="">--Select Organization--</option>
-
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id'];?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
            
             <label for="emp_no"></label>
             <select name="emp_no" id="">
                 <option value="">--Attach Employee--</option>
-                <?php while($emps){ ?>
-                    <option value="<?php echo $emps['id']; ?>"><?php echo $emps['employee'];?></option>
+                <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>"><?php echo $emp['employee'];?></option>
                 <?php } ?>
             </select>
             </p>

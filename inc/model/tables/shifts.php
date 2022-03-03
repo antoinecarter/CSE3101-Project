@@ -123,8 +123,7 @@
             $this->connection->query('SELECT id, CONCAT(shift_code, " :- (", start_time, " - ", end_time, ")") as Shift FROM shifts WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getShiftById($id){

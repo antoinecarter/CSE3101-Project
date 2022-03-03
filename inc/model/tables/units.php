@@ -119,8 +119,7 @@
             $this->connection->query('SELECT id, CONCAT(unit_level, " : ", unit_name) as Unit FROM units WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getUnitById($id){

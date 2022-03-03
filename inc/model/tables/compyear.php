@@ -96,8 +96,7 @@
             $this->connection->query('SELECT id, CONCAT("COMPANY YEAR:- ", date_format(start_year, "%d-%b-%Y"), " - ", date_format(end_year, "%d-%b-%Y") as Comp_year  FROM companyyear WHERE org_id = :org_id');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getCompYearById($id){

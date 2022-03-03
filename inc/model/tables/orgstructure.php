@@ -105,8 +105,7 @@
             $this->connection->query("SELECT id, org_struct_name FROM orgstructure WHERE org_id = :org_id and status = 'VERIFY'");
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getOrgStructById($id){

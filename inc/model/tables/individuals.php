@@ -112,8 +112,7 @@
             $this->connection->query('SELECT a.id as id, CONCAT(a.surname, ", ", a.first_name, ":-(DOB: ", date_format(a.date_of_birth, "%d-%b-%Y"), ")(", a.sex, ")") as individual FROM individuals a WHERE org_id = :org_id');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return $statement;
         }
 
         public function getIndById($id){
