@@ -547,17 +547,34 @@ a {
     transition: all 0.35s ease-in-out;
 }
 
-.form-usr p input[placeholder="Enter First Name"],
-input[placeholder="Enter First Name"],
-input[placeholder="Enter Last Name"],
-input[placeholder="Enter Username"],
-input[placeholder="Enter Email"],
-input[placeholder="Enter Passcode"],
-input[placeholder=" Enter Employee No."],
-input[placeholder=" Enter Organization"] {
+.form-usr p input::placeholder {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     text-decoration-color: #e2e2e2;
+}
+
+.form-usr p textarea::placeholder {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-decoration-color: #e2e2e2;
+}
+
+.form-usr p textarea {
+    width: 400px;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid rgb(8, 8, 8);
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    font-weight: bold;
+    resize: none;
+}
+
+.form-usr p textarea:focus {
+    outline: 0;
+    border: 2px solid #149e1b;
 }
 
 .form-usr p input:focus {
@@ -747,19 +764,6 @@ input[placeholder=" Enter Organization"] {
     -o-transition: 0.35s ease-in-out;
     transition: 0.35s ease-in-out;
     transition: all 0.35s ease-in-out;
-}
-
-.edit-usr p input[placeholder="Enter First Name"],
-input[placeholder="Enter First Name"],
-input[placeholder="Enter Last Name"],
-input[placeholder="Enter Username"],
-input[placeholder="Enter Email"],
-input[placeholder="Enter Passcode"],
-input[placeholder=" Enter Employee No."],
-input[placeholder=" Enter Organization"] {
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-    text-decoration-color: #e2e2e2;
 }
 
 .edit-usr p input:focus {

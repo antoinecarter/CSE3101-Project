@@ -45,11 +45,13 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
             <input type="text" placeholder="Enter Full Name" name="full_name" required>
            </p>
            <span>Address</span>
-           <span>Country</span>   
            <p>
             <label for="address" ></label>
             <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address"></textarea>
-
+           </p>
+           
+           <span>Country</span>   
+           <p>
             <label for="country"></label>
             <select name="country" required>
                 <option value="">--Select Country--</option>
