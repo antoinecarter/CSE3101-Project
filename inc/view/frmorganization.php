@@ -47,7 +47,7 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
            <span>Address</span>
            <p>
             <label for="address" ></label>
-            <textarea name="address" id="" placeholder="Enter Address"></textarea>
+            <textarea name="address" id="" placeholder="Enter Address" style="width: 800px; height: 100px; padding: 0; margin: 0;"></textarea>
            </p>
            
            <span>Country</span>   

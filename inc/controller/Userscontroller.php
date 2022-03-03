@@ -173,6 +173,7 @@ class UsersController extends User
             $new_user->set_passcode($_POST['passcode']);
             $new_user->set_role($_POST['role']);
             $new_user->set_start_date($_POST['start_date']);
+            $new_user->set_end_date($_POST['end_date']);
             $new_user->set_status($_POST['status']);
             $new_user->create();
             $message = 'User Created';
