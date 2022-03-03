@@ -52,10 +52,10 @@ $orgs = $orgcontroller->orgList();
            <span>Value Description</span>   
            <p>
             <label for="table_value" ></label>
-            <input type="text" placeholder="Enter Username" name="table_value" value="<?php $row['table_value']; ?>"required>
+            <input type="text" placeholder="Enter Table Value" name="table_value" value="<?php $row['table_value']; ?>"required>
         
             <label for="value_desc"></label>
-            <input type="password" placeholder="Enter Passcode" name="value_desc" value="<?php $row['value_desc']; ?>" required>
+            <input type="text" placeholder="Enter Value Description" name="value_desc" value="<?php $row['value_desc']; ?>" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
