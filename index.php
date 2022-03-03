@@ -96,7 +96,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $addresscontroller->tbladdress();
     }
-} else if ($path == "/CSE3101-Project/Address/Registration?parent_id=".$params['parent_id']."&id=".$params['id']){
+} else if ($path == "/CSE3101-Project/Address/Registration"){
     if(isset($_SESSION['id'])){
         $addresscontroller->frmaddress();
     }

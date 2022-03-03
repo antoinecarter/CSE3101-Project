@@ -34,12 +34,7 @@ $ind = $indcontroller->individualsList($_SESSION['org_id']);
                 <tr>
                 <th>Edit</th>
                 <th>Individuals</th>
-                <th>Address Type</th>
-                <th>Lot</th>
-                <th>Address Line 1</th>
-                <th>Address Line 2</th>
-                <th>Address Line 3</th>
-                <th>Country</th>
+                <th>Address</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 </tr>
@@ -58,12 +53,8 @@ $ind = $indcontroller->individualsList($_SESSION['org_id']);
                     <td><?php while($individual = $ind->fetch(PDO::FETCH_ASSOC)){ if($individual['id'] == $row['id']){ echo $individual['individual']; }}?></td>
                     <td><?php echo $row['address_type'];?></td>
                     <td><?php echo $row['lot'];?></td>
-                    <td><?php echo $row['address_line1'];?></td>
-                    <td><?php echo $row['address_line2'];?></td>
-                    <td><?php echo $row['address_line3'];?></td>
-                    <td><?php echo $row['country'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
             
