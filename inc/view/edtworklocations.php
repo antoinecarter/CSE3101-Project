@@ -8,95 +8,88 @@
     }
     $statement = $worklocationsModel->viewworkl();
     
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
 ?>
-<div class = "edit-usr">
-    <div><?php if(isset($cred)){ echo $cred;}?></div>
-        <?php if(isset($row['id'])){?>
-            <div>
+<div class = "form-usr">
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
     <form method="post" action="">
-        <h2>Update workl</h2>
+        <div>
+        <h2>Create/Edit Work Locations</h2>
+          
+        </div>
         <div>
             <p>
             <label for="id"></label>
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id" value= "<?php echo $row['id'];?>">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>Location Code</span1>
+            <span1>Location Description</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
-           </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode">
-           </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
-                <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
+           <label for="org_id" ></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $row['org_id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+            <label for="location_code" ></label>
+            <input type="text" placeholder="Enter Location Code" name="location_code" value= "<?php echo $row['location_code'];?>" required>
+
+            <label for="location_desc" ></label>
+            <input type="text" placeholder="Enter Location Description" name="location_desc" value= "<?php echo $row['location_desc'];?>"required>
+            
+           </p>
+           <span>Address</span>
+           <span>Telephone</span>   
            <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+            <label for="address" ></label>
+            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address" value= "<?php echo $row['address'];?>"></textarea>
+
+            <label for="telephone"></label>
+            <input type="text" placeholder="Enter Telephone #" name="telephone" value= "<?php echo $row['telephone'];?>" required>
+
             </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+            <span>Start Date</span>
+            <span>End Date</span>
+            <p>
+            <label for="start_date"></label>
+            <input type="date" name="start_date" value= "<?php echo $row['start_date'];?>" required>
+        
+            <label for="end_date"></label>
+            <input type="date" name="end_date" value= "<?php echo $row['end_date'];?>">
             </p>
+            <span>Status</span>
            <p>
-            <label for="status">Status</label>
+            <label for="status"></label>
             <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
                 <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
                 <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
                 <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option>
             </select>
+            </p>
         </div>
-        </p>
-           <p>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-            <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-   
-        </div>
-        <?php } ?>
         <div>
                 <button type="submit" name="update_workl">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_workl"> Delete</button></a> <?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Worklocations/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_workl">Delete</button></a> <?php } ?>
  
  
-            </div>
+            </div> 
+        
     </form>
-    <?php } ?>
     <div>
-                
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Worklocations" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
-    </div>
-    
-    
-    
 </div>
 
 <?php

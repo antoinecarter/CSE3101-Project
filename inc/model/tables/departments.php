@@ -121,6 +121,14 @@
             }
         }
         
+        public function excludeDepartment($id, $org_id){
+            $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as Department FROM departments WHERE org_id = :org_id and status = "VERIFY" and id != :id');
+            $this->connection->bind(':org_id', $org_id);
+            $this->connection->bind(':id', $id);
+            $statement = $this->connection->getStatement();
+            $row = $statement->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        }
 
         public function findDepartments($org_id){
             $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as Department FROM departments WHERE org_id = :org_id and status = "VERIFY"');

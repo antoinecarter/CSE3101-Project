@@ -41,7 +41,7 @@
                     include_once __DIR__ . "/../view/frmreferences.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter org id';
+                        $message = 'Please enter Organization';
                         return $message;
                     }
         

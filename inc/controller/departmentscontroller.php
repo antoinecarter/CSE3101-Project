@@ -41,17 +41,12 @@
                     include_once __DIR__ . "/../view/frmdepartments.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter Organization id';
+                        $message = 'Please enter Organization';
                         return $message;
-                    }else {
-                        if ($this->departmentsModel->findDepartments($_POST['org_id'])) {
-                            $message = 'Username already exist';
-                            return $message;
-                        }
                     }
         
                     if (empty($_POST['org_struct_id'])) {
-                        $message = 'Please input Org. Structure id';
+                        $message = 'Please input Org. Structure Name';
                         return $message;
                     }
                 
@@ -170,6 +165,11 @@
                     include_once __DIR__ . "/../view/edtdepartments.php";
                     return $message;
                 }
+
+            public function deptList($org_id){
+                $list = $this->departmentsModel->findDepartments($org_id);
+                return $list;
+            }
             
         }
         ?>

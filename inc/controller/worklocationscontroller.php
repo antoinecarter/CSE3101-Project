@@ -42,7 +42,7 @@
                     include_once __DIR__ . "/../view/frmworklocations.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter orginazation id ';
+                        $message = 'Please enter Organization';
                         return $message;
                     }
 
@@ -69,13 +69,6 @@
                         return $message;
                     }
         
-
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
-                        return $message;
-                    }
-        
-
                     if (empty($_POST['status'])) {
                         $message = 'Please input status';
                         return $message;
@@ -118,17 +111,17 @@
                         $id = $params['id'];
                         $statement = $this->worklocationsModel->getWkLocationById($id);
                         $delworkl = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delworkl['id'] != $_SESSION['id']) {
-                            if (($delworkl['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delworkl['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->worklocationsModel->delete($id);
                                 $this->delworklocations();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }
@@ -180,6 +173,11 @@
                     include_once __DIR__ . "/../view/edtworklocations.php";
                     return $message;
                 }
+
+            public function wklocationsList($org_id){
+                $list = $this->worklocationsModel->findWkLocation($org_id);
+                return $list;
+            }
             
         }
         ?>

@@ -14,7 +14,7 @@
     $orgs = $orgcontroller->orgList();
     $emps = $empcontroller->empList($_SESSION['org_id']);
 ?>
-<div class = "edit-usr">
+<div class = "form-usr">
     <div><?php if(isset($cred)){ echo $cred;}?></div>
         <?php if(isset($row['id'])){?>
             <div>

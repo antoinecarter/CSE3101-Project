@@ -40,15 +40,10 @@
                     include_once __DIR__ . "/../view/frmacompy.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter Organization Id';
+                        $message = 'Please enter Organization';
                         return $message;
-                    }else {
-                        if ($this->compyearModel->findCompYear($_POST['org_id'])) {
-                            $message = 'Username already exist';
-                            return $message;
-                        }
                     }
-        
+
                     if (empty($_POST['year'])) {
                         $message = 'Please enter year';
                         return $message;
@@ -97,17 +92,13 @@
                         $id = $params['id'];
                         $statement = $this->compyearModel->getCompYearById($id);
                         $delcompyr = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delcompyr['id'] != $_SESSION['id']) {
-                            if (($delcompyr['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
                                 $message = $this->compyearModel->delete($id);
                                 $this->delcompy();
                                 return $message;
-                            } else {
-                                $message = 'User is an Admin/You are not an Admin';
-                                return $message;
-                            }
+                            
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }
@@ -149,8 +140,7 @@
                         'year'     => $_REQUEST['year'],
                         'start_year'     => $_REQUEST['start_year'],
                         'end_year'    => $_REQUEST['end_year'],
-                        'payment_frequency'    => $_REQUEST['payment_frequency'],
-                        'role'            => $_REQUEST['role']
+                        'payment_frequency'    => $_REQUEST['payment_frequency']
    
                     );
                     $message = $update_compyr->update($d['id'], $d);
@@ -158,5 +148,9 @@
                     return $message;
                 }
             
+                public function compyrList($org_id){
+                    $list = $this->compyearModel->findCompYear($org_id);
+                    return $list;
+                }
         }
         ?>

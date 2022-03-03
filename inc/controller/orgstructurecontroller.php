@@ -40,17 +40,12 @@ class OrgstructureController extends Orgstructure
             include_once __DIR__ . "/../view/frmorgstructure.php";
         } else {
             if (empty($_POST['org_id'])) {
-                $message = 'Please enter Organization ID';
+                $message = 'Please enter Organization';
                 return $message;
             }
 
             if (empty($_POST['org_struct_name'])) {
-                $message = 'Please enter org_struct_name';
-                return $message;
-            }
-
-            if (empty($_POST['end_date'])) {
-                $message = 'Please input end date';
+                $message = 'Please enter Organization Structure Name';
                 return $message;
             }
             if (empty($_POST['status'])) {
@@ -150,6 +145,11 @@ class OrgstructureController extends Orgstructure
             $message = $update_orgstructure->update($d['id'], $d);
             include_once __DIR__ . "/../view/edtorgstructure.php";
             return $message;
+        }
+
+        public function orgstructList($org_id){
+            $list = $this->orgstructureModel->findOrgStructure($org_id);
+            return $list;
         }
     
 }

@@ -42,7 +42,7 @@
                     include_once __DIR__ . "/../view/frmshifts.php";
                 } else {
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter orginazation id';
+                        $message = 'Please enter Organization';
                         return $message;
                     }
 
@@ -78,11 +78,6 @@
         
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input start date';
-                        return $message;
-                    }
-        
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
                         return $message;
                     }
         
@@ -130,11 +125,11 @@
                                 $this->delshifts();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }
@@ -186,6 +181,11 @@
                     $message = $update_shift->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtshifts.php";
                     return $message;
+                }
+
+                public function shiftsList($org_id){
+                    $list = $this->shiftsModel->findShift($org_id);
+                    return $list;
                 }
             
         }

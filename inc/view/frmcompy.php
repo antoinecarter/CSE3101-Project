@@ -69,8 +69,6 @@ $orgs = $orgcontroller->orgList();
       <?php if($_SESSION['role']=='ADMIN' && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_user">Create</button> <?php } ?>
 
       </p>
-  
-        </div>
         
     </form>
     <div>

@@ -4,6 +4,13 @@ $departmentsModel = new DepartmentsController();
 if (isset($_POST['create_dpt'])) {
     $cred = $departmentsModel->createdpt();
 }
+
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+$orgstructcontroller = new OrgstructureController();
+$orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+$depts= $departmentsModel->deptList($_SESSION['org_id']);
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +20,7 @@ if (isset($_POST['create_dpt'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new Department</h2>
+        <h2>Create/Edit Department</h2>
           
         </div>
         <div>
@@ -21,60 +28,83 @@ if (isset($_POST['create_dpt'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>Org Structure Name</span1>
+            <span1>Parent Department</span1>  
            <p>
-            <label for="department_name">Department Name</label>
-            <input type="text" name="department_name" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+            <label for="org_id" ></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+            <label for="org_struct_id" ></label>
+            <select name="org_struct_id" required>
+                <option value="">--Select Organization Structure--</option>
+
+                <?php while($orgstruct){ ?>
+                    <option value="<?php echo $orgstruct['id']; ?>"><?php echo $orgstruct['org_struct_name'];?></option>
+                <?php } ?>
+            </select>
+
+            <label for="Parent Department" ></label>
+            <select name="parent_dept_id">
+                <option value="">--Select Parent Department--</option>
+
+                <?php while($depts){ ?>
+                    <option value="<?php echo $depts['id']; ?>"><?php echo $depts['department'];?></option>
+                <?php } ?>
+            </select>
+           </p>
+           <span>Department Code</span>
+           <span>Department Name</span>   
+           <span>Department Level</span>   
            <p>
-            <label for="start_date">Effective From</label>
+            <label for="dept_code" ></label>
+            <input type="text" placeholder="Enter Department Code" name="dept_code" required>
+        
+            <label for="dept_name"></label>
+            <input type="password" placeholder="Enter Department Name" name="dept_name" required>
+
+            <label for="dept_level"></label>
+            <input type="password" placeholder="Enter Department Level" name="dept_level" required>
+            </p>
+            <span>Start Date</span>
+            <span>End Date</span>
+            <span>Status</span>
+            <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
-            </p>
-           <p>
-            <label for="status">Status</label>
+
+            <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>
             </select>
             </p>
-           <p>
         </div>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
+        
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
+      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_dpt">Create</button> <?php } ?>
 
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_dpt">Create</button> <?php } ?>
       </p>
+  
         </div>
-        <?php } ?>
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Departments" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
-
 <?php
 include_once __DIR__ . "/footer.php";
 ?>

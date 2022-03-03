@@ -9,136 +9,112 @@
     $statement = $shiftsModel->viewshift();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $orgcontroller = new OrganizationsController();
+    $refcontroller = new ReferencesController();
+    $shifttype = $refcontroller->refList('TBLSHIFTTYPE', $_SESSION['org_id']);
+    $orgs = $orgcontroller->orgList();
 ?>
-<div class = "edit-usr">
-    <div><?php if(isset($cred)){ echo $cred;}?></div>
-        <?php if(isset($row['id'])){?>
-            <div>
+<div class = "form-usr">
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
     <form method="post" action="">
-        <h2>Update shift</h2>
         <div>
-            <p>
+        <h2>Create/Edit Shifts</h2>
+          
+        </div>
+        <div>
+                 <p>
             <label for="id"></label>
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
             </p>
+            <span1>Organization </span1>                                                   
+            <span1>Shift Type</span1>
+            <span1>Shift Code </span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
-           </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode">
-           </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
-                <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
+            <label for="org_id" ></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $row['org_id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
+
+            <label for="shift_type" ></label>
+            <select name="shift_type" required>
+                <option value="">--Select Payment Frequency--</option>
+                
+                <?php while($shifttype){ ?>
+                    <option value="<?php echo $row['value_desc']; ?>" <?php if($row['value_desc'] == $shifttype['value_desc']){ ?> selected <?php }?>><?php echo $shifttype['value_desc'];?></option>
+                <?php } ?>
+            </select>
+
+            <label for="shift_code" ></label>
+            <input type="text" placeholder="Enter Shift Code" name="shift_code" value="<?php echo $row['shift_codes'];?>" required>
+           </p>
+            <span>Start Time</span>
+            <span>End Time</span>
+            <span>Shift Hours</span>
+            <p>
+            <label for="start_time"></label>
+            <input type="time" name="start_time" value="<?php echo $row['start_time'];?>" required>
+        
+            <label for="end_time"></label>
+            <input type="time" name="end_time" value="<?php echo $row['end_time'];?>" required>
+
+            <label for="shift_hours"></label>
+            <input type="text" name="shift_hours" value="<?php echo $row['shift_hours'];?>" readonly>
             </p>
-           <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+
+            <span>Lunch Start</span>
+            <span>Lunch End</span>
+            <span>Lunch Hours</span>
+            <p>
+            <label for="lunch_start"></label>
+            <input type="time" name="lunch_start" value="<?php echo $row['lunch_start'];?>" required>
+        
+            <label for="lunch_end"></label>
+            <input type="time" name="lunch_end" value="<?php echo $row['lunch_end'];?>"required>
+
+            <label for="lunch_hours"></label>
+            <input type="text" name="lunch_hours" value="<?php echo $row['lunch_hours'];?>"readonly>
             </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-            </p>
-           <p>
-            <label for="status">Status</label>
+
+            <span>Start Date</span>
+            <span>End Date</span>
+            <span>Status</span>
+            <p>
+            <label for="start_date"></label>
+            <input type="date" name="start_date" value="<?php echo $row['start_date'];?>" required>
+        
+            <label for="end_date"></label>
+            <input type="date" name="end_date" value="<?php echo $row['end_date'];?>">
+            
+            <label for="status"></label>
             <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
                 <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
                 <option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
                 <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option>
             </select>
+            </p>
+
         </div>
-        </p>
-           <p>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-            <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-           <p>
-            <label for="can_create">Can Create</label>
-            <select name="can_create" id="">
-                <option value="1" <?php if($row['can_create'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_create'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
-            <select name="can_view" id="">
-                <option value="1" <?php if($row['can_view'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_view'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
-            <select name="can_update" id="">
-                <option value="1" <?php if($row['can_update'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_update'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_delete">Can Delete</label>
-            <select name="can_delete" id="">
-                <option value="1" <?php if($row['can_delete'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_delete'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
-            <select name="can_verify" id="">
-                <option value="1" <?php if($row['can_verify'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_verify'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
-            <select name="can_approve" id="">
-                <option value="1" <?php if($row['can_approve'] == 1){?>selected <?php } ?>>Yes</option>
-                <option value="0" <?php if($row['can_approve'] == 0){?>selected <?php } ?>>No</option>
-            </select>
-            </p>
-           
-        </div>
-        <?php } ?>
         <div>
                 <button type="submit" name="update_shift">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_shift"> Delete</button></a> <?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Shifts/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_shift"> Delete</button></a> <?php } ?>
  
  
             </div>
+        
     </form>
-    <?php } ?>
     <div>
-                
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Shifts" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
-    </div>
-    
-    
-    
 </div>
 
 <?php

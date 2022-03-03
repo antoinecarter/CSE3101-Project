@@ -246,17 +246,17 @@ class UsersController extends User
             $id = $params['id'];
             $statement = $this->userModel->getUserById($id);
             $deluser = $statement->fetch(PDO::FETCH_ASSOC);
-            if ($deluser['id'] != $_SESSION['id']) {
-                if (($deluser['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+            if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                if (in_array($deluser['status'], array('UNVERIFY', 'KEYED'))) {
                     $message = $this->userModel->delete($id);
                     $this->delusers();
                     return $message;
                 } else {
-                    $message = 'User is an Admin/You are not an Admin';
+                    $message = 'Cannot delete verified record!';
                     return $message;
                 }
             } else {
-                $message = 'Error! Cannot delete logged-in user';
+                $message = 'Not permitted to delete record!';
                 return $message;
             }
         }

@@ -4,6 +4,11 @@ $shiftsModel = new ShiftsController();
 if (isset($_POST['create_shift'])) {
     $cred = $shiftsModel->createshift();
 }
+$orgcontroller = new OrganizationsController();
+$refcontroller = new ReferencesController();
+$shifttype = $refcontroller->refList('TBLSHIFTTYPE', $_SESSION['org_id']);
+$orgs = $orgcontroller->orgList();
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +18,7 @@ if (isset($_POST['create_shift'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new shift</h2>
+        <h2>Create/Edit Shifts</h2>
           
         </div>
         <div>
@@ -21,113 +26,87 @@ if (isset($_POST['create_shift'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization </span1>                                                   
+            <span1>Shift Type</span1>
+            <span1>Shift Code </span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+            <label for="org_id" ></label>
+            <select name="org_id" required>
+                <option value="">--Select Organization--</option>
+
+                <?php while($orgs){ ?>
+                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php } ?>
             </select>
+
+            <label for="shift_type" ></label>
+            <select name="shift_type" required>
+                <option value="">--Select Shift Type--</option>
+                
+                <?php while($shifttype){ ?>
+                    <option value="<?php echo $shifttype['value_desc']; ?>"><?php echo $shifttype['value_desc'];?></option>
+                <?php } ?>
+            </select>
+
+            <label for="shift_code" ></label>
+            <input type="text" placeholder="Enter Shift Code" name="shift_code" required>
+           </p>
+            <span>Start Time</span>
+            <span>End Time</span>
+            <span>Shift Hours</span>
+            <p>
+            <label for="start_time"></label>
+            <input type="time" name="start_time" required>
+        
+            <label for="end_time"></label>
+            <input type="time" name="end_time" required>
+
+            <label for="shift_hours"></label>
+            <input type="text" name="shift_hours" readonly>
             </p>
-           <p>
-            <label for="start_date">Effective From</label>
+
+            <span>Lunch Start</span>
+            <span>Lunch End</span>
+            <span>Lunch Hours</span>
+            <p>
+            <label for="lunch_start"></label>
+            <input type="time" name="lunch_start" required>
+        
+            <label for="lunch_end"></label>
+            <input type="time" name="lunch_end" required>
+
+            <label for="lunch_hours"></label>
+            <input type="text" name="lunch_hours" readonly>
+            </p>
+
+            <span>Start Date</span>
+            <span>End Date</span>
+            <span>Status</span>
+            <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
-            </p>
-           <p>
-            <label for="status">Status</label>
+            
+            <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>
             </select>
             </p>
-           <p>
+
         </div>
         <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-           <p>
-            <label for="can_create">Can Create</label>
-            <select name="can_create" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_view">Can View</label>
-            <select name="can_view" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_update">Can Update</label>
-            <select name="can_update" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_delete">Can Delete</label>
-            <select name="can_delete" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_verify">Can Verify</label>
-            <select name="can_verify" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-            <label for="can_approve">Can Approve</label>
-            <select name="can_approve" id="">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-            </p>
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_shift">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN' && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_shift">Create</button> <?php } ?>
+
       </p>
-        </div>
-        <?php } ?>
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Shifts" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
