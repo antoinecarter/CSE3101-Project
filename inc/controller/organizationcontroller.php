@@ -176,6 +176,7 @@
             
                     $update_org = new Organization();
                     $d = array(
+                        'id'            => $_REQUEST['id'],
                         'org_type'            => $_REQUEST['org_type'],
                         'short_name'        => $_REQUEST['short_name'],
                         'full_name'     => $_REQUEST['full_name'],

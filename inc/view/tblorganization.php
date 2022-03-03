@@ -39,8 +39,7 @@ $num_rows = $statement->rowCount();
                     <td><?php echo $row['full_name']; ?></td>
                     <td><?php echo $row['address']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
-
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
         

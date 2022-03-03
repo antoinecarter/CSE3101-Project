@@ -73,7 +73,7 @@
                 <span>Overview</span>
                 <p>
                 <label for="overview" ></label>
-                <textarea name="overview" id="" cols="70" rows="1" placeholder="Overview/Purpose" value="<?php echo $row['id'];?>"></textarea>
+                <textarea name="overview" id="" cols="70" rows="1" placeholder="Overview/Purpose" style="width: 800px; height: 100px; padding: 0; margin: 0;"><?php echo $row['overview'];?></textarea>
                 </p>
     
                 <span>Work Location</span>

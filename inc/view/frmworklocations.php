@@ -47,7 +47,7 @@ $orgs = $orgcontroller->orgList();
            <span>Address</span>
            <p>
             <label for="address" ></label>
-            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address"></textarea>
+            <textarea name="address" id="" placeholder="Enter Address" style="width: 800px; height: 100px; padding: 0; margin: 0;"></textarea>
                 </p>
            <span>Telephone</span>   
                 <p>

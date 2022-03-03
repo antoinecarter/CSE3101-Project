@@ -47,7 +47,7 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
            <span>Address</span>
            <p>
             <label for="address" ></label>
-            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address"></textarea>
+            <textarea name="address" id="" placeholder="Enter Address"></textarea>
            </p>
            
            <span>Country</span>   
@@ -60,10 +60,6 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
                     <option value="<?php echo $country['value_desc']; ?>"><?php echo $country['value_desc'];?></option>
                 <?php } ?>
             </select>
-            </p>
-            <p>
-            <label for="id"></label>
-            <input type="hidden" name="id">
             </p>
             <span1>Telephone</span1>                                                   
             <span1>Fax</span1>

@@ -52,7 +52,7 @@ $orgs = $orgcontroller->orgList();
            <span>Telephone</span>   
            <p>
             <label for="address" ></label>
-            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Address" value= "<?php echo $row['address'];?>"></textarea>
+            <textarea name="address" id="" placeholder="Enter Address" style="width: 800px; height: 100px; padding: 0; margin: 0;" ><?php echo $row['address'];?></textarea>
 
             <label for="telephone"></label>
             <input type="text" placeholder="Enter Telephone #" name="telephone" value= "<?php echo $row['telephone'];?>" required>

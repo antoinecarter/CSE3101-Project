@@ -1,11 +1,11 @@
 <?php
 include __DIR__ . "/header.php";
 $orgcontroller = new OrganizationsController();
-if (isset($_POST['create_organization'])) {
+if (isset($_POST['update_organization'])) {
     $cred = $orgcontroller->updateorg();
-    header('Location: /CSE3101-Project/Organizations');
+}else if (isset($_POST['delete_organization'])){
+    $cred = $orgcontroller->deleteorg();
 }
-
 $refcontroller = new ReferencesController();
 $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
 $statement = $orgcontroller->vieworg();
@@ -47,18 +47,19 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             <label for="full_name" ></label>
             <input type="text" placeholder="Enter Full Name" name="full_name" value="<?php echo $row['full_name']; ?>"required>
            </p>
-           <span>Address</span>
-           <span>Country</span>   
+           <span>Address</span>   
            <p>
             <label for="address" ></label>
-            <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Email" value="<?php echo $row['email']; ?>" ></textarea>
-
+            <textarea name="address" id="" placeholder="Enter Address" style="width: 800px; height: 100px; padding: 0; margin: 0;"><?php echo $row['address'];?></textarea>
+           </p>
+            <span>Country</span>
+            <p>
             <label for="country"></label>
             <select name="country" required>
                 <option value="">--Select Country--</option>
                 
-                <?php while($countries){ ?>
-                    <option value="<?php echo $countries['value_desc']; ?>"<?php if($row['country'] == $countries['value_desc']){ ?> selected <?php }?>><?php echo $countries['value_desc'];?></option>
+                <?php while($country = $countries->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $country['value_desc']; ?>"<?php if($row['country'] == $country['value_desc']){?>selected <?php } ?>><?php echo $country['value_desc'];?></option>
                 <?php } ?>
             </select>
             </p>
@@ -99,7 +100,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
         <div style="height:100px;"></div>
         <div>
                 <button type="submit" name="update_organization">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Organizations/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_reference">Delete</button></a> <?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Organizations/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_organization">Delete</button></a> <?php } ?>
  
  
             </div> 

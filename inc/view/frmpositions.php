@@ -74,7 +74,7 @@ $orgs = $orgcontroller->orgList();
             <span>Overview</span>
             <p>
             <label for="overview" ></label>
-            <textarea name="overview" id="" cols="70" rows="1" placeholder="Overview/Purpose"></textarea>
+            <textarea name="overview" id="" placeholder="Overview/Purpose" style="width: 800px; height: 100px; padding: 0; margin: 0;"></textarea>
             </p>
 
             <span>Work Location</span>
