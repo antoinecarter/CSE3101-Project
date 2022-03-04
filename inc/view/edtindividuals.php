@@ -12,10 +12,10 @@
     $orgcontroller = new OrganizationsController();
     $orgs = $orgcontroller->orgList();
     $refcontroller = new ReferencesController();
-    $sex = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
-    $nationality = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
-    $ethnicity = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
-    $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
+    $sexes = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
+    $nationalities = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
+    $ethnicities = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
+    $pobs = $refcontroller->refList('TBLHOSPITALS', $_SESSION['org_id']);
 
     $addresscontroller = new AddressController();
     $natidcontroller = new NationalidentifiersController();
@@ -27,6 +27,8 @@
   <div class = "exist" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
+    <?php if(isset($row['id'])){?>
+
     <form method="post" action="">
         <div>
         <h2>Create/Edit Individual</h2>
@@ -42,12 +44,12 @@
             <span1>Surname</span1>  
            <p>
             <label for="org_id" ></label>
-            <select name="org_id" readonly required>
+            <select name="org_id" <?php if($_SESSION['role'] != 'ADMIN'){ ?>disabled <?php } ?>required>
                     <option value="">--Select Organization--</option>
     
-                    <?php while($orgs){ ?>
-                        <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
-                    <?php } ?>
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($row['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
                 </select>
 
             <label for="first_name" ></label>
@@ -64,8 +66,8 @@
             <select name="sex" required>
                 <option value="">--Select Sex--</option>
                 
-                <?php while($sex){ ?>
-                    <option value="<?php echo $sex['value_desc']; ?>"><?php echo $sex['value_desc'];?></option>
+                <?php while($sex = $sexes->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $sex['value_desc']; ?>"<?php if($row['sex'] == $sex['value_desc']){?> selected <?php } ?>><?php echo $sex['value_desc'];?></option>
                 <?php } ?>
             </select>
         
@@ -76,33 +78,33 @@
             <select name="place_of_birth" required>
                 <option value="">--Select Place of Birth--</option>
                 
-                <?php while($pob){ ?>
-                    <option value="<?php echo $pob['value_desc']; ?>" <?php if($row['place_of_birth'] == $pob['value_desc']){ ?> selected <?php }?> ><?php echo $pob['value_desc'];?></option>
+                <?php while($pob = $pobs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $pob['value_desc']; ?>"<?php if($row['place_of_birth'] == $pob['value_desc']){?> selected <?php } ?>><?php echo $pob['value_desc'];?></option>
                 <?php } ?>
             </select>
             </p>
 
-            <span>Email</span>
-           <span>Nationality</span>   
-           <span>Ethnicity</span>   
+            <span1>Email</span1>
+           <span1>Nationality</span1>   
+           <span1>Ethnicity</span1>   
            <p>
            <label for="email"></label>
-            <input type="emial" placeholder="Enter Email" name="email" value="<?php echo $row['email'];?>" required>
+            <input style="width: auto; height:35px" type="emial" placeholder="Enter Email" name="email" value="<?php echo $row['email'];?>" required>
 
             <label for="nationality"></label>
             <select name="nationality" required>
                 <option value="">--Select Nationality--</option>
                 
-                <?php while($nationality){ ?>
-                    <option value="<?php echo $nationality['value_desc']; ?>" <?php if($row['nationality'] == $nationality['value_desc']){ ?> selected <?php }?>><?php echo $nationality['value_desc'];?></option>
+                <?php while($nationality = $nationalities->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $nationality['value_desc']; ?>"<?php if($row['nationality'] == $nationality['value_desc']){?> selected <?php } ?>><?php echo $nationality['value_desc'];?></option>
                 <?php } ?>
             </select>
             <label for="ethnicity"></label>
             <select name="ethnicity" required>
                 <option value="">--Select ethnicity--</option>
                 
-                <?php while($ethnicity){ ?>
-                    <option value="<?php echo $ethnicity['value_desc']; ?>" <?php if($row['ethnicity'] == $ethnicity['value_desc']){ ?> selected <?php }?>><?php echo $ethnicity['value_desc'];?></option>
+                <?php while($ethnicity = $ethnicities->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $ethnicity['value_desc']; ?>" <?php if($row['ethnicity'] == $ethnicity['value_desc']){?> selected <?php } ?>><?php echo $ethnicity['value_desc'];?></option>
                 <?php } ?>
             </select>
     
@@ -121,10 +123,11 @@
                 <button type="submit" name="update_indv">Apply Changes</button>
             <?php if($row['status'] != 'VERIFY'){ ?><a href="./Individuals/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_indv"> Delete</button></a> <?php } ?>
  
-            </div>>
+            </div>
   
         
     </form>
+    <?php } ?>
     <div>
     <a href="./Individuals" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         

@@ -102,8 +102,13 @@
 
         public function view($role, $id)
         {  
+            $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM worklocations");
+                $this->connection->query('SELECT a.*, b.full_name full_name
+                FROM worklocations a
+                LEFT JOIN organization b on a.org_id = b.id
+                WHERE a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -111,7 +116,7 @@
         
 
         public function findWkLocation($org_id){
-            $this->connection->query('SELECT id, CONCAT(location_code, " :- ", location_desc) as worklocation FROM worklocations WHERE location_code = :location_code and status = "VERIFY"');
+            $this->connection->query('SELECT id, CONCAT(location_code, " :- ", location_desc) as worklocation FROM worklocations WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

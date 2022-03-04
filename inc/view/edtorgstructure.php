@@ -2,7 +2,7 @@
 include __DIR__ . "/header.php";
 $orgstructModel = new OrgstructureController();
 if (isset($_POST['update_org_struct'])) {
-    $cred = $orgstructModel->createorgstructure();
+    $cred = $orgstructModel->updateorgstructure();
 }else if (isset($_POST['delete_org_struct'])){
     $cred = $orgstructModel->deleteorgstructure();
 }
@@ -18,6 +18,7 @@ $orgs = $orgcontroller->orgList();
   <div class = "exist" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
+  <?php if(isset($row['id'])){?>
     <form method="post" action="">
         <div>
         <h2>Create/Edit Organization Structure</h2>
@@ -35,8 +36,8 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -72,6 +73,7 @@ $orgs = $orgcontroller->orgList();
             </div>
         
     </form>
+    <?php } ?>
     <div>
     <a href="./Orgstructure" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         

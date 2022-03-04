@@ -31,13 +31,13 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
             <label for="org_struct_name" ></label>
-            <input type="text" placeholder="Enter Shift Code" name="org_struct_name" required>
+            <input type="text" placeholder="Enter Org Structure Name" name="org_struct_name" required>
            </p>
 
             <span>Start Date</span>

@@ -9,7 +9,7 @@ $departmentscontroller = new DepartmentsController();
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 $orgstructcontroller = new OrgstructureController();
-$orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+$orgstructs = $orgstructcontroller->orgstructList($_SESSION['org_id']);
 $depts= $departmentscontroller->deptList($_SESSION['org_id']);
 ?>
 <div class = "form-usr">
@@ -36,8 +36,8 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -45,7 +45,7 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             <select name="org_struct_id" required>
                 <option value="">--Select Organization Structure--</option>
 
-                <?php while($orgstruct){ ?>
+                <?php while($orgstruct = $orgstructs->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $orgstruct['id']; ?>"><?php echo $orgstruct['org_struct_name'];?></option>
                 <?php } ?>
             </select>
@@ -54,8 +54,8 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             <select name="parent_dept_id">
                 <option value="">--Select Parent Department--</option>
 
-                <?php while($depts){ ?>
-                    <option value="<?php echo $depts['id']; ?>"><?php echo $depts['department'];?></option>
+                <?php while($dept = $depts->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $dept['id']; ?>"><?php echo $dept['department'];?></option>
                 <?php } ?>
             </select>
            </p>
@@ -70,7 +70,7 @@ $depts= $departmentscontroller->deptList($_SESSION['org_id']);
             <input type="text" placeholder="Enter Unit Name" name="unit_name" required>
 
             <label for="unit_level"></label>
-            <input type="text" placeholder="Enter Unit Level" name="unit_level" required>
+            <input style="width: 100px;" type="number" placeholder="#" name="unit_level" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>

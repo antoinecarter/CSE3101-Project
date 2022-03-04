@@ -26,7 +26,7 @@
 
     <button class="sidebar-dr">Organization Management▼</button>
       <div class="dropdown-contain">
-    <a href="./Orgstructure">Organazation Structure</a>
+    <a href="./Orgstructure">Organization Structure</a>
     <a href="./Departments">Departments</a>
     <a href="./Units">Units</a>
     <a href="./Positions">Positions</a>

@@ -43,7 +43,7 @@ $org = $orgs->fetch(PDO::FETCH_ASSOC);
                 ?>
                 <tr>
                     <td><a href="./Worklocations/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php if($row['org_id'] == $org['id']){ echo $org['full_name']; }?></td>
+                    <td><?php echo $row['full_name']?></td>
                     <td><?php echo $row['location_code']; ?></td>
                     <td><?php echo $row['location_desc']; ?></td>
                     <td><?php echo $row['address']; ?></td>

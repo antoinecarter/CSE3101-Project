@@ -11,7 +11,7 @@
     $orgcontroller = new OrganizationsController();
     $orgs = $orgcontroller->orgList();
     $orgstructcontroller = new OrgstructureController();
-    $orgstruct = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+    $orgstructs = $orgstructcontroller->orgstructList($_SESSION['org_id']);
     $depts= $departmentscontroller->exdeptList($row['id'], $_SESSION['org_id']);
 ?>
 <div class = "form-usr">
@@ -20,6 +20,7 @@
   <div class = "exist" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
+  <?php if(isset($row['id'])){?>
     <form method="post" action="">
         <div>
         <h2>Create/Edit Department</h2>
@@ -31,15 +32,15 @@
             <input type="hidden" name="id" value="<?php echo $row['id'];?>">
             </p>
             <span1>Organization</span1>                                                   
-            <span1>Org Structure Name</span1>
-            <span1>Parent Department</span1>  
+            <span1>Org Struct Name</span1>
+            <span1>Parent Dept</span1>  
            <p>
             <label for="org_id" ></label>
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -47,8 +48,8 @@
             <select name="org_struct_id" required>
                 <option value="">--Select Organization Structure--</option>
 
-                <?php while($orgstruct){ ?>
-                    <option value="<?php echo $orgstruct['id']; ?>" <?php if($row['org_struct_id'] == $orgstruct['id']){?> selected <?php } ?>><?php echo $orgstruct['org_struct_name'];?></option>
+                <?php while($orgstruct = $orgstructs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $orgstruct['id']; ?>" <?php if($row['org_struct_id'] == $orgstruct['id']){ ?> selected <?php } ?>><?php echo $orgstruct['org_struct_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -56,14 +57,14 @@
             <select name="parent_dept_id">
                 <option value="">--Select Parent Department--</option>
 
-                <?php while($depts){ ?>
-                    <option value="<?php echo $depts['id']; ?>" <?php if($row['parent_dept_id'] == $depts['id']){?> selected <?php } ?>><?php echo $depts['department'];?></option>
+                <?php while($dept = $depts->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $dept['id']; ?>" <?php if($row['parent_dept_id'] == $dept['id']){ ?> selected <?php } ?>><?php echo $dept['department'];?></option>
                 <?php } ?>
             </select>
            </p>
-           <span>Department Code</span>
-           <span>Department Name</span>   
-           <span>Department Level</span>   
+           <span>Dept Code</span>
+           <span>Dept Name</span>   
+           <span>Dept Level</span>   
            <p>
             <label for="dept_code" ></label>
             <input type="text" placeholder="Enter Department Code" name="dept_code" value="<?php echo $row['dept_code'];?>" required>
@@ -72,7 +73,7 @@
             <input type="text" placeholder="Enter Department Name" name="dept_name" value="<?php echo $row['dept_name'];?>" required>
 
             <label for="dept_level"></label>
-            <input type="text" placeholder="Enter Department Level" name="dept_level" value="<?php echo $row['dept_level'];?>" required>
+            <input style="width: 100px;" type="number" placeholder="Enter Department Level" name="dept_level" value="<?php echo $row['dept_level'];?>" required>
             </p>
             <span>Start Date</span>
             <span>End Date</span>
@@ -101,6 +102,7 @@
             </div>
         
     </form>
+    <?php }?>
     <div>
     <a href="./Departments" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         

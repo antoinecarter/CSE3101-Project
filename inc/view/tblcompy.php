@@ -44,7 +44,7 @@ $org = $orgs->fetch(PDO::FETCH_ASSOC);
                 ?>
                 <tr>
                     <td><a href="./Compyear/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php if($row['org_id'] == $org['id']){ echo $org['full_name']; }?></td>
+                    <td><?php echo $row['full_name'];?></td>
                     <td><?php echo $row['year']; ?></td>
                     <td><?php echo date_format(date_create($row['start_year']), "d-M-Y"); ?></td>
                     <td><?php echo date_format(date_create($row['end_year']),"d-M-Y");?></td>

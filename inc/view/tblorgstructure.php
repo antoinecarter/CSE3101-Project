@@ -1,8 +1,12 @@
 <?php
 include __DIR__ . "/header.php";
-$Organizationscontroller = new OrganizationsController();
-$statement = $Organizationscontroller->vieworgs();
+$Organizationscontroller = new OrgstructureController();
+$statement = $Organizationscontroller->vieworgstructures();
 $num_rows = $statement->rowCount();
+
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+$org = $orgs->fetch(PDO::FETCH_ASSOC);
 ?>
 <div class="breadcrumb">
     <?php 
@@ -12,21 +16,20 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>Organizations</h5>
+    <h5>Organization Structures</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Organizations
-        <a href="./Organizations/Registration"><button>Add Org.</button></a></h2>
+        <h2>Listing of Organization Structures
+        <a href="./Orgstructure/Registration"><button>Add Org.</button></a></h2>
         <a style= "margin-left: 7px;"> Num Of Organizations: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Organization Id</th>
+                <th>Organization</th>
                 <th>Organization Structure Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Status</th>
             </thead>
             <tbody>
                 <?php
@@ -36,12 +39,11 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Organizations/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
+                    <td><a href="./Orgstructure/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['full_name'];?></td>
                     <td><?php echo $row['org_struct_name']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
-                    <td><?php echo $row['status']; ?></td>
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
 
                 </tr>
             <?php } ?>

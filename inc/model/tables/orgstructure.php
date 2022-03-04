@@ -93,8 +93,13 @@
 
         public function view($role, $id)
         {  
+            $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM orgstructure");
+                $this->connection->query('SELECT a.*, b.full_name full_name
+                FROM orgstructure a
+                LEFT JOIN organization b on a.org_id = b.id
+                WHERE a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }

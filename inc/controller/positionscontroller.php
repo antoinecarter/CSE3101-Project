@@ -219,6 +219,11 @@
                     $list = $this->positionsModel->findPositions($org_id);
                     return $list;
                 }
+
+                public function placementList($org_id){
+                    $list = $this->positionsModel->getPlacements($org_id);
+                    return $list;
+                }
             
         }
         ?>

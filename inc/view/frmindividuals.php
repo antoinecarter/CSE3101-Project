@@ -9,10 +9,10 @@ if (isset($_POST['create_indv'])) {
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 $refcontroller = new ReferencesController();
-$sex = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
-$nationality = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
-$ethnicity = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
-$pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
+$sexes = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
+$nationalities = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
+$ethnicities = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
+$pobs = $refcontroller->refList('TBLHOSPITALS', $_SESSION['org_id']);
 
 ?>
 <div class = "form-usr">
@@ -36,12 +36,12 @@ $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
             <span1>Surname</span1>  
            <p>
             <label for="org_id" ></label>
-            <select name="org_id" readonly required>
+            <select name="org_id" <?php if($_SESSION['role'] != 'ADMIN'){ ?>disabled <?php } ?>required>
                     <option value="">--Select Organization--</option>
     
-                    <?php while($orgs){ ?>
-                        <option value="<?php echo $orgs['id']; ?>"<?php if($_SESSION['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
-                    <?php } ?>
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
                 </select>
 
             <label for="first_name" ></label>
@@ -58,7 +58,7 @@ $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
             <select name="sex" required>
                 <option value="">--Select Sex--</option>
                 
-                <?php while($sex){ ?>
+                <?php while($sex = $sexes->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $sex['value_desc']; ?>"><?php echo $sex['value_desc'];?></option>
                 <?php } ?>
             </select>
@@ -70,24 +70,24 @@ $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
             <select name="place_of_birth" required>
                 <option value="">--Select Place of Birth--</option>
                 
-                <?php while($pob){ ?>
+                <?php while($pob = $pobs->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $pob['value_desc']; ?>"><?php echo $pob['value_desc'];?></option>
                 <?php } ?>
             </select>
             </p>
 
-            <span>Email</span>
-           <span>Nationality</span>   
-           <span>Ethnicity</span>   
+            <span1>Email</span1>
+           <span1>Nationality</span1>   
+           <span1>Ethnicity</span1>   
            <p>
            <label for="email"></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
+            <input style="width: auto; height:35px" type="email" placeholder="Enter Email" name="email" required>
 
             <label for="nationality"></label>
             <select name="nationality" required>
                 <option value="">--Select Nationality--</option>
                 
-                <?php while($nationality){ ?>
+                <?php while($nationality = $nationalities->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $nationality['value_desc']; ?>"><?php echo $nationality['value_desc'];?></option>
                 <?php } ?>
             </select>
@@ -95,7 +95,7 @@ $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
             <select name="ethnicity" required>
                 <option value="">--Select Ethnicity--</option>
                 
-                <?php while($ethnicity){ ?>
+                <?php while($ethnicity = $ethnicities->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $ethnicity['value_desc']; ?>"><?php echo $ethnicity['value_desc'];?></option>
                 <?php } ?>
             </select>

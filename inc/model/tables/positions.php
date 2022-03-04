@@ -120,9 +120,16 @@
         }
 
         public function view($role, $id)
-        {  
+        {  $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM positions");
+                $this->connection->query('SELECT a.*, b.full_name full_name, c.org_struct_name org_struct_name, d.PLACEMENT placement, e.location_desc wk_loc
+                FROM positions a
+                LEFT JOIN organization b on a.org_id= b.id
+                LEFT JOIN orgstructure c on a.org_struct_id = c.id
+                LEFT JOIN placements d on a.parent_unit_id = d.id
+                LEFT JOIN worklocations e on a.wk_loc_id = e.id
+                where a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -131,6 +138,13 @@
 
         public function findPositions($org_id){
             $this->connection->query('SELECT id, CONCAT(a.pos_name, " :- ", b.location_desc) as Position FROM positions a inner join worklocations b on a.wk_loc_id = b.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
+            $this->connection->bind(':org_id', $org_id);
+            $statement = $this->connection->getStatement();
+            return $statement;
+        }
+
+        public function getPlacements($org_id){
+            $this->connection->query('SELECT * FROM placements WHERE org_id = :org_id');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

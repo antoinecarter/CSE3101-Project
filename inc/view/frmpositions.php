@@ -1,15 +1,25 @@
 <?php
 include __DIR__ . "/header.php";
-$positionsModel = new PositionsController();
+$positioncontroller = new PositionsController();
 if (isset($_POST['create_pos'])) {
-    $cred = $positionsModel->createpos();
+    $cred = $positioncontroller->createpos();
 }
 
 $orgcontroller = new OrganizationsController();
 $refcontroller = new ReferencesController();
 $shifttype = $refcontroller->refList('TBLSHIFTTYPE', $_SESSION['org_id']);
-$orgs = $orgcontroller->orgList();
 
+$orgs = $orgcontroller->orgList();
+$orgstructcontroller = new OrgstructureController();
+$orgstructs = $orgstructcontroller->orgstructList($_SESSION['org_id']);
+
+$unitcontroller = new UnitsController();
+$units = $unitcontroller->unitsList($_SESSION['org_id']);
+
+$wkloccontroller = new WorklocationsController();
+$wklocs = $wkloccontroller->wklocationsList($_SESSION['org_id']);
+
+$placements = $positioncontroller->placementList($_SESSION['org_id'])
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -28,15 +38,15 @@ $orgs = $orgcontroller->orgList();
             <input type="hidden" name="id">
             </p>
             <span1>Organization</span1>                                                   
-            <span1>Org Structure Name</span1>
-            <span1>Parent Unit</span1>  
+            <span1>Org Struct. Name</span1>
+            <span1>Placement</span1>  
            <p>
             <label for="org_id" ></label>
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -44,7 +54,7 @@ $orgs = $orgcontroller->orgList();
             <select name="org_struct_id" required>
                 <option value="">--Select Organization Structure--</option>
 
-                <?php while($orgstruct){ ?>
+                <?php while($orgstruct = $orgstructs->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $orgstruct['id']; ?>"><?php echo $orgstruct['org_struct_name'];?></option>
                 <?php } ?>
             </select>
@@ -53,14 +63,14 @@ $orgs = $orgcontroller->orgList();
             <select name="parent_unit_id">
                 <option value="">--Select Parent Unit--</option>
 
-                <?php while($units){ ?>
-                    <option value="<?php echo $units['id']; ?>"><?php echo $units['unit'];?></option>
+                <?php while($placement = $placements->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $placement['id']; ?>"><?php echo $placement['PLACEMENT'];?></option>
                 <?php } ?>
             </select>
            </p>
-           <span>Position Code</span>
+           <span>Code</span>
            <span>Position Name</span>   
-           <span>Position Level</span>   
+           <span>Level</span>   
            <p>
             <label for="pos_code" ></label>
             <input type="text" placeholder="Enter Position Code" name="pos_code" required>
@@ -69,7 +79,7 @@ $orgs = $orgcontroller->orgList();
             <input type="text" placeholder="Enter Position Name" name="pos_name" required>
 
             <label for="pos_level"></label>
-            <input type="text" placeholder="Enter Position Level" name="pos_level" required>
+            <input style="width: 100px;" type="number" placeholder="#" name="pos_level" required>
             </p>
             <span>Overview</span>
             <p>
@@ -77,15 +87,15 @@ $orgs = $orgcontroller->orgList();
             <textarea name="overview" id="" placeholder="Overview/Purpose" style="width: 800px; height: 100px; padding: 0; margin: 0;"></textarea>
             </p>
 
-            <span>Work Location</span>
-           <span>Lower Salary Limit</span>   
-           <span>Upper Salary Limit</span>   
+            <span1>Work Location</span1>
+           <span1>Lower Limit</span1>   
+           <span1>Upper Limit</span1>   
            <p>
             <label for="wk_loc_id" ></label>
             <select name="wk_loc_id">
                 <option value="">--Select Work Location--</option>
 
-                <?php while($wkloc){ ?>
+                <?php while($wkloc = $wklocs->fetch(PDO::FETCH_ASSOC)){ ?>
                     <option value="<?php echo $wkloc['id']; ?>"><?php echo $wkloc['worklocation'];?></option>
                 <?php } ?>
             </select>

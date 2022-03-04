@@ -22,16 +22,12 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Organization Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Gender</th>
                 <th>Date of Birth</th>
-                <th>Place of Birth</th>
                 <th>Email</th>
-                <th>Nationality</th>
-                <th>Ethnicity</th>
-                <th>State</th>
+                <th>Status</th>
             </thead>
             <tbody>
                 <?php
@@ -42,16 +38,11 @@ $num_rows = $statement->rowCount();
                 ?>
                 <tr>
                     <td><a href="./Individuals/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
                     <td><?php echo $row['first_name']; ?></td>
                     <td><?php echo $row['surname']; ?></td>
                     <td><?php echo $row['sex']; ?></td>
-                    <td><?php echo $row['payment_frequency']; ?></td>
                     <td><?php echo date_format(date_create($row['date_of_birth']), "d-M-Y"); ?></td>
-                    <td><?php echo $row['place_of_birth']; ?></td>
                     <td><?php echo $row['email']; ?></td>
-                    <td><?php echo $row['nationality']; ?></td>
-                    <td><?php echo $row['ethnicity']; ?></td>
                     <td><?php echo $row['status']; ?></td>
                 </tr>
             <?php } ?>

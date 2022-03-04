@@ -134,7 +134,7 @@
                 }
             }
         
-            public function viewunits()
+            public function viewunit()
             {
                 
                 $url = $_SERVER['REQUEST_SCHEME'] . '://';
@@ -150,7 +150,7 @@
                 return $units;
             }
         
-            public function viewunitss()
+            public function viewunits()
             {
                 $id =  $_SESSION['id'];
                 $role = $_SESSION['role'];
@@ -169,6 +169,7 @@
                         'org_struct_id'     => $_REQUEST['org_struct_id'],
                         'parent_dept_id'     => $_REQUEST['parent_dept_id'],
                         'unit_code'    => $_REQUEST['unit_code'],
+                        'unit_name'        => $_REQUEST['unit_name'],
                         'unit_level'            => $_REQUEST['unit_level'],
                         'start_date'            => $_REQUEST['start_date'],
                         'end_date'            => $_REQUEST['end_date'],

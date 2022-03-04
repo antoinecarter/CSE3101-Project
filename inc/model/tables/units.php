@@ -107,8 +107,15 @@
 
         public function view($role, $id)
         {  
+            $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM units");
+                $this->connection->query('SELECT a.*, b.full_name full_name, c.org_struct_name, d.dept_name as parent_dept_name
+                FROM units a
+                LEFT JOIN organization b on a.org_id = b.id
+                left join orgstructure c on a.org_struct_id=c.id
+                left join departments d on a.parent_dept_id = d.id
+                WHERE a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -116,7 +123,7 @@
         
 
         public function findUnits($org_id){
-            $this->connection->query('SELECT id, CONCAT(unit_level, " : ", unit_name) as Unit FROM units WHERE org_id = :org_id and status = "VERIFY"');
+            $this->connection->query('SELECT id, CONCAT(unit_level, " : ", unit_name) as unit FROM units WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

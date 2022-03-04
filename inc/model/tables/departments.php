@@ -113,16 +113,22 @@
         }
 
         public function view($role, $id)
-        {  
+        {   
+            $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM departments");
+                $this->connection->query('SELECT a.*, concat(b.dept_level, ":", b.dept_name) parent_dept, c.org_struct_name org_struct_name
+                FROM DEPARTMENTS a
+                left join departments b on a.parent_dept_id = b.id
+                left join orgstructure c on a.org_struct_id = c.id
+                where a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
         }
         
         public function excludeDepartment($id, $org_id){
-            $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as Department FROM departments WHERE org_id = :org_id and status = "VERIFY" and id != :id');
+            $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as department FROM departments WHERE org_id = :org_id and status = "VERIFY" and id != :id');
             $this->connection->bind(':org_id', $org_id);
             $this->connection->bind(':id', $id);
             $statement = $this->connection->getStatement();
@@ -130,7 +136,7 @@
         }
 
         public function findDepartments($org_id){
-            $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as Department FROM departments WHERE org_id = :org_id and status = "VERIFY"');
+            $this->connection->query('SELECT id, CONCAT(dept_level, " : ", dept_name) as department FROM departments WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

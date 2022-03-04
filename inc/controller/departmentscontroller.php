@@ -65,19 +65,8 @@
                         return $message;
                     }
                 
-                    if (empty($_POST['parent_dept_id'])) {
-                        $message = 'Please input Parent Department Id';
-                        return $message;
-                    }
-                
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input start date';
-                        return $message;
-                    }
-                
-                
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
                         return $message;
                     }
                 

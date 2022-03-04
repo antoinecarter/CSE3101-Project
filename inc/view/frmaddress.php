@@ -15,21 +15,6 @@ $usercontroller = new UsersController();
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
 $employees = $empcontroller->empList($_SESSION['org_id']);
 $users = $usercontroller->userList();
-/*$url = $_SERVER['REQUEST_SCHEME'] . '://';
-$url .= $_SERVER['HTTP_HOST'];
-$url .= $_SERVER['REQUEST_URI'];
-
-$url_components = parse_url($url);
-if(isset($url_components['query'])){
-    parse_str($url_components['query'], $params);
-}
-$id = $params['id'];
-foreach($individuals as $individual){
-    if($individual['id'] = $params['ind_id']){
-        $ind_name = $individual['individual'];
-        $ind_id =  $individual['id'];
-    }
-}*/
 }
 ?>
 <div class = "form-usr">
