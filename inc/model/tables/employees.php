@@ -120,9 +120,14 @@
         }
 
         public function view($role, $id)
-        {  
+        {  $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM employees");
+                $this->connection->query('SELECT a.id as id, concat(b.first_name, " ", b.surname, ":-", c.pos_name, "(", c.pos_level, ")") as employee, a.payment_frequency as payment_frequency, a.emp_date as emp_date, a.rate_of_pay as rate_of_pay, a.separation_status as separation_status, a.separation_date as separation_date, concat(d.shift_type, ":", d.shift_code) as shift
+                FROM employees a 
+                INNER JOIN individuals b on a.ind_id = b.id 
+                INNER JOIN positions c on a.position_id = c.id
+                INNER JOIN shifts d on a.shift_id = d.id where a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{

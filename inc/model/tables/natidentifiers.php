@@ -96,12 +96,15 @@
 
         public function view($role, $id)
         {  
+            $org_id = $_SESSION['org_id'];
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM nationalidentifiers");
+                $this->connection->query('SELECT a.id as id, a.ind_id as ind_id, CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, concat(a.identifier, ":-", a.identifier_num) as natid, a.start_date as start_date, a.end_date as end_date FROM nationalidentifiers a inner join individuals b on a.ind_id = b.id where a.org_id = :org_id');
+                $this->connection->bind(':org_id', $org_id);
+                //$this->connection->query('SELECT a.id as id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, concat(a.identifier, ":-", a.identifier_num) as natid, a.start_date as start_date, a.end_date as end_date FROM nationalidentifiers a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.employee_no');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as Individual, concat(a.identifier, ":-", a.identifier_num) as natid, a.start_date, a.end_date FROM nationalidentifiers a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.emp_no WHERE d.id = :id');
+                $this->connection->query('SELECT a.id as id, a.ind_id as ind_id, CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, concat(a.identifier, ":-", a.identifier_num) as natid, a.start_date as start_date, a.end_date as end_date FROM nationalidentifiers a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.employee_no where d.id = :id and where a.org_id = :org_id');
                 $this->connection->bind(':id', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;

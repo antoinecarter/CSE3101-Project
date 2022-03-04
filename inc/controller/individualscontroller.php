@@ -122,7 +122,7 @@
                 public function deleteindv()
                 {
                     {
-                        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $url = $_SERVER['REQUEST_SCHEME'] . '://';
                             $url .= $_SERVER['HTTP_HOST'];
                             $url .= $_SERVER['REQUEST_URI'];

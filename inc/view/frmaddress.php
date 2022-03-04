@@ -3,19 +3,18 @@ include __DIR__ . "/header.php";
 $addresscontroller = new AddressController();
 if (isset($_POST['create_address'])) {
     $cred = $addresscontroller->createaddress();
-
+}
 
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 $refcontroller = new ReferencesController();
-$countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
+$countries = $refcontroller->refList('COUNTRIES', $_SESSION['org_id']);
 $indcontroller = new IndividualsController();
 $empcontroller = new  EmployeesController();
 $usercontroller = new UsersController();
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
 $employees = $empcontroller->empList($_SESSION['org_id']);
 $users = $usercontroller->userList();
-}
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -41,15 +40,15 @@ $users = $usercontroller->userList();
             <select name="org_id" readonly required>
                     <option value="">--Select Organization--</option>
     
-                    <?php while($orgs){ ?>
-                        <option value="<?php echo $orgs['id']; ?>"<?php if($_SESSION['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
-                    <?php } ?>
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
                 </select>
                 <select name="ind_id" required>
                     <option value="">--Select Individual--</option>
     
-                    <?php while($individuals){ ?>
-                        <option value="<?php echo $individuals['id']; ?>"><?php echo $individuals['individual'];?></option>
+                    <?php while($individual = $individuals->fetch(PDO::FETCH_ASSOC)){ ?>
+                        <option value="<?php echo $individual['id']; ?>"><?php echo $individual['individual'];?></option>
                     <?php } ?>
                 </select>
                 <select name="address_type" id="">
@@ -65,13 +64,13 @@ $users = $usercontroller->userList();
             <select name="country" required>
                 <option value="">--Select Country--</option>
                 
-                <?php while($countries){ ?>
-                    <option value="<?php echo $countries['value_desc']; ?>"><?php echo $countries['value_desc'];?></option>
+                <?php while($country = $countries->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $country['value_desc']; ?>"><?php echo $country['value_desc'];?></option>
                 <?php } ?>
             </select>
 
            <label for="lot" ></label>
-            <input type="text" placeholder="Enter Lot" name="lot" required>
+            <input style="width: 100px; height:35px" type="number" placeholder="Enter Lot" name="lot" required>
            </p>
            <span>Add. Line 1</span>
            <span>Add. Line 2</span>

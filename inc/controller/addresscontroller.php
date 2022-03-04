@@ -39,6 +39,11 @@ class AddressController extends Address
         if ($method == "GET") {
             include_once __DIR__ . "/../view/frmaddress.php";
         } else {
+            if($this->addressModel->getAddressByIndId($_POST['ind_id'])->rowCount() >= 2){
+                $message = 'Cannot add another address record';
+                return $message;
+            }
+            
             if (empty($_POST['org_id'])) {
                 $message = 'Please enter Organization';
                 return $message;
@@ -66,11 +71,6 @@ class AddressController extends Address
 
             if (empty($_POST['address_line2'])) {
                 $message = 'Please input address line2';
-                return $message;
-            }
-
-            if (empty($_POST['address_line3'])) {
-                $message = 'Please input address line3';
                 return $message;
             }
 
@@ -118,15 +118,10 @@ class AddressController extends Address
                 $id = $params['id'];
                 $statement = $this->addressModel->getAddressById($id);
                 $deladdress = $statement->fetch(PDO::FETCH_ASSOC);
-                if ($deladdress['id'] != $_SESSION['id']) {
-                    if (($deladdress['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
                         $message = $this->addressModel->delete($id);
                         $this->deladdress();
                         return $message;
-                    } else {
-                        $message = 'User is an Admin/You are not an Admin';
-                        return $message;
-                    }
                 } else {
                     $message = 'Error! Cannot delete logged-in user';
                     return $message;
@@ -151,7 +146,7 @@ class AddressController extends Address
         return $address;
     }
 
-    public function viewaddreses()
+    public function viewaddresses()
     {
         $id =  $_SESSION['id'];
         $role = $_SESSION['role'];

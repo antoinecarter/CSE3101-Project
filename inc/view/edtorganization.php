@@ -7,7 +7,7 @@ if (isset($_POST['update_organization'])) {
     $cred = $orgcontroller->deleteorg();
 }
 $refcontroller = new ReferencesController();
-$countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
+$countries = $refcontroller->refList('COUNTRIES', $_SESSION['org_id']);
 $statement = $orgcontroller->vieworg();
 $row = $statement->fetch(PDO::FETCH_ASSOC);
 

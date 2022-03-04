@@ -111,11 +111,11 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query('SELECT a.id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as Individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id');
+                $this->connection->query('SELECT a.id as id, a.ind_id as ind_id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as Individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.emp_no WHERE d.id = :id');
+                $this->connection->query('SELECT a.id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.emp_no WHERE d.id = :id');
                 $this->connection->bind(':id', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
@@ -128,6 +128,14 @@
             $this->connection->bind(':ind_id', $ind_id);
             $statement = $this->connection->getStatement();
             return $statement;
+        }
+
+        public function getAddressByIndId($ind_id){
+            $this->connection->query('SELECT * FROM addresses WHERE ind_id = :ind_id and address_type in ("HOME", "WORK") and end_date is null');
+            $this->connection->bind(':ind_id', $ind_id);
+            $row = $this->connection->getStatement();
+    
+            return $row;
         }
 
         public function getAddressById($id){

@@ -4,6 +4,17 @@ $nationalidentifierscontroller = new NationalidentifiersController();
 if (isset($_POST['create_nationalidentifiers'])) {
     $cred = $nationalidentifierscontroller->createnationalidentifiers();
 }
+
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+$refcontroller = new ReferencesController();
+$natids = $refcontroller->refList('IDENTIFIERS', $_SESSION['org_id']);
+$indcontroller = new IndividualsController();
+$empcontroller = new  EmployeesController();
+$usercontroller = new UsersController();
+$individuals = $indcontroller->individualsList($_SESSION['org_id']);
+$employees = $empcontroller->empList($_SESSION['org_id']);
+$users = $usercontroller->userList();
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +24,7 @@ if (isset($_POST['create_nationalidentifiers'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new National Identifier</h2>
+        <h2>Create/Edit National Identifier</h2>
           
         </div>
         <div>
@@ -21,20 +32,39 @@ if (isset($_POST['create_nationalidentifiers'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span>Organization Id</span>
-            <span>Individual Id</span>
+            <span>Organization</span>
+            <span>Individual</span>
         <p>
             <label for="org_id"></label>
-            <input type="text" placeholder=" Enter Organization" name="org_id">
+            <select name="org_id" required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
+                </select>
            
             <label for="ind_id"></label>
-            <input type="text" placeholder=" Enter Individual No." name="ind_id">
+            <select name="ind_id" required>
+                    <option value="">--Select Individual--</option>
+    
+                    <?php while($individual = $individuals->fetch(PDO::FETCH_ASSOC)){ ?>
+                        <option value="<?php echo $individual['id']; ?>"><?php echo $individual['individual'];?></option>
+                    <?php } ?>
+                </select>
             </p>
             <span>Identifier</span>
             <span>Identifier No.</span> 
             <p>
             <label for="identifier"></label>
-            <input type="text" placeholder=" Enter Identifier" name="identifier">
+            <select name="identifier" required>
+                <option value="">--Select Identifier--</option>
+                
+                <?php while($natid = $natids->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $natid['value_desc']; ?>"><?php echo $natid['value_desc'];?></option>
+                <?php } ?>
+            </select>
+
         
             <label for="identifier_num"></label>
             <input type="text" placeholder=" Enter Identifier No." name="identifier_num">
@@ -53,7 +83,7 @@ if (isset($_POST['create_nationalidentifiers'])) {
         
    
 
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_nationalidentifiers">Create</button> <?php } ?>
+            <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_nationalidentifiers">Create</button> <?php } ?>
 
       </p>
   

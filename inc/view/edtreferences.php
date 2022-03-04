@@ -42,7 +42,7 @@ $orgs = $orgcontroller->orgList();
             </select>
 
             <label for="table_name" ></label>
-            <input type="text" placeholder="TBL..." name="table_name" value="<?php echo $row['table_name']; ?>" required>
+            <input type="text" placeholder="..." name="table_name" value="<?php echo $row['table_name']; ?>" required>
 
             <label for="table_desc" ></label>
             <input type="text" placeholder="Listing of ..." name="table_desc" value="<?php echo $row['table_desc']; ?>" required>

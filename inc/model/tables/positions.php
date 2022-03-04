@@ -137,7 +137,7 @@
         
 
         public function findPositions($org_id){
-            $this->connection->query('SELECT id, CONCAT(a.pos_name, " :- ", b.location_desc) as Position FROM positions a inner join worklocations b on a.wk_loc_id = b.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
+            $this->connection->query('SELECT a.id as id, CONCAT(a.pos_name, " :- ", b.location_desc) as position FROM positions a inner join worklocations b on a.wk_loc_id = b.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $addresscontroller = new AddressController();
-$statement = $addresscontroller->viewaddreses();
+$statement = $addresscontroller->viewaddresses();
 $num_rows = $statement->rowCount();
 $indcontroller = new IndividualsController();
 $ind = $indcontroller->individualsList($_SESSION['org_id']);
@@ -50,9 +50,8 @@ $ind = $indcontroller->individualsList($_SESSION['org_id']);
                 ?>
                 <tr>
                     <td><a href="./Address/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php while($individual = $ind->fetch(PDO::FETCH_ASSOC)){ if($individual['id'] == $row['id']){ echo $individual['individual']; }}?></td>
-                    <td><?php echo $row['address_type'];?></td>
-                    <td><?php echo $row['lot'];?></td>
+                    <td><?php echo $row['individual']?></td>
+                    <td><?php echo $row['address'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
                     <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>

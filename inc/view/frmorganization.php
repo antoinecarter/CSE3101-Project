@@ -7,7 +7,7 @@ if (isset($_POST['create_organization'])) {
 }
 
 $refcontroller = new ReferencesController();
-$countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
+$countries = $refcontroller->refList('COUNTRIES', $_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 

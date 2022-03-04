@@ -111,7 +111,7 @@ class NationalidentifiersController extends NationalIdentifier
         }
     }
 
-    public function viewnationalidentifiers()
+    public function viewnationalidentifier()
     {
         
         $url = $_SERVER['REQUEST_SCHEME'] . '://';
@@ -121,13 +121,14 @@ class NationalidentifiersController extends NationalIdentifier
         $url_components = parse_url($url);
         if(isset($url_components['query'])){
             parse_str($url_components['query'], $params);
+            $id = $params['id'];
         };
-        $id = $params['id'];
+        
         $nationalidentifiers = $this->nationalidentifiersModel->getNatIdById($id);
         return $nationalidentifiers;
     }
 
-    public function viewnationalidentifierss()
+    public function viewnationalidentifiers()
     {
         $id =  $_SESSION['id'];
         $role = $_SESSION['role'];

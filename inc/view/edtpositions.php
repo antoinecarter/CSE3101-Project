@@ -12,7 +12,7 @@
 
     $orgcontroller = new OrganizationsController();
 $refcontroller = new ReferencesController();
-$shifttype = $refcontroller->refList('TBLSHIFTTYPE', $_SESSION['org_id']);
+$shifttype = $refcontroller->refList('SHIFTTYPE', $_SESSION['org_id']);
 
 $orgs = $orgcontroller->orgList();
 $orgstructcontroller = new OrgstructureController();

@@ -11,7 +11,7 @@
     $row = $statement->fetch(PDO::FETCH_ASSOC);
     $orgcontroller = new OrganizationsController();
     $refcontroller = new ReferencesController();
-    $payfreq = $refcontroller->refList('TBLPAYMENTFREQUENCY', $_SESSION['org_id']);
+    $payfreq = $refcontroller->refList('PAYMENTFREQUENCY', $_SESSION['org_id']);
     $orgs = $orgcontroller->orgList();
 ?>
 <div class = "form-usr">

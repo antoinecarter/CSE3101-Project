@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 $nationalidentifiersController = new NationalidentifiersController();
-$statement = $nationalidentifiersController->viewnationalidentifierss();
+$statement = $nationalidentifiersController->viewnationalidentifiers();
 $num_rows = $statement->rowCount();
 ?>
 <div class="breadcrumb">
@@ -31,10 +31,8 @@ $num_rows = $statement->rowCount();
             <thead>
                 <tr>
                 <th>Edit</th>
-                <th>Organization Id</th>
-                <th>Individual Id</th>
+                <th>Individual</th>
                 <th>Identifier</th>
-                <th>Identifier Number</th>
                 <th>Start Date</th>
                 <th>End Date</th>
    
@@ -50,13 +48,11 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./NationalIdentifier/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
-                    <td><?php echo $row['ind_id'];?></td>
-                    <td><?php echo $row['identifer'];?></td>
-                    <td><?php echo $row['identifer_num'];?></td>
+                    <td><a href="./NationalIdentifier/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['individual'];?></td>
+                    <td><?php echo $row['natid'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
             

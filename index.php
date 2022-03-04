@@ -28,7 +28,7 @@ require_once __DIR__ . "/inc/controller/employeescontroller.php";
 
 require_once __DIR__. "/inc/view/inc.php";
 
-$params = ['parent_id' => '', 'id' => ''];
+
 
 $path = $_SERVER["REQUEST_URI"];
 $url = $_SERVER['REQUEST_SCHEME'] . '://';
@@ -38,6 +38,8 @@ $url .= $_SERVER['REQUEST_URI'];
 $url_components = parse_url($url);
 if(isset($url_components['query'])){
     parse_str($url_components['query'], $params);
+}else{
+    $params = ['parent_id' => '', 'id' => ''];
 }
 
 if ($path == "/CSE3101-Project/"){
@@ -180,7 +182,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $nationalidentifierscontroller->frmnationalidentifiers();
     }
-} else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?id='.$params['id'])){
+} else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $nationalidentifierscontroller->edtnationalidentifiers();

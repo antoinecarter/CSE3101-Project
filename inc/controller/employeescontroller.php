@@ -43,11 +43,6 @@
                     if (empty($_POST['org_id'])) {
                         $message = 'Please enter Organization Id';
                         return $message;
-                    } else {
-                        if ($this->employeesModel->findEmp($_POST['org_id'])) {
-                            $message = 'Username already exist';
-                            return $message;
-                        }
                     }
 
                     if (empty($_POST['emp_no'])) {
@@ -85,31 +80,10 @@
                         return $message;
                     }
                 
-                
-                    if (empty($_POST['ann_leave_date'])) {
-                        $message = 'Please input ann leave date ';
-                        return $message;
-                    }
-                
                     if (empty($_POST['rate_of_pay'])) {
                         $message = 'Please input Rate of pay ';
                         return $message;
                     }
-        
-                
-                
-                    if (empty($_POST['separation_status'])) {
-                        $message = 'Please input separation status ';
-                        return $message;
-                    }
-        
-                
-                
-                    if (empty($_POST['separation_date'])) {
-                        $message = 'Please input separation date ';
-                        return $message;
-                    }
-        
                 
                     if (empty($_POST['shift_id'])) {
                         $message = 'Please input Shift id ';
@@ -187,8 +161,9 @@
                 $url_components = parse_url($url);
                 if(isset($url_components['query'])){
                     parse_str($url_components['query'], $params);
+                    $id = $params['id'];
                 };
-                $id = $params['id'];
+                
                 $employees = $this->employeesModel->getEmpById($id);
                 return $employees;
             }

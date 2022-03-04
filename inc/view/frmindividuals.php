@@ -9,10 +9,10 @@ if (isset($_POST['create_indv'])) {
 $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 $refcontroller = new ReferencesController();
-$sexes = $refcontroller->refList('TBLSEX', $_SESSION['org_id']);
-$nationalities = $refcontroller->refList('TBLNATIONALITY', $_SESSION['org_id']);
-$ethnicities = $refcontroller->refList('TBLETHNICITY', $_SESSION['org_id']);
-$pobs = $refcontroller->refList('TBLHOSPITALS', $_SESSION['org_id']);
+$sexes = $refcontroller->refList('SEX', $_SESSION['org_id']);
+$nationalities = $refcontroller->refList('NATIONALITY', $_SESSION['org_id']);
+$ethnicities = $refcontroller->refList('ETHNICITY', $_SESSION['org_id']);
+$pobs = $refcontroller->refList('HOSPITALS', $_SESSION['org_id']);
 
 ?>
 <div class = "form-usr">
