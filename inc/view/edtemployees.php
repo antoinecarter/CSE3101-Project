@@ -31,7 +31,7 @@
             </p>
            <p>
             <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
+            <input type="email" name="email" value="<?php echo $row['email']; ?>" required>
             </p>
            <p>
             <label for="username">Username</label>

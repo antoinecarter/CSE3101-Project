@@ -66,13 +66,13 @@ $countries = $refcontroller->refList('TBLCOUNTRIES', $_SESSION['org_id']);
             <span1>Email</span1>  
            <p>
             <label for="telephone"></label>
-            <input type="text" placeholder="Enter Telephone Number" name="telephone" required>
+            <input type="number" placeholder="Enter Telephone Number" name="telephone" required>
 
             <label for="fax" ></label>
-            <input type="text" placeholder="Enter Fax Number" name="fax" required>
+            <input type="number" placeholder="Enter Fax Number" name="fax" required>
 
             <label for="email" ></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
            </p>
             <span>Start Date</span>
             <span>End Date</span>

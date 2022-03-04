@@ -14,11 +14,10 @@ $orgs = $orgcontroller->orgList();
 
 ?>
 <div class = "form-usr">
-<?php if(isset($cred)){ 
-  ?>
+<?php if(isset($cred)){ ?>
   <div class = "exist" > <?php echo $cred; ?> </div>
-  <?php } 
-  ?>
+  <?php } ?>
+  <?php if(isset($row['id'])){?>
     <form method="post" action="">
         <div>
         <h2>Create/Edit Reference</h2>
@@ -87,6 +86,7 @@ $orgs = $orgcontroller->orgList();
             </div>      
         
     </form>
+    <?php } ?>
     <div>
     <a href="./References" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         

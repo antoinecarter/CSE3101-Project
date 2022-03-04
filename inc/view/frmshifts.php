@@ -34,8 +34,8 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -43,8 +43,8 @@ $orgs = $orgcontroller->orgList();
             <select name="shift_type" required>
                 <option value="">--Select Shift Type--</option>
                 
-                <?php while($shifttype){ ?>
-                    <option value="<?php echo $shifttype['value_desc']; ?>"><?php echo $shifttype['value_desc'];?></option>
+                <?php while($shift = $shifttype->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $shift['value_desc']; ?>"><?php echo $shift['value_desc'];?></option>
                 <?php } ?>
             </select>
 
@@ -65,15 +65,15 @@ $orgs = $orgcontroller->orgList();
             <input type="text" name="shift_hours" readonly>
             </p>
 
-            <span>Lunch Start</span>
-            <span>Lunch End</span>
-            <span>Lunch Hrs</span>
+            <span1>Lunch Start</span1>
+            <span1>Lunch End</span1>
+            <span1>Lunch Hrs</span1>
             <p>
             <label for="lunch_start"></label>
-            <input type="time" name="lunch_start" required>
+            <input type="time" name="lunch_start">
         
             <label for="lunch_end"></label>
-            <input type="time" name="lunch_end" required>
+            <input type="time" name="lunch_end">
 
             <label for="lunch_hours"></label>
             <input type="text" name="lunch_hours" readonly>

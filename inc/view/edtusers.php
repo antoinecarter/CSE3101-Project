@@ -35,7 +35,7 @@
             <input type="text" name="last_name" placeholder="Enter Last Name" value="<?php echo $row['last_name']; ?>"required>
 
             <label for="email"></label>
-            <input type="text" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>" required>
+            <input type="email" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>" required>
             </p>
                                                               
             <span>Username</span>

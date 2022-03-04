@@ -37,7 +37,7 @@ $emps = $empcontroller->empList($_SESSION['org_id']);
             <input type="text" placeholder="Enter Last Name" name="last_name" required>
 
             <label for="email" ></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
            </p>
            <span>Username</span>
            <span>Password</span>   

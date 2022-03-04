@@ -68,13 +68,13 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             <span1>Email</span1>  
            <p>
             <label for="telephone"></label>
-            <input type="text" placeholder="Enter Telephone Number" name="telephone" value="<?php echo $row['telephone']; ?>" required>
+            <input type="number" placeholder="Enter Telephone Number" name="telephone" value="<?php echo $row['telephone']; ?>" required>
 
             <label for="fax" ></label>
-            <input type="text" placeholder="Enter Fax Number" name="fax" value="<?php echo $row['fax']; ?>" required>
+            <input type="number" placeholder="Enter Fax Number" name="fax" value="<?php echo $row['fax']; ?>" required>
 
             <label for="email" ></label>
-            <input type="text" placeholder="Enter Email" name="email" value="<?php echo $row['email']; ?>" required>
+            <input type="email" placeholder="Enter Email" name="email" value="<?php echo $row['email']; ?>" required>
            </p>
             <span>Start Date</span>
             <span>End Date</span>

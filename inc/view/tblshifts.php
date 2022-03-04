@@ -22,41 +22,30 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Organization Id</th>
                 <th>Shift Type</th>
                 <th>Shift Code</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Shift Hours</th>
-                <th>Lunch Start</th>
-                <th>Lunch End</th>
-                <th>Lunch Hours</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>status</th>
             </thead>
             <tbody>
                 <?php
                     if($num_rows == 0){
-                        echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
+                        echo '<tr><td colspan="9" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
                     }
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
                     <td><a href="./Shifts/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
                     <td><?php echo $row['shift_type']; ?></td>
                     <td><?php echo $row['shift_code']; ?></td>
                     <td><?php echo $row['start_time']; ?></td>
                     <td><?php echo $row['end_time']; ?></td>
                     <td><?php echo $row['shift_hours']; ?></td>
-                    <td><?php echo $row['lunch_start']; ?></td>
-                    <td><?php echo $row['lunch_end']; ?></td>
-                    <td><?php echo $row['lunch_hours']; ?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
-                    <td><?php echo $row['status']; ?></td>
-
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
         

@@ -66,16 +66,6 @@
                         return $message;
                     }
         
-                    if (empty($_POST['lunch_start'])) {
-                        $message = 'Please input lunch start';
-                        return $message;
-                    }
-        
-                    if (empty($_POST['lunch_end'])) {
-                        $message = 'Please input lunch end';
-                        return $message;
-                    }
-        
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input start date';
                         return $message;
@@ -172,10 +162,8 @@
                         'shift_code'     => $_REQUEST['shift_code'],
                         'start_time'     => $_REQUEST['start_time'],
                         'end_time'    => $_REQUEST['end_time'],
-                        'shift_hours'    => $_REQUEST['shift_hours'],
                         'lunch_start'            => $_REQUEST['lunch_start'],
                         'lunch_end'            => $_REQUEST['lunch_end'],
-                        'lunch_hours'            => $_REQUEST['lunch_hours'],
                         'start_date'            => $_REQUEST['start_date'],
                         'end_date'            => $_REQUEST['end_date'],
                         'status'            => $_REQUEST['status']

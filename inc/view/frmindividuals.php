@@ -81,7 +81,7 @@ $pob = $refcontroller->refList('TBLPLACEOFBIRTH', $_SESSION['org_id']);
            <span>Ethnicity</span>   
            <p>
            <label for="email"></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
 
             <label for="nationality"></label>
             <select name="nationality" required>

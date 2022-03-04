@@ -20,6 +20,7 @@
   <div class = "exist" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
+  <?php if(isset($row['id'])){?>
     <form method="post" action="">
         <div>
         <h2>Create/Edit Shifts</h2>
@@ -38,8 +39,8 @@
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -47,17 +48,17 @@
             <select name="shift_type" required>
                 <option value="">--Select Payment Frequency--</option>
                 
-                <?php while($shifttype){ ?>
-                    <option value="<?php echo $shifttype['value_desc']; ?>" <?php if($row['shift_type'] == $shifttype['value_desc']){ ?> selected <?php }?>><?php echo $shifttype['value_desc'];?></option>
+                <?php while($shift = $shifttype->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $shift['value_desc']; ?>"<?php if($row['shift_type'] == $shift['value_desc']){?>selected <?php } ?>><?php echo $shift['value_desc'];?></option>
                 <?php } ?>
             </select>
 
             <label for="shift_code" ></label>
-            <input type="text" placeholder="Enter Shift Code" name="shift_code" value="<?php echo $row['shift_codes'];?>" required>
+            <input type="text" placeholder="Enter Shift Code" name="shift_code" value="<?php echo $row['shift_code'];?>" required>
            </p>
-            <span>Start Time</span>
-            <span>End Time</span>
-            <span>Shift Hours</span>
+            <span1>Start Time</span1>
+            <span1>End Time</span1>
+            <span1>Shift Hours</span1>
             <p>
             <label for="start_time"></label>
             <input type="time" name="start_time" value="<?php echo $row['start_time'];?>" required>
@@ -69,15 +70,15 @@
             <input type="text" name="shift_hours" value="<?php echo $row['shift_hours'];?>" readonly>
             </p>
 
-            <span>Lunch Start</span>
-            <span>Lunch End</span>
-            <span>Lunch Hours</span>
+            <span1>Lunch Start</span1>
+            <span1>Lunch End</span1>
+            <span1>Lunch Hours</span1>
             <p>
             <label for="lunch_start"></label>
-            <input type="time" name="lunch_start" value="<?php echo $row['lunch_start'];?>" required>
+            <input type="time" name="lunch_start" value="<?php echo $row['lunch_start'];?>">
         
             <label for="lunch_end"></label>
-            <input type="time" name="lunch_end" value="<?php echo $row['lunch_end'];?>"required>
+            <input type="time" name="lunch_end" value="<?php echo $row['lunch_end'];?>">
 
             <label for="lunch_hours"></label>
             <input type="text" name="lunch_hours" value="<?php echo $row['lunch_hours'];?>"readonly>
@@ -111,6 +112,7 @@
             </div>
         
     </form>
+    <?php } ?>
     <div>
     <a href="./Shifts" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         

@@ -87,7 +87,7 @@
            <span>Ethnicity</span>   
            <p>
            <label for="email"></label>
-            <input type="text" placeholder="Enter Lower Salary Limit" name="email" value="<?php echo $row['email'];?>" required>
+            <input type="emial" placeholder="Enter Email" name="email" value="<?php echo $row['email'];?>" required>
 
             <label for="nationality"></label>
             <select name="nationality" required>

@@ -32,8 +32,8 @@ $orgs = $orgcontroller->orgList();
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -52,7 +52,7 @@ $orgs = $orgcontroller->orgList();
            <span>Telephone</span>   
                 <p>
             <label for="telephone"></label>
-            <input type="text" placeholder="Enter Telephone #" name="telephone" required>
+            <input type="number" placeholder="Enter Telephone #" name="telephone" required>
 
             </p>
             <span>Start Date</span>
@@ -62,7 +62,7 @@ $orgs = $orgcontroller->orgList();
             <input type="date" name="start_date" required>
         
             <label for="end_date"></label>
-            <input type="date" name="end_date" required>
+            <input type="date" name="end_date">
             </p>
             <span>Status</span>
            <p>

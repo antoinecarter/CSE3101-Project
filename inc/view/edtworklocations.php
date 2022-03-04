@@ -18,6 +18,7 @@ $orgs = $orgcontroller->orgList();
   <div class = "exist" > <?php echo $cred; ?> </div>
   <?php } 
   ?>
+  <?php if(isset($row['id'])){?>
     <form method="post" action="">
         <div>
         <h2>Create/Edit Work Locations</h2>
@@ -30,14 +31,14 @@ $orgs = $orgcontroller->orgList();
             </p>
             <span1>Organization</span1>                                                   
             <span1>Location Code</span1>
-            <span1>Location Description</span1>  
+            <span1>Location Descript.</span1>  
            <p>
            <label for="org_id" ></label>
             <select name="org_id" required>
                 <option value="">--Select Organization--</option>
 
-                <?php while($orgs){ ?>
-                    <option value="<?php echo $orgs['id']; ?>"<?php if($row['org_id'] == $orgs['id']){?> selected <?php } ?>><?php echo $orgs['full_name'];?></option>
+                <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>" <?php if($row['org_id'] == $org['id']){ ?> selected <?php } ?>><?php echo $org['full_name'];?></option>
                 <?php } ?>
             </select>
 
@@ -55,7 +56,7 @@ $orgs = $orgcontroller->orgList();
             <textarea name="address" id="" placeholder="Enter Address" style="width: 800px; height: 100px; padding: 0; margin: 0;" ><?php echo $row['address'];?></textarea>
 
             <label for="telephone"></label>
-            <input type="text" placeholder="Enter Telephone #" name="telephone" value= "<?php echo $row['telephone'];?>" required>
+            <input type="number" placeholder="Enter Telephone #" name="telephone" value= "<?php echo $row['telephone'];?>" required>
 
             </p>
             <span>Start Date</span>
@@ -86,6 +87,7 @@ $orgs = $orgcontroller->orgList();
             </div> 
         
     </form>
+    <?php } ?>
     <div>
     <a href="./Worklocations" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
