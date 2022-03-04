@@ -13,7 +13,7 @@ if (isset($_POST['create_sal'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new sal</h2>
+        <h2>Create/Edit Salary</h2>
           
         </div>
         <div>
@@ -21,76 +21,70 @@ if (isset($_POST['create_sal'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization Id</span1>                                                   
+            <span1>Employee Id</span1>
+            <span1>Salary</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
+           <label for="org_id"></label>
+            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
+
+           <label for="emp_id"></label>
+            <input type="text" placeholder="Enter Employee Id" name="emp_id" required>
+
+           <label for="ind_id"></label>
+            <input type="text" placeholder="Enter Salary" name="salary" required>
+
+           </p>
+           <span style=" padding-left: 90px;">NIS Deduct</span>
+           <span>Taxable</span>   
+           <span>Monthly Basic</span>   
+           <p>
+            <label for="nis_deduct" ></label>
+            <input type="text" placeholder="Enter NIS Deduct" name="nis_deduct" required>
+        
+            <label for="taxable"></label>
+            <input type="text" placeholder="Enter Taxable" name="taxable" required>
+
+            <label for="monthly_basic"></label>
+            <input type="text" placeholder="Enter Monthly Basic" name="monthly_basic" required>
+
             </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
-            </select>
-            </p>
-           <p>
-            <label for="start_date">Effective From</label>
+            <span >Daily Rate</span>
+            <span >Employee Date</span>
+         <p>
+         
+         <label for="daily_rate"></label>
+            <input type="text" placeholder="Enter Daily Rate" name="daily_rate" required>
+
+            <label for="hourly_rate"></label>
+            <input type="text" placeholder="Enter Hourly Rate" name="hourly_rate" required>
+
+         </p>
+            <span >Start Date</span>
+            <span >End Date</span>
+         <p>
+            <label for="start_date"></label>
             <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
+        
+            <label for="end_date"></label>
             <input type="date" name="end_date">
             </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required>
-                <option value="KEYED">Keyed</option>
-                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option> <?php } ?>
-            </select>
             </p>
-           <p>
         </div>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
+        <div style="height:30px;"></div>
+        
            <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-      
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_sal">Create</button> <?php } ?>
+      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_sal">Create</button> <?php } ?>
+
       </p>
-        </div>
-        <?php } ?>
+  
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Salary" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
-
 <?php
 include_once __DIR__ . "/footer.php";
 ?>

@@ -13,7 +13,7 @@ if (isset($_POST['create_leavreq'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create new Leave Request</h2>
+        <h2>Create/Edit Leave Requests</h2>
           
         </div>
         <div>
@@ -21,76 +21,75 @@ if (isset($_POST['create_leavreq'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
+            <span1>Organization Id</span1>                                                   
+            <span1>Employee Id</span1>
+            <span1>Leave Type</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-            </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode" required>
-            </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+           <label for="org_id"></label>
+            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
+
+           <label for="emp_id"></label>
+            <input type="text" placeholder="Enter Employee Id" name="emp_id" required>
+            
+            <select name="leave_type">
+                <option value="">--Select Parent Unit--</option>
+
+                <?php while($units){ ?>
+                    <option value="<?php echo $units['id']; ?>"><?php echo $units['unit'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+           </p>
+           <span style=" padding-left: 60px;">From Date</span>
+           <span>To Date</span>   
+           <span>Resumption Date</span>   
            <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" required>
-            </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date">
-            </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required>
-                <option value="KEYED">Keyed</option>
-                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option> <?php } ?>
-            </select>
-            </p>
-           <p>
-        </div>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-        <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
+    
+           <label for="from_date"></label>
+            <input type="date" name="from_date" required>
+    
+           <label for="to_date"></label>
+            <input type="date" name="to_date" required>
+    
+           <label for="resumption_date"></label>
+            <input type="date" name="resumption_date" required>
+
             </p>
 
-           <p>
-      <?php if($_SESSION['role']=='ADMIN'){ ?><button type="submit" name="create_leavreq">Create</button> <?php } ?>
-      </p>
+            <span  style=" padding-left: 60px;">Approved By</span>
+            <span >Approved Date</span>
+            <span >Status</span>
+         <p>
+
+         <label for="approved_by"></label>
+            <input type="text" placeholder="Enter Approved By" name="approved_by" required>
+
+            <label for="approved_date"></label>
+            <input type="date" name="approved_date" required>
+
+            <label for="status"></label>
+            <select name="status" id="" required>
+                <option value="KEYED">Keyed</option>
+                <option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option>
+            </select>
+            </p>
+            </p>
         </div>
-        <?php } ?>
+        <div style="height:30px;"></div>
+        
+           <p>
+      <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_leavreq">Create</button> <?php } ?>
+
+      </p>
+  
         
     </form>
     <div>
-        <a href="./Users" > <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Leaverequests" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
 </div>
-
 <?php
 include_once __DIR__ . "/footer.php";
 ?>

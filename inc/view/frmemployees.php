@@ -26,13 +26,13 @@ if (isset($_POST['create_emp'])) {
             <span1>Individual Id</span1>  
            <p>
            <label for="org_id"></label>
-            <input type="text" placeholder="Enter Payment Frequency" name="org_id" required>
+            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
 
            <label for="emp_no"></label>
-            <input type="text" placeholder="Enter Payment Frequency" name="emp_no" required>
+            <input type="text" placeholder="Enter Employee Number" name="emp_no" required>
 
            <label for="ind_id"></label>
-            <input type="text" placeholder="Enter Payment Frequency" name="ind_id" required>
+            <input type="text" placeholder="Enter Individual Id" name="ind_id" required>
 
            </p>
            <span style=" padding-left: 90px;">Position Id</span>
