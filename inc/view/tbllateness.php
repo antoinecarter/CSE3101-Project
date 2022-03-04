@@ -12,11 +12,11 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-    <h5>lateness</h5>
+    <h5>Lateness</h5>
 </div>
 <div class = "usrtb">
         <h2>Listing of Lateness
-        <a href="./lateness/Registration"><button>Add Late.</button></a></h2>
+        <a href="./Lateness/Registration"><button>Add Late.</button></a></h2>
         <a style= "margin-left: 7px;"> Num Of Lateness: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
@@ -39,7 +39,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./lateness/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><a href="./Lateness/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['org_id']; ?></td>
                     <td><?php echo $row['emp_id']; ?></td>
                     <td><?php echo date_format(date_create($row['work_date']), "d-M-Y"); ?></td>

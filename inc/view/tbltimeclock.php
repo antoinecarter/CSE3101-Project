@@ -16,7 +16,7 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Timeclocks
-        <a href="./Timeclocks/Registration"><button>Add Sal.</button></a></h2>
+        <a href="./Timeclocks/Registration"><button>Add Time</button></a></h2>
         <a style= "margin-left: 7px;"> Num Of Timeclocks: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
