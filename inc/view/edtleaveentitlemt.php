@@ -9,95 +9,107 @@
     $statement = $leaveentitlemtModel->viewleav();
     
     $row = $statement->fetch(PDO::FETCH_ASSOC);
+    
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+
+$empcontroller = new EmployeesController();
+$emps = $empcontroller->empList($_SESSION['org_id']);
+
+$refcontroller = new ReferencesController();
+$refs = $refcontroller->refList('LEAVETYPES', $_SESSION['org_id']);
 ?>
-<div class = "edit-usr">
-    <div><?php if(isset($cred)){ echo $cred;}?></div>
+<div class = "form-usr">
+<?php if(isset($cred)){ 
+  ?>
+  <div class = "exist" > <?php echo $cred; ?> </div>
+  <?php } 
+  ?>
         <?php if(isset($row['id'])){?>
-            <div>
-            <form method="post" action="">
-        <h2>Update Leave</h2>
+    <form method="post" action="">
         <div>
-        <p>
+        <h2>Create/Edit Leave Entitlemt</h2>
+          
+        </div>
+        <div>
+                 <p>
             <label for="id"></label>
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
             </p>
+            <span1>Organization</span1>                                                   
+            <span1>Employee</span1>
+            <span1>Leave Type</span1>  
            <p>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" value="<?php echo $row['first_name']; ?>" required>
-            </p>
-           <p>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"required>
-            </p>
-           <p>
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<?php echo $row['email']; ?>" required>
-            </p>
-           <p>
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $row['username']; ?>" required>
-           </p>
-           <p>
-            <label for="passcode">Password</label>
-            <input type="password" name="passcode">
-           </p>
-           <p>
-            <label for="role">Role</label>
-            <select name="role" id="" required>
-                <option value="ADMIN" <?php if($row['role'] == 'ADMIN'){?>selected <?php } ?>>ADMIN</option>
-                <option value="USER" <?php if($row['role'] == 'USER'){?>selected <?php } ?>>USER</option>
+           <label for="org_id"></label>
+           <select name="org_id" required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($row['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
+                </select>
+
+           <label for="emp_id"></label>
+                <select name="emp_id" required>
+                    <option value="">--Select Employee--</option>
+    
+                    <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>"<?php if($row['emp_id'] == $emp['id']){?> selected <?php }?>><?php echo $emp['employee'];?></option>
+                <?php } ?>
+                </select>
+            
+                <select name="leave_type" required>
+                <option value="">--Select Leave Type--</option>
+                
+                <?php while($leave = $refs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $leave['value_desc']; ?>"<?php if($row['leave_type'] == $leave['value_desc']){?> selected<?php }?>><?php echo $leave['value_desc'];?></option>
+                <?php } ?>
             </select>
-            </p>
+
+           </p>
+           <span1>Quantity</span1>
+           <span1>Max Accumulation</span1>   
+           <span1>Monthly Rate</span1>   
            <p>
-            <label for="start_date">Effective From</label>
-            <input type="date" name="start_date" value="<?php echo $row['start_date']; ?>" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+            <label for="quantity" ></label>
+            <input style="height:35px; width: 200px;" type="number" placeholder="Enter Quantity" name="quantity" value="<?php echo $row['quantity'];?>" required>
+        
+            <label for="max_accumulation"></label>
+            <input style="height:35px; width: 200px;" type="number" placeholder="Enter Max Accumulation" name="max_accumulation" value="<?php echo $row['max_accumulation'];?>" required>
+
+            <label for="monthly_rate"></label>
+            <input type="text" name="monthly_rate" value="<?php echo $row['monthly_rate'];?>" readonly>
+
             </p>
-           <p>
-            <label for="end_date">Effective To</label>
-            <input type="date" name="end_date" value="<?php echo $row['end_date']; ?>" <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
+
+            <span >Leave Earn</span>
+            <span >Start Date</span>
+            <span >End Date</span>
+         <p>
+
+         
+         <label for="leave_earn"></label>
+            <input style="height:35px; width: 200px;" type="number"  name="leave_earn" value="<?php echo $row['leave_earn'] ?>" readonly>
+
+            <label for="start_date"></label>
+            <input type="date" name="start_date"  value="<?php echo $row['start_date'] ?>" required>
+        
+            <label for="end_date"></label>
+            <input type="date" name="end_date"  value="<?php echo $row['end_date'] ?>" >
             </p>
-           <p>
-            <label for="status">Status</label>
-            <select name="status" id="" required <?php if($_SESSION['role'] != 'ADMIN'){ ?> readonly <?php } ?>>
-                            <option value="KEYED" <?php if($row['status'] == 'KEYED'){?>selected <?php } ?>>Keyed</option>
-                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY" <?php if($row['status'] == 'VERIFY'){?>selected <?php } ?>>Verify</option>
-                <option value="UNVERIFY" <?php if($row['status'] == 'UNVERIFY'){?>selected <?php } ?>>Unverify</option> <?php } ?>
-            </select>
         </div>
-        </p>
-           <p>
-        <div style="height:100px;"></div>
-        <?php if($_SESSION['role'] == 'ADMIN'){ ?>
-        <div>
-            <p>
-            <label for="org_id">Organization</label>
-            <input type="text" name="org_id">
-            </p>
-           <p>
-            <label for="emp_no">Employee No.</label>
-            <input type="text" name="emp_no">
-            </p>
-  
-           
-        </div>
-        <?php } ?>
+        <div style="height:30px;"></div>
         <div>
                 <button type="submit" name="update_leav">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_leav"> Delete</button></a> <?php } ?>
+            <a href="./Leaveentitlemt/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_leav"> Delete</button></a> 
  
- 
-            </div>
+            </div> 
+            <?php } ?>  
     </form>
-    <?php } ?>
     <div>
-                
-        <a href="./Users"> <button style = "background-color:#0b74eb;">Return</button></a>
+    <a href="./Leaveentitlemt" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
         
     </div>
-    </div>
-    
-    
-    
 </div>
 
 <?php

@@ -1,6 +1,9 @@
 <?php
 
 include_once __DIR__ . "/../model/tables/absence.php";
+include_once __DIR__ . "/../model/tables/employees.php";
+include_once __DIR__ . "/../model/tables/shifts.php";
+
 include_once __DIR__ . "/../alert.php";
 
 class AbsenceController extends Absence
@@ -39,6 +42,12 @@ class AbsenceController extends Absence
         if ($method == "GET") {
             include_once __DIR__ . "/../view/frmabsence.php";
         } else {
+
+            if($this->absenceModel->verify($_POST['emp_id'], $_POST['work_date'])){
+                $message = 'Existing absence record for employee at this date detected!';
+                return $message;
+            }
+            
             if (empty($_POST['org_id'])) {
                 $message = 'Please enter Organization ID';
                 return $message;
@@ -53,30 +62,30 @@ class AbsenceController extends Absence
                 $message = 'Please input work date';
                 return $message;
             }
-            if (empty($_POST['shift_id'])) {
-                $message = 'Please input shift id';
-                return $message;
-            }
-
-            if (empty($_POST['shift_hours'])) {
-                $message = 'Please input shift hours';
-                return $message;
-            }
 
             if (empty($_POST['status'])) {
                 $message = 'Please input status';
                 return $message;
             }
+            try{
+            $emp = new Employee();
+            $d = $emp->getEmpById($_POST['emp_id']);
+            $data = $d->fetch(PDO::FETCH_ASSOC);
 
+            $shift = new Shift();
+            $d2 = $shift->getShiftById($data['shift_id']);
+            $data2 = $d2->fetch(PDO::FETCH_ASSOC);
             $new_absence = new Absence();
             $new_absence->set_org_id($_POST['org_id']);
             $new_absence->set_emp_id($_POST['emp_id']);
             $new_absence->set_work_date($_POST['work_date']);
-            $new_absence->set_shift_id($_POST['shift_id']);
-            $new_absence->set_shift_hours($_POST['shift_hours']);
+            $new_absence->set_shift_id($data['shift_id']);
+            $new_absence->set_shift_hours($data2['shift_hours']);
             $new_absence->set_status($_POST['status']);
             $new_absence->create();
-
+            }catch(PDOException $message){
+                echo $message->getMessage();
+            }
             $message = 'absence Created';
             return $message;
     }

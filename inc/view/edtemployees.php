@@ -4,7 +4,7 @@ $employeecontroller = new EmployeesController();
 if (isset($_POST['update_emp'])) {
     $cred = $employeecontroller->updateemp();
 }else if(isset($_POST['delete_emp'])){
-    $cred = $employeecontroller->delemployees();
+    $cred = $employeecontroller->deleteemp();
 }
 $statement = $employeecontroller->viewemp();
 $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@ $empcontroller = new  EmployeesController();
 $usercontroller = new UsersController();
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
 $employees = $empcontroller->empList($_SESSION['org_id']);
-$users = $usercontroller->userList();
+$users = $usercontroller->userList($_SESSION['org_id']);
 $positionscontroller = new PositionsController();
 $positions = $positionscontroller->positionsList($_SESSION['org_id']);
 $payfreq = $refcontroller->refList('PAYMENTFREQUENCY', $_SESSION['org_id']);
@@ -43,7 +43,9 @@ $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
         <div>
                  <p>
             <label for="id"></label>
-            <input type="hidden" name="id">
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+
+            
             </p>
             <span1>Organization</span1>                                                   
             <span1>Employee No.</span1>
@@ -165,7 +167,7 @@ $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
         <div style="height:30px;"></div>
         <div>
                 <button type="submit" name="update_emp">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Employees/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_emp"> Delete</button></a> <?php } ?>
+            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Employees/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_emp"> Delete</button></a> <?php } ?>
  
             </div>
     </form>

@@ -22,13 +22,11 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <th>Edit</th>
-                <th>Organization Id</th>
+                <th>Work Date</th>
                 <th>Day</th>
-                <th>Employee Id</th>
-                <th>Shift Id</th>
+                <th>Employee</th>
+                <th>Shift</th>
                 <th>Shift Hours</th>
-                <th>Time In</th>
-                <th>Time Out</th>
                 <th>Min Time In</th>
                 <th>Max Time Out</th>
                 <th>Hours Worked</th>
@@ -42,17 +40,14 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Timeclocks/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
+                    <td><a href="./Timeclocks/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo date_format(date_create($row['work_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['day']; ?></td>
-                    <td><?php echo $row['emp_id']; ?></td>
-                    <td><?php echo $row['shift_id']; ?></td>
+                    <td><?php echo $row['employee']; ?></td>
+                    <td><?php echo $row['shift']; ?></td>
                     <td><?php echo $row['shift_hours']; ?></td>
-                    <td><?php echo $row['time_in']; ?></td>
-                    <td><?php echo $row['time_out']; ?></td>
-                    <td><?php echo $row['min_time_in']; ?></td>
-                    <td><?php echo $row['max_time_out']; ?></td>
+                    <td><?php echo $row['min']; ?></td>
+                    <td><?php echo $row['max']; ?></td>
                     <td><?php echo $row['hours_worked']; ?></td>
                     <td><?php echo $row['status']; ?></td>
 

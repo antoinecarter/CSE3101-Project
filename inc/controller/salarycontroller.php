@@ -40,13 +40,17 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmsalary.php";
                 } else {
+                    if($this->salaryModel->verify($_POST['emp_id'])){
+                        $message= 'Employee already has active salary record';
+                        return $message;
+                    }
                     if (empty($_POST['org_id'])) {
-                        $message = 'Please enter organization id';
+                        $message = 'Please enter organization';
                         return $message;
                     }
 
                     if (empty($_POST['emp_id'])) {
-                        $message = 'Please input employee id';
+                        $message = 'Please input employee';
                         return $message;
                     }
         
@@ -55,46 +59,9 @@
                         $message = 'Please input salary';
                         return $message;
                     }
-        
-
-                    if (empty($_POST['nis_deduct'])) {
-                        $message = 'Please input nis deduct';
-                        return $message;
-                    }
-        
-
-                    if (empty($_POST['taxable'])) {
-                        $message = 'Please input taxable';
-                        return $message;
-                    }
-        
-
-                    if (empty($_POST['monthly_basic'])) {
-                        $message = 'Please input monthly basic';
-                        return $message;
-                    }
-        
-
-                    if (empty($_POST['daily_rate'])) {
-                        $message = 'Please input daily rate';
-                        return $message;
-                    }
-        
-
-                    if (empty($_POST['hourly_rate'])) {
-                        $message = 'Please input hourly rate';
-                        return $message;
-                    }
-        
 
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input date attented';
-                        return $message;
-                    }
-        
-
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date';
                         return $message;
                     }
         
@@ -102,11 +69,6 @@
                     $new_salary->set_org_id($_POST['org_id']);
                     $new_salary->set_emp_id($_POST['emp_id']);
                     $new_salary->set_salary($_POST['salary']);
-                    $new_salary->set_nis_deduct($_POST['nis_deduct']);
-                    $new_salary->set_taxable($_POST['taxable']);
-                    $new_salary->set_monthly_basic($_POST['monthly_basic']);
-                    $new_salary->set_daily_rate($_POST['daily_rate']);
-                    $new_salary->set_hourly_rate($_POST['hourly_rate']);
                     $new_salary->set_start_date($_POST['start_date']);
                     $new_salary->set_end_date($_POST['end_date']);
                     $new_salary->create();
@@ -182,11 +144,6 @@
                         'org_id'        => $_REQUEST['org_id'],
                         'emp_id'     => $_REQUEST['emp_id'],
                         'salary'     => $_REQUEST['salary'],
-                        'nis_deduct'     => $_REQUEST['nis_deduct'],
-                        'taxable'     => $_REQUEST['taxable'],
-                        'monthly_basic'     => $_REQUEST['monthly_basic'],
-                        'daily_rate'    => $_REQUEST['daily_rate'],
-                        'hourly_rate'    => $_REQUEST['hourly_rate'],
                         'start_date'    => $_REQUEST['start_date'],
                         'end_date'            => $_REQUEST['end_date']
         

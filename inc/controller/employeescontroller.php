@@ -95,7 +95,7 @@
                         $message = 'Please input Status ';
                         return $message;
                     }
-        
+                    
                     $new_employees = new Employee();
                     $new_employees->set_org_id($_POST['org_id']);
                     $new_employees->set_emp_no($_POST['emp_no']);
@@ -130,21 +130,22 @@
                         $url_components = parse_url($url);
                         if(isset($url_components['query'])){
                             parse_str($url_components['query'], $params);
+                            $id = $params['id'];
                         }
-                        $id = $params['id'];
+                        
                         $statement = $this->employeesModel->getEmpById($id);
                         $delemp = $statement->fetch(PDO::FETCH_ASSOC);
-                        if ($delemp['id'] != $_SESSION['id']) {
-                            if (($delemp['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                        if (($_SESSION['role'] == 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
+                            if (in_array($delemp['status'], array('UNVERIFY', 'KEYED'))){
                                 $message = $this->employeesModel->delete($id);
                                 $this->delemployees();
                                 return $message;
                             } else {
-                                $message = 'User is an Admin/You are not an Admin';
+                                $message = 'Cannot delete verified record!';
                                 return $message;
                             }
                         } else {
-                            $message = 'Error! Cannot delete logged-in user';
+                            $message = 'Not permitted to delete record!';
                             return $message;
                         }
                     }

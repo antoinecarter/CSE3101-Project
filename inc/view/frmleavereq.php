@@ -4,6 +4,21 @@ $leaverequestsModel = new LeaverequestsController();
 if (isset($_POST['create_leavreq'])) {
     $cred = $leaverequestsModel->createleavreq();
 }
+
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+
+$empcontroller = new EmployeesController();
+$emps = $empcontroller->empList($_SESSION['org_id']);
+
+$shiftscontroller = new ShiftsController();
+$shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
+
+$refcontroller = new ReferencesController();
+$refs = $refcontroller->refList('LEAVETYPES', $_SESSION['org_id']);
+
+$usercontroller = new UsersController();
+$users = $usercontroller->approveList($_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -21,28 +36,38 @@ if (isset($_POST['create_leavreq'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span1>Organization Id</span1>                                                   
-            <span1>Employee Id</span1>
+            <span1>Organization</span1>                                                   
+            <span1>Employee</span1>
             <span1>Leave Type</span1>  
            <p>
            <label for="org_id"></label>
-            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
-
+           <select name="org_id" required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
+                </select>
            <label for="emp_id"></label>
-            <input type="text" placeholder="Enter Employee Id" name="emp_id" required>
-            
-            <select name="leave_type">
-                <option value="">--Select Parent Unit--</option>
-
-                <?php while($units){ ?>
-                    <option value="<?php echo $units['id']; ?>"><?php echo $units['unit'];?></option>
+           <select name="emp_id" required>
+                    <option value="">--Select Employee--</option>
+    
+                    <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>" <?php if($_SESSION['emp_no'] == $emp['id']){?>selected<?php }?>><?php echo $emp['employee'];?></option>
+                <?php } ?>
+                </select>             
+                <select name="leave_type" required>
+                <option value="">--Select Leave Type--</option>
+                
+                <?php while($leave = $refs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $leave['value_desc']; ?>"><?php echo $leave['value_desc'];?></option>
                 <?php } ?>
             </select>
 
            </p>
-           <span style=" padding-left: 60px;">From Date</span>
-           <span>To Date</span>   
-           <span>Resumption Date</span>   
+           <span1>From Date</span1>
+           <span1>To Date</span1>   
+           <span1>Resumption Date</span1>   
            <p>
     
            <label for="from_date"></label>
@@ -56,22 +81,29 @@ if (isset($_POST['create_leavreq'])) {
 
             </p>
 
-            <span  style=" padding-left: 60px;">Approved By</span>
-            <span >Approved Date</span>
-            <span >Status</span>
+            <span1>Approved By</span1>
+            <span1 >Approved Date</span1>
+            <span1 >Status</span1>
          <p>
 
          <label for="approved_by"></label>
-            <input type="text" placeholder="Enter Approved By" name="approved_by" required>
+         <select name="approved_by" <?php if(($_SESSION['role'] != 'ADMIN') || $_SESSION['can_approve'] != 1){?> readonly="readonly" <?php }?>>
+                <option value="">--Select User--</option>
+                
+                <?php while($user = $users->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $user['id'];?>"><?php echo $user['user'];?></option>
+                <?php } ?>
 
             <label for="approved_date"></label>
-            <input type="date" name="approved_date" required>
+            <input type="date" name="approved_date">
 
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
                 <option value="VERIFY">Verify</option>
                 <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_approve'] == 1){ ?> <option value="APPROVE">Apprvove</option>
+                    <option value="UNAPPROVE">Unapprvove</option> <?php }?>
             </select>
             </p>
             </p>

@@ -89,7 +89,14 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM absences");
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.work_date as work_date, concat(e.shift_type, ":-", e.shift_code) as shift, e.shift_hours, a.status as status
+                FROM absences a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN shifts e on c.shift_id = e.id
+                INNER JOIN positions f on c.position_id = f.id
+                ');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
@@ -116,17 +123,14 @@
             return $row;
         }
 
-        public function verify($id)
+        public function verify($emp_id, $work_date)
         {
-            $this->connection->query('SELECT * FROM users WHERE id = :id');
-            $this->connection->bind(':id', $id);
+            $this->connection->query('SELECT * FROM absences WHERE emp_id = :emp_id and work_date = :work_date');
+            $this->connection->bind(':emp_id', $emp_id);
+            $this->connection->bind(':work_date', $work_date);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            if($row['can_verify'] == 0){
-                return false;
-            }else{
-                return true;
-            }
+            return $statement;
+            
             
         }
 

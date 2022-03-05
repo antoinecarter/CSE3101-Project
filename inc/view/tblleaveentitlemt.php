@@ -31,12 +31,9 @@ $num_rows = $statement->rowCount();
             <thead>
                 <tr>
                 <th>Edit</th>
-                <th>Organization Id</th>
-                <th>Employee Id</th>
+                <th>Employee</th>
                 <th>Leave Type</th>
                 <th>Quantity</th>
-                <th>Max Accumulation</th>
-                <th>Monthly Rate</th>
                 <th>Leave Earn</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -52,16 +49,13 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Leaveentitlemt/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
-                    <td><?php echo $row['emp_id'];?></td>
+                    <td><a href="./Leaveentitlemt/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['employee'];?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo $row['quantity'];?></td>
-                    <td><?php echo $row['max_accumulation'];?></td>
-                    <td><?php echo $row['monthly_rate'];?></td>
                     <td><?php echo $row['leave_earn'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
-                    <td><?php echo date_format(date_create($row['end_date']), "d-M-Y"); ?></td>
+                    <td><?php if(isset($row['end_date'])){echo date_format(date_create($row['end_date']), "d-M-Y");}else{ echo '-';} ?></td>
                 </tr>
             <?php } ?>
             

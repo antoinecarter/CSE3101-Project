@@ -108,7 +108,7 @@ class LatenessController extends Lateness
                     parse_str($url_components['query'], $params);
                 }
                 $id = $params['id'];
-                $statement = $this->latenessModel->getAbsenceById($id);
+                $statement = $this->latenessModel->getLatenessById($id);
                 $dellateness = $statement->fetch(PDO::FETCH_ASSOC);
                 if ($dellateness['id'] != $_SESSION['id']) {
                     if (($dellateness['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
@@ -139,7 +139,7 @@ class LatenessController extends Lateness
             parse_str($url_components['query'], $params);
         };
         $id = $params['id'];
-        $lateness = $this->latenessModel->getAbsenceById($id);
+        $lateness = $this->latenessModel->getLatenessById($id);
         return $lateness;
     }
 

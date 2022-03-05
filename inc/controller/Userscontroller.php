@@ -68,7 +68,7 @@ class UsersController extends User
                     $_SESSION['pass'] = $valid['passcode'];
                     $_SESSION['role'] = $valid['role'];
                     $_SESSION['org_id'] = $valid['org_id'];
-                    $_SESSION['emp_no'] = $valid['emp_no'];
+                    $_SESSION['emp_no'] = $valid['employee_no'];
                     $_SESSION['can_create'] = $valid['can_create'];
                     $_SESSION['can_view'] = $valid['can_view'];
                     $_SESSION['can_update'] = $valid['can_update'];
@@ -93,6 +93,9 @@ class UsersController extends User
     {
         unset($_SESSION['id']);
         unset($_SESSION['username']);
+        unset($_SESSION['pass']);
+        unset($_SESSION['role']);
+        unset($_SESSION['emp_no']);
         unset($_SESSION['email']);
         unset($_SESSION['org_id']);
         unset($_SESSION['can_create']);
@@ -278,8 +281,13 @@ class UsersController extends User
         return $ver;
     }
 
-    public function userList(){
-        $list = $this->userModel->findUser();
+    public function userList($org_id){
+        $list = $this->userModel->findUser($org_id);
+        return $list;
+    }
+
+    public function approveList($org_id){
+        $list = $this->userModel->approve($org_id);
         return $list;
     }
 }

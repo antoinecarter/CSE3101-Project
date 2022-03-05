@@ -53,33 +53,10 @@ class LeavetrackController extends LeaveTrack
                 $message = 'Please input comp_year_id';
                 return $message;
             }
-            if (empty($_POST['leave_ent_id'])) {
-                $message = 'Please input leave_ent_id';
-                return $message;
-            }
 
-            if (empty($_POST['leave_req_id'])) {
-                $message = 'Please input leave_req_id';
-                return $message;
-            }
 
             if (empty($_POST['leave_type'])) {
                 $message = 'Please input leave type';
-                return $message;
-            }
-
-            if (empty($_POST['entitled_days'])) {
-                $message = 'Please input entitled days';
-                return $message;
-            }
-
-            if (empty($_POST['leave_earned'])) {
-                $message = 'Please input leave earned';
-                return $message;
-            }
-
-            if (empty($_POST['leave_used'])) {
-                $message = 'Please input leave used';
                 return $message;
             }
 

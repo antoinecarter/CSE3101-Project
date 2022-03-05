@@ -39,7 +39,7 @@ $url_components = parse_url($url);
 if(isset($url_components['query'])){
     parse_str($url_components['query'], $params);
 }else{
-    $params = ['parent_id' => '', 'id' => ''];
+    $params = ['parent_id' => null, 'id' => null];
 }
 
 if ($path == "/CSE3101-Project/"){
@@ -87,7 +87,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $absencecontroller->frmabsence();
     }
-} else if($path == ('/CSE3101-Project/Absence/Registration/Edit?id='.$params['id'])){
+} else if($path == ("/CSE3101-Project/Absence/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $absencecontroller->edtabsence();
@@ -150,7 +150,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $latenesscontroller->frmlateness();
     }
-} else if($path == ('/CSE3101-Project/Lateness/Registration/Edit?id='.$params['id'])){
+} else if($path == ("/CSE3101-Project/Lateness/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $latenesscontroller->edtlateness();
@@ -166,7 +166,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $leavetrackcontroller->frmleavetrack();
     }
-} else if($path == ('/CSE3101-Project/Leavetrack/Registration/Edit?id='.$params['id'])){
+} else if($path == ("/CSE3101-Project/Leavetrack/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $leavetrackcontroller->edtleavetrack();
@@ -232,7 +232,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $timeclockscontroller->frmtimeclocks();
     }
-} else if($path == ('/CSE3101-Project/Timeclocks/Registration/Edit?id='.$params['id'])){
+} else if($path == ('/CSE3101-Project/Timeclocks/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $timeclockscontroller->edttimeclocks();
@@ -300,7 +300,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $salarycontroller->frmsalary();
     }
-} else if($path == ('/CSE3101-Project/Salary/Registration/Edit?id='.$params['id'])){
+} else if($path == ('/CSE3101-Project/Salary/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $salarycontroller->edtsalary();
@@ -368,7 +368,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $leaveentitlemtcontroller->frmleaveentitlemt();
     }
-} else if($path == ('/CSE3101-Project/Leaveentitlemt/Registration/Edit?id='.$params['id'])){
+} else if($path == ('/CSE3101-Project/Leaveentitlemt/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $leaveentitlemtcontroller->edtleaveentitlemt();
@@ -386,7 +386,7 @@ if ($path == "/CSE3101-Project/"){
     if(isset($_SESSION['id'])){
         $employeescontroller->frmemployees();
     }
-} else if($path == ('/CSE3101-Project/Employees/Registration/Edit?id='.$params['id'])){
+} else if($path == ('/CSE3101-Project/Employees/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
         if( ($_SESSION['role'] == 'ADMIN')){
             $employeescontroller->edtemployees();

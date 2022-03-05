@@ -21,8 +21,8 @@ if (isset($_POST['create_lateness'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span1>Organization Id</span1>                                                   
-            <span1>Employee Id</span1>
+            <span1>Organization</span1>                                                   
+            <span1>Employee</span1>
             <span1>Work Date</span1>  
            <p>
            <label for="org_id"></label>
@@ -35,9 +35,9 @@ if (isset($_POST['create_lateness'])) {
             <input type="date" name="work_date">
             </p>
 
-            <span >Shift Id</span>
+            <span >Shift</span>
             <span >Shift Hours</span>
-            <span >Timeclock Id</span>
+            <span >Timeclock</span>
          <p>
          <label for="shift_id"></label>
             <input type="text" placeholder="Enter Shift Id" name="shift_id" required>

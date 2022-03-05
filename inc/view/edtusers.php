@@ -93,7 +93,7 @@
             <select name="emp_no" id="">
                 <option value="">--Attach Employee--</option>
                 <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
-                    <option value="<?php echo $emp['id']; ?>" <?php if($row['emp_no'] == $emp['id']){ ?> selected <?php } ?>><?php echo $emp['employee'];?></option>
+                    <option value="<?php echo $emp['id']; ?>" <?php if($row['employee_no'] == $emp['id']){ ?> selected <?php } ?>><?php echo $emp['employee'];?></option>
                 <?php } ?>
             </select>
             </p>

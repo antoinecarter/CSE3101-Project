@@ -129,7 +129,7 @@
         
 
         public function findShift($org_id){
-            $this->connection->query('SELECT id, CONCAT(shift_code, " :- (", start_time, " - ", end_time, ")") as shift FROM shifts WHERE org_id = :org_id and status = "VERIFY"');
+            $this->connection->query('SELECT id, CONCAT(shift_type, ":", shift_code, " :- (", start_time, " - ", end_time, ")") as shift FROM shifts WHERE org_id = :org_id and status = "VERIFY"');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;

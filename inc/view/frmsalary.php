@@ -1,9 +1,16 @@
 <?php
 include __DIR__ . "/header.php";
-$salaryModel = new SalaryController();
+$salarycontroller = new SalaryController();
 if (isset($_POST['create_sal'])) {
-    $cred = $salaryModel->createsal();
+    $cred = $salarycontroller->createsal();
 }
+
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+
+$empcontroller = new EmployeesController();
+$emps = $empcontroller->empList($_SESSION['org_id']);
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -21,43 +28,45 @@ if (isset($_POST['create_sal'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span1>Organization Id</span1>                                                   
-            <span1>Employee Id</span1>
+            <span1>Organization</span1>                                                   
+            <span1>Employee</span1>
             <span1>Salary</span1>  
            <p>
            <label for="org_id"></label>
-            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
-
+           <select name="org_id" required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
+                </select>
            <label for="emp_id"></label>
-            <input type="text" placeholder="Enter Employee Id" name="emp_id" required>
+           <select name="emp_id" required>
+                    <option value="">--Select Employee--</option>
+    
+                    <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>"><?php echo $emp['employee'];?></option>
+                <?php } ?>
+                </select>
 
-           <label for="ind_id"></label>
+           <label for="salary"></label>
             <input type="text" placeholder="Enter Salary" name="salary" required>
 
            </p>
-           <span style=" padding-left: 90px;">NIS Deduct</span>
-           <span>Taxable</span>   
-           <span>Monthly Basic</span>   
-           <p>
-            <label for="nis_deduct" ></label>
-            <input type="text" placeholder="Enter NIS Deduct" name="nis_deduct" required>
-        
-            <label for="taxable"></label>
-            <input type="text" placeholder="Enter Taxable" name="taxable" required>
 
-            <label for="monthly_basic"></label>
-            <input type="text" placeholder="Enter Monthly Basic" name="monthly_basic" required>
-
-            </p>
-            <span >Daily Rate</span>
-            <span >Employee Date</span>
+            <span1>Monthly Basic</span1>   
+            <span1 >Daily Rate</span1>
+            <span1 >Hourly Rate</span1>
          <p>
          
+         <label for="monthly_basic"></label>
+            <input type="text"  name="monthly_basic" readonly>
+
          <label for="daily_rate"></label>
-            <input type="text" placeholder="Enter Daily Rate" name="daily_rate" required>
+            <input type="text"  name="daily_rate" readonly>
 
             <label for="hourly_rate"></label>
-            <input type="text" placeholder="Enter Hourly Rate" name="hourly_rate" required>
+            <input type="text"  name="hourly_rate" readonly>
 
          </p>
             <span >Start Date</span>

@@ -208,8 +208,9 @@
             
         }
 
-        public function findUser(){
-            $this->connection->query('SELECT * FROM users');
+        public function findUser($org_id){
+            $this->connection->query('SELECT * FROM users where org_id = :org_id');
+            $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
             return $statement;
         }
@@ -221,6 +222,7 @@
     
             return $row;
         }
+
 
         public function verify($id)
         {
@@ -235,16 +237,17 @@
             
         }
 
-        public function approve($id)
+        public function approve($org_id)
         {
-            $this->connection->query('SELECT * FROM users WHERE id = :id');
-            $this->connection->bind(':id', $id);
+            $this->connection->query('SELECT a.id as id, CONCAT(a.username,":-", c.first_name, " ", c.surname, "(", b.emp_no, ")") as user
+            FROM users a
+            INNER JOIN employees b on a.employee_no = b.id 
+            INNER JOIN individuals c on b.ind_id = c.id
+            WHERE a.org_id = :org_id
+            AND a.can_approve = 1');
+            $this->connection->bind(':id', $org_id);
             $row = $this->connection->getStatement();
-            if($row['can_approve'] == 0){
-                return false;
-            }else{
-                return true;
-            }
+            return $row;
         }
 
         public function get_id(){

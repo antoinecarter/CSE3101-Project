@@ -38,7 +38,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Employees/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><a href="./Employees/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['employee']; ?></td>
                     <td><?php echo $row['payment_frequency']; ?></td>
                     <td><?php echo date_format(date_create($row['emp_date']), "d-M-Y"); ?></td>

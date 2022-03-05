@@ -31,13 +31,12 @@ $num_rows = $statement->rowCount();
             <thead>
                 <tr>
                 <th>Edit</th>
-                <th>Organization Id</th>
-                <th>Employee Id</th>
+                <th>Employee</th>
                 <th>Leave Type</th>
                 <th>From Date</th>
                 <th>To Date</th>
                 <th>Resumption Date</th>
-                <th>Approved Date</th>
+                <th>Approved By</th>
                 <th>Approved Date</th>
                 <th>Status</th>
                 </tr>
@@ -47,20 +46,19 @@ $num_rows = $statement->rowCount();
 
                 <?php
                     if($num_rows == 0){
-                        echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
+                        echo '<tr><td colspan="10" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
                     }
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
                     <td><a href="./Leaverequests/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
-                    <td><?php echo $row['emp_id'];?></td>
+                    <td><?php echo $row['employee']; ?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo date_format(date_create($row['from_date']), "d-M-Y"); ?></td>
                     <td><?php echo date_format(date_create($row['to_date']), "d-M-Y"); ?></td>
                     <td><?php echo date_format(date_create($row['resumption_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['approved_by'];?></td>
-                    <td><?php echo date_format(date_create($row['approved_date']), "d-M-Y"); ?></td>
+                    <td><?php if(isset($row['approved_date'])){echo date_format(date_create($row['approved_date']), "d-M-Y");}else{ echo '-';} ?></td>
                     <td><?php echo $row['status'];?></td>
                 </tr>
             <?php } ?>

@@ -103,8 +103,11 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM leaveent WHERE emp_id = :id");
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(c.first_name," ",c.surname,":-", d.pos_name, "(", d.pos_level, ")") as employee, a.leave_type as leave_type, a.quantity as quantity, a.leave_earn as leave_earn, a.start_date as start_date, a.end_date as end_date
+                FROM leaveent a
+                INNER JOIN employees b on a.emp_id = b.id
+                INNER JOIN individuals c on b.ind_id = c.id
+                INNER JOIN positions d on b.position_id = d.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
@@ -132,17 +135,13 @@
             return $row;
         }
 
-        public function verify($id)
+        public function verify($emp_id, $leave_type)
         {
-            $this->connection->query('SELECT * FROM users WHERE id = :id');
-            $this->connection->bind(':id', $id);
+            $this->connection->query('SELECT * FROM leaveent WHERE emp_id = :emp_id and end_date is null and upper(leave_type) = upper(:leave_type)');
+            $this->connection->bind(':emp_id', $emp_id);
+            $this->connection->bind(':leave_type', $leave_type);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            if($row['can_verify'] == 0){
-                return false;
-            }else{
-                return true;
-            }
+            return $statement;
         }
 
         public function get_id(){

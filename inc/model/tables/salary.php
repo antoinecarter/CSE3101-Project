@@ -8,8 +8,6 @@
         private $org_id;
         private $emp_id;
         private $salary;
-        private $nis_deduct;
-        private $taxable;
         private $monthly_basic;
         private $daily_rate;
         private $hourly_rate;
@@ -34,16 +32,11 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO salaries(org_id, emp_id, salary, nis_deduct, taxable, monthly_basic, daily_rate, hourly_rate, start_date) 
-                                                VALUES (:org_id, :emp_id, :salary, :nis_deduct, :taxable, :monthly_basic, :daily_rate, :hourly_rate, :start_date)");
+                $this->connection->query("INSERT INTO salaries(org_id, emp_id, salary, start_date) 
+                                                VALUES (:org_id, :emp_id, :salary, :start_date)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':emp_id',$this->emp_id);
                 $this->connection->bind(':salary',$this->salary);
-                $this->connection->bind(':nis_deduct',$this->nis_deduct);
-                $this->connection->bind(':taxable',$this->taxable);
-                $this->connection->bind(':monthly_basic',$this->monthly_basic);
-                $this->connection->bind(':daily_rate',$this->daily_rate);
-                $this->connection->bind(':hourly_rate',$this->hourly_rate);
                 $this->connection->bind(':start_date',$this->start_date);
                 $this->connection->execute();
                 
@@ -68,9 +61,7 @@
             }
             $this->connection->query("UPDATE salaries 
                                     SET 
-                                        org_id = :org_id, emp_id = :emp_id, salary = :salary, 
-                                        nis_deduct = :nis_deduct,  taxable = :taxable, monthly_basic = :monthly_basic, 
-                                        daily_rate = :daily_rate, hourly_rate = :hourly_rate, start_date = :start_date
+                                        org_id = :org_id, emp_id = :emp_id, salary = :salary, start_date = :start_date
                                     WHERE
                                         id = :id");
         
@@ -78,11 +69,6 @@
             $this->connection->bind(':org_id', $this->remove_errors($d['org_id']));
             $this->connection->bind(':emp_id', $this->remove_errors($d['emp_id']));
             $this->connection->bind(':salary', $this->remove_errors($d['salary']));
-            $this->connection->bind(':nis_deduct', $this->remove_errors($d['nis_deduct']));
-            $this->connection->bind(':taxable', $this->remove_errors($d['taxable']));
-            $this->connection->bind(':monthly_basic', $this->remove_errors($d['monthly_basic']));
-            $this->connection->bind(':daily_rate', $this->remove_errors($d['daily_rate']));
-            $this->connection->bind(':hourly_rate', $this->remove_errors($d['hourly_rate']));
             $this->connection->bind(':start_date', $this->remove_errors(date('Y-m-d', strtotime($d['start_date']))));
 
             try{
@@ -110,13 +96,12 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM salaries WHERE emp_id = :id");
-                $this->connection->bind(':id', $id);
-                $statement = $this->connection->getStatement();
-                return $statement;
-            }else{
-                $this->connection->query('SELECT a.* FROM salaries a INNER JOIN employees b on a.emp_id = b.id WHERE a.emp_id = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.surname, ", ", d.first_name, ":- ", e.pos_name, " (Emp No: ", c.emp_no, ")") as employee, a.salary as salary, a.monthly_basic as monthly_basic, a.daily_rate as daily_rate, a.hourly_rate as hourly_rate, a.start_date as start_date, a.end_date as end_date
+                FROM salaries a 
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN positions e on c.position_id = e.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -140,15 +125,10 @@
 
         public function verify($id)
         {
-            $this->connection->query('SELECT * FROM users WHERE id = :id');
+            $this->connection->query('SELECT * FROM salaries WHERE id = :id  and end_date is null');
             $this->connection->bind(':id', $id);
             $statement = $this->connection->getStatement();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            if($row['can_verify'] == 0){
-                return false;
-            }else{
-                return true;
-            }
+            return $statement;
             
         }
 
@@ -166,14 +146,6 @@
 
         public function get_salary(){
             return $this->salary;
-        }
-
-        public function get_nis_deduct(){
-            return $this->nis_deduct;
-        }
-
-        public function get_taxable(){
-            return $this->taxable;
         }
 
         public function get_monthly_basic(){
@@ -210,14 +182,6 @@
 
         public function set_salary($salary){
             return $this->salary = $salary;
-        }
-
-        public function set_nis_deduct($nis_deduct){
-            return $this->nis_deduct = $nis_deduct;
-        }
-
-        public function set_taxable($taxable){
-            return $this->taxable = $taxable;
         }
 
         public function set_monthly_basic($monthly_basic){

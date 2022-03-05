@@ -32,8 +32,8 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO lateness(org_id, emp_id, work_date, shift_id, shift_hours, timeclock_id, min_time_in, status) 
-                                                VALUES (:org_id, :emp_id, :work_date, :shift_id, :shift_hours, :timeclock_id, :min_time_in, :status)");
+                $this->connection->query("INSERT INTO lateness(org_id, emp_id, work_date, shift_id, shift_hours, timeclock_id, min_time_in, hours_deducted) 
+                                                VALUES (:org_id, :emp_id, :work_date, :shift_id, :shift_hours, :timeclock_id, :min_time_in, :hours_deducted)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':emp_id',$this->emp_id);
                 $this->connection->bind(':work_date',$this->work_date);
@@ -41,7 +41,7 @@
                 $this->connection->bind(':shift_hours',$this->shift_hours);
                 $this->connection->bind(':timeclock_id',$this->timeclock_id);
                 $this->connection->bind(':min_time_in',$this->min_time_in);
-                $this->connection->bind(':status',$this->status);
+                $this->connection->bind(':hours_deducted', $this->hours_deducted);
                 $this->connection->execute();
                 
                 $this->id = $this->connection->get_connection()->lastInsertId();
@@ -57,7 +57,7 @@
                                     SET 
                                         org_id = :org_id, emp_id = :emp_id, work_date = :work_date,
                                         shift_id = :shift_id, shift_hours = :shift_hours, timeclock_id = :timeclock_id, 
-                                        min_time_in = :min_time_in, status = :status
+                                        min_time_in = :min_time_in, hours_deducted = :hours_deducted
                                     WHERE
                                         id = :id");
         
@@ -70,7 +70,6 @@
             $this->connection->bind(':timeclock_id', $this->remove_errors($d['timeclock_id']));
             $this->connection->bind(':min_time_in', $this->remove_errors(date('H:i', strtotime($d['min_time_in']))));
             $this->connection->bind(':hours_deducted', $this->remove_errors($d['hours_deducted']));
-            $this->connection->bind(':status', $this->remove_errors($d['status']));
 
             try{
                 $this->connection->execute();
@@ -94,10 +93,27 @@
             }         
         }
 
+        public function deleteByTimeClock($id){
+            $this->connection->query('DELETE FROM lateness WHERE timeclock_id = :id');
+            $this->connection->bind(':id', $id);
+            try{
+                $this->connection->execute();
+            }catch(PDOException $message){
+                echo $message->getMessage();
+            }
+        }
+
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM lateness");
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.work_date as work_date, concat(e.shift_type, ":-", e.shift_code) as shift, e.shift_hours, a.min_time_in as min, a.hours_deducted as hours_deducted
+                FROM lateness a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN shifts e on c.shift_id = e.id
+                INNER JOIN positions f on c.position_id = f.id
+                ');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
@@ -108,7 +124,7 @@
             }
         }
 
-        public function findAbsence($org_id){
+        public function findLateness($org_id){
             $this->connection->query('SELECT a.id, CONCAT(d.surname, ", ", d.first_name ,":-", b.shift_code, ":- (", time_format(b.start_time, "%H:%i"),"-", time_format(b.end_time, "%H:%i"),")-Work Date:",a.work_date, "//", a.status) as emp_timeclock FROM lateness a inner join shifts b on a.shift_id = b.id inner join employees c on a.emp_id = c.id inner join individuals d on d.id = c.ind_id WHERE org_id = :org_id');
             $this->connection->bind(':org_id', $org_id);
             $statement = $this->connection->getStatement();
@@ -116,12 +132,21 @@
             return $row;
         }
 
-        public function getAbsenceById($id){
+        public function getLatenessById($id){
             $this->connection->query('SELECT * FROM lateness WHERE id = :id');
             $this->connection->bind(':id', $id);
             $row = $this->connection->getStatement();
     
             return $row;
+        }
+
+        public function getLatenessByWorkDateandEmp($work_date, $emp_id){
+            $work_date = date("Y-m-d", strtotime($work_date));
+            $this->connection->query('SELECT * FROM lateness WHERE work_date = :work_date and emp_id = :emp_id');
+            $this->connection->bind(':work_date', $work_date);
+            $this->connection->bind(':emp_id', $emp_id);
+            $statement = $this->connection->getStatement();
+            return $statement;
         }
 
         public function verify($id)

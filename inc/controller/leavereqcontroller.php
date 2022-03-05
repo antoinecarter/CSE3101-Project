@@ -74,18 +74,6 @@
                     }
         
         
-                    if (empty($_POST['approved_by'])) {
-                        $message = 'Please input approved by ';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['approved_date'])) {
-                        $message = 'Please input approved date ';
-                        return $message;
-                    }
-        
-        
                     if (empty($_POST['status'])) {
                         $message = 'Please input status ';
                         return $message;

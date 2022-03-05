@@ -107,7 +107,14 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM timeclocks");
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.work_date as work_date, a.day as day, concat(e.shift_type, ":-", e.shift_code) as shift, e.shift_hours, a.min_time_in as min, a.max_time_out as max, a.hours_worked as hours_worked, a.status as status
+                FROM timeclocks a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN shifts e on c.shift_id = e.id
+                INNER JOIN positions f on c.position_id = f.id
+                ');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{

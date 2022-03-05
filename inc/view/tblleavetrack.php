@@ -31,11 +31,7 @@ $num_rows = $statement->rowCount();
             <thead>
                 <tr>
                 <th>Edit</th>
-                <th>Organization Id</th>
-                <th>Employee Id</th>
-                <th>Company Year Id</th>
-                <th>Leave Entitlement Id</th>
-                <th>Leave Request Id</th>
+                <th>Employee</th>
                 <th>Leave Type</th>
                 <th>Entitled Day</th>
                 <th>Leave Earned</th>
@@ -52,12 +48,8 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Leavetrack/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
-                    <td><?php echo $row['org_id']; ?></td>
-                    <td><?php echo $row['emp_id'];?></td>
-                    <td><?php echo $row['com_year_id'];?></td>
-                    <td><?php echo $row['leave_ent_id'];?></td>
-                    <td><?php echo $row['leave_req_id'];?></td>
+                    <td><a href="./Leavetrack/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><?php echo $row['employee'];?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo $row['entitled_days'];?></td>
                     <td><?php echo $row['leave_earned'];?></td>

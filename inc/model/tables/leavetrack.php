@@ -33,15 +33,13 @@
         public function create()
         {            
             try{
-                $this->connection->query("INSERT INTO leavetracks(org_id, emp_id, comp_year_id, leave_ent_id, leave_type, entitled_days, leave_earned) 
-                                                VALUES (:org_id, :emp_id, :comp_year_id, :leave_ent_id, :leave_type, :entitled_days, :leave_earned)");
+                $this->connection->query("INSERT INTO leavetracks(org_id, emp_id, leave_ent_id, leave_type, entitled_days) 
+                                                VALUES (:org_id, :emp_id, :leave_ent_id, :leave_type, :entitled_days)");
                 $this->connection->bind(':org_id', $this->org_id);
                 $this->connection->bind(':emp_id',$this->emp_id);
-                $this->connection->bind(':comp_year_id',$this->comp_year_id);
                 $this->connection->bind(':leave_ent_id',$this->leave_ent_id);
                 $this->connection->bind(':leave_type',$this->leave_type);
                 $this->connection->bind(':entitled_days',$this->entitled_days);
-                $this->connection->bind(':leave_earned',$this->leave_earned);
                 $this->connection->execute();
                 
                 $this->id = $this->connection->get_connection()->lastInsertId();
@@ -106,7 +104,12 @@
         public function view($role, $id)
         {  
             if($role == 'ADMIN'){
-                $this->connection->query("SELECT * FROM leavetracks");
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, a.leave_ent_id as leave_ent_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.entitled_days as entitled_days, a.leave_earned as leave_earned, a.leave_used as leave_used, a.leave_type as leave_type
+                FROM leavetracks a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN positions f on c.position_id = f.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{

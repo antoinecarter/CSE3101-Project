@@ -39,7 +39,7 @@
     <a href="./NationalIdentifier">National Identifier</a>
       <a href="./Employees">Employees</a>
       <a href="./Salary">Salary</a>
-    <a href="./Attendance">Attendance Det.</a>
+    <!--<a href="./Attendance">Attendance Det.</a>-->
     <a href="./Leaveentitlemt">Leave Entitlement </a>
   </div>
 

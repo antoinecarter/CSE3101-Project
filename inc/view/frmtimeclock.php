@@ -1,9 +1,17 @@
 <?php
 include __DIR__ . "/header.php";
-$timeclocksModel = new TimeclocksController();
+$timeclockcontroller = new TimeclocksController();
 if (isset($_POST['create_time'])) {
-    $cred = $timeclocksModel->createtime();
+    $cred = $timeclockcontroller->createtime();
 }
+$orgcontroller = new OrganizationsController();
+$orgs = $orgcontroller->orgList();
+
+$empcontroller = new EmployeesController();
+$emps = $empcontroller->empList($_SESSION['org_id']);
+
+$shiftscontroller = new ShiftsController();
+$shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -13,7 +21,7 @@ if (isset($_POST['create_time'])) {
   ?>
     <form method="post" action="">
         <div>
-        <h2>Create/Edit Timeclocks</h2>
+        <h2>Create/Edit Time-in | Time-out</h2>
           
         </div>
         <div>
@@ -21,37 +29,33 @@ if (isset($_POST['create_time'])) {
             <label for="id"></label>
             <input type="hidden" name="id">
             </p>
-            <span1>Organization Id</span1>                                                   
-            <span1>Employee Id</span1>
+            <span1>Organization</span1>                                                   
+            <span1>Employee</span1>
             <span1>Work Date</span1>  
            <p>
            <label for="org_id"></label>
-            <input type="text" placeholder="Enter Organization Id" name="org_id" required>
-
+           <select name="org_id" required>
+                    <option value="">--Select Organization--</option>
+    
+                    <?php while($org = $orgs->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $org['id']; ?>"<?php if($_SESSION['org_id'] == $org['id']){?>selected<?php }?>><?php echo $org['full_name'];?></option>
+                <?php } ?>
+                </select>
            <label for="emp_id"></label>
-            <input type="text" placeholder="Enter Employee Id" name="emp_id" required>
-            
+           <select name="emp_id" required>
+                    <option value="">--Select Employee--</option>
+    
+                    <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <option value="<?php echo $emp['id']; ?>" <?php if($_SESSION['emp_no'] == $emp['id']){?>selected<?php }?>><?php echo $emp['employee'];?></option>
+                <?php } ?>
+                </select>            
             <label for="work_date"></label>
             <input type="date" name="work_date">
             </p>
 
-            <span >Day</span>
-            <span >Shift Id</span>
-            <span >Shift Hours</span>
-         <p>
-         <label for="day"></label>
-            <input type="text" placeholder="Enter day" name="day" required>
-
-         <label for="shift_id"></label>
-            <input type="text" placeholder="Enter Shift Id" name="shift_id" required>
-
-            <label for="shift_hours"></label>
-            <input type="time" name="shift_hours" required>
-
-            </p>
             <span >Time In</span>
             <span >Time Out</span>
-         <p>
+            <p>
             <label for="time_in"></label>
             <input type="time" name="time_in" required>
 
@@ -59,27 +63,13 @@ if (isset($_POST['create_time'])) {
             <input type="time" name="time_out" required>
 
             </p>
-            <span >Max Time In</span>
-            <span >Max Time Out</span>
-            <span >Hours Worked</span>
-         <p>
-            <label for="min_time_in"></label>
-            <input type="time" name="min_time_in" required>
-
-            <label for="max_time_out"></label>
-            <input type="time" name="max_time_out" required>
-
-            <label for="hours_worked"></label>
-            <input type="time" name="hours_worked" required>
-
-            </p>
             <span >Status</span>
             <p>
             <label for="status"></label>
             <select name="status" id="" required>
                 <option value="KEYED">Keyed</option>
-                <option value="VERIFY">Verify</option>
-                <option value="UNVERIFY">Unverify</option>
+                <?php if($_SESSION['can_verify'] ==  1){?><option value="VERIFY">Verify</option>
+                <option value="UNVERIFY">Unverify</option> <?php } ?>
             </select>
             </p>
         </div>

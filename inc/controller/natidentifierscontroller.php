@@ -95,7 +95,7 @@ class NationalidentifiersController extends NationalIdentifier
                 $statement = $this->nationalidentifiersModel->getNatIdById($id);
                 $delnationalidentifiers = $statement->fetch(PDO::FETCH_ASSOC);
                 if ($delnationalidentifiers['id'] != $_SESSION['id']) {
-                    if (($delnationalidentifiers['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
+                    if (($_SESSION['role'] != 'ADMIN') || ($_SESSION['can_delete'] == 1)) {
                         $message = $this->nationalidentifiersModel->delete($id);
                         $this->delnationalidentifiers($params);
                         return $message;

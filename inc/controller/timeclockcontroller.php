@@ -2,6 +2,12 @@
 
 
         include_once __DIR__ . "/../model/tables/timeclock.php";
+        include_once __DIR__ . "/../model/tables/employees.php";
+        include_once __DIR__ . "/../model/tables/shifts.php";
+        include_once __DIR__ . "/../model/tables/lateness.php";
+
+
+
         include_once __DIR__ . "/../alert.php";
         
         class TimeclocksController extends Timeclock
@@ -50,31 +56,12 @@
                         $message = 'Please input work date';
                         return $message;
                     }
-        
-        
-                    if (empty($_POST['day'])) {
-                        $message = 'Please input day';
-                        return $message;
-                    }
-        
-        
+
                     if (empty($_POST['emp_id'])) {
                         $message = 'Please input employee id';
                         return $message;
                     }
-        
-        
-                    if (empty($_POST['shift_id'])) {
-                        $message = 'Please input shift id';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['shift_hours'])) {
-                        $message = 'Please input shift hours';
-                        return $message;
-                    }
-        
+
         
                     if (empty($_POST['time_in'])) {
                         $message = 'Please input time in';
@@ -87,45 +74,63 @@
                         return $message;
                     }
         
-        
-                    if (empty($_POST['min_time_in'])) {
-                        $message = 'Please input min_time_in';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['max_time_out'])) {
-                        $message = 'Please input max_time_out';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['hours_worked'])) {
-                        $message = 'Please input hours worked';
-                        return $message;
-                    }
-        
-        
                     if (empty($_POST['status'])) {
                         $message = 'Please input status';
                         return $message;
                     }
-        
-                    $new_timeclocks = new Timeclock();
-                    $new_timeclocks->set_org_id($_POST['org_id']);
-                    $new_timeclocks->set_work_date($_POST['work_date']);
-                    $new_timeclocks->set_day($_POST['day']);
-                    $new_timeclocks->set_emp_id($_POST['emp_id']);
-                    $new_timeclocks->set_shift_id($_POST['shift_id']);
-                    $new_timeclocks->set_shift_hours($_POST['shift_hours']);
-                    $new_timeclocks->set_time_in($_POST['time_in']);
-                    $new_timeclocks->set_time_out($_POST['time_out']);
-                    $new_timeclocks->set_min_time_in($_POST['min_time_in']);
-                    $new_timeclocks->set_max_time_out($_POST['max_time_out']);
-                    $new_timeclocks->set_hours_worked($_POST['hours_worked']);
-                    $new_timeclocks->set_status($_POST['status']);
-                    $new_timeclocks->create();
-                    $message = 'timeclocks Created';
+                    try{
+                        $emp = new Employee();
+                        $d = $emp->getEmpById($_POST['emp_id']);
+                        $data = $d->fetch(PDO::FETCH_ASSOC);
+                        $shift_id = $data['shift_id'];
+                        $date = new DateTime($_POST['work_date']);
+                        $day = $date->format('l');
+
+                        $shift = new Shift();
+                        $d2 = $shift->getShiftById($data['shift_id']);
+                        $data2 =$d2->fetch(PDO::FETCH_ASSOC);
+                        $shift_hours = $data2['shift_hours'];
+                        $min_time_in = $_POST['time_in'];
+                        $max_time_out = $_POST['time_out'];
+
+                        $new_timeclocks = new Timeclock();
+                        $new_timeclocks->set_org_id($_POST['org_id']);
+                        $new_timeclocks->set_work_date($_POST['work_date']);
+                        $new_timeclocks->set_day($day);
+                        $new_timeclocks->set_emp_id($_POST['emp_id']);
+                        $new_timeclocks->set_shift_id($shift_id);
+                        $new_timeclocks->set_shift_hours($shift_hours);
+                        $new_timeclocks->set_time_in($_POST['time_in']);
+                        $new_timeclocks->set_time_out($_POST['time_out']);
+                        $new_timeclocks->set_min_time_in($min_time_in);
+                        $new_timeclocks->set_max_time_out($max_time_out);
+                        $new_timeclocks->set_status($_POST['status']);
+                        $new_timeclocks->create();
+                        $message = 'timeclocks Created';
+                        $time1 = strtotime($_POST['time_in']);
+                        $time2 = strtotime($data2['start_time']);
+                        $lateness = new Lateness();
+                        if($lateness->getLatenessByWorkDateandEmp($_POST['work_date'], $_POST['emp_id'])->rowCount() >= 1){
+                            return $message;
+                        }else{
+                            if(date("H:i", $time1) > date("H:i", $time2)){
+                                
+                                $lateness->set_emp_id($_POST['emp_id']);
+                                $lateness->set_work_date($_POST['work_date']);
+                                $lateness->set_shift_id($shift_id);
+                                $lateness->set_org_id($_POST['org_id']);
+                                $lateness->set_shift_hours($shift_hours);
+                                $lateness->set_timeclock_id($new_timeclocks->get_id());
+                                $lateness->set_min_time_in($_POST['time_in']);
+                                $hours_deducted = (float)(($time1 - $time2)/3600);
+                                $lateness->set_hours_deducted($hours_deducted);
+                                $lateness->create();
+                            }
+                        }
+                    }catch(PDOException $message){
+                        echo $message->getMessage();
+                    }
+                    
                     return $message;
 
             }
@@ -149,6 +154,12 @@
                         if ($deltime['id'] != $_SESSION['id']) {
                             if (($deltime['role'] != 'ADMIN') && ($_SESSION['role'] == 'ADMIN')) {
                                 $message = $this->timeclocksModel->delete($id);
+                                try{
+                                    $lateness = new Lateness();
+                                    $lateness->deleteByTimeClock($id);
+                                }catch(PDOException $message){
+                                    echo $message->getMessage();
+                                }
                                 $this->deltimeclocks();
                                 return $message;
                             } else {

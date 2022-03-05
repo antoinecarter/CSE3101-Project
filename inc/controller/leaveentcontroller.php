@@ -2,6 +2,9 @@
 
 
         include_once __DIR__ . "/../model/tables/leaveent.php";
+        include_once __DIR__ . "/../model/tables/leavetrack.php";
+
+        include_once __DIR__ . "/../model/tables/employees.php";
         include_once __DIR__ . "/../alert.php";
         
         class LeaveentitlemtController extends LeaveEntitlement
@@ -44,12 +47,13 @@
                     if (empty($_POST['org_id'])) {
                         $message = 'Please enter Orginazation id';
                         return $message;
-                    }else {
-                        if ($this->leaveentitlemtModel->findLeaveEnt($_POST['org_id'], $_POST['id'])) {
-                            $message = 'Username already exist';
-                            return $message;
-                        }
                     }
+                    
+                    if( ($this->leaveentitlemtModel->verify($_POST['emp_id'], $_POST['leave_type'])->rowCount())> 0 ){
+                        $message = 'Employee already has active leave entitlement of this type';
+                        return $message;
+                    }
+
         
                     if (empty($_POST['emp_id'])) {
                         $message = 'Please input Employee id';
@@ -75,44 +79,42 @@
                     }
         
         
-                    if (empty($_POST['monthly_rate'])) {
-                        $message = 'Please input monthly rate';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['leave_earn'])) {
-                        $message = 'Please input leave earn';
-                        return $message;
-                    }
-        
-        
-                    if (empty($_POST['end_date'])) {
-                        $message = 'Please input end date ';
-                        return $message;
-                    }
-        
-        
                     if (empty($_POST['start_date'])) {
                         $message = 'Please input start date';
                         return $message;
                     }
-        
                     $new_leaveentitlemt = new LeaveEntitlement();
                     $new_leaveentitlemt->set_org_id($_POST['org_id']);
                     $new_leaveentitlemt->set_emp_id($_POST['emp_id']);
                     $new_leaveentitlemt->set_leave_type($_POST['leave_type']);
                     $new_leaveentitlemt->set_quantity($_POST['quantity']);
                     $new_leaveentitlemt->set_max_accumulation($_POST['max_accumulation']);
-                    $new_leaveentitlemt->set_monthly_rate($_POST['monthly_rate']);
-                    $new_leaveentitlemt->set_leave_earn($_POST['leave_earn']);
                     $new_leaveentitlemt->set_end_date($_POST['end_date']);
                     $new_leaveentitlemt->set_start_date($_POST['start_date']);
                     $new_leaveentitlemt->create();
+                    $message = 'Leave Entitlement Created';
+                    try{
+                    $empmodel = new Employee();
+                    $statement = $empmodel->getEmpById($_POST['emp_id']);
+                    $data = $statement->fetch(PDO::FETCH_ASSOC);
+                    if($data['separation_date'] == null){
+                        $date = new DateTime($data['emp_date']);
+                        $add1Year = $date->add(new DateInterval("P1Y"));
+                        $now = new DateTime('now');
+                        $leavetrack = new LeaveTrack();
+                        $leavetrack->set_org_id($_POST['org_id']);
+                        $leavetrack->set_emp_id($_POST['emp_id']);
+                        $leavetrack->set_leave_type($_POST['leave_type']);
+                        $leavetrack->set_entitled_days($_POST['quantity']);
+                        $leavetrack->set_leave_ent_id($new_leaveentitlemt->get_id());
+                        $leavetrack->create();
+                    }
+                }catch(PDOException $message){
+                    echo $message->getMessage();
+                }
                     $message = 'leaveentitlemt Created';
                     return $message;
-
-            }
+                }
             }
         
             public function deleteleav()
@@ -126,8 +128,9 @@
                         $url_components = parse_url($url);
                         if(isset($url_components['query'])){
                             parse_str($url_components['query'], $params);
+                            $id = $params['id'];
                         }
-                        $id = $params['id'];
+                        
                         $statement = $this->leaveentitlemtModel->getLeaveEntById($id);
                         $delleav = $statement->fetch(PDO::FETCH_ASSOC);
                         if ($delleav['id'] != $_SESSION['id']) {
@@ -157,8 +160,9 @@
                 $url_components = parse_url($url);
                 if(isset($url_components['query'])){
                     parse_str($url_components['query'], $params);
+                    $id = $params['id'];
                 };
-                $id = $params['id'];
+                
                 $leaveentitlemt = $this->leaveentitlemtModel->getLeaveEntById($id);
                 return $leaveentitlemt;
             }
