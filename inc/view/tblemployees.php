@@ -16,15 +16,16 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Employees
-        <a href="./Employees/Registration"><button>Add Emp.</button></a></h2>
+        <?php if($_SESSION['role'] == 'ADMIN'){?>  <a href="./Employees/Registration"><button>Add Emp.</button></a> <?php } ?>
+    </h2>
         <a style= "margin-left: 7px;"> Num Of Employees: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>
             <thead>
-                <th>Edit</th>
+                <?php if($_SESSION['can_view'] == 1){?><th>Edit</th> <?php } ?>
                 <th>Employee</th>
                 <th>Payment Frequency</th>
-                <th>Employee Date</th>
+                <th>Employment Date</th>
                 <th>Rate of Pay</th>
                 <th>Seperation Status</th>
                 <th>Seperation Date</th>
@@ -38,7 +39,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Employees/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['can_view'] == 1){?><td><a href="./Employees/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo $row['employee']; ?></td>
                     <td><?php echo $row['payment_frequency']; ?></td>
                     <td><?php echo date_format(date_create($row['emp_date']), "d-M-Y"); ?></td>

@@ -1,6 +1,7 @@
 <?php
 
         include_once __DIR__ . "/../model/tables/employees.php";
+        include_once __DIR__ . "/../model/tables/individuals.php";
         include_once __DIR__ . "/../alert.php";
         
         class EmployeesController extends Employee
@@ -95,6 +96,14 @@
                         $message = 'Please input Status ';
                         return $message;
                     }
+
+                    $ind = new Employee();
+                    $statement =$ind->findEmpbyIndId($_POST['ind_id']);
+                    if($statement->rowCount() > 0){
+                        $message = 'Individual already an employee';
+                        return $message;
+                    }
+
                     
                     $new_employees = new Employee();
                     $new_employees->set_org_id($_POST['org_id']);
@@ -171,7 +180,7 @@
         
             public function viewemps()
             {
-                $id =  $_SESSION['id'];
+                $id =  $_SESSION['emp_no'];
                 $role = $_SESSION['role'];
                 $statement = $this->employeesModel->view($role, $id);
                 return $statement;
@@ -205,8 +214,8 @@
                     return $message;
                 }
 
-            public function empList($org_id){
-                $list = $this->employeesModel->findEmp($org_id);
+            public function empList($org_id, $role, $user){
+                $list = $this->employeesModel->findEmp($org_id, $role, $user);
                 return $list;
             }
             

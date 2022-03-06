@@ -11,7 +11,7 @@
     $orgcontroller = new OrganizationsController();
     $empcontroller = new EmployeesController();
     $orgs = $orgcontroller->orgList();
-    $emps = $empcontroller->empList($_SESSION['org_id']);
+    $emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 ?>
 <div class = "form-usr">
     <div><?php if(isset($cred)){ echo $cred;}?></div>
@@ -148,8 +148,8 @@
         </div>
         <?php } ?>
         <div>
-                <button type="submit" name="update_user">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_user"> Delete</button></a> <?php } ?>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_user">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>    <?php if($row['status'] != 'VERIFY'){ ?><a href="./Users/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_user"> Delete</button></a> <?php } ?> <?php } ?>
  
  
             </div>

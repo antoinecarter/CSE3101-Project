@@ -128,7 +128,7 @@ class LeavetrackController extends LeaveTrack
 
     public function viewleavetracks()
     {
-        $id =  $_SESSION['id'];
+        $id =  $_SESSION['emp_no'];
         $role = $_SESSION['role'];
         $statement = $this->leavetrackModel->view($role, $id);
         return $statement;

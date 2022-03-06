@@ -14,7 +14,7 @@ $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 
 $empcontroller = new EmployeesController();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 
 $refcontroller = new ReferencesController();
 $refs = $refcontroller->refList('LEAVETYPES', $_SESSION['org_id']);
@@ -100,8 +100,8 @@ $refs = $refcontroller->refList('LEAVETYPES', $_SESSION['org_id']);
         </div>
         <div style="height:30px;"></div>
         <div>
-                <button type="submit" name="update_leav">Apply Changes</button>
-            <a href="./Leaveentitlemt/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_leav"> Delete</button></a> 
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_leav">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>  <a href="./Leaveentitlemt/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_leav"> Delete</button></a> <?php } ?>
  
             </div> 
             <?php } ?>  

@@ -8,7 +8,7 @@ if (isset($_POST['create_user'])) {
 $orgcontroller = new OrganizationsController();
 $empcontroller = new EmployeesController();
 $orgs = $orgcontroller->orgList();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 

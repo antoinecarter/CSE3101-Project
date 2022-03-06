@@ -118,8 +118,16 @@
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT * FROM leaverequests a inner join employees b on a.emp_id = b.id inner join users c on c.emp_no = b.id WHERE c.emp_no = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.leave_type as leave_type, g.username as approved_by, a.approved_date as approved_date, a.status as status, a.resumption_date as resumption_date, a.from_date as from_date, a.to_date as to_date
+                FROM leaverequests a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN positions f on c.position_id = f.id
+                left JOIN users g on a.approved_by = g.id
+                INNER JOIN users h on h.employee_no = a.emp_id
+                WHERE h.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }

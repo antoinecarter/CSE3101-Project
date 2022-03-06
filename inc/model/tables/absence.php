@@ -100,8 +100,16 @@
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.* FROM absences a INNER JOIN users b on a.emp_id = b.emp_no WHERE a.emp_id = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.work_date as work_date, concat(e.shift_type, ":-", e.shift_code) as shift, e.shift_hours, a.status as status
+                FROM absences a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN shifts e on c.shift_id = e.id
+                INNER JOIN positions f on c.position_id = f.id
+                INNER JOIN users g on g.employee_no = a.emp_id
+                WHERE g.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }

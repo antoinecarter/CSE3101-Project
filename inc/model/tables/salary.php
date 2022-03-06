@@ -104,6 +104,18 @@
                 INNER JOIN positions e on c.position_id = e.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
+            }else{
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.surname, ", ", d.first_name, ":- ", e.pos_name, " (Emp No: ", c.emp_no, ")") as employee, a.salary as salary, a.monthly_basic as monthly_basic, a.daily_rate as daily_rate, a.hourly_rate as hourly_rate, a.start_date as start_date, a.end_date as end_date
+                FROM salaries a 
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN positions e on c.position_id = e.id
+                INNER JOIN users f on a.emp_id = f.employee_no
+                WHERE f.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
+                $statement = $this->connection->getStatement();
+                return $statement;
             }
         }
         /*

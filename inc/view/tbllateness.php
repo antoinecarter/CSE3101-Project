@@ -21,7 +21,7 @@ $num_rows = $statement->rowCount();
         <div class="tblfx">
         <table>
             <thead>
-                <th>Edit</th>
+            <?php if($_SESSION['role'] == 'ADMIN'){ ?><th>Edit</th><?php } ?>
                 <th>Employee </th>
                 <th>Work Date</th>
                 <th>Shift</th>
@@ -37,7 +37,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Lateness/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><td><a href="./Lateness/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo $row['employee']; ?></td>
                     <td><?php echo date_format(date_create($row['work_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['shift']; ?></td>
@@ -50,6 +50,9 @@ $num_rows = $statement->rowCount();
         </tbody>
     </table>
 </div>
+</div>
+<div><?php include_once __DIR__."/latenessdashboard.php"; ?></div>
+
     <?php
     include __DIR__ . "/footer.php";
     ?>

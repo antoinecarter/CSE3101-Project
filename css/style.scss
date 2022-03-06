@@ -130,6 +130,7 @@ a {
     background-color: #15172b;
     border-radius: 33px 0px 33px 0px;
     border: 2px solid rgb(255, 255, 255);
+    width: 100%;
 }
 
 .cur_user {
@@ -140,7 +141,8 @@ a {
 .topnav_button {
     top: 5rem;
     left: 18px;
-    padding-left: 897px;
+    align-content: space-between;
+    margin: auto;
 }
 
 .topnav_button a {
@@ -348,8 +350,10 @@ a {
 
 .box-e {
     width: 200px;
-    background-color: #15172b;
-    color: #fff;
+    background-color: darkgray;
+    //background-color: #15172b;
+    //color: #fff;
+    color: black;
     border-radius: 5px;
     font-size: 150%;
     cursor: pointer;
@@ -358,8 +362,21 @@ a {
     align-items: top;
     border-top: 3px solid rgb(0, 0, 0);
     border-left: 3px solid rgb(0, 0, 0);
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppinss', sans-serif;
     
+}
+
+.box-e .title{
+    background-color: #15172b;
+    color: whitesmoke;
+    height: 100px;
+    width: 200px;
+    font-family: 'Lato', sans-serif;
+}
+
+.box-e .content{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
 }
 
 
@@ -677,7 +694,7 @@ a {
 }
 
 .exist {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 50px;
     text-align: center;
@@ -686,7 +703,7 @@ a {
     margin-left: 350px;
     height: 50px;
     width: 400px;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .edit-usr {

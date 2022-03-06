@@ -70,8 +70,8 @@
         <div style="height:100px;"></div>
         
         <div>
-                <button type="submit" name="update_compyr">Apply Changes</button>
-            <a href="./Compyear/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_compyr"> Delete</button></a>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_compyr">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?> <a href="./Compyear/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_compyr"> Delete</button></a> <?php } ?>
  
  
             </div>

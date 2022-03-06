@@ -11,10 +11,10 @@ $refcontroller = new ReferencesController();
 $natids = $refcontroller->refList('IDENTIFIERS', $_SESSION['org_id']);
 $indcontroller = new IndividualsController();
 $empcontroller = new  EmployeesController();
-$usercontroller = new UsersController();
+
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
-$employees = $empcontroller->empList($_SESSION['org_id']);
-$users = $usercontroller->userList();
+$employees = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
+
 $positionscontroller = new PositionsController();
 $positions = $positionscontroller->positionsList($_SESSION['org_id']);
 $payfreq = $refcontroller->refList('PAYMENTFREQUENCY', $_SESSION['org_id']);

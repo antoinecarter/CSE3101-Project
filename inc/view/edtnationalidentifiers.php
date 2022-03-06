@@ -15,10 +15,9 @@ $refcontroller = new ReferencesController();
 $natids = $refcontroller->refList('IDENTIFIERS', $_SESSION['org_id']);
 $indcontroller = new IndividualsController();
 $empcontroller = new  EmployeesController();
-$usercontroller = new UsersController();
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
-$employees = $empcontroller->empList($_SESSION['org_id']);
-$users = $usercontroller->userList();
+$employees = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -88,8 +87,8 @@ $users = $usercontroller->userList();
         <div style="height:100px;"></div>
         
         <div>
-                <button type="submit" name="update_nationalidentifiers">Apply Changes</button>
-            <a href="./NationalIdentifier/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_nationalidentifier">Delete</button></a> 
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_nationalidentifiers">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>  <a href="./NationalIdentifier/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_nationalidentifier">Delete</button></a>  <?php } ?>
  
             </div>
         

@@ -16,10 +16,10 @@ $refcontroller = new ReferencesController();
 $countries = $refcontroller->refList('COUNTRIES', $_SESSION['org_id']);
 $indcontroller = new IndividualsController();
 $empcontroller = new  EmployeesController();
-$usercontroller = new UsersController();
+
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
-$employees = $empcontroller->empList($_SESSION['org_id']);
-$users = $usercontroller->userList();
+$employees = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
+
 ?>
 <div class = "form-usr">
 <?php if(isset($cred)){ 
@@ -112,8 +112,8 @@ $users = $usercontroller->userList();
         <div style="height:100px;"></div>
         
         <div>
-                <button type="submit" name="update_address">Apply Changes</button>
-            <a href="./Address/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_address"> Delete</button></a> 
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_address">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?> <a href="./Address/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_address"> Delete</button></a> <?php } ?>
  
             </div>
   

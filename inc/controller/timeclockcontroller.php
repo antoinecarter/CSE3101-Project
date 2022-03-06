@@ -192,7 +192,7 @@
         
             public function viewtimes()
             {
-                $id =  $_SESSION['id'];
+                $id =  $_SESSION['emp_no'];
                 $role = $_SESSION['role'];
                 $statement = $this->timeclocksModel->view($role, $id);
                 return $statement;

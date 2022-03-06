@@ -131,18 +131,32 @@
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.* FROM employees a INNER JOIN users b on a.id = b.emp_no WHERE b.id = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.ind_id as ind_id, concat(b.first_name, " ", b.surname, ":-", c.pos_name, "(", c.pos_level, ")") as employee, a.payment_frequency as payment_frequency, a.emp_date as emp_date, a.rate_of_pay as rate_of_pay, a.separation_status as separation_status, a.separation_date as separation_date, concat(d.shift_type, ":", d.shift_code) as shift
+                FROM employees a 
+                INNER JOIN individuals b on a.ind_id = b.id 
+                INNER JOIN positions c on a.position_id = c.id
+                INNER JOIN shifts d on a.shift_id = d.id
+                INNER JOIN users e on e.employee_no = a.id
+                WHERE e.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
         }
 
-        public function findEmp($org_id){
-            $this->connection->query('SELECT a.id as id, b.id  as ind_id,  CONCAT(b.surname, ", ", b.first_name, ":- ", c.pos_name, " (Emp No: ", a.emp_no, ")") as employee FROM employees a inner join individuals b on a.ind_id = b.id inner join positions c on a.position_id = c.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
-            $this->connection->bind(':org_id', $org_id);
-            $statement = $this->connection->getStatement();
+        public function findEmp($org_id, $role, $user){
+            if($role == 'ADMIN'){
+                $this->connection->query('SELECT a.id as id, b.id  as ind_id,  CONCAT(b.surname, ", ", b.first_name, ":- ", c.pos_name, " (Emp No: ", a.emp_no, ")") as employee FROM employees a inner join individuals b on a.ind_id = b.id inner join positions c on a.position_id = c.id WHERE a.org_id = :org_id and a.status = "VERIFY"');
+                $this->connection->bind(':org_id', $org_id);
+                $statement = $this->connection->getStatement();
             return $statement;
+            }else{
+                $this->connection->query('SELECT a.id as id, b.id  as ind_id,  CONCAT(b.surname, ", ", b.first_name, ":- ", c.pos_name, " (Emp No: ", a.emp_no, ")") as employee FROM employees a inner join individuals b on a.ind_id = b.id inner join positions c on a.position_id = c.id inner join users d on d.employee_no = a.id WHERE a.org_id = :org_id and a.status = "VERIFY" and d.employee_no = :emp_no');
+                $this->connection->bind(':org_id', $org_id);
+                $this->connection->bind(':emp_no', $user);
+                $statement = $this->connection->getStatement();
+                return $statement;
+            }
         }
 
         public function getEmpById($id){
@@ -151,6 +165,13 @@
             $row = $this->connection->getStatement();
     
             return $row;
+        }
+
+        public function findEmpbyIndId($ind_id){
+            $this->connection->query('SELECT * from employees where ind_id = :ind_id');
+            $this->connection->bind(':ind_id', $ind_id);
+            $statement = $this->connection->getStatement();
+            return $statement;
         }
 
         public function verify($id)

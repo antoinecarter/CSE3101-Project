@@ -21,8 +21,9 @@ $ind = $indcontroller->individualsList($_SESSION['org_id']);
     <h5>Address</h5>
 </div>
 <div class = "usrtb">
-        <h2>Listing of Addresss
-        <a href="./Address/Registration"><button>Add Address</button></a></h2>
+    <h2>Listing of Addresss
+        <?php if($_SESSION['role'] == 'ADMIN'){ ?> <a href="./Address/Registration"><button>Add Address</button></a> <?php } ?>
+    </h2>
         <a style= "margin-left: 7px;"> Num Of Addresss: <?php echo $num_rows; ?></a>
 
 

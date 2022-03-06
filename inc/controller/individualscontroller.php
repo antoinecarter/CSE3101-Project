@@ -169,7 +169,7 @@
             
                 public function viewindvs()
                 {
-                    $id =  $_SESSION['id'];
+                    $id =  $_SESSION['emp_no'];
                     $role = $_SESSION['role'];
                     $statement = $this->individualsModel->view($role, $id);
                     return $statement;

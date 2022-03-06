@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="http://localhost/CSE3101-Project/" />
   <link rel="stylesheet" href="./css/style.scss" type="text/css">
+  
 </head>
 
 
@@ -15,7 +16,9 @@
 
     <div id="mySidebar" class="sidebar">
       <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</b>
-      <button class="sidebar-dr">HR Config ▼</button>
+      <?php if($_SESSION['role'] == 'ADMIN'){ ?>
+      <div>
+      <button class="sidebar-dr">Configurations▼</button>
       <div class="dropdown-contain">
     <a href="./References">References</a>
     <a href="./Organizations">Organizations</a>
@@ -23,16 +26,21 @@
     <a href="./Worklocations">Work Locations</a>
     <a href="./Shifts">Shifts</a>
   </div>
-
-    <button class="sidebar-dr">Organization Management▼</button>
+      </div>
+      
+      
+<div>
+<button class="sidebar-dr">Organization Management▼</button>
       <div class="dropdown-contain">
     <a href="./Orgstructure">Organization Structure</a>
     <a href="./Departments">Departments</a>
     <a href="./Units">Units</a>
     <a href="./Positions">Positions</a>
   </div>
-
-      <button class="sidebar-dr">Employee Management ▼</button>
+</div>
+<?php }?>
+<div>
+<button class="sidebar-dr">Employee Management ▼</button>
       <div class="dropdown-contain">
     <a href="./Individuals">Individuals</a>
     <a href="./Address">Address</a>
@@ -42,19 +50,25 @@
     <!--<a href="./Attendance">Attendance Det.</a>-->
     <a href="./Leaveentitlemt">Leave Entitlement </a>
   </div>
-
-      <button class="sidebar-dr">Attendance Management ▼</button>
+</div>
+      
+<div>
+<button class="sidebar-dr">Attendance Management ▼</button>
       <div class="dropdown-contain">
     <a href="./Absence">Absence</a>
     <a href="./Lateness">Lateness</a>
     <a href="./Timeclocks">Timeclocks</a>
   </div>
-
-      <button class="sidebar-dr">Leave Management ▼</button>
+</div>
+      
+<div>
+<button class="sidebar-dr">Leave Management ▼</button>
       <div class="dropdown-contain">
     <a href="./Leavetrack">Leave Track</a>
     <a href="./Leaverequests">Leave Requests </a>
   </div>
+</div>
+      
 
 
     </div>
@@ -85,8 +99,9 @@
     </div>
 
   </nav>
-  <script src="./js/script.js"></script>
-
+  <script src="./js/script.js" async></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
   <body>
     <div>
   

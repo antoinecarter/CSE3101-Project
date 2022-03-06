@@ -20,7 +20,8 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of National Identifier
-        <a href="./NationalIdentifier/Registration"><button>Add Identifier</button></a></h2>
+        <?php if($_SESSION['role'] == 'ADMIN'){?> <a href="./NationalIdentifier/Registration"><button>Add Identifier</button></a> <?php } ?>
+    </h2>
         <a style= "margin-left: 7px;"> Num Of National Identifiers: <?php echo $num_rows; ?></a>
 
 

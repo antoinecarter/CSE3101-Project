@@ -16,7 +16,7 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Individuals
-        <a href="./Individuals/Registration"><button>Add Ind.</button></a></h2>
+       <?php if($_SESSION['role'] == 'ADMIN'){ ?> <a href="./Individuals/Registration"><button>Add Ind.</button></a> <?php } ?></h2>
         <a style= "margin-left: 7px;"> Num Of Individuals: <?php echo $num_rows; ?></a>
         <div class="tblfx">
         <table>

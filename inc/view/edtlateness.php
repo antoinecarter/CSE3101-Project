@@ -15,7 +15,7 @@ $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 
 $empcontroller = new EmployeesController();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 
 $shiftscontroller = new ShiftsController();
 $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
@@ -96,8 +96,8 @@ $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
         </div>
         <div style="height:20px;"></div>
         <div>
-                <button type="submit" name="update_lateness">Apply Changes</button>
-            <a href="./Lateness/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_lateness"> Delete</button></a>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_lateness">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>  <a href="./Lateness/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_lateness"> Delete</button></a> <?php } ?>
  
  
             </div> 

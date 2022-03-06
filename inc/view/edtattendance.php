@@ -62,8 +62,8 @@
 
 
         <div>
-                <button type="submit" name="update_attendance">Apply Changes</button>
-            <?php if($row['org_id'] != 'VERIFY'){ ?><a href="./Attendance/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_attendance"> Delete</button></a> <?php } ?>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_attendance">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>  <?php if($row['org_id'] != 'VERIFY'){ ?><a href="./Attendance/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_attendance"> Delete</button></a> <?php } ?> <?php } ?>
  
  
             </div>

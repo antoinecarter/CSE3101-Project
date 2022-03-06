@@ -14,10 +14,10 @@ $refcontroller = new ReferencesController();
 $natids = $refcontroller->refList('IDENTIFIERS', $_SESSION['org_id']);
 $indcontroller = new IndividualsController();
 $empcontroller = new  EmployeesController();
-$usercontroller = new UsersController();
+
 $individuals = $indcontroller->individualsList($_SESSION['org_id']);
-$employees = $empcontroller->empList($_SESSION['org_id']);
-$users = $usercontroller->userList($_SESSION['org_id']);
+$employees = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
+
 $positionscontroller = new PositionsController();
 $positions = $positionscontroller->positionsList($_SESSION['org_id']);
 $payfreq = $refcontroller->refList('PAYMENTFREQUENCY', $_SESSION['org_id']);
@@ -166,8 +166,8 @@ $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
         </div>
         <div style="height:30px;"></div>
         <div>
-                <button type="submit" name="update_emp">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Employees/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_emp"> Delete</button></a> <?php } ?>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_emp">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>   <?php if($row['status'] != 'VERIFY'){ ?><a href="./Employees/Registration/Delete?id=<?php echo $row['id'];?>"> <button style = "background-color:#eb0b4e;"  name="delete_emp"> Delete</button></a> <?php } ?> <?php } ?>
  
             </div>
     </form>

@@ -13,7 +13,7 @@
 $orgs = $orgcontroller->orgList();
 
 $empcontroller = new EmployeesController();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 
 $shiftscontroller = new ShiftsController();
 $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
@@ -115,8 +115,8 @@ $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);
         </div>
         <div style="height:20px;"></div>
         <div>
-                <button type="submit" name="update_time">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Timeclocks/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_time"> Delete</button></a> <?php } ?>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_time">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>   <?php if($row['status'] != 'VERIFY'){ ?><a href="./Timeclocks/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_time"> Delete</button></a> <?php } ?> <?php } ?>
  
  
             </div>

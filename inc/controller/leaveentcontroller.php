@@ -169,7 +169,7 @@
         
             public function viewleavs()
             {
-                $id =  $_SESSION['id'];
+                $id =  $_SESSION['emp_no'];
                 $role = $_SESSION['role'];
                 $statement = $this->leaveentitlemtModel->view($role, $id);
                 return $statement;
@@ -196,6 +196,12 @@
                     $message = $update_leav->update($d['id'], $d);
                     include_once __DIR__ . "/../view/edtleaveentitlemt.php";
                     return $message;
+                }
+
+                public function leavetypeDashboard()
+                {
+                    $list = $this->leaveentitlemtModel->leavetypeDash();
+                    return $list;
                 }
             
         }

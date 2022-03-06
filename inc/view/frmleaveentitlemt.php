@@ -9,7 +9,7 @@ $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 
 $empcontroller = new EmployeesController();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 
 $refcontroller = new ReferencesController();
 $refs = $refcontroller->refList('LEAVETYPES', $_SESSION['org_id']);

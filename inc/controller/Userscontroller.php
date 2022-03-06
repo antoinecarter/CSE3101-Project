@@ -91,6 +91,7 @@ class UsersController extends User
 
     public function logout()
     {
+        session_start();
         unset($_SESSION['id']);
         unset($_SESSION['username']);
         unset($_SESSION['pass']);
@@ -104,7 +105,9 @@ class UsersController extends User
         unset($_SESSION['can_delete']);
         unset($_SESSION['can_verify']);
         unset($_SESSION['can_approve']);
+        setcookie(session_id(), "", time() - 3600, "/" );
         session_destroy();
+        session_write_close();
         include_once __DIR__ . "/../view/login.php";
     }
 

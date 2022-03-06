@@ -130,7 +130,7 @@ class NationalidentifiersController extends NationalIdentifier
 
     public function viewnationalidentifiers()
     {
-        $id =  $_SESSION['id'];
+        $id =  $_SESSION['emp_no'];
         $role = $_SESSION['role'];
         $statement = $this->nationalidentifiersModel->view($role, $id);
         return $statement;

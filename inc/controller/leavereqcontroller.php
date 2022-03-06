@@ -148,7 +148,7 @@
         
             public function viewleavreqs()
             {
-                $id =  $_SESSION['id'];
+                $id =  $_SESSION['emp_no'];
                 $role = $_SESSION['role'];
                 $statement = $this->leaverequestsModel->view($role, $id);
                 return $statement;

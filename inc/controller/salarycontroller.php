@@ -128,7 +128,7 @@
         
             public function viewsals()
             {
-                $id =  $_SESSION['id'];
+                $id =  $_SESSION['emp_no'];
                 $role = $_SESSION['role'];
                 $statement = $this->salaryModel->view($role, $id);
                 return $statement;

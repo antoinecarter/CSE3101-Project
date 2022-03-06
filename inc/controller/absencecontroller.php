@@ -141,7 +141,7 @@ class AbsenceController extends Absence
 
     public function viewabsences()
     {
-        $id =  $_SESSION['id'];
+        $id =  $_SESSION['emp_no'];
         $role = $_SESSION['role'];
         $statement = $this->absenceModel->view($role, $id);
         return $statement;

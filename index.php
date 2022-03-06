@@ -29,17 +29,15 @@ require_once __DIR__ . "/inc/controller/employeescontroller.php";
 require_once __DIR__. "/inc/view/inc.php";
 
 
-
 $path = $_SERVER["REQUEST_URI"];
 $url = $_SERVER['REQUEST_SCHEME'] . '://';
 $url .= $_SERVER['HTTP_HOST'];
 $url .= $_SERVER['REQUEST_URI'];
-
 $url_components = parse_url($url);
 if(isset($url_components['query'])){
     parse_str($url_components['query'], $params);
 }else{
-    $params = ['parent_id' => null, 'id' => null];
+    $params = ['parent_id' => '0', 'id' => '0'];
 }
 
 if ($path == "/CSE3101-Project/"){
@@ -104,9 +102,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ("/CSE3101-Project/Address/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
-        if( ($_SESSION['role'] == 'ADMIN')){
             $addresscontroller->edtaddress();
-        }
     }
 
 
@@ -137,9 +133,7 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/Individuals/Registration/Edit?id='.$params['id'])){
     if(isset($_SESSION['id'])){
-        if( ($_SESSION['role'] == 'ADMIN')){
             $individualscontroller->edtindividuals();
-        }
     }
 
 } else if($path == "/CSE3101-Project/Lateness"){
@@ -152,9 +146,9 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ("/CSE3101-Project/Lateness/Registration/Edit?parent_id=".$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
-        if( ($_SESSION['role'] == 'ADMIN')){
+
             $latenesscontroller->edtlateness();
-        }
+
     }
     
 
@@ -184,9 +178,8 @@ if ($path == "/CSE3101-Project/"){
     }
 } else if($path == ('/CSE3101-Project/NationalIdentifier/Registration/Edit?parent_id='.$params['parent_id']."&id=".$params['id'])){
     if(isset($_SESSION['id'])){
-        if( ($_SESSION['role'] == 'ADMIN')){
             $nationalidentifierscontroller->edtnationalidentifiers();
-        }
+
     }
 
 

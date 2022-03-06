@@ -9,7 +9,7 @@ $orgcontroller = new OrganizationsController();
 $orgs = $orgcontroller->orgList();
 
 $empcontroller = new EmployeesController();
-$emps = $empcontroller->empList($_SESSION['org_id']);
+$emps = $empcontroller->empList($_SESSION['org_id'], $_SESSION['role'], $_SESSION['emp_no']);
 
 $shiftscontroller = new ShiftsController();
 $shifts = $shiftscontroller->shiftsList($_SESSION['org_id']);

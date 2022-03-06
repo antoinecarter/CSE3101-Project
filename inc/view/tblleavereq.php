@@ -30,7 +30,7 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <tr>
-                <th>Edit</th>
+                <?php if($_SESSION['role'] == 'ADMIN'){?>  <th>Edit</th> <?php } ?>
                 <th>Employee</th>
                 <th>Leave Type</th>
                 <th>From Date</th>
@@ -51,7 +51,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Leaverequests/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['role'] == 'ADMIN'){?>  <td><a href="./Leaverequests/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo $row['employee']; ?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo date_format(date_create($row['from_date']), "d-M-Y"); ?></td>

@@ -115,8 +115,8 @@
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.id,  CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.emp_no WHERE d.id = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id,  a.ind_id as ind_id, CONCAT(b.surname, ", ", b.first_name, ":-(DOB: ", date_format(b.date_of_birth, "%d-%b-%Y"), ")(", b.sex, ")") as individual, CONCAT(a.address_type, ": Lot ", a.lot, " ",a.address_line1, ", ", a.address_line2, ", ", a.country) as address, a.start_date, a.end_date FROM addresses a inner join individuals b on a.ind_id = b.id inner join employees c on c.ind_id = b.id inner join users d on c.id = d.employee_no where d.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }

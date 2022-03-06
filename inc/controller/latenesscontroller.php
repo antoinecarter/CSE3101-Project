@@ -145,7 +145,7 @@ class LatenessController extends Lateness
 
     public function viewlatenesss()
     {
-        $id =  $_SESSION['id'];
+        $id =  $_SESSION['emp_no'];
         $role = $_SESSION['role'];
         $statement = $this->latenessModel->view($role, $id);
         return $statement;
@@ -171,6 +171,11 @@ class LatenessController extends Lateness
             $message = $update_lateness->update($d['id'], $d);
             include_once __DIR__ . "/../view/edtlateness.php";
             return $message;
+        }
+
+        public function latenessAndAbsenceDashboard($role, $user){
+            $list = $this->latenessModel->latenessAndAbsenceDash($role, $user);
+            return $list;
         }
     
 }

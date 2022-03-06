@@ -12,15 +12,13 @@ $num_rows = $statement->rowCount();
     $url .= $_SERVER['REQUEST_URI'];
     $url_components = parse_url($url);
     parse_str($url_components['path'], $params);?>
-
-    <body>
-        
-    
-    <h5>Leave Entitlement</h5>
+    <h5>Leave Entitlement</h5>  
 </div>
+
 <div class = "usrtb">
         <h2>Listing of Leave Entitlement
-        <a href="./Leaveentitlemt/Registration"><button>Add Leave</button></a></h2>
+        <?php if($_SESSION['role'] == 'ADMIN'){?>  <a href="./Leaveentitlemt/Registration"><button>Add Leave</button></a> <?php } ?>
+    </h2>
         <a style= "margin-left: 7px;"> Num Of Leave Entitlements: <?php echo $num_rows; ?></a>
 
 
@@ -30,7 +28,7 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <tr>
-                <th>Edit</th>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><th>Edit</th> <?php } ?>
                 <th>Employee</th>
                 <th>Leave Type</th>
                 <th>Quantity</th>
@@ -49,7 +47,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Leaveentitlemt/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><td><a href="./Leaveentitlemt/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo $row['employee'];?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo $row['quantity'];?></td>
@@ -61,8 +59,12 @@ $num_rows = $statement->rowCount();
             
         </tbody>
     </table>
-    </body>
 </div>
+                    </div>
+<div><?php include_once __DIR__."/leavedashboard.php"; ?></div>
+
+
+
     <?php
     include __DIR__ . "/footer.php";
     ?>

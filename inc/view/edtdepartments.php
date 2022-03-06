@@ -95,8 +95,8 @@
         </div>
         <div style="height:100px;"></div>
         <div>
-                <button type="submit" name="update_dpt">Apply Changes</button>
-            <?php if($row['status'] != 'VERIFY'){ ?><a href="./Departments/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_dpt"> Delete</button></a> <?php } ?>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_dpt">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>   <?php if($row['status'] != 'VERIFY'){ ?><a href="./Departments/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_dpt"> Delete</button></a> <?php } ?> <?php } ?>
  
  
             </div>

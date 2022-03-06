@@ -117,8 +117,16 @@
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT a.* FROM lateness a INNER JOIN users b on a.emp_id = b.emp_no WHERE a.emp_id = :id');
-                $this->connection->bind(':id', $id);
+                $this->connection->query('SELECT a.id as id, a.emp_id as emp_id, CONCAT(d.first_name, " ",d.surname, ":-", f.pos_name, "(", f.pos_level, ")") as employee, a.work_date as work_date, concat(e.shift_type, ":-", e.shift_code) as shift, e.shift_hours, a.min_time_in as min, a.hours_deducted as hours_deducted
+                FROM lateness a
+                INNER JOIN organization b on a.org_id = b.id
+                INNER JOIN employees c on a.emp_id = c.id
+                INNER JOIN individuals d on c.ind_id = d.id
+                INNER JOIN shifts e on c.shift_id = e.id
+                INNER JOIN positions f on c.position_id = f.id
+                INNER JOIN users  g on g.employee_no = a.emp_id
+                WHERE g.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
                 $statement = $this->connection->getStatement();
                 return $statement;
             }
@@ -161,6 +169,36 @@
                 return true;
             }
             
+        }
+
+        public function latenessAndAbsenceDash($role, $user){
+            if($role == 'ADMIN'){
+                $this->connection->query('SELECT b.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", b.emp_no, ")") as employee, 
+                count(a.work_date) as lateness, count(e.work_date) as absences
+                FROM lateness a 
+                INNER JOIN employees b on a.emp_id = b.id
+                INNER JOIN individuals c on b.ind_id = c.id
+                INNER JOIN users d on d.employee_no = a.emp_id
+                INNER JOIN positions f on b.position_id = f.id
+                LEFT JOIN absences e on e.emp_id = a.emp_id
+                GROUP BY b.id');
+                $statement = $this->connection->getStatement();
+                return $statement;
+            }else{
+                $this->connection->query('SELECT b.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", f.pos_name, " (Emp No: ", b.emp_no, ")") as employee, 
+                count(a.work_date) as lateness, count(e.work_date) as absences
+                FROM lateness a 
+                INNER JOIN employees b on a.emp_id = b.id
+                INNER JOIN individuals c on b.ind_id = c.id
+                INNER JOIN users d on d.employee_no = a.emp_id
+                INNER JOIN positions f on b.position_id = f.id
+                LEFT JOIN absences e on e.emp_id = b.id
+                WHERE b.id = :emp_no
+                GROUP BY b.id');
+                $this->connection->bind(':emp_no',$user);
+                $statement = $this->connection->getStatement();
+                return $statement;
+            }
         }
 
         public function get_id(){

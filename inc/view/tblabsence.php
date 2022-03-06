@@ -20,7 +20,8 @@ $num_rows = $statement->rowCount();
 </div>
 <div class = "usrtb">
         <h2>Listing of Absences
-        <a href="./Absence/Registration"><button>Add Absence</button></a></h2>
+        <?php if($_SESSION['role'] == 'ADMIN'){?>  <a href="./Absence/Registration"><button>Add Absence</button></a><?php } ?>
+        </h2> 
         <a style= "margin-left: 7px;"> Num Of Absences: <?php echo $num_rows; ?></a>
 
 
@@ -30,7 +31,7 @@ $num_rows = $statement->rowCount();
         <table>
             <thead>
                 <tr>
-                <th>Edit</th>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><th>Edit</th> <?php } ?>
                 <th>Employee </th>
                 <th>Work Date</th>
                 <th>Shift</th>
@@ -48,7 +49,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Absence/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><td><a href="./Absence/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td><?php } ?>
                     <td><?php echo $row['employee'];?></td>
                     <td><?php echo date_format(date_create($row['work_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['shift'];?></td>

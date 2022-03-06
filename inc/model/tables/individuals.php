@@ -104,6 +104,15 @@
                 $this->connection->query("SELECT * FROM individuals");
                 $statement = $this->connection->getStatement();
                 return $statement;
+            }else{
+                $this->connection->query('SELECT a.*
+                FROM individuals a
+                INNER JOIN employees b on a.id = b.ind_id
+                INNER JOIN users c on b.id = c.employee_no
+                WHERE c.employee_no = :emp_no');
+                $this->connection->bind(':emp_no', $id);
+                $statement= $this->connection->getStatement();
+                return $statement;
             }
         }
         

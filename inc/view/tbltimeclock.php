@@ -21,7 +21,7 @@ $num_rows = $statement->rowCount();
         <div class="tblfx">
         <table>
             <thead>
-                <th>Edit</th>
+            <?php if($_SESSION['role'] == 'ADMIN'){?>  <th>Edit</th> <?php } ?>
                 <th>Work Date</th>
                 <th>Day</th>
                 <th>Employee</th>
@@ -35,12 +35,12 @@ $num_rows = $statement->rowCount();
             <tbody>
                 <?php
                     if($num_rows == 0){
-                        echo '<tr><td colspan="7" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
+                        echo '<tr><td colspan="10" style="text-align: center; font-family: Lato, sans-serif; font-size: 20px; font-weight: bolder">--No Data Found--</td></tr>';
                     }
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Timeclocks/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                <?php if($_SESSION['role'] == 'ADMIN'){?>  <td><a href="./Timeclocks/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo date_format(date_create($row['work_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['day']; ?></td>
                     <td><?php echo $row['employee']; ?></td>
