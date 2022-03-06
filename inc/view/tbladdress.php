@@ -50,7 +50,7 @@ $ind = $indcontroller->individualsList($_SESSION['org_id']);
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./Address/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><a href="./Address/Registration/Edit?id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['individual']?></td>
                     <td><?php echo $row['address'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>

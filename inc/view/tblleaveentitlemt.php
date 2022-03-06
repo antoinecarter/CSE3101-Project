@@ -47,7 +47,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                <?php if($_SESSION['role'] == 'ADMIN'){ ?><td><a href="./Leaveentitlemt/Registration/Edit?parent_id=<?php echo $row['emp_id'];?>&id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
+                <?php if($_SESSION['role'] == 'ADMIN'){ ?><td><a href="./Leaveentitlemt/Registration/Edit?id=<?php echo $row['id']; ?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td> <?php } ?>
                     <td><?php echo $row['employee'];?></td>
                     <td><?php echo $row['leave_type'];?></td>
                     <td><?php echo $row['quantity'];?></td>

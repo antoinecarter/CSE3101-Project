@@ -49,7 +49,7 @@ $num_rows = $statement->rowCount();
                     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
                 ?>
                 <tr>
-                    <td><a href="./NationalIdentifier/Registration/Edit?parent_id=<?php echo $row['ind_id'];?>&id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
+                    <td><a href="./NationalIdentifier/Registration/Edit?id=<?php echo $row['id'];?>"><img style="width:30px; height:30px" src="./inc/view/include/edit.png"></a></td>
                     <td><?php echo $row['individual'];?></td>
                     <td><?php echo $row['natid'];?></td>
                     <td><?php echo date_format(date_create($row['start_date']), "d-M-Y"); ?></td>
