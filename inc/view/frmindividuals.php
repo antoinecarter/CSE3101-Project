@@ -81,7 +81,7 @@ $pobs = $refcontroller->refList('HOSPITALS', $_SESSION['org_id']);
            <span1>Ethnicity</span1>   
            <p>
            <label for="email"></label>
-            <input style="width: auto; height:35px" type="email" placeholder="Enter Email" name="email" required>
+            <input  style="width: auto; height:35px" type="email" placeholder="Enter Email" name="email" required>
 
             <label for="nationality"></label>
             <select name="nationality" required>

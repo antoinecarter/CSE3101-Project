@@ -245,7 +245,7 @@
             INNER JOIN individuals c on b.ind_id = c.id
             WHERE a.org_id = :org_id
             AND a.can_approve = 1');
-            $this->connection->bind(':id', $org_id);
+            $this->connection->bind(':org_id', $org_id);
             $row = $this->connection->getStatement();
             return $row;
         }

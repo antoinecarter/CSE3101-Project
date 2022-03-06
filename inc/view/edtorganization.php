@@ -74,7 +74,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             <input type="number" placeholder="Enter Fax Number" name="fax" value="<?php echo $row['fax']; ?>" required>
 
             <label for="email" ></label>
-            <input type="email" placeholder="Enter Email" name="email" value="<?php echo $row['email']; ?>" required>
+            <input style="width: auto; height:35px" type="email" placeholder="Enter Email" name="email" value="<?php echo $row['email']; ?>" required>
            </p>
             <span>Start Date</span>
             <span>End Date</span>

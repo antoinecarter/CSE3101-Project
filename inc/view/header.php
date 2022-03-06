@@ -73,7 +73,7 @@
     <a href="./home" class="cur_user"> HMRIS </a>
 
     <div class="topnav_button">
-      <a href="./Users">User Accounts</a>
+     <?php if($_SESSION['role'] == 'ADMIN'){?> <a href="./Users">User Accounts</a> <?php }?>
 
       <div class="dropmenu">
         <button class="dropbb"><?php require_once __DIR__."/../../index.php";

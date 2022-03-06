@@ -333,12 +333,14 @@ a {
     }
 }
 
+
+
 .wrapper {
     display: grid;
     margin-top: 70px;
     margin-left: 5%;
     margin-bottom: 3%;
-    grid-template-rows: 250px 250px;
+    grid-template-rows: 250px 250px 250px;
     grid-template-columns: 200px 200px 200px 200px 0px;
     grid-gap: 50px;
     text-align: center;
@@ -918,4 +920,5 @@ select[readonly]{
     pointer-events: none;
     touch-action: none;
 }
+
 //Top

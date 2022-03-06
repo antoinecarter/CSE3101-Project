@@ -26,16 +26,18 @@
             </p>
             <span1>First Name </span1>                                                   
             <span1>Last Name</span1>
-            <span1>Email </span1> 
+            
            <p>
             <label for="first_name"></label>
             <input type="text" name="first_name" placeholder="Enter First Name" value="<?php echo $row['first_name']; ?>" required>
             
             <label for="last_name"></label>
             <input type="text" name="last_name" placeholder="Enter Last Name" value="<?php echo $row['last_name']; ?>"required>
-
+            </p>
+            <span1>Email </span1> 
+            <p>
             <label for="email"></label>
-            <input type="email" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>" required>
+            <input style="width: auto; height:35px" type="email" name="email" placeholder="Enter Email" value="<?php echo $row['email']; ?>" required>
             </p>
                                                               
             <span>Username</span>
