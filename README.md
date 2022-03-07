@@ -12,7 +12,6 @@ user = "root";
 
 password = "";
 
-
 **System Title:**
 	HRMIS
 
@@ -26,8 +25,13 @@ password = "";
     	Dashboard showing frequency of lateness and absent days
 	Dashboard showing number of leave types distributed to all employees
 
+**Use Case Diagram**
+
+![1646618170001.png](image/README/1646618170001.png)
+
 **Technology Used:**
-    	PHP, MySQL, HTML, CSS, SCSS, PHPMYADMIN
+
+    PHP, MySQL, HTML, CSS, SCSS, PHPMYADMIN
 
 **Roles:**
     	Administrator, User
