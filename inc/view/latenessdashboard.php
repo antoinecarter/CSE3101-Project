@@ -27,7 +27,7 @@
         data: [<?php foreach($latenesses as $lateness){echo $lateness . ",";}?>],
         backgroundColor: 'rgba(0,99,132,0.6)',
         borderColor: 'rgba(0,99,132,1)',
-        yAxisID: "y-axis-lateness"
+        yAxisID: "y-axis"
     };
 
     var absenceData = {
@@ -35,7 +35,7 @@
         data: [<?php foreach($absences as $absence){echo $absence . ",";}?>],
         backgroundColor: 'rgba(99,132,0,0.6)',
         borderColor: 'rgba(99,132,0,1)',
-        yAxisID: "y-axis-absence"
+        yAxisID: "y-axis"
     };
 
     var empData = {
@@ -47,12 +47,12 @@
         scales: {
             xAxes: [{
                 barPercentage: 1,
-                categoryPercentage: 0.6
+                categoryPercentage: 1
             }],
             yAxes: [{
-                id: "y-axis-lateness"
+                id: "y-axis"
             }, {
-                id: "y-axis-absence"
+                id: "y-axis"
             }]
         },
         responsive: true,

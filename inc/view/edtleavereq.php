@@ -60,7 +60,7 @@
                         <option value="">--Select Employee--</option>
         
                         <?php while($emp = $emps->fetch(PDO::FETCH_ASSOC)){ ?>
-                        <option value="<?php echo $emp['id']; ?>" <?php if($row['emp_no'] == $emp['id']){?>selected<?php }?>><?php echo $emp['employee'];?></option>
+                        <option value="<?php echo $emp['id']; ?>" <?php if($row['emp_id'] == $emp['id']){?>selected<?php }?>><?php echo $emp['employee'];?></option>
                     <?php } ?>
                     </select>             
                     <select name="leave_type" required>
@@ -119,19 +119,18 @@
                 </p>
 
             <div style="height:30px;"></div>
-            
-               <p>
-          <?php if($_SESSION['role']=='ADMIN'  && $_SESSION['can_create'] == 1){ ?><button type="submit" name="create_leavreq">Create</button> <?php } ?>
-    
-          </p>
-      
-            
+            <div>
+        <?php if($_SESSION['can_update'] == 1){ ?> <button type="submit" name="update_leavreq">Apply Changes</button> <?php } ?>
+        <?php if($_SESSION['can_delete'] == 1){ ?>   <a href="./Leavetrack/Registration/Delete?id="<?php echo $row['id']?>> <button style = "background-color:#eb0b4e;"  name="delete_leavreq"> Delete</button></a> <?php } ?>
+ 
+ 
+            </div>
         </form>
         <?php } ?>
         <div>
-        <a href="./Leaverequests" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
-            
-        </div>
+    <a href="./Leaverequests" > <button style = "background-color:#0b74eb; margin-top:0px;">Return</button></a>
+        
+    </div>
     </div>
 <?php
     include_once __DIR__."/footer.php";

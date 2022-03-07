@@ -40,7 +40,7 @@
                 if ($method == "GET") {
                     include_once __DIR__ . "/../view/frmsalary.php";
                 } else {
-                    if($this->salaryModel->verify($_POST['emp_id'])){
+                    if($this->salaryModel->verify($_POST['emp_id'])->rowCount() > 0){
                         $message= 'Employee already has active salary record';
                         return $message;
                     }

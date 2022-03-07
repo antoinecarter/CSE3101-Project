@@ -173,28 +173,44 @@
 
         public function latenessAndAbsenceDash($role, $user){
             if($role == 'ADMIN'){
-                $this->connection->query('SELECT b.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", b.emp_no, ")") as employee, 
-                count(a.work_date) as lateness, count(e.work_date) as absences
-                FROM lateness a 
-                INNER JOIN employees b on a.emp_id = b.id
-                INNER JOIN individuals c on b.ind_id = c.id
-                INNER JOIN users d on d.employee_no = a.emp_id
-                INNER JOIN positions f on b.position_id = f.id
-                LEFT JOIN absences e on e.emp_id = a.emp_id
-                GROUP BY b.id');
+                $this->connection->query('SELECT i.id as id, i.employee as employee, i.lateness as lateness, j.absences as absences FROM (SELECT a.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", a.emp_no, ")") as employee, 
+                count(b.work_date) as lateness, 0 as absences
+                FROM employees a               
+                INNER JOIN individuals c on a.ind_id = c.id
+                INNER JOIN positions f on a.position_id = f.id
+                left outer JOIN lateness b on a.id = b.emp_id
+                
+                GROUP BY a.id) i join 
+
+(SELECT a.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", a.emp_no, ")") as employee, 
+                0 as lateness, count(e.work_date) as absences
+                FROM employees a               
+                INNER JOIN individuals c on a.ind_id = c.id
+                INNER JOIN positions f on a.position_id = f.id
+                left outer JOIN absences e on e.emp_id = a.id
+                GROUP BY a.id) j on i.id = j.id');
                 $statement = $this->connection->getStatement();
                 return $statement;
             }else{
-                $this->connection->query('SELECT b.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", f.pos_name, " (Emp No: ", b.emp_no, ")") as employee, 
-                count(a.work_date) as lateness, count(e.work_date) as absences
-                FROM lateness a 
-                INNER JOIN employees b on a.emp_id = b.id
-                INNER JOIN individuals c on b.ind_id = c.id
-                INNER JOIN users d on d.employee_no = a.emp_id
-                INNER JOIN positions f on b.position_id = f.id
-                LEFT JOIN absences e on e.emp_id = b.id
-                WHERE b.id = :emp_no
-                GROUP BY b.id');
+                $this->connection->query('SELECT i.id as id, i.employee as employee, i.lateness as lateness, j.absences as absences FROM (SELECT a.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", a.emp_no, ")") as employee, 
+                count(b.work_date) as lateness, 0 as absences
+                FROM employees a               
+                INNER JOIN individuals c on a.ind_id = c.id
+                INNER JOIN positions f on a.position_id = f.id
+                INNER JOIN users g on g.employee_no = a.id
+                left outer JOIN lateness b on a.id = b.emp_id
+                
+                GROUP BY a.id) i join 
+
+(SELECT a.id as id, CONCAT(c.surname, ", ", c.first_name, ":- ", " (Emp No: ", a.emp_no, ")") as employee, 
+                0 as lateness, count(e.work_date) as absences
+                FROM employees a               
+                INNER JOIN individuals c on a.ind_id = c.id
+                INNER JOIN positions f on a.position_id = f.id
+				INNER JOIN users g on g.employee_no = a.id
+                left outer JOIN absences e on e.emp_id = a.id
+                GROUP BY a.id) j on i.id = j.id
+                where i.id = :emp_no');
                 $this->connection->bind(':emp_no',$user);
                 $statement = $this->connection->getStatement();
                 return $statement;

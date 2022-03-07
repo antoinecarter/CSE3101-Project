@@ -44,7 +44,7 @@ $num_rows = $statement->rowCount();
                     <td><?php echo $row['payment_frequency']; ?></td>
                     <td><?php echo date_format(date_create($row['emp_date']), "d-M-Y"); ?></td>
                     <td><?php echo $row['rate_of_pay']; ?></td>
-                    <td><?php if(isset($row['separation_status'])){echo $row['separation_date'];}else{ echo '-';} ?></td>
+                    <td><?php if(isset($row['separation_status'])){echo $row['separation_status'];}else{ echo '-';} ?></td>
                     <td><?php if(isset($row['separation_date'])){echo date_format(date_create($row['separation_date']), "d-M-Y");}else{ echo '-';} ?></td>
                     <td><?php echo $row['shift']; ?></td>
                 </tr>

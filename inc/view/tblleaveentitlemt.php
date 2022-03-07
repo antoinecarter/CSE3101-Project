@@ -61,7 +61,7 @@ $num_rows = $statement->rowCount();
     </table>
 </div>
                     </div>
-<div><?php include_once __DIR__."/leavedashboard.php"; ?></div>
+<?php if($_SESSION['role'] == 'ADMIN'){ ?><div><?php include __DIR__."/leavedashboard.php"; ?></div> <?php } ?>
 
 
 

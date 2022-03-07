@@ -43,7 +43,7 @@ class AbsenceController extends Absence
             include_once __DIR__ . "/../view/frmabsence.php";
         } else {
 
-            if($this->absenceModel->verify($_POST['emp_id'], $_POST['work_date'])){
+            if($this->absenceModel->verify($_POST['emp_id'], $_POST['work_date'])->rowCount() > 0){
                 $message = 'Existing absence record for employee at this date detected!';
                 return $message;
             }

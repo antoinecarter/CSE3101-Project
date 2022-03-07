@@ -1,5 +1,5 @@
 
-<canvas id="leavetypes" style="width: 100%; height:200px;"></canvas>
+<canvas id="leavetype" style="width: 100%; height:500px;"></canvas>
 
 <script>
     <?php 
@@ -15,7 +15,7 @@
     }
     ?>
 
-    var densityCanvas = document.getElementById("leavetypes");
+    var leaveCanvas = document.getElementById("leavetype");
 
     Chart.defaults.global.defaultFontFamily="Lato";
     Chart.defaults.global.defaultFontSize = 18;
@@ -23,13 +23,6 @@
     var countData = {
         label: 'Count',
         data: [<?php foreach($counts as $count){echo $count . ",";}?>],
-        backgroundColor: 'rgba(99,132,0,0.6)',
-        borderColor: 'rgba(99,132,0,1)'
-    };
-
-    var leaveData = {
-        labels: [<?php foreach($leavetypes as $leavetype){echo "'".$leavetype."',";}?>],
-        datasets: countData,
         backgroundColor: [
             "#DEB887",
             "#A9A9A9",
@@ -45,6 +38,12 @@
           "#1D7A46"
         ],
         borderWidth: [1, 1, 1, 1, 1, 1, 1],
+    };
+
+    var leaveData = {
+        labels: [<?php foreach($leavetypes as $leavetype){echo "'".$leavetype."',";}?>],
+        datasets: [countData],
+        
         
         
 
@@ -52,6 +51,7 @@
 
     var chartOptions = {
         responsive: true,
+        radius : 120,
         title: {
             display:true,
             position: "top",
@@ -61,7 +61,7 @@
         },
         legend: {
             display: true,
-            position: "right",
+            position: "bottom",
             labels: {
                 fontColor: "#fff",
                 fontSize: 16
@@ -70,7 +70,7 @@
         
     };
 
-    var doughnutChart = new Chart(densityCanvas, {
+    var doughnutChart = new Chart(leaveCanvas, {
         type: 'doughnut',
         data: leaveData,
         options: chartOptions
